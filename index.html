@@ -27,8 +27,9 @@ footer{padding:46px 0 70px;border-top:1px solid #243d60;color:#7188a1;font-size:
 @media(max-width:840px){.hero-grid{grid-template-columns:1fr}.monitor{max-width:500px;width:100%;margin:auto}.grid{grid-template-columns:1fr 1fr}.facts{grid-template-columns:1fr 1fr}.fact:nth-child(2){border-right:0}.fact:nth-child(-n+2){border-bottom:1px solid var(--line)}}
 @media(max-width:620px){.grid{grid-template-columns:1fr}.facts{grid-template-columns:1fr}.fact{border-right:0;border-bottom:1px solid var(--line)}.fact:last-child{border-bottom:0}.foot{flex-direction:column}.hero h1{letter-spacing:-4px}}
 
-.lang{position:relative}.lang-btn{font-size:13px;color:#afc0d5;padding:9px 12px;background:transparent;border:1px solid transparent;border-radius:4px;cursor:pointer;font-family:inherit}.lang-btn:hover,.lang.open .lang-btn{background:#102b50;border-color:#315b8d;color:#fff}.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 5px);min-width:175px;padding:5px;background:#0b182b;border:1px solid #315b8d;box-shadow:5px 5px 0 #02060b}.lang.open .lang-menu{display:block}.lang-menu button{display:block;width:100%;text-align:left;padding:9px 10px;background:transparent;color:#b9c9dd;border:0;cursor:pointer;font:13px "Trebuchet MS","Segoe UI",Arial,sans-serif}.lang-menu button:hover,.lang-menu button.active{background:#12345f;color:#fff}.lang-menu .check{float:right;color:#79d7ff}
+.lang{position:relative}.lang-btn{font-size:13px;color:#afc0d5;padding:9px 12px;background:transparent;border:1px solid transparent;border-radius:4px;cursor:pointer;font-family:inherit}.lang-btn:hover,.lang.open .lang-btn{background:#102b50;border-color:#315b8d;color:#fff}.lang-menu{display:block;visibility:hidden;opacity:0;pointer-events:none;position:absolute;right:0;top:calc(100% + 5px);min-width:175px;padding:5px;background:#0b182b;border:1px solid #315b8d;box-shadow:5px 5px 0 #02060b;transform:translateY(-8px) scaleY(.96);transform-origin:top center;transition:opacity .16s ease,transform .18s ease,visibility 0s linear .18s}.lang.open .lang-menu{visibility:visible;opacity:1;pointer-events:auto;transform:translateY(0) scaleY(1);transition:opacity .16s ease,transform .18s ease,visibility 0s linear 0s}.lang-menu button{display:block;width:100%;text-align:left;padding:9px 10px;background:transparent;color:#b9c9dd;border:0;cursor:pointer;font:13px "Trebuchet MS","Segoe UI",Arial,sans-serif}.lang-menu button:hover,.lang-menu button.active{background:#12345f;color:#fff}.lang-menu .check{float:right;color:#79d7ff}
 @media(max-width:720px){.lang-btn{padding:9px 8px}.lang-menu{right:-5px}}
+@media(prefers-reduced-motion:reduce){.lang-menu,.lang.open .lang-menu{transition:none;transform:none}}
 </style>
 
 <style id="style-switch-css">
@@ -169,6 +170,8 @@ body.modern-mode .monitor img{
 }
 body.modern-mode .image-credit{color:#6d8095}
 body.modern-mode section{scroll-margin-top:80px}
+body section[id]{scroll-margin-top:78px}
+body:not(.modern-mode) section[id]{scroll-margin-top:66px}
 body.modern-mode .panel{
   background:rgba(255,255,255,.46);
   border:1px solid rgba(126,147,168,.30);
@@ -517,9 +520,458 @@ button,a{touch-action:manipulation}
 }
 </style>
 
+
+<style id="modern-motion">
+/* Modern-only motion: content gently rises into place. Retro stays completely static. */
+@media (prefers-reduced-motion: no-preference){
+  body.modern-mode main section .wrap > .head,
+  body.modern-mode main section .wrap > .panel,
+  body.modern-mode .hero-grid > *{
+    opacity:1;
+    transform:none;
+  }
+  body.modern-mode .modern-reveal{
+    opacity:0;
+    transform:translateY(34px);
+    transition:opacity .62s cubic-bezier(.2,.7,.2,1), transform .62s cubic-bezier(.2,.7,.2,1);
+    will-change:opacity,transform;
+  }
+  body.modern-mode .modern-reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  body.modern-mode .modern-reveal.delay-1{transition-delay:.07s}
+  body.modern-mode .modern-reveal.delay-2{transition-delay:.14s}
+  body.modern-mode .modern-reveal.delay-3{transition-delay:.21s}
+  body.modern-mode .modern-reveal.delay-4{transition-delay:.28s}
+  body.modern-mode .modern-reveal.delay-5{transition-delay:.35s}
+}
+</style>
+
+
+<style id="retro-windows9x-final">
+/* Windows 9x Retro finish: gray desktop, gray controls, hard pixel chrome. */
+body:not(.modern-mode){
+  background:#008080;
+  color:#000;
+  font-family:"MS Sans Serif","Arial",sans-serif;
+}
+body:not(.modern-mode) .top{
+  background:#c0c0c0;
+  border-top:1px solid #fff;
+  border-left:1px solid #fff;
+  border-bottom:2px solid #000;
+  box-shadow:0 1px 0 #808080,0 3px 0 #000;
+}
+body:not(.modern-mode) .topbar{height:52px}
+body:not(.modern-mode) .logo{
+  color:#000;
+  font-family:Arial,sans-serif;
+  font-size:19px;
+  letter-spacing:-.7px;
+  text-shadow:none;
+}
+body:not(.modern-mode) .logo span:first-of-type{color:#000080}
+body:not(.modern-mode) .logo .version{color:#000;margin-left:5px}
+
+/* Retro nav buttons: classic raised 3D gray controls. */
+body:not(.modern-mode) .nav{gap:3px}
+body:not(.modern-mode) .nav a,
+body:not(.modern-mode) .lang-btn{
+  color:#000;
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  padding:6px 9px;
+  font:12px "MS Sans Serif",Arial,sans-serif;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+  text-shadow:none;
+}
+body:not(.modern-mode) .nav a:hover,
+body:not(.modern-mode) .nav a.active,
+body:not(.modern-mode) .lang-btn:hover,
+body:not(.modern-mode) .lang.open .lang-btn{
+  color:#fff;
+  background:#000080;
+  border-top-color:#808080;
+  border-left-color:#808080;
+  border-right-color:#fff;
+  border-bottom-color:#fff;
+  box-shadow:none;
+}
+
+/* Retro / Modern switch itself is also a real Windows 9x-style control. */
+body:not(.modern-mode) .style-switch{
+  height:28px;
+  padding:2px 5px;
+  gap:5px;
+  margin-right:2px;
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+}
+body:not(.modern-mode) .style-label{
+  color:#000;
+  font:700 8px "MS Sans Serif",Arial,sans-serif;
+  letter-spacing:0;
+}
+body:not(.modern-mode) .style-label:first-child{color:#000080}
+body:not(.modern-mode) .style-toggle{
+  width:32px;
+  height:16px;
+  background:#808080;
+  border:2px solid;
+  border-top-color:#000;
+  border-left-color:#000;
+  border-right-color:#fff;
+  border-bottom-color:#fff;
+  border-radius:0;
+  box-shadow:inset 1px 1px #404040;
+}
+body:not(.modern-mode) .style-toggle span{
+  top:1px;
+  left:1px;
+  width:12px;
+  height:10px;
+  background:#c0c0c0;
+  border:1px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:none;
+  transition:none;
+}
+body:not(.modern-mode) .style-toggle:active,
+body:not(.modern-mode) .style-toggle:focus:active{
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+}
+
+/* 3px / 2px / 1px black depth: buttons visibly push inward on click. */
+body:not(.modern-mode) .btn{
+  color:#000;
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:3px 3px 0 #000,2px 2px 0 #808080 inset,-1px -1px 0 #dfdfdf inset;
+  text-shadow:none;
+  transform:translate(0,0);
+}
+body:not(.modern-mode) .btn.primary{
+  color:#000;
+  background:#c0c0c0;
+  border-color:#fff #000 #000 #fff;
+  text-shadow:none;
+}
+body:not(.modern-mode) .btn:hover{background:#d0d0d0}
+body:not(.modern-mode) .btn:active{
+  border-top-color:#000;
+  border-left-color:#000;
+  border-right-color:#fff;
+  border-bottom-color:#fff;
+  box-shadow:1px 1px 0 #000 inset;
+  transform:translate(3px,3px);
+}
+
+/* Panels / windows: gray Win9x chrome instead of modern dark cards. */
+body:not(.modern-mode) .panel,
+body:not(.modern-mode) .monitor{
+  background:#c0c0c0;
+  color:#000;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:3px 3px 0 #000,2px 2px 0 #808080 inset,-1px -1px 0 #dfdfdf inset;
+}
+body:not(.modern-mode) .panel-head{
+  color:#fff;
+  background:#000080;
+  border:0;
+  padding:4px 6px;
+  font:bold 11px "MS Sans Serif",Arial,sans-serif;
+}
+body:not(.modern-mode) .card{background:#c0c0c0;min-height:190px}
+body:not(.modern-mode) .card h3,
+body:not(.modern-mode) .card p,
+body:not(.modern-mode) .head h2,
+body:not(.modern-mode) .head p,
+body:not(.modern-mode) .fact small,
+body:not(.modern-mode) .fact strong{color:#000}
+body:not(.modern-mode) .eyebrow,
+body:not(.modern-mode) .badge{color:#000080}
+body:not(.modern-mode) .badge{background:#c0c0c0;border-color:#000;border-radius:0}
+body:not(.modern-mode) .fact{border-color:#808080}
+body:not(.modern-mode) .terminal pre{color:#000;background:#fff;border:2px inset #808080}
+body:not(.modern-mode) .note{color:#000;background:#fff;border-left-color:#000080}
+body:not(.modern-mode) .rule{border-top-color:#808080;border-bottom-color:#fff}
+body:not(.modern-mode) footer{color:#000;background:#c0c0c0;border-top:2px solid #808080}
+body:not(.modern-mode) .monitor{box-shadow:3px 3px 0 #000,2px 2px 0 #808080 inset}
+body:not(.modern-mode) .monitor img{border:4px inset #808080}
+body:not(.modern-mode) .image-credit{color:#000}
+body:not(.modern-mode) .lang-menu{
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:3px 3px 0 #000;
+}
+body:not(.modern-mode) .lang-menu button{color:#000;border:0;border-radius:0}
+body:not(.modern-mode) .lang-menu button:hover,
+body:not(.modern-mode) .lang-menu button.active{background:#000080;color:#fff}
+body:not(.modern-mode) .lang-menu .check{color:#fff}
+
+/* No rounded modern motion/hover treatment in Retro. */
+body:not(.modern-mode) .card:hover,
+body:not(.modern-mode) .btn:hover{transform:none;transition:none}
+
+@media(max-width:860px){
+  body:not(.modern-mode) .topbar{min-height:52px;padding:4px 0}
+  body:not(.modern-mode) .nav{padding:3px 0 2px}
+  body:not(.modern-mode) .nav a,
+  body:not(.modern-mode) .lang-btn{min-height:34px}
+}
+@media(max-width:420px){
+  body:not(.modern-mode) .style-switch{height:26px;padding:2px 4px}
+  body:not(.modern-mode) .style-label{display:inline;font-size:7px}
+  body:not(.modern-mode) .style-toggle{width:30px;height:15px}
+  body:not(.modern-mode) .nav a,
+  body:not(.modern-mode) .lang-btn{padding:5px 8px;font-size:10px}
+}
+</style>
+
+
+<style id="retro-control-final-fix">
+/* Final Win9x control pass: stable, non-animated Retro controls. */
+body:not(.modern-mode) .btn,
+body:not(.modern-mode) .style-toggle,
+body:not(.modern-mode) .style-switch,
+body:not(.modern-mode) .lang-btn,
+body:not(.modern-mode) .lang-menu button{
+  -webkit-appearance:none;
+  appearance:none;
+  animation:none !important;
+}
+body:not(.modern-mode) .btn{
+  background:#c0c0c0;
+}
+body:not(.modern-mode) .btn:hover{
+  background:#c0c0c0;
+}
+/* Pressed buttons: only a subtle darker gray, plus the classic inset bevel. */
+body:not(.modern-mode) .btn:active,
+body:not(.modern-mode) .lang-menu button:active{
+  background:#b8b8b8 !important;
+}
+body:not(.modern-mode) .style-toggle{
+  background:#808080 !important;
+  outline:none;
+  box-shadow:inset 1px 1px #404040 !important;
+  transition:none !important;
+  animation:none !important;
+  filter:none !important;
+}
+body:not(.modern-mode) .style-toggle:hover,
+body:not(.modern-mode) .style-toggle:active,
+body:not(.modern-mode) .style-toggle:focus,
+body:not(.modern-mode) .style-toggle:focus-visible{
+  background:#808080 !important;
+  filter:none !important;
+  animation:none !important;
+}
+body:not(.modern-mode) .style-toggle span{
+  background:#c0c0c0 !important;
+  border-top-color:#fff !important;
+  border-left-color:#fff !important;
+  border-right-color:#000 !important;
+  border-bottom-color:#000 !important;
+  box-shadow:none !important;
+  transition:none !important;
+  animation:none !important;
+  filter:none !important;
+}
+body:not(.modern-mode) .style-toggle:focus-visible{
+  outline:1px dotted #000 !important;
+  outline-offset:1px;
+}
+
+<style id="retro-fonts">
+/* 8x8-era typography. Dalmoori is the bundled MiniWin Hangul font family;
+   Public Pixel is a public-domain 8x8 bitmap fallback for Latin/Cyrillic/Latin-ext. */
+@font-face{font-family:DalmooriWeb;src:url("https://cdn.jsdelivr.net/gh/sweetherofonts/fontshero_pack1/dalmoori/dalmoori-Regular.woff2") format("woff2");font-display:swap}
+@font-face{font-family:PublicPixel8;src:url("https://cdn.jsdelivr.net/gh/ggbotnet/public-pixel-font@main/PublicPixel.ttf") format("truetype");font-display:swap}
+body:not(.modern-mode){font-family:PublicPixel8,DalmooriWeb,"Courier New",monospace;image-rendering:pixelated}
+body:not(.modern-mode) :lang(ko),body:not(.modern-mode) :lang(ko-KR){font-family:DalmooriWeb,PublicPixel8,"Courier New",monospace}
+body:not(.modern-mode) :lang(zh-CN),body:not(.modern-mode) :lang(zh-TW),body:not(.modern-mode) :lang(ja){font-family:"QuanPixel",PublicPixel8,DalmooriWeb,"Courier New",monospace}
+body:not(.modern-mode) .logo,body:not(.modern-mode) .hero h1{font-family:PublicPixel8,"Courier New",monospace}
+body:not(.modern-mode) .btn,body:not(.modern-mode) .nav a,body:not(.modern-mode) .lang-btn,body:not(.modern-mode) .lang-menu button{font-family:PublicPixel8,DalmooriWeb,"Courier New",monospace}
+</style>
+
+<style id="retro-scrollbar-final">
+/* Windows 9x scrollbar — Retro only.  Chromium/WebKit uses the exact 16px 9x skin;
+   Firefox gets the closest native scrollbar colors as a fallback. */
+html:not(.modern-mode),
+body:not(.modern-mode) {
+  scrollbar-width: auto;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html:not(.modern-mode),
+  body:not(.modern-mode) {
+    scrollbar-color: #c0c0c0 #c0c0c0;
+  }
+}
+
+/* The original browser viewport scrollbar is not left untouched: these pseudo-elements
+   skin the actual native scrollbar itself, including the viewport scrollbar. */
+html:not(.modern-mode)::-webkit-scrollbar,
+body:not(.modern-mode)::-webkit-scrollbar,
+body:not(.modern-mode) *::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background: none;
+}
+
+html:not(.modern-mode)::-webkit-scrollbar-thumb,
+html:not(.modern-mode)::-webkit-scrollbar-button,
+body:not(.modern-mode)::-webkit-scrollbar-thumb,
+body:not(.modern-mode)::-webkit-scrollbar-button,
+body:not(.modern-mode) *::-webkit-scrollbar-thumb,
+body:not(.modern-mode) *::-webkit-scrollbar-button {
+  width: 16px;
+  height: 16px;
+  background: silver;
+  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px gray;
+  border: 1px solid;
+  border-color: silver #000 #000 silver;
+}
+
+html:not(.modern-mode)::-webkit-scrollbar-thumb:active,
+html:not(.modern-mode)::-webkit-scrollbar-button:active,
+body:not(.modern-mode)::-webkit-scrollbar-thumb:active,
+body:not(.modern-mode)::-webkit-scrollbar-button:active,
+body:not(.modern-mode) *::-webkit-scrollbar-thumb:active,
+body:not(.modern-mode) *::-webkit-scrollbar-button:active {
+  box-shadow: inset -1px -1px #dfdfdf, inset 1px 1px gray;
+  border-color: #000 silver silver #000;
+}
+
+html:not(.modern-mode)::-webkit-scrollbar-track,
+body:not(.modern-mode)::-webkit-scrollbar-track,
+body:not(.modern-mode) *::-webkit-scrollbar-track {
+  image-rendering: optimizeSpeed;
+  image-rendering: pixelated;
+  image-rendering: optimize-contrast;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAyIDIiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+CjxtZXRhZGF0YT5NYWRlIHdpdGggUGl4ZWxzIHRvIFN2ZyBodHRwczovL2NvZGVwZW4uaW8vc2hzaGF3L3Blbi9YYnh2Tmo8L21ldGFkYXRhPgo8cGF0aCBzdHJva2U9IiNjMGMwYzAiIGQ9Ik0wIDBoMU0xIDFoMSIgLz4KPC9zdmc+");
+  background-position: 0 0;
+  background-repeat: repeat;
+  background-size: 2px;
+}
+
+html:not(.modern-mode)::-webkit-scrollbar-button,
+body:not(.modern-mode)::-webkit-scrollbar-button,
+body:not(.modern-mode) *::-webkit-scrollbar-button {
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
+html:not(.modern-mode)::-webkit-scrollbar-button:single-button:vertical:decrement,
+body:not(.modern-mode)::-webkit-scrollbar-button:single-button:vertical:decrement,
+body:not(.modern-mode) *::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU3ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTcgNWgxTTYgNmgzTTUgN2g1TTQgOGg3IiAvPgo8L3N2Zz4=");
+}
+
+html:not(.modern-mode)::-webkit-scrollbar-button:single-button:vertical:increment,
+body:not(.modern-mode)::-webkit-scrollbar-button:single-button:vertical:increment,
+body:not(.modern-mode) *::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhJZWxzIHRvIFN2ZyBodHRwczovL2NvZGVwZW4uaW8vc2hzaGF3L3Blbi9YYnh2Tmo8L21ldGFkYXRhPgo8cGF0aCBzdHJva2U9IiMwMDAwMDAiIGQ9Ik00IDVoN2g3TTUgNmg1TTYgN2gzTTcgOGgxIiAvPgo8L3N2Zz4=");
+}
+
+/* Fallback to the exact source snippet for horizontal arrows. */
+html:not(.modern-mode)::-webkit-scrollbar-button:single-button:horizontal:decrement,
+body:not(.modern-mode)::-webkit-scrollbar-button:single-button:horizontal:decrement,
+body:not(.modern-mode) *::-webkit-scrollbar-button:single-button:horizontal:decrement {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU1ZHIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTggM2gxTTcgNGgyTTYgNWgzTTUgNmg0TTYgN2gzTTcgOGgyTTggOWgxIiAvPgo8L3N2Zz4=");
+}
+
+html:not(.modern-mode)::-webkit-scrollbar-button:single-button:horizontal:increment,
+body:not(.modern-mode)::-webkit-scrollbar-button:single-button:horizontal:increment,
+body:not(.modern-mode) *::-webkit-scrollbar-button:single-button:horizontal:increment {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTAuNSAxNiAxNiIgc2hhcGUtcmVuZGVyaW5nPSJjcmlzcEVkZ2VzIj4KPG1ldGFkYXRhPk1hZGUgd2l0aCBQaXhlbHMgdG8gU1ZnIGh0dHBzOi8vY29kZXBlbi5pby9zaHNoYXcvcGVuL1hieHZOajwvbWV0YWRhdGE+CjxwYXRoIHN0cm9rZT0iIzAwMDAwMCIgZD0iTTYgM2gxTTYgNGgyTTYgNWgzTTYgNmg0TTYgN2gzTTYgOGgyTTYgOWgxIiAvPgo8L3N2Zz4=");
+}
+
+html:not(.modern-mode)::-webkit-scrollbar-corner,
+body:not(.modern-mode)::-webkit-scrollbar-corner,
+body:not(.modern-mode) *::-webkit-scrollbar-corner {
+  background: silver;
+}
+
+/* Hide the horizontal scrollbar of the nav itself; only the page and actual scrollable
+   panels use the Windows 9x skin. */
+body:not(.modern-mode) .nav,
+body:not(.modern-mode) .terminal pre {
+  scrollbar-width: none;
+}
+body:not(.modern-mode) .nav::-webkit-scrollbar {
+  display: none;
+}
+</style>
+
+
+<style id="retro-no-motion-final">
+/* Retro = instant Windows 9x behavior: no animation, no transition, no smooth scrolling anywhere. */
+html:not(.modern-mode),
+body:not(.modern-mode),
+body:not(.modern-mode) * ,
+body:not(.modern-mode) *::before,
+body:not(.modern-mode) *::after {
+  animation: none !important;
+  animation-delay: 0s !important;
+  animation-duration: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition: none !important;
+  transition-delay: 0s !important;
+  transition-duration: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+html:not(.modern-mode) {
+  scroll-behavior: auto !important;
+}
+
+body:not(.modern-mode) .modern-reveal,
+body:not(.modern-mode) .modern-reveal.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+body:not(.modern-mode) .lang-menu,
+body:not(.modern-mode) .lang.open .lang-menu {
+  transition: none !important;
+}
+</style>
 </head>
 <body>
-<header class="top"><div class="wrap topbar"><a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0-pre</span></a><nav class="nav"><div class="style-switch" role="group" aria-label="Visual style"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div><a data-i18n="home" href="#home">Home</a><a data-i18n="about" href="#about">About</a><a data-i18n="features" href="#features">Features</a><a data-i18n="build" href="#build">Build</a><a data-i18n="networking" href="#networking">Networking</a><a data-i18n="download" href="#download">Download</a><div class="lang"><button aria-expanded="false" class="lang-btn" data-i18n="language" type="button">Language ▾</button><div class="lang-menu" role="menu"><button data-lang="ko" data-lang-label="한국어" role="menuitem" type="button">한국어</button><button data-lang="en" data-lang-label="English" role="menuitem" type="button">English</button><button data-lang="es" data-lang-label="Español" role="menuitem" type="button">Español</button><button data-lang="zh-CN" data-lang-label="中文（简体）" role="menuitem" type="button">中文（简体）</button><button data-lang="zh-TW" data-lang-label="中文（繁體）" role="menuitem" type="button">中文（繁體）</button><button data-lang="ja" data-lang-label="日本語" role="menuitem" type="button">日本語</button></div></div></nav></div></header>
+<header class="top"><div class="wrap topbar"><a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0-pre</span></a><nav class="nav"><div class="style-switch" role="group" aria-label="Visual style"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div><a data-i18n="home" href="#home">Home</a><a data-i18n="about" href="#about">About</a><a data-i18n="features" href="#features">Features</a><a data-i18n="build" href="#build">Build</a><a data-i18n="networking" href="#networking">Networking</a><a data-i18n="download" href="#download">Download</a><div class="lang"><button aria-expanded="false" class="lang-btn" data-i18n="language" type="button">Language ▾</button><div class="lang-menu" role="menu"><button data-lang="ko" data-lang-label="한국어" role="menuitem" type="button">한국어</button><button data-lang="en" data-lang-label="English" role="menuitem" type="button">English</button><button data-lang="es" data-lang-label="Español" role="menuitem" type="button">Español</button><button data-lang="zh-CN" data-lang-label="中文（简体）" role="menuitem" type="button">中文（简体）</button><button data-lang="zh-TW" data-lang-label="中文（繁體）" role="menuitem" type="button">中文（繁體）</button><button data-lang="ja" data-lang-label="日本語" role="menuitem" type="button">日本語</button><button data-lang="fr" data-lang-label="Français" role="menuitem" type="button">Français</button><button data-lang="de" data-lang-label="Deutsch" role="menuitem" type="button">Deutsch</button><button data-lang="pt-BR" data-lang-label="Português (Brasil)" role="menuitem" type="button">Português (Brasil)</button><button data-lang="it" data-lang-label="Italiano" role="menuitem" type="button">Italiano</button><button data-lang="ru" data-lang-label="Русский" role="menuitem" type="button">Русский</button><button data-lang="vi" data-lang-label="Tiếng Việt" role="menuitem" type="button">Tiếng Việt</button><button data-lang="id" data-lang-label="Bahasa Indonesia" role="menuitem" type="button">Bahasa Indonesia</button><button data-lang="pl" data-lang-label="Polski" role="menuitem" type="button">Polski</button></div></div></nav></div></header>
 <main>
 <section class="hero" id="home"><div class="wrap hero-grid"><div><span class="tag" data-i18n="hero_tag">SEGFAULT777 / MINIWIN / MAIN</span><h1><span>MINI</span><span>WIN</span></h1><p data-i18n="hero_p">A tiny 32-bit x86 desktop operating system that boots from a single MBR disk image into a Windows-95-flavored GUI. Built from the ground up without libc, a bootloader framework, or borrowed kernel code.</p><div class="actions"><a class="btn primary" data-i18n="download_source" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip">DOWNLOAD SOURCE</a><a class="btn" data-i18n="github" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank">VIEW ON GITHUB</a></div></div><div class="monitor"><img alt="MiniWin desktop screenshot" loading="eager" src="https://cdn.phototourl.com/free/2026-09-15-a92c382b-1b9f-4b3d-b09b-8c67f4c240cd.png"/><div class="image-credit">MINIWIN // ACTUAL SCREENSHOT</div></div></div></section>
 <section id="about"><div class="wrap"><div class="head"><div class="eyebrow" data-i18n="about_eyebrow">01 / THE PROJECT</div><h2 data-i18n="about_h2">A small OS project, built close to the metal.</h2><p data-i18n="about_p">MiniWin is a dependency-free 32-bit x86 OS. Its bootloader handles the real-mode setup and protected-mode jump; the kernel then runs its own display, input, storage, desktop, clock and application code.</p></div><div class="panel"><div class="panel-head" data-i18n="system_information">SYSTEM INFORMATION</div><div class="facts"><div class="fact"><strong>i386</strong><small data-i18n="cpu">CPU target</small></div><div class="fact"><strong>640×400</strong><small data-i18n="display">VBE framebuffer</small></div><div class="fact"><strong>256</strong><small data-i18n="colors">colors</small></div><div class="fact"><strong>4-SLOT</strong><small data-i18n="filesystem">ATA filesystem</small></div></div></div></div></section>
@@ -539,7 +991,65 @@ button,a{touch-action:manipulation}
 <section id="download"><div class="wrap"><div class="head"><div class="eyebrow" data-i18n="download_eyebrow">05 / GET IT</div><h2 data-i18n="download_h2">Take it apart.</h2><p data-i18n="download_p">Grab the source, read the kernel, change something, rebuild the image, and boot it again.</p></div><div class="actions"><a class="btn primary" data-i18n="mainzip" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip">DOWNLOAD MAIN.ZIP</a><a class="btn" data-i18n="open_repo" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank">OPEN REPOSITORY</a><a class="btn" data-i18n="readme" href="https://github.com/SegFault777/MiniWin/blob/main/README.md" rel="noopener" target="_blank">READ README</a></div></div></section>
 </main>
 <footer><div class="wrap foot"><div data-i18n="footer_desc"><strong data-i18n="footer_name">MINIWIN</strong><br/>32-bit x86 desktop OS by SegFault777.</div><div data-i18n="footer_source">Source &amp; documentation: GitHub / SegFault777 / MiniWin</div></div></footer>
-<script>const links=[...document.querySelectorAll('.nav a')],sections=[...document.querySelectorAll('main section[id]')];new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-35% 0px -55% 0px'}).observe;sections.forEach(s=>{new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-35% 0px -55% 0px'}).observe(s)});</script>
+<script id="nav-section-observer">
+(()=>{
+  const links=[...document.querySelectorAll('.nav a[href^="#"]')];
+  const sections=[...document.querySelectorAll('main section[id]')];
+  const header=document.querySelector('body > header.top');
+  if(!links.length||!sections.length)return;
+
+  const getOffset=()=> (header?.getBoundingClientRect().height || 0) + 10;
+  const modern=()=>document.body.classList.contains('modern-mode');
+  const setActive=id=>links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
+
+  // Pick exactly one section from the current scroll position. This avoids
+  // IntersectionObserver threshold races that can flicker between adjacent sections.
+  let raf=0;
+  const updateActive=()=>{
+    raf=0;
+    const probe=window.scrollY + getOffset() + Math.min(window.innerHeight*0.18, 140);
+    let current=sections[0];
+    for(const section of sections){
+      if(section.offsetTop <= probe) current=section;
+      else break;
+    }
+    // When the very bottom is reached, always keep the final section active.
+    if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2){
+      current=sections[sections.length-1];
+    }
+    setActive(current.id);
+  };
+  const scheduleActive=()=>{ if(!raf) raf=requestAnimationFrame(updateActive); };
+
+  const goTo=(id,updateHash=true)=>{
+    const target=document.getElementById(id);
+    if(!target)return;
+    const y=Math.max(0,target.getBoundingClientRect().top + window.scrollY - getOffset());
+    window.scrollTo({top:y,behavior:modern()?'smooth':'auto'});
+    setActive(id);
+    if(updateHash) history.replaceState(null,'','#'+id);
+  };
+
+  links.forEach(link=>link.addEventListener('click',e=>{
+    const href=link.getAttribute('href')||'';
+    if(!href.startsWith('#')||href==='#')return;
+    const id=href.slice(1);
+    if(!document.getElementById(id))return;
+    e.preventDefault();
+    goTo(id,true);
+  }));
+
+  window.addEventListener('scroll',scheduleActive,{passive:true});
+  window.addEventListener('resize',scheduleActive,{passive:true});
+  window.addEventListener('load',scheduleActive,{once:true});
+
+  if(location.hash && document.getElementById(location.hash.slice(1))){
+    requestAnimationFrame(()=>goTo(location.hash.slice(1),false));
+  }else{
+    scheduleActive();
+  }
+})();
+</script>
 <script>
 const I18N={
  en:{language:'Language ▾',home:'Home',about:'About',features:'Features',build:'Build',networking:'Networking',download:'Download',hero_tag:'SEGFAULT777 / MINIWIN / MAIN',hero_p:'A tiny 32-bit x86 desktop operating system that boots from a single MBR disk image into a Windows-95-flavored GUI. Built from the ground up without libc, a bootloader framework, or borrowed kernel code.',download_source:'DOWNLOAD SOURCE',github:'VIEW ON GITHUB',about_eyebrow:'01 / THE PROJECT',about_h2:'A small OS project, built close to the metal.',about_p:'MiniWin is a dependency-free 32-bit x86 OS. Its bootloader handles the real-mode setup and protected-mode jump; the kernel then runs its own display, input, storage, desktop, clock and application code.',system_information:'SYSTEM INFORMATION',cpu:'CPU target',display:'VBE framebuffer',colors:'colors',filesystem:'ATA filesystem',features_eyebrow:'02 / WHAT\'S INSIDE',features_h2:'What is actually in the repository.',features_p:'The README describes a working set of low-level components and a small desktop environment; the project is still being built out.',boot_title:'512-byte MBR loader',boot_p:'Sets a real VBE mode, switches from real mode to protected mode, and loads the kernel with BIOS INT 13h extended LBA reads.',kernel_title:'Freestanding C',kernel_p:'Includes VGA, PS/2 keyboard and mouse, PC speaker, ATA storage, PCI enumeration and COM1 serial logging, all without libc.',desktop_title:'Classic window manager',desktop_p:'Drag, resize, minimize and maximize windows. Clicking a window brings it to the front, while the taskbar keeps minimized windows.',apps_title:'Notepad + Settings',apps_p:'Notepad supports multiple documents and real persistent saves. Settings switches the system language and controls input methods.',hangul_title:'Hangul IME',hangul_p:'A 2-beolsik-style jamo composition system backed by all 11,172 modern Hangul syllable glyphs.',clock_title:'Real CMOS time',clock_p:'The taskbar clock reads the hardware RTC and can show English or Korean date and time formats.',languages_title:'English / 한국어',languages_p:'MiniWin currently supports two system UI languages: English and Korean. Settings can switch the language live, and the Korean option includes the built-in Hangul IME.',build_eyebrow:'03 / BUILD & RUN',build_h2:'Build the disk image.',build_p:'Build on Linux with NASM, a 32-bit-capable GCC, and ld. On Debian or Ubuntu 64-bit hosts, gcc-multilib may be needed.',quick_start:'QUICK START — SHELL',current_state:'Current state: RTL8139 and e1000 drivers have been verified for ARP traffic in QEMU, but MiniWin does not yet have an ARP/IP/TCP stack or browser. File Manager and dynamic program loading are also not implemented.',network_eyebrow:'04 / NETWORKING',network_h2:'Two real NIC drivers. Still a work in progress.',network_p:'The README documents two independently verified network-card drivers. They can exchange a real ARP request/reply with QEMU\'s SLIRP gateway, but MiniWin does not have a full network stack yet.',rtl_title:'Port-I/O driver',rtl_p:'Includes a ring-buffer RX path and four-slot round-robin TX. The README records an end-to-end ARP reply received from QEMU\'s gateway.',e1000_title:'MMIO + descriptor rings',e1000_p:'Uses memory-mapped registers plus RX/TX descriptor rings. It is exercised without paging, so physical addresses can be used directly for the card\'s MMIO and DMA buffers.',limit_title:'Driver layer, for now',limit_p:'Both drivers are polled rather than interrupt-driven. Above them there is no ARP/IP/TCP stack, DNS, TLS, or browser yet.',download_eyebrow:'05 / GET IT',download_h2:'Take it apart.',download_p:'Grab the source, read the kernel, change something, rebuild the image, and boot it again.',mainzip:'DOWNLOAD MAIN.ZIP',open_repo:'OPEN REPOSITORY',readme:'READ README',footer_name:'MiniWin',footer_desc:'Dependency-free 32-bit x86 desktop OS by SegFault777.',footer_source:'Source & documentation: GitHub / SegFault777 / MiniWin'},
@@ -550,28 +1060,222 @@ const I18N={
  ja:{language:'言語 ▾',home:'ホーム',about:'概要',features:'機能',build:'ビルド',networking:'ネットワーク',download:'ダウンロード',hero_tag:'SEGFAULT777 / MINIWIN / MAIN',hero_p:'単一の MBR ディスクイメージから起動し、Windows 95 風の GUI に入る、依存関係のない 32-bit x86 デスクトップ OS です。libc、ブートローダーフレームワーク、借用したカーネルコードは使っていません。',download_source:'ソースをダウンロード',github:'GitHub で見る',about_eyebrow:'01 / プロジェクト',about_h2:'ハードウェアに近いところで作る小さな OS プロジェクト。',about_p:'MiniWin は依存関係のない 32-bit x86 OS です。ブートローダーが real mode の設定と protected mode への移行を担当し、その後はカーネルが表示、入力、ストレージ、デスクトップ、時計、アプリケーションを処理します。',system_information:'システム情報',cpu:'CPU ターゲット',display:'VBE フレームバッファ',colors:'色数',filesystem:'ATA ファイルシステム',features_eyebrow:'02 / 内容',features_h2:'リポジトリに実際にあるもの。',features_p:'README に記載された低レベルのコンポーネントと小さなデスクトップ環境を紹介します。プロジェクトはまだ開発中です。',boot_title:'512 バイト MBR ブートローダー',boot_p:'実際の VBE モードを設定し、real mode から protected mode へ切り替え、BIOS INT 13h 拡張 LBA 読み込みでカーネルをロードします。',kernel_title:'Freestanding C',kernel_p:'libc を使わず、VGA、PS/2 キーボード・マウス、PC スピーカー、ATA ストレージ、PCI 列挙、COM1 シリアルログを実装しています。',desktop_title:'クラシックなウィンドウ管理',desktop_p:'ウィンドウの移動、サイズ変更、最小化、最大化に対応。クリックしたウィンドウが前面に来て、タスクバーには最小化されたウィンドウが残ります。',apps_title:'Notepad + Settings',apps_p:'Notepad は複数ドキュメントと永続保存に対応。Settings ではシステム言語と入力方式を変更できます。',hangul_title:'ハングル IME',hangul_p:'2 ボル式風のジャモ合成を備え、11,172 個の現代ハングル音節グリフを収録しています。',clock_title:'実際の CMOS 時計',clock_p:'タスクバーの時計はハードウェア RTC を読み取り、英語または韓国語の日付・時刻形式を表示します。',languages_title:'English / 한국어',languages_p:'MiniWin のシステム UI は現在、英語と韓国語に対応しています。Settings からリアルタイムで切り替えられ、韓国語には内蔵 Hangul IME が含まれます。',build_eyebrow:'03 / ビルドと実行',build_h2:'ディスクイメージをビルドする。',build_p:'Linux では NASM、32-bit 対応 GCC、ld が必要です。64-bit Debian/Ubuntu では gcc-multilib が必要な場合があります。',quick_start:'クイックスタート — SHELL',current_state:'現在の状態：RTL8139 と e1000 のドライバーは QEMU で ARP トラフィックが検証済みですが、ARP/IP/TCP スタックやブラウザはまだありません。File Manager と動的プログラムロードも未実装です。',network_eyebrow:'04 / ネットワーク',network_h2:'2 つの実 NIC ドライバー。まだ開発途中です。',network_p:'README には独立して検証された 2 つの NIC ドライバーが記載されています。QEMU の SLIRP ゲートウェイと実際の ARP リクエスト/レスポンスを交換できますが、完全なネットワークスタックはまだありません。',rtl_title:'Port-I/O ドライバー',rtl_p:'リングバッファ RX と 4 スロットのラウンドロビン TX を備えています。README には QEMU ゲートウェイから ARP 応答を端から端まで受信した記録があります。',e1000_title:'MMIO + ディスクリプタリング',e1000_p:'メモリマップドレジスタと RX/TX ディスクリプタリングを使用します。ページングを無効にしているため、物理アドレスを MMIO と DMA バッファに直接使えます。',limit_title:'今はドライバ層まで',limit_p:'両方のドライバーは割り込みではなくポーリング方式です。その上にはまだ ARP/IP/TCP、DNS、TLS、ブラウザがありません。',download_eyebrow:'05 / ダウンロード',download_h2:'中身を見てみよう。',download_p:'ソースを取得し、カーネルを読み、変更し、イメージを再ビルドしてもう一度起動してみてください。',mainzip:'MAIN.ZIP をダウンロード',open_repo:'リポジトリを開く',readme:'README を読む',footer_name:'MiniWin',footer_desc:'SegFault777 による依存関係のない 32-bit x86 デスクトップ OS。',footer_source:'ソースとドキュメント: GitHub / SegFault777 / MiniWin'}
 };
 
+/* Additional UI languages. Untranslated long-form strings intentionally fall back to English. */
+const EXTRA_I18N={
+ fr:{language:'Langue ▾',home:'Accueil',about:'À propos',features:'Fonctionnalités',build:'Compiler',networking:'Réseau',download:'Télécharger',download_source:'TÉLÉCHARGER LE CODE',github:'VOIR SUR GITHUB',about_eyebrow:'01 / LE PROJET',about_h2:'Un petit projet d’OS, au plus près du matériel.',system_information:'INFORMATIONS SYSTÈME',features_eyebrow:'02 / CONTENU',features_h2:'Ce qui se trouve réellement dans le dépôt.',build_eyebrow:'03 / COMPILATION ET EXÉCUTION',build_h2:'Construisez l’image disque.',network_eyebrow:'04 / RÉSEAU',network_h2:'Deux vrais pilotes NIC. Encore en développement.',download_eyebrow:'05 / TÉLÉCHARGEMENT',download_h2:'Explorez le code.',quick_start:'DÉMARRAGE RAPIDE — SHELL'},
+ de:{language:'Sprache ▾',home:'Startseite',about:'Über',features:'Funktionen',build:'Build',networking:'Netzwerk',download:'Download',download_source:'QUELLCODE HERUNTERLADEN',github:'AUF GITHUB ANSEHEN',about_eyebrow:'01 / DAS PROJEKT',about_h2:'Ein kleines OS-Projekt, nah an der Hardware.',system_information:'SYSTEMINFORMATIONEN',features_eyebrow:'02 / INHALT',features_h2:'Was tatsächlich im Repository steckt.',build_eyebrow:'03 / BAUEN & AUSFÜHREN',build_h2:'Das Festplattenabbild erstellen.',network_eyebrow:'04 / NETZWERK',network_h2:'Zwei echte NIC-Treiber. Noch in Entwicklung.',download_eyebrow:'05 / DOWNLOAD',download_h2:'Schau in den Code.',quick_start:'SCHNELLSTART — SHELL'},
+ 'pt-BR':{language:'Idioma ▾',home:'Início',about:'Sobre',features:'Recursos',build:'Compilar',networking:'Rede',download:'Baixar',download_source:'BAIXAR CÓDIGO-FONTE',github:'VER NO GITHUB',about_eyebrow:'01 / O PROJETO',about_h2:'Um pequeno projeto de SO, próximo do hardware.',system_information:'INFORMAÇÕES DO SISTEMA',features_eyebrow:'02 / CONTEÚDO',features_h2:'O que realmente existe no repositório.',build_eyebrow:'03 / COMPILAR E EXECUTAR',build_h2:'Compile a imagem de disco.',network_eyebrow:'04 / REDE',network_h2:'Dois drivers NIC reais. Ainda em desenvolvimento.',download_eyebrow:'05 / DOWNLOAD',download_h2:'Explore o código.',quick_start:'INÍCIO RÁPIDO — SHELL'},
+ it:{language:'Lingua ▾',home:'Home',about:'Informazioni',features:'Funzioni',build:'Build',networking:'Rete',download:'Scarica',download_source:'SCARICA IL CODICE',github:'VEDI SU GITHUB',about_eyebrow:'01 / IL PROGETTO',about_h2:'Un piccolo progetto OS, vicino all’hardware.',system_information:'INFORMAZIONI DI SISTEMA',features_eyebrow:'02 / CONTENUTO',features_h2:'Cosa c’è realmente nel repository.',build_eyebrow:'03 / BUILD ED ESECUZIONE',build_h2:'Costruisci l’immagine disco.',network_eyebrow:'04 / RETE',network_h2:'Due veri driver NIC. Ancora in sviluppo.',download_eyebrow:'05 / DOWNLOAD',download_h2:'Esplora il codice.',quick_start:'AVVIO RAPIDO — SHELL'},
+ ru:{language:'Язык ▾',home:'Главная',about:'О проекте',features:'Возможности',build:'Сборка',networking:'Сеть',download:'Скачать',download_source:'СКАЧАТЬ ИСХОДНЫЙ КОД',github:'ОТКРЫТЬ НА GITHUB',about_eyebrow:'01 / ПРОЕКТ',about_h2:'Небольшая ОС, созданная близко к железу.',system_information:'СИСТЕМНАЯ ИНФОРМАЦИЯ',features_eyebrow:'02 / СОДЕРЖИМОЕ',features_h2:'Что действительно есть в репозитории.',build_eyebrow:'03 / СБОРКА И ЗАПУСК',build_h2:'Соберите образ диска.',network_eyebrow:'04 / СЕТЬ',network_h2:'Два настоящих NIC-драйвера. Разработка продолжается.',download_eyebrow:'05 / СКАЧАТЬ',download_h2:'Изучите код.',quick_start:'БЫСТРЫЙ СТАРТ — SHELL'},
+ vi:{language:'Ngôn ngữ ▾',home:'Trang chủ',about:'Giới thiệu',features:'Tính năng',build:'Biên dịch',networking:'Mạng',download:'Tải xuống',download_source:'TẢI MÃ NGUỒN',github:'XEM TRÊN GITHUB',about_eyebrow:'01 / DỰ ÁN',about_h2:'Một dự án OS nhỏ, hoạt động gần phần cứng.',system_information:'THÔNG TIN HỆ THỐNG',features_eyebrow:'02 / NỘI DUNG',features_h2:'Những gì thực sự có trong repository.',build_eyebrow:'03 / BIÊN DỊCH & CHẠY',build_h2:'Biên dịch ảnh đĩa.',network_eyebrow:'04 / MẠNG',network_h2:'Hai driver NIC thật. Vẫn đang phát triển.',download_eyebrow:'05 / TẢI XUỐNG',download_h2:'Khám phá mã nguồn.',quick_start:'BẮT ĐẦU NHANH — SHELL'},
+ id:{language:'Bahasa ▾',home:'Beranda',about:'Tentang',features:'Fitur',build:'Build',networking:'Jaringan',download:'Unduh',download_source:'UNDUH SOURCE',github:'LIHAT DI GITHUB',about_eyebrow:'01 / PROYEK',about_h2:'Proyek OS kecil yang dekat dengan perangkat keras.',system_information:'INFORMASI SISTEM',features_eyebrow:'02 / ISI',features_h2:'Apa yang benar-benar ada di repository.',build_eyebrow:'03 / BUILD & JALANKAN',build_h2:'Bangun image disk.',network_eyebrow:'04 / JARINGAN',network_h2:'Dua driver NIC nyata. Masih dalam pengembangan.',download_eyebrow:'05 / UNDUH',download_h2:'Jelajahi kodenya.',quick_start:'MULAI CEPAT — SHELL'},
+ pl:{language:'Język ▾',home:'Start',about:'O projekcie',features:'Funkcje',build:'Budowanie',networking:'Sieć',download:'Pobierz',download_source:'POBIERZ KOD ŹRÓDŁOWY',github:'ZOBACZ NA GITHUB',about_eyebrow:'01 / PROJEKT',about_h2:'Mały projekt systemu operacyjnego, blisko sprzętu.',system_information:'INFORMACJE O SYSTEMIE',features_eyebrow:'02 / ZAWARTOŚĆ',features_h2:'Co naprawdę znajduje się w repozytorium.',build_eyebrow:'03 / BUDOWANIE I URUCHAMIANIE',build_h2:'Zbuduj obraz dysku.',network_eyebrow:'04 / SIEĆ',network_h2:'Dwa prawdziwe sterowniki NIC. Projekt jest nadal rozwijany.',download_eyebrow:'05 / POBIERANIE',download_h2:'Zajrzyj do kodu.',quick_start:'SZYBKI START — SHELL'}
+};
+const EXTRA_BODY={
+fr:{hero_tag:'SEGFAULT777 / MINIWIN / PRINCIPAL',hero_p:'Un petit système d’exploitation x86 32 bits qui démarre depuis une seule image disque MBR vers une interface inspirée de Windows 95.',about_p:'MiniWin est un OS x86 32 bits sans dépendances. Le chargeur prépare le mode réel puis le mode protégé, et le noyau gère affichage, entrée, stockage, bureau, horloge et applications.',features_p:'Le dépôt contient un ensemble fonctionnel de composants bas niveau et un petit environnement de bureau. Le projet est encore en développement.',cpu:'Cible CPU',display:'Framebuffer VBE',colors:'couleurs',filesystem:'Système de fichiers ATA',boot_title:'Chargeur MBR de 512 octets',boot_p:'Configure un vrai mode VBE, passe en mode protégé et charge le noyau avec les lectures LBA étendues du BIOS.',kernel_title:'C freestanding',kernel_p:'VGA, clavier et souris PS/2, haut-parleur PC, stockage ATA, PCI et journal série COM1, sans libc.',desktop_title:'Gestionnaire de fenêtres classique',desktop_p:'Déplacez, redimensionnez, réduisez et agrandissez les fenêtres. La fenêtre cliquée passe au premier plan.',apps_title:'Notepad + Settings',apps_p:'Notepad gère plusieurs documents et les sauvegardes persistantes. Settings change la langue et les méthodes de saisie.',hangul_title:'IME Hangul',hangul_p:'Composition jamo de style 2-beolsik avec les 11 172 syllabes Hangul modernes.',clock_title:'Heure CMOS réelle',clock_p:'L’horloge de la barre des tâches lit le RTC matériel.',languages_title:'English / 한국어',languages_p:'MiniWin prend actuellement en charge l’anglais et le coréen pour son interface système.',build_p:'Construisez sous Linux avec NASM, GCC 32 bits et ld. Sur Debian ou Ubuntu 64 bits, gcc-multilib peut être nécessaire.',current_state:'Les pilotes RTL8139 et e1000 ont été vérifiés dans QEMU pour le trafic ARP. La pile ARP/IP/TCP et le navigateur ne sont pas encore présents.',network_p:'Deux pilotes NIC réels sont inclus et testés avec la passerelle SLIRP de QEMU, mais la pile réseau complète reste à construire.',rtl_title:'Pilote Port-I/O',rtl_p:'RX en tampon circulaire et TX à quatre emplacements en rotation.',e1000_title:'MMIO + anneaux de descripteurs',e1000_p:'Utilise des registres mappés en mémoire et de vrais anneaux de descripteurs RX/TX.',limit_title:'Limité pour le moment aux pilotes',limit_p:'Pas encore d’ARP/IP/TCP, DNS, TLS ou navigateur au-dessus des pilotes.',download_p:'Récupérez le code source, lisez le noyau, modifiez-le et reconstruisez l’image.',footer_desc:'OS de bureau x86 32 bits sans dépendances par SegFault777.',footer_source:'Code source et documentation : GitHub / SegFault777 / MiniWin'},
+de:{hero_tag:'SEGFAULT777 / MINIWIN / MAIN',hero_p:'Ein kleines 32-Bit-x86-Betriebssystem, das aus einem einzigen MBR-Disk-Image direkt in eine Windows-95-inspirierte GUI startet.',about_p:'MiniWin ist ein abhängigesfreies 32-Bit-x86-OS. Der Bootloader bereitet Real- und Protected-Mode vor; der Kernel übernimmt Anzeige, Eingabe, Speicher, Desktop, Uhr und Apps.',features_p:'Das Repository enthält funktionierende Low-Level-Komponenten und eine kleine Desktop-Umgebung. Das Projekt wird weiterentwickelt.',cpu:'CPU-Ziel',display:'VBE-Framebuffer',colors:'Farben',filesystem:'ATA-Dateisystem',boot_title:'512-Byte-MBR-Loader',boot_p:'Setzt einen echten VBE-Modus, wechselt in den Protected Mode und lädt den Kernel per erweiterten BIOS-LBA-Lesezugriffen.',kernel_title:'Freestanding C',kernel_p:'VGA, PS/2-Tastatur und Maus, PC-Lautsprecher, ATA-Speicher, PCI-Erkennung und COM1-Logging ohne libc.',desktop_title:'Klassischer Fenstermanager',desktop_p:'Fenster verschieben, skalieren, minimieren und maximieren. Ein Klick bringt das Fenster nach vorne.',apps_title:'Notepad + Settings',apps_p:'Notepad unterstützt mehrere Dokumente und persistentes Speichern. Settings ändert Sprache und Eingabemethoden.',hangul_title:'Hangul-IME',hangul_p:'Jamo-Komposition im Stil von 2-Beolsik mit allen 11.172 modernen Hangul-Silben.',clock_title:'Echte CMOS-Uhr',clock_p:'Die Taskleisten-Uhr liest die Hardware-RTC.',languages_title:'English / 한국어',languages_p:'Die MiniWin-Systemoberfläche unterstützt derzeit Englisch und Koreanisch.',build_p:'Unter Linux mit NASM, 32-Bit-fähigem GCC und ld bauen. Auf 64-Bit-Debian/Ubuntu kann gcc-multilib nötig sein.',current_state:'RTL8139- und e1000-Treiber wurden in QEMU mit ARP-Datenverkehr verifiziert. Ein vollständiger ARP/IP/TCP-Stack und Browser fehlen noch.',network_p:'Zwei echte NIC-Treiber sind enthalten und gegen das QEMU-SLIRP-Gateway getestet; der vollständige Netzwerk-Stack fehlt noch.',rtl_title:'Port-I/O-Treiber',rtl_p:'Ringpuffer für RX und vier Round-Robin-TX-Slots.',e1000_title:'MMIO + Descriptor-Ringe',e1000_p:'Nutzt speicherabgebildete Register sowie RX/TX-Descriptor-Ringe.',limit_title:'Derzeit nur Treiberschicht',limit_p:'Noch kein ARP/IP/TCP, DNS, TLS oder Browser über den Treibern.',download_p:'Quellcode laden, Kernel lesen, Änderungen vornehmen und das Image neu bauen.',footer_desc:'Abhängigkeitsfreies 32-Bit-x86-Desktop-OS von SegFault777.',footer_source:'Quellcode und Dokumentation: GitHub / SegFault777 / MiniWin'},
+'pt-BR':{hero_tag:'SEGFAULT777 / MINIWIN / PRINCIPAL',hero_p:'Um pequeno sistema operacional x86 de 32 bits que inicia de uma única imagem de disco MBR em uma GUI inspirada no Windows 95.',about_p:'MiniWin é um SO x86 de 32 bits sem dependências. O bootloader prepara os modos real e protegido; o kernel cuida de vídeo, entrada, armazenamento, desktop, relógio e apps.',features_p:'O repositório contém componentes de baixo nível funcionais e um pequeno ambiente de desktop. O projeto continua em desenvolvimento.',cpu:'Alvo da CPU',display:'Framebuffer VBE',colors:'cores',filesystem:'Sistema de arquivos ATA',boot_title:'Bootloader MBR de 512 bytes',boot_p:'Configura VBE, muda para protected mode e carrega o kernel usando leituras LBA estendidas do BIOS.',kernel_title:'C freestanding',kernel_p:'VGA, teclado e mouse PS/2, alto-falante, armazenamento ATA, PCI e log serial COM1, sem libc.',desktop_title:'Gerenciador de janelas clássico',desktop_p:'Mova, redimensione, minimize e maximize janelas. A janela clicada vai para frente.',apps_title:'Notepad + Settings',apps_p:'Notepad suporta vários documentos e salvamento persistente. Settings altera idioma e métodos de entrada.',hangul_title:'IME Hangul',hangul_p:'Composição de jamo no estilo 2-beolsik com 11.172 sílabas Hangul modernas.',clock_title:'Relógio CMOS real',clock_p:'O relógio da barra de tarefas lê o RTC do hardware.',languages_title:'English / 한국어',languages_p:'A interface do sistema MiniWin atualmente suporta inglês e coreano.',build_p:'Compile no Linux com NASM, GCC de 32 bits e ld. Em Debian/Ubuntu 64 bits, gcc-multilib pode ser necessário.',current_state:'Os drivers RTL8139 e e1000 foram verificados no QEMU com tráfego ARP. Ainda não há pilha ARP/IP/TCP nem navegador.',network_p:'Dois drivers NIC reais estão incluídos e testados contra o gateway SLIRP do QEMU, mas a pilha de rede completa ainda não existe.',rtl_title:'Driver Port-I/O',rtl_p:'RX com buffer circular e TX round-robin com quatro slots.',e1000_title:'MMIO + anéis de descritores',e1000_p:'Usa registradores mapeados em memória e anéis reais de descritores RX/TX.',limit_title:'Por enquanto, apenas a camada de driver',limit_p:'Ainda não há ARP/IP/TCP, DNS, TLS ou navegador acima dos drivers.',download_p:'Baixe o código, leia o kernel, faça alterações e reconstrua a imagem.',footer_desc:'SO desktop x86 de 32 bits sem dependências, por SegFault777.',footer_source:'Código-fonte e documentação: GitHub / SegFault777 / MiniWin'},
+it:{hero_tag:'SEGFAULT777 / MINIWIN / MAIN',hero_p:'Un piccolo sistema operativo x86 a 32 bit che avvia una GUI ispirata a Windows 95 da una singola immagine disco MBR.',about_p:'MiniWin è un OS x86 a 32 bit senza dipendenze. Il bootloader prepara real mode e protected mode; il kernel gestisce video, input, storage, desktop, orologio e app.',features_p:'Il repository contiene componenti low-level funzionanti e un piccolo ambiente desktop. Il progetto è ancora in sviluppo.',cpu:'Target CPU',display:'Framebuffer VBE',colors:'colori',filesystem:'Filesystem ATA',boot_title:'Loader MBR da 512 byte',boot_p:'Imposta un vero modo VBE, passa al protected mode e carica il kernel con letture LBA estese del BIOS.',kernel_title:'C freestanding',kernel_p:'VGA, tastiera e mouse PS/2, altoparlante PC, storage ATA, PCI e log seriale COM1 senza libc.',desktop_title:'Window manager classico',desktop_p:'Sposta, ridimensiona, minimizza e massimizza le finestre. Un clic porta la finestra in primo piano.',apps_title:'Notepad + Settings',apps_p:'Notepad gestisce più documenti e salvataggi persistenti. Settings cambia lingua e metodi di input.',hangul_title:'IME Hangul',hangul_p:'Composizione jamo in stile 2-beolsik con tutte le 11.172 sillabe Hangul moderne.',clock_title:'Ora CMOS reale',clock_p:'L’orologio della taskbar legge l’RTC hardware.',languages_title:'English / 한국어',languages_p:'L’interfaccia di sistema MiniWin supporta attualmente inglese e coreano.',build_p:'Compila su Linux con NASM, GCC a 32 bit e ld. Su Debian/Ubuntu 64 bit può servire gcc-multilib.',current_state:'I driver RTL8139 ed e1000 sono stati verificati in QEMU con traffico ARP. Mancano ancora stack ARP/IP/TCP e browser.',network_p:'Sono inclusi due veri driver NIC testati contro il gateway SLIRP di QEMU, ma lo stack di rete completo non è ancora presente.',rtl_title:'Driver Port-I/O',rtl_p:'RX con ring buffer e TX round-robin a quattro slot.',e1000_title:'MMIO + anelli descriptor',e1000_p:'Usa registri memory-mapped e anelli reali di descriptor RX/TX.',limit_title:'Per ora solo il livello driver',limit_p:'Sopra i driver non ci sono ancora ARP/IP/TCP, DNS, TLS o browser.',download_p:'Scarica il codice, leggi il kernel, modifica e ricostruisci l’immagine.',footer_desc:'OS desktop x86 a 32 bit senza dipendenze, di SegFault777.',footer_source:'Codice e documentazione: GitHub / SegFault777 / MiniWin'},
+ru:{hero_tag:'SEGFAULT777 / MINIWIN / MAIN',hero_p:'Небольшая 32-битная x86 ОС, загружающаяся из одного MBR-образа диска в графический интерфейс в стиле Windows 95.',about_p:'MiniWin — 32-битная x86 ОС без зависимостей. Загрузчик подготавливает режимы процессора, а ядро управляет экраном, вводом, хранилищем, рабочим столом, часами и приложениями.',features_p:'В репозитории есть рабочие низкоуровневые компоненты и небольшой рабочий стол. Проект всё ещё развивается.',cpu:'Целевая CPU',display:'VBE-буфер',colors:'цветов',filesystem:'ATA-файловая система',boot_title:'512-байтный MBR-загрузчик',boot_p:'Настраивает VBE, переходит в protected mode и загружает ядро расширенными LBA-чтениями BIOS.',kernel_title:'Freestanding C',kernel_p:'VGA, PS/2 клавиатура и мышь, PC speaker, ATA, PCI и COM1-лог без libc.',desktop_title:'Классический оконный менеджер',desktop_p:'Окна можно перемещать, менять размер, сворачивать и разворачивать. Нажатое окно выходит вперёд.',apps_title:'Notepad + Settings',apps_p:'Notepad поддерживает несколько документов и постоянное сохранение. Settings меняет язык и методы ввода.',hangul_title:'Hangul IME',hangul_p:'Композиция jamo в стиле 2-beolsik со всеми 11 172 современными слогами Hangul.',clock_title:'Настоящие часы CMOS',clock_p:'Часы панели задач читают аппаратный RTC.',languages_title:'English / 한국어',languages_p:'Системный интерфейс MiniWin сейчас поддерживает английский и корейский.',build_p:'Собирайте в Linux с NASM, 32-битным GCC и ld. На 64-битных Debian/Ubuntu может понадобиться gcc-multilib.',current_state:'Драйверы RTL8139 и e1000 проверены в QEMU на ARP-трафике. Полного ARP/IP/TCP стека и браузера пока нет.',network_p:'Есть два реальных NIC-драйвера, проверенных с QEMU SLIRP, но полноценный сетевой стек ещё не реализован.',rtl_title:'Драйвер Port-I/O',rtl_p:'Кольцевой буфер RX и четыре слота TX с round-robin.',e1000_title:'MMIO + кольца дескрипторов',e1000_p:'Использует memory-mapped регистры и кольца RX/TX-дескрипторов.',limit_title:'Пока только уровень драйверов',limit_p:'Над драйверами ещё нет ARP/IP/TCP, DNS, TLS или браузера.',download_p:'Скачайте исходники, изучите ядро, внесите изменения и пересоберите образ.',footer_desc:'32-битная x86 desktop ОС без зависимостей от SegFault777.',footer_source:'Исходный код и документация: GitHub / SegFault777 / MiniWin'},
+vi:{hero_tag:'SEGFAULT777 / MINIWIN / CHÍNH',hero_p:'Một hệ điều hành x86 32-bit nhỏ khởi động từ một ảnh đĩa MBR duy nhất vào giao diện lấy cảm hứng từ Windows 95.',about_p:'MiniWin là hệ điều hành x86 32-bit không phụ thuộc thư viện. Bootloader xử lý các chế độ CPU; kernel tự quản lý hiển thị, nhập liệu, lưu trữ, desktop, đồng hồ và ứng dụng.',features_p:'Kho mã có các thành phần mức thấp đang hoạt động và một desktop nhỏ. Dự án vẫn đang được phát triển.',cpu:'Mục tiêu CPU',display:'Framebuffer VBE',colors:'màu',filesystem:'Hệ thống tệp ATA',boot_title:'Bootloader MBR 512 byte',boot_p:'Thiết lập VBE, chuyển sang protected mode và nạp kernel bằng đọc LBA mở rộng của BIOS.',kernel_title:'C freestanding',kernel_p:'VGA, bàn phím/chuột PS/2, loa PC, ATA, PCI và log COM1 mà không cần libc.',desktop_title:'Trình quản lý cửa sổ cổ điển',desktop_p:'Di chuyển, đổi kích thước, thu nhỏ và phóng to cửa sổ. Cửa sổ được nhấp sẽ lên trước.',apps_title:'Notepad + Settings',apps_p:'Notepad hỗ trợ nhiều tài liệu và lưu bền vững. Settings đổi ngôn ngữ và phương thức nhập.',hangul_title:'IME Hangul',hangul_p:'Ghép jamo kiểu 2-beolsik với đủ 11.172 âm tiết Hangul hiện đại.',clock_title:'Giờ CMOS thật',clock_p:'Đồng hồ taskbar đọc RTC phần cứng.',languages_title:'English / 한국어',languages_p:'Giao diện hệ thống MiniWin hiện hỗ trợ tiếng Anh và tiếng Hàn.',build_p:'Build trên Linux với NASM, GCC 32-bit và ld. Debian/Ubuntu 64-bit có thể cần gcc-multilib.',current_state:'Driver RTL8139 và e1000 đã được kiểm tra trong QEMU với ARP. Chưa có stack ARP/IP/TCP hoàn chỉnh hay trình duyệt.',network_p:'Có hai driver NIC thật được kiểm tra với QEMU SLIRP, nhưng stack mạng đầy đủ vẫn đang phát triển.',rtl_title:'Driver Port-I/O',rtl_p:'RX dùng ring buffer và TX round-robin bốn slot.',e1000_title:'MMIO + vòng descriptor',e1000_p:'Dùng thanh ghi memory-mapped và vòng descriptor RX/TX.',limit_title:'Hiện chỉ đến tầng driver',limit_p:'Chưa có ARP/IP/TCP, DNS, TLS hoặc trình duyệt phía trên driver.',download_p:'Tải mã nguồn, đọc kernel, chỉnh sửa và build lại image.',footer_desc:'Hệ điều hành desktop x86 32-bit không phụ thuộc thư viện của SegFault777.',footer_source:'Mã nguồn và tài liệu: GitHub / SegFault777 / MiniWin'},
+id:{hero_tag:'SEGFAULT777 / MINIWIN / UTAMA',hero_p:'Sistem operasi x86 32-bit kecil yang melakukan boot dari satu image disk MBR ke GUI bergaya Windows 95.',about_p:'MiniWin adalah OS x86 32-bit tanpa dependensi. Bootloader menyiapkan mode CPU; kernel menangani tampilan, input, penyimpanan, desktop, jam, dan aplikasi.',features_p:'Repository berisi komponen low-level yang berfungsi dan desktop kecil. Proyek masih dikembangkan.',cpu:'Target CPU',display:'Framebuffer VBE',colors:'warna',filesystem:'Sistem berkas ATA',boot_title:'Bootloader MBR 512 byte',boot_p:'Mengatur VBE, masuk protected mode, lalu memuat kernel dengan pembacaan LBA BIOS.',kernel_title:'C freestanding',kernel_p:'VGA, keyboard/mouse PS/2, speaker PC, ATA, PCI dan log serial COM1 tanpa libc.',desktop_title:'Window manager klasik',desktop_p:'Jendela dapat dipindah, diubah ukuran, diminimalkan dan dimaksimalkan. Klik membawa jendela ke depan.',apps_title:'Notepad + Settings',apps_p:'Notepad mendukung beberapa dokumen dan penyimpanan persisten. Settings mengubah bahasa dan metode input.',hangul_title:'IME Hangul',hangul_p:'Komposisi jamo gaya 2-beolsik dengan 11.172 suku kata Hangul modern.',clock_title:'Waktu CMOS nyata',clock_p:'Jam taskbar membaca RTC perangkat keras.',languages_title:'English / 한국어',languages_p:'UI sistem MiniWin saat ini mendukung bahasa Inggris dan Korea.',build_p:'Build di Linux dengan NASM, GCC 32-bit dan ld. Debian/Ubuntu 64-bit mungkin memerlukan gcc-multilib.',current_state:'Driver RTL8139 dan e1000 telah diverifikasi di QEMU dengan lalu lintas ARP. Stack ARP/IP/TCP dan browser belum ada.',network_p:'Dua driver NIC nyata tersedia dan diuji terhadap gateway QEMU SLIRP, tetapi stack jaringan lengkap masih belum ada.',rtl_title:'Driver Port-I/O',rtl_p:'RX menggunakan ring buffer dan TX round-robin empat slot.',e1000_title:'MMIO + ring descriptor',e1000_p:'Menggunakan register memory-mapped dan ring descriptor RX/TX.',limit_title:'Saat ini hanya lapisan driver',limit_p:'Belum ada ARP/IP/TCP, DNS, TLS atau browser di atas driver.',download_p:'Unduh source, baca kernel, ubah, lalu build ulang image.',footer_desc:'OS desktop x86 32-bit tanpa dependensi oleh SegFault777.',footer_source:'Source dan dokumentasi: GitHub / SegFault777 / MiniWin'},
+pl:{hero_tag:'SEGFAULT777 / MINIWIN / GŁÓWNY',hero_p:'Mały 32-bitowy system x86 uruchamiany z pojedynczego obrazu dysku MBR do interfejsu inspirowanego Windows 95.',about_p:'MiniWin to bezzależnościowy 32-bitowy system x86. Bootloader przygotowuje tryby CPU, a kernel obsługuje ekran, wejście, pamięć, pulpit, zegar i aplikacje.',features_p:'Repozytorium zawiera działające komponenty niskiego poziomu i małe środowisko pulpitu. Projekt jest nadal rozwijany.',cpu:'Cel CPU',display:'Framebuffer VBE',colors:'kolorów',filesystem:'System plików ATA',boot_title:'512-bajtowy loader MBR',boot_p:'Ustawia VBE, przechodzi do protected mode i ładuje kernel przez rozszerzone odczyty LBA BIOS.',kernel_title:'Freestanding C',kernel_p:'VGA, klawiatura i mysz PS/2, głośnik PC, ATA, PCI i logowanie COM1 bez libc.',desktop_title:'Klasyczny menedżer okien',desktop_p:'Okna można przesuwać, skalować, minimalizować i maksymalizować. Kliknięte okno trafia na wierzch.',apps_title:'Notepad + Settings',apps_p:'Notepad obsługuje wiele dokumentów i trwały zapis. Settings zmienia język i metody wejścia.',hangul_title:'IME Hangul',hangul_p:'Składanie jamo w stylu 2-beolsik z 11 172 współczesnymi sylabami Hangul.',clock_title:'Prawdziwy zegar CMOS',clock_p:'Zegar paska zadań odczytuje sprzętowy RTC.',languages_title:'English / 한국어',languages_p:'Interfejs systemowy MiniWin obsługuje obecnie angielski i koreański.',build_p:'Buduj na Linuksie z NASM, 32-bitowym GCC i ld. Na 64-bitowym Debianie/Ubuntu może być potrzebny gcc-multilib.',current_state:'Sterowniki RTL8139 i e1000 zostały zweryfikowane w QEMU z ruchem ARP. Brakuje jeszcze stosu ARP/IP/TCP i przeglądarki.',network_p:'Dostępne są dwa prawdziwe sterowniki NIC przetestowane z QEMU SLIRP, ale pełny stos sieciowy nie jest jeszcze gotowy.',rtl_title:'Sterownik Port-I/O',rtl_p:'RX z buforem pierścieniowym i czterema slotami TX round-robin.',e1000_title:'MMIO + pierścienie deskryptorów',e1000_p:'Używa rejestrów memory-mapped i pierścieni deskryptorów RX/TX.',limit_title:'Na razie tylko warstwa sterownika',limit_p:'Nad sterownikami nie ma jeszcze ARP/IP/TCP, DNS, TLS ani przeglądarki.',download_p:'Pobierz kod, poznaj kernel, wprowadź zmiany i przebuduj obraz.',footer_desc:'Bez-zależnościowy 32-bitowy desktopowy OS x86 od SegFault777.',footer_source:'Kod źródłowy i dokumentacja: GitHub / SegFault777 / MiniWin'}
+};
+Object.keys(EXTRA_BODY).forEach(k=>{EXTRA_I18N[k]={...EXTRA_I18N[k],...EXTRA_BODY[k]};});
+Object.keys(EXTRA_I18N).forEach(k=>{I18N[k]={...I18N.en,...EXTRA_I18N[k]};});
+
+/* Bind the complete page, not just headings, to the language dictionary. */
+const TEXT_BINDINGS=[
+ ['.hero p','hero_p'],['.hero .tag','hero_tag'],['.image-credit','hero_tag'],
+ ['#about .head p','about_p'],['#about .fact:nth-child(1) small','cpu'],['#about .fact:nth-child(2) small','display'],['#about .fact:nth-child(3) small','colors'],['#about .fact:nth-child(4) small','filesystem'],
+ ['#features .head p','features_p'],['#features .card:nth-child(1) h3','boot_title'],['#features .card:nth-child(1) p','boot_p'],['#features .card:nth-child(2) h3','kernel_title'],['#features .card:nth-child(2) p','kernel_p'],['#features .card:nth-child(3) h3','desktop_title'],['#features .card:nth-child(3) p','desktop_p'],['#features .card:nth-child(4) h3','apps_title'],['#features .card:nth-child(4) p','apps_p'],['#features .card:nth-child(5) h3','hangul_title'],['#features .card:nth-child(5) p','hangul_p'],['#features .card:nth-child(6) h3','clock_title'],['#features .card:nth-child(6) p','clock_p'],['#features .card:nth-child(7) h3','languages_title'],['#features .card:nth-child(7) p','languages_p'],
+ ['#build .head p','build_p'],['#build .note','current_state'],['#networking .head p','network_p'],['#networking .card:nth-child(1) h3','rtl_title'],['#networking .card:nth-child(1) p','rtl_p'],['#networking .card:nth-child(2) h3','e1000_title'],['#networking .card:nth-child(2) p','e1000_p'],['#networking .card:nth-child(3) h3','limit_title'],['#networking .card:nth-child(3) p','limit_p'],['#download .head p','download_p'],['footer .foot > div:first-child','footer_desc'],['footer .foot > div:last-child','footer_source']
+];
+const applyBoundText=(d)=>TEXT_BINDINGS.forEach(([sel,key])=>{const el=document.querySelector(sel);if(el&&d[key]!==undefined)el.textContent=d[key]});
 const languageMenu=document.querySelector('.lang'), languageButton=document.querySelector('.lang-btn');
-const setLanguage=(lang)=>{const d=I18N[lang]||I18N.en; document.documentElement.lang=lang; document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(d[k]!==undefined)el.textContent=d[k]}); document.querySelectorAll('.lang-menu button').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang); const c=b.classList.contains('active')?' ✓':''; b.innerHTML=b.dataset.langLabel+(c?'<span class="check">✓</span>':'')}); localStorage.setItem('miniwin-language',lang);};
-languageButton.addEventListener('click',e=>{e.stopPropagation();const open=languageMenu.classList.toggle('open');languageButton.setAttribute('aria-expanded',open?'true':'false')});
-document.querySelectorAll('.lang-menu button').forEach(b=>b.addEventListener('click',()=>{setLanguage(b.dataset.lang);languageMenu.classList.remove('open');languageButton.setAttribute('aria-expanded','false')}));
-document.addEventListener('click',e=>{if(!languageMenu.contains(e.target)){languageMenu.classList.remove('open');languageButton.setAttribute('aria-expanded','false')}});
+const setLanguage=(lang)=>{const d=I18N[lang]||I18N.en; document.documentElement.lang=lang; document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(d[k]!==undefined)el.textContent=d[k]}); applyBoundText(d); document.querySelectorAll('.lang-menu button').forEach(b=>{b.classList.toggle('active',b.dataset.lang===lang); const c=b.classList.contains('active')?' ✓':''; b.innerHTML=b.dataset.langLabel+(c?'<span class="check">✓</span>':'')}); localStorage.setItem('miniwin-language',lang);};
 setLanguage(localStorage.getItem('miniwin-language')||'en');
 </script>
-<script id="style-switch-js">(()=>{const t=document.getElementById('styleToggle');if(!t)return;const apply=m=>{const modern=m==='modern';document.documentElement.classList.toggle('modern-mode',modern);document.body.classList.toggle('modern-mode',modern);t.setAttribute('aria-pressed',String(modern));localStorage.setItem('miniwin-style',m)};apply(localStorage.getItem('miniwin-style')||'retro');t.addEventListener('click',()=>apply(document.body.classList.contains('modern-mode')?'retro':'modern'))})();</script>
-
-<script>
-(function(){
-  const sw=document.getElementById('themeSwitch');
-  if(!sw)return;
-  function setTheme(mode){
-    document.body.classList.toggle('modern',mode==='modern');
-    try{localStorage.setItem('miniwin-theme',mode)}catch(e){}
+<script id="style-switch-js">
+(()=>{
+  const t=document.getElementById('styleToggle');
+  if(!t)return;
+  const body=document.body;
+  const motionOK=window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+  const revealItems=[...document.querySelectorAll('main .hero-grid > *, main section .head, main section .panel')];
+  revealItems.forEach((el,i)=>{el.classList.add('modern-reveal'); if(i%5)el.classList.add('delay-'+Math.min(i%5,5));});
+  let observer=null;
+  if(motionOK && 'IntersectionObserver' in window){
+    observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});
+    },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
   }
-  let mode='retro';
-  try{mode=localStorage.getItem('miniwin-theme')||'retro'}catch(e){}
-  setTheme(mode);
-  sw.addEventListener('click',()=>setTheme(document.body.classList.contains('modern')?'retro':'modern'));
+  const apply=m=>{
+    const modern=m==='modern';
+    document.documentElement.classList.toggle('modern-mode',modern);
+    body.classList.toggle('modern-mode',modern);
+    t.setAttribute('aria-pressed',String(modern));
+    t.setAttribute('aria-label',modern?'Switch to Retro style':'Switch to Modern style');
+    localStorage.setItem('miniwin-style',m);
+    revealItems.forEach(el=>{
+      el.classList.remove('is-visible');
+      if(!modern || !motionOK) el.classList.add('is-visible');
+    });
+    if(observer){
+      if(modern && motionOK) revealItems.forEach(el=>observer.observe(el));
+      else revealItems.forEach(el=>observer.unobserve(el));
+    }
+  };
+  apply(localStorage.getItem('miniwin-style')||'retro');
+  t.addEventListener('click',()=>apply(body.classList.contains('modern-mode')?'retro':'modern'));
+})();
+</script>
+
+
+<style id="final-language-dropdown-fix">
+/* Language dropdown: always rendered, shown by visibility/opacity. Never clipped by the fixed header. */
+.lang{position:relative !important; z-index:10050 !important; overflow:visible !important;}
+.lang-menu{
+  display:block !important;
+  position:absolute !important;
+  right:0 !important;
+  top:calc(100% + 5px) !important;
+  z-index:10060 !important;
+  max-height:min(70vh,520px);
+  overflow-y:auto;
+  visibility:hidden;
+  opacity:0;
+  pointer-events:none;
+}
+.lang.open .lang-menu{
+  visibility:visible;
+  opacity:1;
+  pointer-events:auto;
+}
+/* Retro: instant Windows 9x behavior. */
+body:not(.modern-mode) .lang-menu,
+body:not(.modern-mode) .lang.open .lang-menu{
+  transform:none !important;
+  transition:none !important;
+  border-radius:0 !important;
+}
+body:not(.modern-mode) .lang-menu{
+  background:#c0c0c0 !important;
+  border:2px outset #c0c0c0 !important;
+  box-shadow:4px 4px 0 #000 !important;
+}
+body:not(.modern-mode) .lang-menu button{
+  background:#c0c0c0 !important;
+  color:#000 !important;
+  border:0 !important;
+  border-radius:0 !important;
+}
+body:not(.modern-mode) .lang-menu button:hover,
+body:not(.modern-mode) .lang-menu button.active{
+  background:#000080 !important;
+  color:#fff !important;
+}
+/* Modern: subtle drop-down slide. */
+body.modern-mode .lang-menu{
+  transform:translateY(-8px) scaleY(.96);
+  transform-origin:top center;
+  transition:opacity .16s ease,transform .18s ease,visibility 0s linear .18s;
+}
+body.modern-mode .lang.open .lang-menu{
+  transform:translateY(0) scaleY(1);
+  transition:opacity .16s ease,transform .18s ease,visibility 0s linear 0s;
+}
+@media(max-width:900px){
+  .lang-menu{position:fixed !important; top:60px !important; right:10px !important; left:auto !important; min-width:180px;}
+}
+@media(max-width:700px){
+  .lang-menu{top:58px !important; right:8px !important; min-width:170px;}
+}
+@media(prefers-reduced-motion:reduce){
+  body.modern-mode .lang-menu,
+  body.modern-mode .lang.open .lang-menu{transition:none !important;transform:none !important;}
+}
+</style>
+<script id="final-language-dropdown-fix-js">
+(()=>{
+  const wrap=document.querySelector('.lang');
+  const btn=document.querySelector('.lang-btn');
+  const menu=document.querySelector('.lang-menu');
+  if(!wrap||!btn||!menu)return;
+  const close=()=>{wrap.classList.remove('open');btn.setAttribute('aria-expanded','false')};
+  const open=()=>{wrap.classList.add('open');btn.setAttribute('aria-expanded','true')};
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    wrap.classList.contains('open') ? close() : open();
+  });
+  menu.addEventListener('click',e=>{
+    const item=e.target.closest('button[data-lang]');
+    if(item){
+      setLanguage(item.dataset.lang);
+      close();
+    }
+    e.stopPropagation();
+  });
+  document.addEventListener('click',e=>{if(!wrap.contains(e.target))close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
 })();
 </script>
 </body>
 </html>
+<style id="header-fixed-final">
+/* Final header behavior: always pinned to the viewport while scrolling. */
+body > header.top{
+  position:fixed !important;
+  top:0;
+  left:0;
+  right:0;
+  width:100%;
+  z-index:9999;
+}
+body > header.top + main{padding-top:64px}
+body:not(.modern-mode) > header.top + main{padding-top:52px}
+@media(max-width:900px){
+  body > header.top + main{padding-top:60px}
+  body:not(.modern-mode) > header.top + main{padding-top:52px}
+}
+@media(max-width:700px){
+  body > header.top + main{padding-top:58px}
+  body:not(.modern-mode) > header.top + main{padding-top:58px}
+}
+</style>
+
+
+
+
+<style id="pc-language-dropdown-final">
+/* Final fix: desktop navigation must not clip the language dropdown. */
+@media (min-width: 861px){
+  body > header.top .nav{
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+  body > header.top .lang{
+    position: relative !important;
+    overflow: visible !important;
+    z-index: 100000 !important;
+  }
+  body > header.top .lang-menu{
+    z-index: 100001 !important;
+  }
+}
+@media (max-width: 860px){
+  body > header.top .nav{
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+  }
+  body > header.top .lang{
+    overflow: visible !important;
+    z-index: 100000 !important;
+  }
+  body > header.top .lang-menu{
+    z-index: 100001 !important;
+  }
+}
+</style>
