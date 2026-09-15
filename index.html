@@ -10,6 +10,14 @@
 :root{--bg:#07101d;--panel:#0d1a2d;--blue:#124d96;--blue2:#2f7bd5;--cyan:#78d8ff;--white:#f5f7fa;--muted:#9cafc3;--line:#294565;--silver:#c3cad3;--dark:#111820;--green:#7de5ac;--shadow:#02060b}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 50% -10%,#183b70 0,transparent 36%),var(--bg);color:var(--white);font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif}a{color:inherit;text-decoration:none}
 .wrap{width:min(1120px,calc(100% - 32px));margin:auto}.top{position:sticky;top:0;z-index:50;background:rgba(7,16,29,.95);border-bottom:1px solid var(--line);box-shadow:0 4px 18px #0008}.topbar{height:64px;display:flex;align-items:center;justify-content:space-between}.version{font:11px "Courier New",monospace;color:#8fdcff;margin-left:7px;font-weight:normal}.logo{font-weight:900;font-size:22px;letter-spacing:-1px}.logo span{color:var(--cyan)}
+
+.theme-toggle-wrap{display:flex;align-items:center;gap:6px;padding:7px 8px;color:#a9bad0;font-size:11px;white-space:nowrap}
+.theme-label{font-weight:700;opacity:.8}
+.theme-switch{width:38px;height:20px;padding:0;border:1px solid #3c6591;border-radius:12px;background:#0c2342;position:relative;cursor:pointer;box-shadow:inset 0 1px 2px #0008}
+.theme-knob{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#d7dee8;box-shadow:0 1px 2px #0008;transition:left .2s ease,background .2s ease}
+.modern .theme-switch{background:#8ab8f0;border-color:#a9cef5}
+.modern .theme-knob{left:20px;background:#fff}
+
 .nav{display:flex;gap:5px}.nav a{font-size:13px;color:#afc0d5;padding:9px 12px;border:1px solid transparent;border-radius:4px}.nav a:hover,.nav a.active{background:#102b50;border-color:#315b8d;color:#fff}
 .hero{padding:82px 0 92px}.hero-grid{display:grid;grid-template-columns:1fr 430px;gap:54px;align-items:center}.tag{display:inline-block;padding:6px 10px;border:1px solid #37699b;background:#102c53;color:#91dcff;font:12px "Courier New",monospace}.hero h1{font-size:clamp(58px,9vw,104px);line-height:.82;letter-spacing:-6px;margin:21px 0 24px;text-shadow:3px 3px #082b63}.hero h1 span{display:block}.hero p{max-width:650px;color:var(--muted);font-size:18px;line-height:1.7}.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-block;padding:11px 17px;font-weight:bold;font-size:14px;color:#07111c;background:linear-gradient(#fff,#b7c0ca);border:2px outset #edf2f5;box-shadow:3px 3px var(--shadow);text-shadow:0 1px #fff}.btn:active{border-style:inset;transform:translate(2px,2px);box-shadow:1px 1px var(--shadow)}.btn.primary{color:#fff;text-shadow:0 1px #05275a;border-color:#68a7e9;background:linear-gradient(#4f98e7,#1053a3)}
 .monitor{background:#b8c1ca;padding:13px;border:2px outset #eef2f6;box-shadow:12px 14px 0 var(--shadow),0 0 0 1px #000}.monitor img{display:block;width:100%;height:auto;background:#000;border:5px inset #7f8891}.image-credit{margin-top:8px;color:#31445c;font:10px "Courier New",monospace;text-align:center}
@@ -17,14 +25,501 @@ section{padding:90px 0}.eyebrow{font:12px "Courier New",monospace;color:var(--cy
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{padding:24px;min-height:190px}.badge{display:inline-block;padding:3px 7px;border:1px solid #347654;color:var(--green);font:11px "Courier New",monospace;margin-bottom:17px}.card h3{margin:0 0 9px;font-size:18px}.card p{margin:0;color:#98acc3;font-size:14px;line-height:1.7}.terminal pre{margin:0;padding:24px;overflow:auto;color:#c5d7ea;font:14px/1.8 "Courier New",monospace}.dim{color:#6883a3}.cyan{color:var(--cyan)}.green{color:var(--green)}.note{margin-top:16px;padding:17px 18px;border-left:4px solid var(--blue2);background:#0b1c31;color:#a9bdd3;line-height:1.7}.rule{height:5px;border-top:2px solid #36699f;border-bottom:1px solid #0a213f;margin:40px 0}
 footer{padding:46px 0 70px;border-top:1px solid #243d60;color:#7188a1;font-size:13px}.foot{display:flex;justify-content:space-between;gap:20px}
 @media(max-width:840px){.hero-grid{grid-template-columns:1fr}.monitor{max-width:500px;width:100%;margin:auto}.grid{grid-template-columns:1fr 1fr}.facts{grid-template-columns:1fr 1fr}.fact:nth-child(2){border-right:0}.fact:nth-child(-n+2){border-bottom:1px solid var(--line)}}
-@media(max-width:620px){.nav a:nth-child(n+3){display:none}.grid{grid-template-columns:1fr}.facts{grid-template-columns:1fr}.fact{border-right:0;border-bottom:1px solid var(--line)}.fact:last-child{border-bottom:0}.foot{flex-direction:column}.hero h1{letter-spacing:-4px}}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.facts{grid-template-columns:1fr}.fact{border-right:0;border-bottom:1px solid var(--line)}.fact:last-child{border-bottom:0}.foot{flex-direction:column}.hero h1{letter-spacing:-4px}}
 
 .lang{position:relative}.lang-btn{font-size:13px;color:#afc0d5;padding:9px 12px;background:transparent;border:1px solid transparent;border-radius:4px;cursor:pointer;font-family:inherit}.lang-btn:hover,.lang.open .lang-btn{background:#102b50;border-color:#315b8d;color:#fff}.lang-menu{display:none;position:absolute;right:0;top:calc(100% + 5px);min-width:175px;padding:5px;background:#0b182b;border:1px solid #315b8d;box-shadow:5px 5px 0 #02060b}.lang.open .lang-menu{display:block}.lang-menu button{display:block;width:100%;text-align:left;padding:9px 10px;background:transparent;color:#b9c9dd;border:0;cursor:pointer;font:13px "Trebuchet MS","Segoe UI",Arial,sans-serif}.lang-menu button:hover,.lang-menu button.active{background:#12345f;color:#fff}.lang-menu .check{float:right;color:#79d7ff}
-@media(max-width:720px){.nav a:nth-child(n+4){display:none}.lang-btn{padding:9px 8px}.lang-menu{right:-5px}}
+@media(max-width:720px){.lang-btn{padding:9px 8px}.lang-menu{right:-5px}}
 </style>
+
+<style id="style-switch-css">
+.style-switch{display:flex;align-items:center;gap:7px;height:34px;padding:0 8px;margin-right:5px;border:1px solid #315276;background:#0a1b31;white-space:nowrap;box-sizing:border-box}
+.style-label{font:700 9px/1 "Courier New",monospace;letter-spacing:.7px;color:#7891ad;user-select:none}
+.style-label:first-child{color:#e9f2fb}
+.style-toggle{position:relative;display:block;flex:0 0 auto;width:34px;height:18px;padding:0;border:1px solid #07111f;border-radius:2px;background:#162d48;cursor:pointer;box-shadow:inset 1px 1px #07111f,inset -1px -1px #54708d}
+.style-toggle span{position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:1px;background:#dbe4ed;box-shadow:1px 1px #050a10;transition:left .16s ease}
+.style-toggle:focus-visible{outline:1px solid #8bc8ff;outline-offset:2px}
+.modern-mode .style-switch{height:36px;padding:0 9px;margin-right:5px;border:1px solid rgba(91,116,141,.25);border-radius:10px;background:rgba(255,255,255,.38);box-shadow:inset 0 1px rgba(255,255,255,.8),0 2px 10px rgba(40,61,82,.05)}
+.modern-mode .style-label{font:700 9px/1 "Segoe UI",Arial,sans-serif;letter-spacing:.5px;color:#718398}
+.modern-mode .style-label:last-child{color:#245b91}
+.modern-mode .style-label:first-child{color:#718398}
+.modern-mode .style-toggle{width:36px;height:20px;border:1px solid rgba(86,109,132,.28);border-radius:999px;background:#aebbc9;box-shadow:inset 0 1px 3px rgba(26,45,64,.2)}
+.modern-mode .style-toggle span{top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(28,55,81,.25)}
+.modern-mode .style-toggle span{left:19px}
+@media(max-width:900px){.style-switch{flex:0 0 auto}.nav{overflow-x:auto;max-width:calc(100vw - 170px);scrollbar-width:none}.nav::-webkit-scrollbar{display:none}}
+</style>
+
+<style id="visual-style-overrides">
+/* Stronger visual split: Windows 9x Retro vs Windows 11/Mica-inspired Modern */
+/* RETRO */
+body:not(.modern-mode){
+  image-rendering:auto;
+}
+body:not(.modern-mode) .top{
+  background:#000b1f;
+  border-bottom:2px solid #6f8fb9;
+  box-shadow:0 2px 0 #000,0 7px 18px #0009;
+}
+body:not(.modern-mode) .nav a,
+body:not(.modern-mode) .lang-btn{
+  border-radius:0;
+  font-family:"Courier New",monospace;
+  letter-spacing:-.2px;
+}
+body:not(.modern-mode) .nav a:hover,
+body:not(.modern-mode) .nav a.active,
+body:not(.modern-mode) .lang-btn:hover,
+body:not(.modern-mode) .lang.open .lang-btn{
+  background:#123f83;
+  border-color:#7f9fc7;
+}
+body:not(.modern-mode) .panel,
+body:not(.modern-mode) .monitor,
+body:not(.modern-mode) .btn,
+body:not(.modern-mode) .style-toggle{
+  border-radius:0;
+}
+body:not(.modern-mode) .panel{
+  box-shadow:5px 5px 0 #000;
+}
+body:not(.modern-mode) .panel-head{
+  background:linear-gradient(#0b3d91,#06265d);
+  border-bottom:2px solid #9ab1ce;
+}
+body:not(.modern-mode) .btn{
+  box-shadow:3px 3px 0 #000;
+}
+body:not(.modern-mode) .hero h1{
+  font-family:Arial Black,"Trebuchet MS",Arial,sans-serif;
+  text-transform:none;
+}
+body:not(.modern-mode) .style-toggle{
+  border-radius:0;
+  background:#071733;
+  box-shadow:inset 1px 1px #000,inset -1px -1px #56749b;
+}
+body:not(.modern-mode) .style-toggle span{
+  border-radius:1px;
+  background:#dce4ee;
+  box-shadow:1px 1px #000;
+}
+
+/* MODERN / MICA-INSPIRED */
+body.modern-mode{
+  background:
+    radial-gradient(circle at 12% 8%,rgba(92,151,232,.28),transparent 28%),
+    radial-gradient(circle at 88% 0%,rgba(175,125,242,.20),transparent 26%),
+    linear-gradient(135deg,#eaf1f8 0%,#dfe8f2 45%,#edf2f7 100%);
+  color:#15253a;
+}
+body.modern-mode .top{
+  background:rgba(244,248,252,.68);
+  border-bottom:1px solid rgba(120,139,160,.34);
+  box-shadow:0 10px 30px rgba(43,67,91,.14);
+  backdrop-filter:blur(24px) saturate(145%);
+}
+body.modern-mode .topbar{height:68px}
+body.modern-mode .logo{color:#17304c}
+body.modern-mode .logo span{color:#3478be}
+body.modern-mode .nav a,
+body.modern-mode .lang-btn{
+  border-radius:9px;
+  color:#3f556d;
+}
+body.modern-mode .nav a:hover,
+body.modern-mode .nav a.active,
+body.modern-mode .lang-btn:hover,
+body.modern-mode .lang.open .lang-btn{
+  background:rgba(255,255,255,.54);
+  border-color:rgba(129,149,171,.28);
+  color:#17304c;
+  box-shadow:0 4px 14px rgba(51,79,106,.08);
+}
+body.modern-mode .hero{
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
+}
+body.modern-mode .tag,
+body.modern-mode .kicker{
+  background:rgba(255,255,255,.35);
+  border-color:rgba(104,132,161,.28);
+  color:#4c79a2;
+  border-radius:8px;
+  box-shadow:0 6px 18px rgba(52,79,105,.06);
+  backdrop-filter:blur(14px);
+}
+body.modern-mode .hero h1{
+  font-family:"Segoe UI",Arial,sans-serif;
+  letter-spacing:-5px;
+  text-shadow:none;
+  color:#172a41;
+}
+body.modern-mode .hero h1 span{color:#172a41}
+body.modern-mode .hero p{color:#586c82}
+body.modern-mode .monitor{
+  padding:10px;
+  background:rgba(255,255,255,.42);
+  border:1px solid rgba(124,146,168,.35);
+  border-radius:18px;
+  box-shadow:0 24px 50px rgba(34,59,83,.18),inset 0 1px rgba(255,255,255,.8);
+  backdrop-filter:blur(18px) saturate(135%);
+}
+body.modern-mode .monitor img{
+  border:0;
+  border-radius:12px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+}
+body.modern-mode .image-credit{color:#6d8095}
+body.modern-mode section{scroll-margin-top:80px}
+body.modern-mode .panel{
+  background:rgba(255,255,255,.46);
+  border:1px solid rgba(126,147,168,.30);
+  border-radius:18px;
+  box-shadow:0 18px 38px rgba(42,64,85,.10),inset 0 1px rgba(255,255,255,.78);
+  backdrop-filter:blur(22px) saturate(145%);
+}
+body.modern-mode .panel-head{
+  background:rgba(247,250,253,.48);
+  border-bottom:1px solid rgba(130,149,168,.24);
+  border-radius:18px 18px 0 0;
+  color:#334b63;
+}
+body.modern-mode .fact,
+body.modern-mode .spec{border-color:rgba(128,148,168,.20)}
+body.modern-mode .fact strong{color:#17304c}
+body.modern-mode .card p{color:#64788e}
+body.modern-mode .badge{border-color:#79a88d;color:#34724f;background:rgba(255,255,255,.18);border-radius:999px}
+body.modern-mode .btn{
+  border:1px solid rgba(113,135,158,.34);
+  border-radius:11px;
+  background:rgba(255,255,255,.62);
+  color:#1d344b;
+  box-shadow:0 8px 22px rgba(34,55,77,.10),inset 0 1px rgba(255,255,255,.95);
+  text-shadow:none;
+}
+body.modern-mode .btn.primary{
+  border-color:rgba(71,125,184,.56);
+  background:linear-gradient(180deg,rgba(91,160,230,.90),rgba(51,113,183,.90));
+  color:#fff;
+}
+body.modern-mode .terminal pre{
+  color:#324a62;
+}
+body.modern-mode .note{
+  background:rgba(255,255,255,.38);
+  border-left-color:#5c8fbe;
+  color:#5d7086;
+  border-radius:0 12px 12px 0;
+  backdrop-filter:blur(12px);
+}
+body.modern-mode footer{
+  background:rgba(242,247,251,.55);
+  border-top-color:rgba(122,144,166,.22);
+  backdrop-filter:blur(18px);
+}
+body.modern-mode .lang-menu{
+  background:rgba(248,251,254,.86);
+  border-color:rgba(122,145,168,.28);
+  border-radius:12px;
+  box-shadow:0 20px 40px rgba(35,56,78,.16);
+  backdrop-filter:blur(22px) saturate(145%);
+}
+body.modern-mode .lang-menu button{color:#415a72}
+body.modern-mode .lang-menu button:hover,
+body.modern-mode .lang-menu button.active{background:rgba(72,128,187,.10);color:#17304c}
+
+/* Refined visual direction ------------------------------------------------ */
+/* Retro: deliberately borrows the visual vocabulary of classic Windows 9x:
+   square geometry, gray chrome, blue title bars, hard 3D edges and compact type. */
+body:not(.modern-mode){
+  background:
+    linear-gradient(#06132a 0 0) top/100% 100% no-repeat,
+    radial-gradient(circle at 50% -15%,#174889 0,transparent 42%),#061226;
+}
+body:not(.modern-mode) .topbar{height:58px}
+body:not(.modern-mode) .logo{font-family:Arial,sans-serif;font-size:21px;letter-spacing:-.8px}
+body:not(.modern-mode) .logo span:first-of-type{color:#74cfff}
+body:not(.modern-mode) .logo .version{font:11px "Courier New",monospace;color:#9fb5d2;margin-left:6px}
+body:not(.modern-mode) .nav{gap:2px;align-items:center}
+body:not(.modern-mode) .nav a,
+body:not(.modern-mode) .lang-btn{
+  padding:7px 10px;
+  border:1px solid transparent;
+  border-radius:0;
+  font:12px "Courier New",monospace;
+}
+body:not(.modern-mode) .hero{padding-top:70px}
+body:not(.modern-mode) .panel,.body:not(.modern-mode) .monitor{border-radius:0}
+body:not(.modern-mode) .panel{box-shadow:4px 4px #000}
+body:not(.modern-mode) .card{background:#0b1a2e}
+body:not(.modern-mode) .panel-head{font-size:11px}
+body:not(.modern-mode) .btn{border-radius:0}
+body:not(.modern-mode) .lang-menu{border-radius:0;box-shadow:4px 4px #000;background:#0b1b31}
+
+/* Modern: Mica-inspired, not a glassmorphism pile. Mica is a quiet, opaque,
+   wallpaper-tinted foundation with a clear hierarchy and restrained elevation. */
+body.modern-mode{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(74,133,205,.22),transparent 30%),
+    radial-gradient(circle at 90% 8%,rgba(151,116,206,.17),transparent 27%),
+    linear-gradient(135deg,#e7edf4 0%,#dfe7ef 48%,#edf2f7 100%);
+}
+body.modern-mode .top{
+  background:rgba(236,241,247,.82);
+  border-bottom:1px solid rgba(104,125,148,.22);
+  box-shadow:0 1px 0 rgba(255,255,255,.8),0 8px 26px rgba(44,63,84,.08);
+  backdrop-filter:blur(22px) saturate(125%);
+}
+body.modern-mode .topbar{height:68px}
+body.modern-mode .logo{font-family:"Segoe UI",Arial,sans-serif;font-size:21px;letter-spacing:-.6px;color:#17304c}
+body.modern-mode .logo span:first-of-type{color:#3478be}
+body.modern-mode .logo .version{color:#647b92}
+body.modern-mode .nav{gap:3px}
+body.modern-mode .nav a,
+body.modern-mode .lang-btn{padding:9px 11px;border-radius:8px;color:#40566d}
+body.modern-mode .nav a:hover,
+body.modern-mode .nav a.active,
+body.modern-mode .lang-btn:hover,
+body.modern-mode .lang.open .lang-btn{background:rgba(255,255,255,.55);border-color:rgba(104,128,151,.20);box-shadow:0 3px 12px rgba(39,62,86,.07)}
+body.modern-mode .hero{padding-top:86px}
+body.modern-mode .head h2{letter-spacing:-1.5px}
+body.modern-mode .panel{box-shadow:0 12px 32px rgba(37,59,81,.09),inset 0 1px rgba(255,255,255,.72)}
+body.modern-mode .card:hover{transform:translateY(-2px);transition:transform .18s ease,box-shadow .18s ease;box-shadow:0 18px 38px rgba(37,59,81,.12),inset 0 1px rgba(255,255,255,.75)}
+body.modern-mode .btn{transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
+body.modern-mode .btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(34,55,77,.13),inset 0 1px rgba(255,255,255,.95)}
+body.modern-mode .lang-menu{top:calc(100% + 8px)}
+
+@media(max-width:900px){
+  .nav{overflow-x:auto;max-width:calc(100vw - 170px);scrollbar-width:none}.nav::-webkit-scrollbar{display:none}
+  .style-switch{flex:0 0 auto}
+}
+@media(max-width:620px){
+  .topbar{height:auto;min-height:62px;gap:8px}.nav{max-width:100%;padding-bottom:3px}.style-switch{flex:0 0 auto}
+}
+</style>
+
+
+<style id="responsive-ui">
+/* Responsive layout: phone → tablet → desktop → wide screens */
+html{overflow-x:hidden}
+body{min-width:0;overflow-x:hidden}
+img{max-width:100%;height:auto}
+button,a{touch-action:manipulation}
+
+/* Large screens: keep content readable instead of stretching */
+@media (min-width:1440px){
+  .wrap{width:min(1180px,calc(100% - 64px))}
+  .hero-grid{grid-template-columns:minmax(0,1fr) 500px;gap:72px}
+  .hero{padding-top:104px;padding-bottom:110px}
+}
+
+/* Tablet / small laptop */
+@media (max-width:900px){
+  .wrap{width:min(100% - 32px,760px)}
+  .topbar{height:auto;min-height:60px;gap:8px;padding:8px 0}
+  .logo{flex:0 0 auto}
+  .nav{min-width:0;max-width:calc(100% - 150px);overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:center}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a,.lang-btn{min-height:42px;display:flex;align-items:center;justify-content:center}
+  .style-switch{min-height:36px}
+  .hero{padding:64px 0 72px}
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,430px);gap:34px}
+  .hero h1{font-size:clamp(52px,10vw,82px)}
+  section{padding:72px 0}
+}
+
+/* Phones: header becomes two clean rows; nav remains horizontally scrollable */
+@media (max-width:700px){
+  .wrap{width:calc(100% - 24px)}
+  .topbar{display:flex;flex-wrap:wrap;align-items:center;padding:9px 0 7px}
+  .logo{font-size:20px}
+  .version{font-size:10px;margin-left:5px}
+  .nav{order:3;width:100%;max-width:none;flex:1 0 100%;gap:2px;padding:2px 0 1px;margin:0;overflow-x:auto;overflow-y:visible}
+  .nav a,.lang-btn{flex:0 0 auto;padding:9px 11px;font-size:12px;min-height:40px}
+  .style-switch{flex:0 0 auto;margin-right:2px;padding:0 7px;height:34px}
+  .style-label{font-size:8px}
+  .lang{flex:0 0 auto}
+  .lang-menu{position:fixed;top:auto;right:12px;margin-top:4px;min-width:180px;z-index:100}
+  .hero{padding:48px 0 58px}
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero h1{font-size:clamp(48px,18vw,76px);letter-spacing:-4px;margin:18px 0 20px}
+  .hero p{font-size:16px;line-height:1.65}
+  .tag{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .monitor{width:100%;max-width:none;padding:9px;box-shadow:7px 8px 0 var(--shadow),0 0 0 1px #000}
+  .monitor img{border-width:4px}
+  .actions{gap:10px;margin-top:22px}
+  .actions .btn{flex:1 1 100%;text-align:center;min-height:46px;padding:12px 14px;display:flex;align-items:center;justify-content:center}
+  section{padding:58px 0}
+  .head,.section-head{margin-bottom:26px}
+  .head h2,.section-head h2{font-size:clamp(30px,8vw,42px);line-height:1.05;letter-spacing:-1.5px}
+  .head p,.section-head .sub{font-size:15px;line-height:1.7}
+  .grid{grid-template-columns:1fr;gap:12px}
+  .card{min-height:0;padding:20px}
+  .facts{grid-template-columns:1fr 1fr}
+  .fact{padding:17px 14px}
+  .fact strong{font-size:21px;overflow-wrap:anywhere}
+  .terminal pre{padding:18px 16px;font-size:12px;line-height:1.7}
+  .note{padding:14px 15px;font-size:14px}
+  .rule{margin:30px 0}
+  .foot{gap:14px;font-size:12px}
+}
+
+/* Very narrow phones */
+@media (max-width:420px){
+  .wrap{width:calc(100% - 20px)}
+  .logo{font-size:18px}
+  .version{display:none}
+  .style-switch{padding:0 6px}
+  .style-label{display:none}
+  .style-toggle{width:36px;height:20px}
+  .modern-mode .style-toggle{width:38px;height:21px}
+  .nav a,.lang-btn{padding-left:10px;padding-right:10px;font-size:11px}
+  .lang-menu{right:10px;min-width:170px}
+  .hero{padding-top:40px}
+  .hero h1{font-size:clamp(44px,20vw,68px);letter-spacing:-3px}
+  .hero p{font-size:15px}
+  .facts{grid-template-columns:1fr}
+  .fact{border-right:0!important;border-bottom:1px solid var(--line)}
+  .fact:last-child{border-bottom:0}
+  .card{padding:18px}
+  .terminal pre{font-size:11px}
+}
+
+/* Landscape phones: use the available width without making text tiny */
+@media (max-width:700px) and (orientation:landscape){
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(260px,42vw);align-items:center}
+  .monitor{max-width:520px}
+  .hero{padding:40px 0 52px}
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+</style>
+
+<style id="responsive-final">
+/* Final responsive pass: keep every navigation item reachable at every width. */
+.topbar{min-width:0}
+.logo{flex:0 0 auto;white-space:nowrap}
+.nav{min-width:0;flex:1 1 auto;align-items:center;justify-content:flex-end}
+.nav > *{flex:0 0 auto}
+
+@media (min-width:1201px){
+  .nav{overflow:visible}
+}
+
+@media (min-width:861px) and (max-width:1200px){
+  .topbar{gap:12px}
+  .nav{overflow-x:auto;justify-content:flex-start;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .nav::-webkit-scrollbar{display:none}
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(340px,430px)}
+}
+
+@media (max-width:860px){
+  .topbar{display:flex;flex-wrap:wrap;align-items:center;padding:8px 0}
+  .logo{margin-right:auto}
+  .nav{order:3;flex:1 0 100%;width:100%;max-width:none;justify-content:flex-start;overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:4px 0 2px;gap:3px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav > *{flex:0 0 auto}
+  .nav a,.lang-btn{min-height:40px;display:flex;align-items:center;justify-content:center;white-space:nowrap}
+  .style-switch{min-height:36px}
+  .hero-grid{grid-template-columns:1fr;gap:38px}
+  .monitor{width:min(100%,560px);margin:0 auto}
+}
+
+@media (max-width:600px){
+  .wrap{width:calc(100% - 24px)}
+  .topbar{padding:7px 0 5px}
+  .logo{font-size:20px}
+  .nav{gap:2px;padding-top:5px}
+  .nav a,.lang-btn{padding:9px 11px;font-size:12px;min-height:42px}
+  .style-switch{height:34px;padding:0 7px;margin-right:1px}
+  .hero{padding:46px 0 58px}
+  .hero h1{font-size:clamp(48px,18vw,78px);line-height:.84;letter-spacing:-4px}
+  .hero p{font-size:16px}
+  .actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .actions .btn{min-height:48px;display:flex;align-items:center;justify-content:center;text-align:center}
+  section{padding:58px 0}
+  .head h2{font-size:clamp(30px,8vw,42px)}
+  .grid{grid-template-columns:1fr}
+  .card{min-height:0}
+  .facts{grid-template-columns:1fr 1fr}
+  .terminal pre{font-size:12px;line-height:1.7}
+}
+
+@media (max-width:420px){
+  .wrap{width:calc(100% - 18px)}
+  .logo{font-size:18px}
+  .version{display:none}
+  .style-label{display:none}
+  .style-toggle{width:38px;height:21px}
+  .modern-mode .style-toggle{width:40px;height:22px}
+  .nav a,.lang-btn{padding:9px 10px;font-size:11px}
+  .facts{grid-template-columns:1fr}
+  .fact{border-right:0!important}
+  .hero{padding-top:38px}
+  .hero h1{font-size:clamp(44px,20vw,68px);letter-spacing:-3px}
+  .hero p{font-size:15px}
+  .monitor{padding:7px}
+  .terminal pre{font-size:11px;padding:16px 14px}
+  .lang-menu{right:0;min-width:170px}
+}
+
+@media (max-width:700px) and (orientation:landscape){
+  .hero{padding:38px 0 48px}
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(280px,44vw);gap:26px}
+  .hero h1{font-size:clamp(42px,10vw,68px)}
+  .hero p{font-size:14px}
+  .monitor{max-width:none}
+}
+</style>
+<style id="final-responsive-header-fix">
+/* Final header fix: keep Retro/Modern switch inline with Home at every width. */
+.topbar{display:flex;align-items:center;gap:14px;min-width:0}
+.logo{flex:0 0 auto;white-space:nowrap}
+.nav{display:flex;align-items:center;gap:5px;min-width:0;flex:1 1 auto;overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.nav .style-switch,.nav a,.nav .lang{flex:0 0 auto}
+.nav .style-switch{display:flex;align-items:center;justify-content:center}
+@media(max-width:900px){
+  .topbar{height:60px;min-height:60px;padding:6px 0;gap:10px;flex-wrap:nowrap}
+  .nav{width:auto;max-width:none;padding:0;margin:0;overflow-x:auto;overflow-y:visible}
+  .nav a,.nav .lang-btn{min-height:38px;height:38px;display:flex;align-items:center;justify-content:center}
+  .nav .style-switch{height:34px;min-height:34px}
+}
+@media(max-width:700px){
+  .wrap{width:calc(100% - 20px)}
+  .topbar{height:58px;min-height:58px;padding:5px 0;gap:9px}
+  .logo{font-size:19px}
+  .version{font-size:9px;margin-left:4px}
+  .nav{gap:2px;flex:1 1 0;min-width:0}
+  .nav a,.nav .lang-btn{padding:8px 10px;font-size:11px;min-height:38px;height:38px}
+  .nav .style-switch{height:34px;min-height:34px;padding:0 7px;margin-right:2px;gap:6px}
+  .nav .style-label{display:inline;font-size:8px}
+  .nav .style-toggle{width:34px;height:18px}
+  .modern-mode .nav .style-switch{height:34px;min-height:34px;padding:0 7px}
+  .modern-mode .nav .style-toggle{width:36px;height:20px}
+  .lang-menu{position:fixed;top:58px;right:10px;margin-top:5px}
+}
+@media(max-width:420px){
+  .wrap{width:calc(100% - 12px)}
+  .topbar{gap:7px}
+  .logo{font-size:17px}
+  .version{display:none}
+  .nav .style-switch{padding:0 6px;gap:5px}
+  .nav .style-label{font-size:7px}
+  .nav a,.nav .lang-btn{padding-left:9px;padding-right:9px;font-size:10px}
+}
+@media(max-width:350px){
+  .logo{font-size:16px}
+  .nav .style-label{font-size:7px}
+  .nav a,.nav .lang-btn{padding-left:8px;padding-right:8px}
+}
+</style>
+
 </head>
 <body>
-<header class="top"><div class="wrap topbar"><a class="logo" href="#home">MINI<span>WIN</span></a><nav class="nav"><a data-i18n="home" href="#home">Home</a><a data-i18n="about" href="#about">About</a><a data-i18n="features" href="#features">Features</a><a data-i18n="build" href="#build">Build</a><a data-i18n="networking" href="#networking">Networking</a><a data-i18n="download" href="#download">Download</a><div class="lang"><button aria-expanded="false" class="lang-btn" data-i18n="language" type="button">Language ▾</button><div class="lang-menu" role="menu"><button data-lang="ko" data-lang-label="한국어" role="menuitem" type="button">한국어</button><button data-lang="en" data-lang-label="English" role="menuitem" type="button">English</button><button data-lang="es" data-lang-label="Español" role="menuitem" type="button">Español</button><button data-lang="zh-CN" data-lang-label="中文（简体）" role="menuitem" type="button">中文（简体）</button><button data-lang="zh-TW" data-lang-label="中文（繁體）" role="menuitem" type="button">中文（繁體）</button><button data-lang="ja" data-lang-label="日本語" role="menuitem" type="button">日本語</button></div></div></nav></div></header>
+<header class="top"><div class="wrap topbar"><a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0-pre</span></a><nav class="nav"><div class="style-switch" role="group" aria-label="Visual style"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div><a data-i18n="home" href="#home">Home</a><a data-i18n="about" href="#about">About</a><a data-i18n="features" href="#features">Features</a><a data-i18n="build" href="#build">Build</a><a data-i18n="networking" href="#networking">Networking</a><a data-i18n="download" href="#download">Download</a><div class="lang"><button aria-expanded="false" class="lang-btn" data-i18n="language" type="button">Language ▾</button><div class="lang-menu" role="menu"><button data-lang="ko" data-lang-label="한국어" role="menuitem" type="button">한국어</button><button data-lang="en" data-lang-label="English" role="menuitem" type="button">English</button><button data-lang="es" data-lang-label="Español" role="menuitem" type="button">Español</button><button data-lang="zh-CN" data-lang-label="中文（简体）" role="menuitem" type="button">中文（简体）</button><button data-lang="zh-TW" data-lang-label="中文（繁體）" role="menuitem" type="button">中文（繁體）</button><button data-lang="ja" data-lang-label="日本語" role="menuitem" type="button">日本語</button></div></div></nav></div></header>
 <main>
 <section class="hero" id="home"><div class="wrap hero-grid"><div><span class="tag" data-i18n="hero_tag">SEGFAULT777 / MINIWIN / MAIN</span><h1><span>MINI</span><span>WIN</span></h1><p data-i18n="hero_p">A tiny 32-bit x86 desktop operating system that boots from a single MBR disk image into a Windows-95-flavored GUI. Built from the ground up without libc, a bootloader framework, or borrowed kernel code.</p><div class="actions"><a class="btn primary" data-i18n="download_source" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip">DOWNLOAD SOURCE</a><a class="btn" data-i18n="github" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank">VIEW ON GITHUB</a></div></div><div class="monitor"><img alt="MiniWin desktop screenshot" loading="eager" src="https://cdn.phototourl.com/free/2026-09-15-a92c382b-1b9f-4b3d-b09b-8c67f4c240cd.png"/><div class="image-credit">MINIWIN // ACTUAL SCREENSHOT</div></div></div></section>
 <section id="about"><div class="wrap"><div class="head"><div class="eyebrow" data-i18n="about_eyebrow">01 / THE PROJECT</div><h2 data-i18n="about_h2">A small OS project, built close to the metal.</h2><p data-i18n="about_p">MiniWin is a dependency-free 32-bit x86 OS. Its bootloader handles the real-mode setup and protected-mode jump; the kernel then runs its own display, input, storage, desktop, clock and application code.</p></div><div class="panel"><div class="panel-head" data-i18n="system_information">SYSTEM INFORMATION</div><div class="facts"><div class="fact"><strong>i386</strong><small data-i18n="cpu">CPU target</small></div><div class="fact"><strong>640×400</strong><small data-i18n="display">VBE framebuffer</small></div><div class="fact"><strong>256</strong><small data-i18n="colors">colors</small></div><div class="fact"><strong>4-SLOT</strong><small data-i18n="filesystem">ATA filesystem</small></div></div></div></div></section>
@@ -61,5 +556,22 @@ languageButton.addEventListener('click',e=>{e.stopPropagation();const open=langu
 document.querySelectorAll('.lang-menu button').forEach(b=>b.addEventListener('click',()=>{setLanguage(b.dataset.lang);languageMenu.classList.remove('open');languageButton.setAttribute('aria-expanded','false')}));
 document.addEventListener('click',e=>{if(!languageMenu.contains(e.target)){languageMenu.classList.remove('open');languageButton.setAttribute('aria-expanded','false')}});
 setLanguage(localStorage.getItem('miniwin-language')||'en');
-</script></body>
+</script>
+<script id="style-switch-js">(()=>{const t=document.getElementById('styleToggle');if(!t)return;const apply=m=>{const modern=m==='modern';document.documentElement.classList.toggle('modern-mode',modern);document.body.classList.toggle('modern-mode',modern);t.setAttribute('aria-pressed',String(modern));localStorage.setItem('miniwin-style',m)};apply(localStorage.getItem('miniwin-style')||'retro');t.addEventListener('click',()=>apply(document.body.classList.contains('modern-mode')?'retro':'modern'))})();</script>
+
+<script>
+(function(){
+  const sw=document.getElementById('themeSwitch');
+  if(!sw)return;
+  function setTheme(mode){
+    document.body.classList.toggle('modern',mode==='modern');
+    try{localStorage.setItem('miniwin-theme',mode)}catch(e){}
+  }
+  let mode='retro';
+  try{mode=localStorage.getItem('miniwin-theme')||'retro'}catch(e){}
+  setTheme(mode);
+  sw.addEventListener('click',()=>setTheme(document.body.classList.contains('modern')?'retro':'modern'));
+})();
+</script>
+</body>
 </html>
