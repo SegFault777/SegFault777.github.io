@@ -969,11 +969,64 @@ body:not(.modern-mode) .lang.open .lang-menu {
   transition: none !important;
 }
 </style>
+
+<style id="canary-feature-css">
+.actions .canary-btn{cursor:pointer}
+.canary-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.45);z-index:100000}
+.canary-modal.open{display:flex}
+.canary-window{width:min(720px,100%);max-height:min(82vh,760px);overflow:auto;background:#c0c0c0;color:#000;border:2px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;box-shadow:6px 6px #000}
+.canary-titlebar{background:#000080;color:#fff;padding:5px 8px;display:flex;align-items:center;justify-content:space-between;font-weight:700}
+.canary-close{background:#c0c0c0;color:#000;border:2px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;width:22px;height:20px;line-height:14px;padding:0;font-weight:700;cursor:pointer}
+.canary-content{padding:18px;line-height:1.65;font-size:14px}
+.canary-content h3{margin:0 0 10px;font-size:19px}
+.canary-content p{margin:0 0 13px}
+.canary-files{margin:10px 0 14px;padding:12px;background:#fff;border:2px inset #808080;font:13px/1.7 "Courier New",monospace}
+.canary-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+.canary-links a{display:inline-block;padding:8px 12px;background:#c0c0c0;color:#000;border:2px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000}
+body.modern-mode .canary-window{background:rgba(248,251,254,.96);color:#1d344b;border:1px solid rgba(104,128,151,.3);border-radius:16px;box-shadow:0 24px 60px rgba(32,50,70,.25);backdrop-filter:blur(18px)}
+body.modern-mode .canary-titlebar{background:rgba(247,250,253,.8);color:#17304c;border-bottom:1px solid rgba(104,128,151,.2)}
+body.modern-mode .canary-close,body.modern-mode .canary-links a{background:rgba(255,255,255,.72);color:#1d344b;border:1px solid rgba(113,135,158,.34);border-radius:8px;box-shadow:0 4px 12px rgba(34,55,77,.08)}
+body.modern-mode .canary-files{background:rgba(255,255,255,.7);border:1px solid rgba(113,135,158,.28);border-radius:8px}
+@media(max-width:600px){.canary-content{padding:14px;font-size:13px}.canary-modal{padding:10px}.canary-window{max-height:88vh}}
+</style>
+
+<style id="modern-screenshot-perspective">
+/* Modern only: the bezel, screenshot, border, credit, and shadow are one tilted object. */
+body.modern-mode .monitor-stage{
+  width:100%;
+  display:block;
+  perspective:1400px;
+  perspective-origin:52% 48%;
+  transform-style:preserve-3d;
+  overflow:visible;
+}
+body.modern-mode .monitor-stage .monitor{
+  transform:rotateY(-36deg) rotateX(6.5deg) rotateZ(-1.2deg);
+  transform-origin:52% 50%;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+body.modern-mode .monitor-stage .monitor img{
+  transform:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.38);
+}
+body.modern-mode .monitor-stage .image-credit{
+  transform:none;
+}
+@media (max-width:600px){
+  body.modern-mode .monitor-stage{
+    perspective:1000px;
+  }
+  body.modern-mode .monitor-stage .monitor{
+    transform:rotateY(-22deg) rotateX(4deg) rotateZ(-0.8deg);
+  }
+}
+</style>
 </head>
 <body>
 <header class="top"><div class="wrap topbar"><a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0-pre</span></a><nav class="nav"><div class="style-switch" role="group" aria-label="Visual style"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div><a data-i18n="home" href="#home">Home</a><a data-i18n="about" href="#about">About</a><a data-i18n="features" href="#features">Features</a><a data-i18n="build" href="#build">Build</a><a data-i18n="networking" href="#networking">Networking</a><a data-i18n="download" href="#download">Download</a><div class="lang"><button aria-expanded="false" class="lang-btn" data-i18n="language" type="button">Language ▾</button><div class="lang-menu" role="menu"><button data-lang="ko" data-lang-label="한국어" role="menuitem" type="button">한국어</button><button data-lang="en" data-lang-label="English" role="menuitem" type="button">English</button><button data-lang="es" data-lang-label="Español" role="menuitem" type="button">Español</button><button data-lang="zh-CN" data-lang-label="中文（简体）" role="menuitem" type="button">中文（简体）</button><button data-lang="zh-TW" data-lang-label="中文（繁體）" role="menuitem" type="button">中文（繁體）</button><button data-lang="ja" data-lang-label="日本語" role="menuitem" type="button">日本語</button><button data-lang="fr" data-lang-label="Français" role="menuitem" type="button">Français</button><button data-lang="de" data-lang-label="Deutsch" role="menuitem" type="button">Deutsch</button><button data-lang="pt-BR" data-lang-label="Português (Brasil)" role="menuitem" type="button">Português (Brasil)</button><button data-lang="it" data-lang-label="Italiano" role="menuitem" type="button">Italiano</button><button data-lang="ru" data-lang-label="Русский" role="menuitem" type="button">Русский</button><button data-lang="vi" data-lang-label="Tiếng Việt" role="menuitem" type="button">Tiếng Việt</button><button data-lang="id" data-lang-label="Bahasa Indonesia" role="menuitem" type="button">Bahasa Indonesia</button><button data-lang="pl" data-lang-label="Polski" role="menuitem" type="button">Polski</button></div></div></nav></div></header>
 <main>
-<section class="hero" id="home"><div class="wrap hero-grid"><div><span class="tag" data-i18n="hero_tag">SEGFAULT777 / MINIWIN / MAIN</span><h1><span>MINI</span><span>WIN</span></h1><p data-i18n="hero_p">A tiny 32-bit x86 desktop operating system that boots from a single MBR disk image into a Windows-95-flavored GUI. Built from the ground up without libc, a bootloader framework, or borrowed kernel code.</p><div class="actions"><a class="btn primary" data-i18n="download_source" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip">DOWNLOAD SOURCE</a><a class="btn" data-i18n="github" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank">VIEW ON GITHUB</a></div></div><div class="monitor"><img alt="MiniWin desktop screenshot" loading="eager" src="https://cdn.phototourl.com/free/2026-09-15-a92c382b-1b9f-4b3d-b09b-8c67f4c240cd.png"/><div class="image-credit">MINIWIN // ACTUAL SCREENSHOT</div></div></div></section>
+<section class="hero" id="home"><div class="wrap hero-grid"><div><span class="tag" data-i18n="hero_tag">SEGFAULT777 / MINIWIN / MAIN</span><h1><span>MINI</span><span>WIN</span></h1><p data-i18n="hero_p">A tiny 32-bit x86 desktop operating system that boots from a single MBR disk image into a Windows-95-flavored GUI. Built from the ground up without libc, a bootloader framework, or borrowed kernel code.</p><div class="actions"><a class="btn primary" data-i18n="download_source" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip">DOWNLOAD SOURCE</a><a class="btn" data-i18n="github" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank">VIEW ON GITHUB</a><button class="btn canary-btn" id="canaryOpen" type="button" data-canary-i18n="button">Canary 설명 보기</button></div></div><div class="monitor-stage"><div class="monitor"><img alt="MiniWin desktop screenshot" loading="eager" src="https://cdn.phototourl.com/free/2026-09-15-a92c382b-1b9f-4b3d-b09b-8c67f4c240cd.png"/><div class="image-credit">MINIWIN // ACTUAL SCREENSHOT</div></div></div></div></section>
 <section id="about"><div class="wrap"><div class="head"><div class="eyebrow" data-i18n="about_eyebrow">01 / THE PROJECT</div><h2 data-i18n="about_h2">A small OS project, built close to the metal.</h2><p data-i18n="about_p">MiniWin is a dependency-free 32-bit x86 OS. Its bootloader handles the real-mode setup and protected-mode jump; the kernel then runs its own display, input, storage, desktop, clock and application code.</p></div><div class="panel"><div class="panel-head" data-i18n="system_information">SYSTEM INFORMATION</div><div class="facts"><div class="fact"><strong>i386</strong><small data-i18n="cpu">CPU target</small></div><div class="fact"><strong>640×400</strong><small data-i18n="display">VBE framebuffer</small></div><div class="fact"><strong>256</strong><small data-i18n="colors">colors</small></div><div class="fact"><strong>4-SLOT</strong><small data-i18n="filesystem">ATA filesystem</small></div></div></div></div></section>
 <section id="features"><div class="wrap"><div class="head"><div class="eyebrow" data-i18n="features_eyebrow">02 / WHAT'S INSIDE</div><h2 data-i18n="features_h2">What is actually in the repository.</h2><p data-i18n="features_p">The README describes a working set of low-level components and a small desktop environment; the project is still being built out.</p></div><div class="grid"><article class="panel card"><span class="badge">BOOT</span><h3 data-i18n="boot_title">512-byte MBR loader</h3><p data-i18n="boot_p">Sets a real VBE mode, switches from real mode to protected mode, and loads the kernel with BIOS INT 13h extended LBA reads.</p></article><article class="panel card"><span class="badge">KERNEL</span><h3 data-i18n="kernel_title">Freestanding C</h3><p data-i18n="kernel_p">Includes VGA, PS/2 keyboard and mouse, PC speaker, ATA storage, PCI enumeration and COM1 serial logging, all without libc.</p></article><article class="panel card"><span class="badge">DESKTOP</span><h3 data-i18n="desktop_title">Classic window manager</h3><p data-i18n="desktop_p">Drag, resize, minimize and maximize windows. Clicking a window brings it to the front, while the taskbar keeps minimized windows.</p></article><article class="panel card"><span class="badge">APPS</span><h3 data-i18n="apps_title">Notepad + Settings</h3><p data-i18n="apps_p">Notepad supports multiple documents and real persistent saves. Settings switches the system language and controls input methods.</p></article><article class="panel card"><span class="badge">IME</span><h3 data-i18n="hangul_title">Hangul IME</h3><p data-i18n="hangul_p">A 2-beolsik-style jamo composition system backed by all 11,172 modern Hangul syllable glyphs.</p></article><article class="panel card"><span class="badge">CLOCK</span><h3 data-i18n="clock_title">Real CMOS time</h3><p data-i18n="clock_p">The taskbar clock reads the hardware RTC and can show English or Korean date and time formats.</p></article><article class="panel card"><span class="badge">LANGUAGES</span><h3 data-i18n="languages_title">English / 한국어</h3><p data-i18n="languages_p">MiniWin currently supports two system UI languages: English and Korean. Settings can switch the language live, and the Korean option includes the built-in Hangul IME.</p></article></div></div></section>
 <section id="build"><div class="wrap"><div class="head"><div class="eyebrow" data-i18n="build_eyebrow">03 / BUILD &amp; RUN</div><h2 data-i18n="build_h2">Make the disk image.</h2><p data-i18n="build_p">Build on Linux with NASM, a 32-bit-capable GCC, and ld. On Debian or Ubuntu 64-bit hosts, gcc-multilib may be needed.</p></div><div class="panel terminal"><div class="panel-head" data-i18n="quick_start">QUICK START — SHELL</div><pre><span class="dim"># clone the repository</span>
@@ -1219,6 +1272,49 @@ body.modern-mode .lang.open .lang-menu{
   });
   document.addEventListener('click',e=>{if(!wrap.contains(e.target))close();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
+</script>
+
+<div class="canary-modal" id="canaryModal" aria-hidden="true">
+  <div class="canary-window" role="dialog" aria-modal="true" aria-labelledby="canaryTitle">
+    <div class="canary-titlebar"><span id="canaryTitle" data-canary-i18n="title">MiniWin Canary</span><button class="canary-close" id="canaryClose" type="button" aria-label="Close">×</button></div>
+    <div class="canary-content">
+      <h3 data-canary-i18n="heading">Canary 버전에서 달라진 점</h3>
+      <p data-canary-i18n="intro">Canary는 일반 MiniWin을 바탕으로 네트워크 스택 작업을 쌓아 올린 개발 버전입니다.</p>
+      <div class="canary-files" data-canary-i18n="files">추가된 헤더: arp.h, dhcp.h, ip.h, net_stack.h</div>
+      <p data-canary-i18n="tcp">현재 TCP는 지원하지 않습니다. Canary의 핵심 변화는 네트워크 스택 관련 코드가 추가된 것입니다.</p>
+      <p data-canary-i18n="size">이미지 파일은 일반 버전의 약 600 KB에서 Canary에서는 약 256 KB로 줄였습니다.</p>
+      <div class="canary-links"><a href="https://github.com/SegFault777/MiniWin-Canary" rel="noopener" target="_blank" data-canary-i18n="canaryLink">Canary 저장소</a><a href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank" data-canary-i18n="mainLink">일반 저장소</a></div>
+    </div>
+  </div>
+</div>
+
+<script id="canary-i18n-js">
+(()=>{
+  const T={
+    en:{button:'View Canary description',title:'MiniWin Canary',heading:'What changed in Canary',intro:'Canary is a development version of MiniWin focused on adding the network stack code.',files:'Added headers: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP is not supported yet. The main difference is the added network stack code.',size:'The image file was reduced from about 600 KB in the regular version to about 256 KB in Canary.',canaryLink:'Canary repository',mainLink:'Regular repository'},
+    ko:{button:'Canary 설명 보기',title:'MiniWin Canary',heading:'Canary에서 달라진 점',intro:'Canary는 네트워크 스택 코드를 추가하는 데 초점을 둔 MiniWin 개발 버전입니다.',files:'추가된 헤더: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'현재 TCP는 지원하지 않습니다. 가장 큰 차이는 네트워크 스택 관련 코드가 추가된 것입니다.',size:'이미지 파일은 일반 버전의 약 600 KB에서 Canary에서는 약 256 KB로 줄였습니다.',canaryLink:'Canary 저장소',mainLink:'일반 저장소'},
+    es:{button:'Ver descripción de Canary',title:'MiniWin Canary',heading:'Cambios en Canary',intro:'Canary es una versión de desarrollo de MiniWin centrada en añadir código de la pila de red.',files:'Cabeceras añadidas: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP todavía no es compatible. La principal diferencia es el código añadido de la pila de red.',size:'La imagen se redujo de unos 600 KB en la versión normal a unos 256 KB en Canary.',canaryLink:'Repositorio Canary',mainLink:'Repositorio normal'},
+    'zh-CN':{button:'查看 Canary 说明',title:'MiniWin Canary',heading:'Canary 的变化',intro:'Canary 是 MiniWin 的开发版本，重点增加网络协议栈代码。',files:'新增头文件：arp.h、dhcp.h、ip.h、net_stack.h',tcp:'目前尚不支持 TCP。主要变化是加入了网络协议栈相关代码。',size:'镜像文件从普通版本约 600 KB 缩减到 Canary 的约 256 KB。',canaryLink:'Canary 仓库',mainLink:'普通仓库'},
+    'zh-TW':{button:'查看 Canary 說明',title:'MiniWin Canary',heading:'Canary 的變化',intro:'Canary 是 MiniWin 的開發版本，重點是加入網路堆疊程式碼。',files:'新增標頭檔：arp.h、dhcp.h、ip.h、net_stack.h',tcp:'目前尚未支援 TCP。主要差異是加入了網路堆疊相關程式碼。',size:'映像檔從一般版本約 600 KB 縮減到 Canary 約 256 KB。',canaryLink:'Canary 儲存庫',mainLink:'一般儲存庫'},
+    ja:{button:'Canary の説明を見る',title:'MiniWin Canary',heading:'Canary で変わった点',intro:'Canary はネットワークスタックのコード追加に重点を置いた MiniWin の開発版です。',files:'追加されたヘッダー: arp.h、dhcp.h、ip.h、net_stack.h',tcp:'現在 TCP はサポートしていません。主な違いはネットワークスタック関連コードが追加されたことです。',size:'イメージファイルは通常版の約 600 KB から Canary では約 256 KB に縮小されています。',canaryLink:'Canary リポジトリ',mainLink:'通常版リポジトリ'},
+    fr:{button:'Voir la description de Canary',title:'MiniWin Canary',heading:'Changements de Canary',intro:'Canary est une version de développement de MiniWin axée sur l’ajout du code de la pile réseau.',files:'En-têtes ajoutés : arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP n’est pas encore pris en charge. La différence principale est l’ajout du code de la pile réseau.',size:'L’image a été réduite d’environ 600 Ko dans la version normale à environ 256 Ko dans Canary.',canaryLink:'Dépôt Canary',mainLink:'Dépôt normal'},
+    de:{button:'Canary-Beschreibung anzeigen',title:'MiniWin Canary',heading:'Änderungen in Canary',intro:'Canary ist eine MiniWin-Entwicklungsversion mit zusätzlichem Code für den Netzwerk-Stack.',files:'Hinzugefügte Header: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP wird derzeit noch nicht unterstützt. Der Hauptunterschied ist der hinzugefügte Netzwerk-Stack-Code.',size:'Das Image wurde von etwa 600 KB in der normalen Version auf etwa 256 KB in Canary reduziert.',canaryLink:'Canary-Repository',mainLink:'Normales Repository'},
+    'pt-BR':{button:'Ver descrição do Canary',title:'MiniWin Canary',heading:'O que mudou no Canary',intro:'Canary é uma versão de desenvolvimento do MiniWin focada na adição do código da pilha de rede.',files:'Cabeçalhos adicionados: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP ainda não é compatível. A principal diferença é o código adicional da pilha de rede.',size:'A imagem foi reduzida de cerca de 600 KB na versão normal para cerca de 256 KB no Canary.',canaryLink:'Repositório Canary',mainLink:'Repositório normal'},
+    it:{button:'Vedi la descrizione di Canary',title:'MiniWin Canary',heading:'Cosa cambia in Canary',intro:'Canary è una versione di sviluppo di MiniWin focalizzata sull’aggiunta del codice dello stack di rete.',files:'Header aggiunti: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP non è ancora supportato. La differenza principale è il codice aggiuntivo dello stack di rete.',size:'L’immagine è stata ridotta da circa 600 KB nella versione normale a circa 256 KB in Canary.',canaryLink:'Repository Canary',mainLink:'Repository normale'},
+    ru:{button:'Открыть описание Canary',title:'MiniWin Canary',heading:'Что изменилось в Canary',intro:'Canary — разрабатываемая версия MiniWin с добавленным кодом сетевого стека.',files:'Добавлены заголовки: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP пока не поддерживается. Главное отличие — добавленный код сетевого стека.',size:'Размер образа уменьшен примерно с 600 КБ в обычной версии до 256 КБ в Canary.',canaryLink:'Репозиторий Canary',mainLink:'Обычный репозиторий'},
+    vi:{button:'Xem mô tả Canary',title:'MiniWin Canary',heading:'Những thay đổi trong Canary',intro:'Canary là phiên bản phát triển của MiniWin tập trung vào việc bổ sung mã cho network stack.',files:'Header được thêm: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP hiện chưa được hỗ trợ. Điểm khác biệt chính là mã network stack được bổ sung.',size:'Image được giảm từ khoảng 600 KB ở bản thường xuống khoảng 256 KB ở Canary.',canaryLink:'Kho Canary',mainLink:'Kho bản thường'},
+    id:{button:'Lihat deskripsi Canary',title:'MiniWin Canary',heading:'Perubahan di Canary',intro:'Canary adalah versi pengembangan MiniWin yang berfokus pada penambahan kode network stack.',files:'Header yang ditambahkan: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP belum didukung. Perbedaan utamanya adalah penambahan kode network stack.',size:'Ukuran image dikurangi dari sekitar 600 KB pada versi biasa menjadi sekitar 256 KB di Canary.',canaryLink:'Repositori Canary',mainLink:'Repositori biasa'},
+    pl:{button:'Zobacz opis Canary',title:'MiniWin Canary',heading:'Co zmieniło się w Canary',intro:'Canary to wersja rozwojowa MiniWin skupiona na dodaniu kodu stosu sieciowego.',files:'Dodane nagłówki: arp.h, dhcp.h, ip.h, net_stack.h',tcp:'TCP nie jest jeszcze obsługiwane. Główna różnica to dodany kod stosu sieciowego.',size:'Obraz zmniejszono z około 600 KB w wersji zwykłej do około 256 KB w Canary.',canaryLink:'Repozytorium Canary',mainLink:'Zwykłe repozytorium'}
+  };
+  const modal=document.getElementById('canaryModal'),openBtn=document.getElementById('canaryOpen'),closeBtn=document.getElementById('canaryClose');
+  if(!modal||!openBtn||!closeBtn)return;
+  const apply=(lang)=>{const d=T[lang]||T.en;document.querySelectorAll('[data-canary-i18n]').forEach(el=>{const k=el.dataset.canaryI18n;if(d[k])el.textContent=d[k]});closeBtn.setAttribute('aria-label',d.button);};
+  const open=()=>{modal.classList.add('open');modal.setAttribute('aria-hidden','false')};
+  const close=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true')};
+  openBtn.addEventListener('click',open);closeBtn.addEventListener('click',close);modal.addEventListener('click',e=>{if(e.target===modal)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  document.querySelectorAll('.lang-menu button[data-lang]').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.lang)));
+  apply(localStorage.getItem('miniwin-language')||'en');
 })();
 </script>
 </body>
