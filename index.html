@@ -82,10 +82,6 @@ body:not(.modern-mode) .style-toggle{
 body:not(.modern-mode) .panel{
   box-shadow:5px 5px 0 #000;
 }
-body:not(.modern-mode) .panel-head{
-  background:linear-gradient(#0b3d91,#06265d);
-  border-bottom:2px solid #9ab1ce;
-}
 body:not(.modern-mode) .btn{
   box-shadow:3px 3px 0 #000;
 }
@@ -705,9 +701,9 @@ body:not(.modern-mode) .monitor{
 }
 body:not(.modern-mode) .panel-head{
   color:#fff;
-  background:#000080;
-  border:0;
-  padding:4px 6px;
+  background:linear-gradient(90deg,#000080,#1084d0);
+  border:0;border-bottom:2px solid #808080;
+  padding:5px 6px 5px 9px;
   font:bold 11px "MS Sans Serif",Arial,sans-serif;
 }
 body:not(.modern-mode) .card{background:#c0c0c0;min-height:190px}
@@ -813,6 +809,7 @@ body:not(.modern-mode) .style-toggle:focus-visible{
   outline:1px dotted #000 !important;
   outline-offset:1px;
 }
+</style>
 
 <style id="retro-fonts">
 /* 8x8-era typography. Dalmoori is the bundled MiniWin Hangul font family;
@@ -1230,9 +1227,276 @@ body.modern-mode .monitor-stage .image-credit{
 }
 </style>
 
+<style id="oldretro-css">
+/* ============================================================
+   OLDRETRO — pre-Win9x CLI/TUI easter egg.
+   Typing "old" while in Retro drops into a DOS-blue text-mode
+   shell; typing "retro" while there brings the GUI back.
+   ============================================================ */
+#oldretroScreen{
+  display:none;
+  visibility:visible;
+  position:fixed;
+  left:0;right:0;bottom:0;top:52px; /* kept in sync with the real header height by JS */
+  z-index:400;
+  background:#0000aa;
+  color:#d8d8ff;
+  font-family:"Courier New",monospace;
+  flex-direction:column;
+}
+body.oldretro-mode #oldretroScreen{display:flex}
+body.oldretro-mode main,
+body.oldretro-mode footer{display:none}
+body.oldretro-mode .nav>a[data-i18n]{display:none}
+/* The BOOTSTRA.386 loader briefly hides <body>; keep our own chrome on screen regardless. */
+body.oldretro-mode>header.top{visibility:visible!important}
+
+.or-boot{
+  position:absolute;inset:0;z-index:5;
+  display:none;
+  overflow-y:auto;
+  background:#000;color:#c0c0c0;
+  padding:18px 20px;
+  font:14px/1.7 "Courier New",monospace;
+  scrollbar-width:none;
+}
+.or-boot::-webkit-scrollbar{display:none}
+.or-boot pre{margin:0;white-space:pre-wrap;word-break:break-word}
+
+.or-titlebar{flex:0 0 auto;background:#aaaaaa;color:#00006a;font-weight:700;font-size:12px;letter-spacing:1px;padding:6px 12px;text-align:center}
+.or-menubar{flex:0 0 auto;display:flex;flex-wrap:wrap;gap:2px;background:#aaaaaa;padding:4px 8px}
+.or-menubar button{font:700 12px "Courier New",monospace;background:#aaaaaa;color:#00006a;border:0;padding:6px 10px;cursor:pointer}
+.or-menubar button:hover,.or-menubar button:focus-visible{background:#00006a;color:#fff;outline:1px dotted #fff}
+
+.or-body{flex:1 1 auto;min-height:0;overflow-y:auto;padding:20px}
+.or-body.or-locked{overflow-y:hidden}
+@media (hover:hover) and (pointer:fine){
+  .or-body{scrollbar-width:thin}
+}
+
+.or-window{position:relative;border:4px double #7fdcff;background:#0000aa;padding:16px;margin:0 0 22px}
+.or-win-title{background:#7fdcff;color:#00006a;font-weight:700;font-size:12px;letter-spacing:.6px;padding:3px 9px;margin:-16px -16px 14px;text-align:center}
+.or-win-body{font-size:13px;line-height:1.75;color:#eef0ff}
+.or-win-body p{margin:0 0 10px}
+.or-win-body p:last-child{margin-bottom:0}
+.or-win-body pre{white-space:pre-wrap;word-break:break-word;margin:0 0 10px;font:12px/1.7 "Courier New",monospace;color:#c8e8ff}
+.or-win-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.or-win-links a{color:#fff;background:#00006a;border:1px solid #7fdcff;padding:6px 10px;font-size:12px;text-decoration:none}
+.or-win-links a:hover{background:#7fdcff;color:#00006a}
+.or-hero-logo{font-size:clamp(22px,5vw,32px);font-weight:700;letter-spacing:6px;color:#fff;text-align:center;margin-bottom:6px}
+.or-hero-tag{text-align:center;color:#7fdcff;font-size:11px;letter-spacing:2px;margin-bottom:16px}
+
+.or-statusbar{flex:0 0 auto;background:#aaaaaa;color:#00006a;font-size:11px;padding:6px 10px;text-align:center}
+.or-pagectrl{flex:0 0 auto;display:flex;gap:2px}
+.or-pagectrl button{
+  flex:1 1 50%;font:700 12px "Courier New",monospace;letter-spacing:1px;padding:12px 8px;
+  background:#c0c0c0;color:#000;border:2px solid;
+  border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;cursor:pointer;
+}
+.or-pagectrl button:active{border-top-color:#000;border-left-color:#000;border-right-color:#fff;border-bottom-color:#fff}
+
+@media(max-width:620px){
+  .or-titlebar{font-size:10px}
+  .or-menubar button{font-size:11px;padding:6px 8px}
+  .or-body{padding:14px}
+  .or-window{padding:14px}
+  .or-win-title{margin:-14px -14px 12px}
+}
+.or-pagectrl{padding-bottom:env(safe-area-inset-bottom,0px)}
+</style>
+
+<style id="settings-panel-css">
+/* ============================================================
+   SETTINGS — gear button pinned to the far right of the top
+   bar (outside the scrolling nav, so it's always reachable on
+   mobile) plus its modal: a dedicated Retro <-> OldRetro
+   toggle and a "differences" explainer. This is the mouse/touch
+   entry point into OldRetro for anyone without a keyboard.
+   ============================================================ */
+.settings-btn{
+  order:1;
+  flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;min-width:44px;min-height:44px;
+  margin-left:6px;
+  border:1px solid transparent;
+  background:transparent;color:#afc0d5;
+  cursor:pointer;font-size:17px;line-height:1;
+}
+.settings-btn:hover,.settings-btn:focus-visible{background:#102b50;border-color:#315b8d;color:#fff;outline:none}
+body.modern-mode .settings-btn{border-radius:10px;color:#5b748d}
+body.modern-mode .settings-btn:hover,body.modern-mode .settings-btn:focus-visible{background:rgba(255,255,255,.5);color:#1c3d61}
+/* Retro (and OldRetro, which keeps the same gray Win9x header) needs the real
+   3-D beveled button skin used by the rest of the header, not the dark-header
+   flat icon style above — otherwise it's nearly invisible on the gray chrome. */
+body:not(.modern-mode) .settings-btn{
+  color:#000;
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+}
+body:not(.modern-mode) .settings-btn:hover,
+body:not(.modern-mode) .settings-btn:focus-visible{
+  background:#c0c0c0;color:#000;outline:1px dotted #000;outline-offset:-4px;
+}
+body:not(.modern-mode) .settings-btn:active{
+  border-top-color:#000;border-left-color:#000;border-right-color:#fff;border-bottom-color:#fff;
+  box-shadow:inset -1px -1px #dfdfdf,inset 1px 1px #808080;
+}
+
+#settingsOverlay{position:fixed;inset:0;z-index:20000;display:flex;align-items:center;justify-content:center;padding:16px;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif}
+#settingsOverlay[hidden]{display:none}
+.settings-backdrop{position:absolute;inset:0;background:rgba(5,10,20,.55)}
+.settings-panel{position:relative;width:min(430px,100%);max-height:min(86vh,640px);overflow-y:auto;background:#0b182b;border:1px solid #315b8d;box-shadow:6px 6px 0 #000;color:#dbe4ed}
+body.modern-mode .settings-panel{background:#fff;border:1px solid rgba(91,116,141,.25);border-radius:14px;box-shadow:0 20px 60px rgba(15,30,50,.35);color:#22405f}
+.settings-head{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #223c5c;background:inherit;font:700 14px "Courier New",monospace;letter-spacing:.6px}
+body.modern-mode .settings-head{border-bottom:1px solid rgba(91,116,141,.18);font:700 16px "Segoe UI",Arial,sans-serif}
+.settings-close{flex:0 0 auto;width:34px;height:34px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;border:0;background:transparent;color:inherit;font-size:16px;cursor:pointer;border-radius:4px}
+.settings-close:hover{background:rgba(255,255,255,.12)}
+body.modern-mode .settings-close:hover{background:rgba(28,61,97,.08)}
+.settings-body{padding:18px 16px}
+.settings-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.settings-row-label{font-size:13.5px;color:#afc0d5}
+body.modern-mode .settings-row-label{color:#4c6a88}
+#settingsOldRetroSwitch{margin-right:0}
+#settingsOldRetroToggle span{left:2px}
+body.oldretro-mode #settingsOldRetroToggle span{left:19px}
+body.modern-mode.oldretro-mode #settingsOldRetroToggle span{left:19px}
+
+.settings-diff-btn{
+  display:block;width:100%;min-height:44px;padding:11px 12px;
+  background:#12345f;color:#fff;border:1px solid #315b8d;
+  font:700 12.5px "Courier New",monospace;letter-spacing:.4px;cursor:pointer;text-align:center;
+}
+.settings-diff-btn:hover{background:#1a4a86}
+body.modern-mode .settings-diff-btn{background:#e8f1fb;color:#1c3d61;border:1px solid rgba(91,116,141,.25);border-radius:8px;font:700 13.5px "Segoe UI",Arial,sans-serif}
+body.modern-mode .settings-diff-btn:hover{background:#d7e8fa}
+.settings-diff-panel{margin:12px 0 0;padding:12px 14px;background:#08111f;border:1px solid #223c5c;font-size:12.5px;line-height:1.7;color:#c3d2e4}
+.settings-diff-panel[hidden]{display:none}
+body.modern-mode .settings-diff-panel{background:#f4f8fc;border:1px solid rgba(91,116,141,.18);border-radius:8px;color:#33506f}
+.settings-diff-panel dt{font-weight:700;color:#8fdcff;margin-top:12px}
+.settings-diff-panel dt:first-child{margin-top:0}
+body.modern-mode .settings-diff-panel dt{color:#1c6fc9}
+.settings-diff-panel dd{margin:3px 0 0}
+
+/* ---- Retro: a real Windows-95 dialog box, matching every other panel/menu
+   on the site (lang-menu, buttons) instead of a foreign dark "web modal". ---- */
+body:not(.modern-mode):not(.oldretro-mode) .settings-panel{
+  background:#c0c0c0;color:#000;
+  border:2px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;
+  box-shadow:4px 4px 0 #000;
+  font-family:"MS Sans Serif",Arial,sans-serif;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-head{
+  background:linear-gradient(90deg,#000080,#1084d0);color:#fff;
+  border-bottom:2px solid #808080;
+  font:700 13px "MS Sans Serif",Arial,sans-serif;letter-spacing:0;
+  padding:6px 6px 6px 10px;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-close{
+  width:22px;height:22px;min-width:22px;min-height:22px;border-radius:0;
+  background:#c0c0c0;color:#000;font-weight:700;
+  border:1px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-close:hover{background:#c0c0c0}
+body:not(.modern-mode):not(.oldretro-mode) .settings-close:active{
+  border-top-color:#000;border-left-color:#000;border-right-color:#fff;border-bottom-color:#fff;
+  box-shadow:inset -1px -1px #dfdfdf,inset 1px 1px #808080;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-row-label{color:#000}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-btn{
+  background:#c0c0c0;color:#000;border-radius:0;
+  border:2px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+  font:700 12px "MS Sans Serif",Arial,sans-serif;letter-spacing:0;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-btn:hover{background:#c0c0c0}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-btn:active{
+  border-top-color:#000;border-left-color:#000;border-right-color:#fff;border-bottom-color:#fff;
+  box-shadow:inset -1px -1px #dfdfdf,inset 1px 1px #808080;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-panel{
+  background:#fff;color:#000;border-radius:0;
+  border:2px solid;border-top-color:#808080;border-left-color:#808080;border-right-color:#fff;border-bottom-color:#fff;
+  font:12px "MS Sans Serif",Arial,sans-serif;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-panel dt{color:#000080}
+
+/* ---- OldRetro: not a "window", but an actual BIOS Setup Utility screen —
+   titlebar, tab row, a menu item that pops a Legacy/UEFI-style selector,
+   a help pane, a key legend and a footer bar, styled after the classic
+   AMI Aptio setup screen. Standard settings markup is hidden in this mode
+   (see .settings-standard / .settings-bios visibility below). ---- */
+body.oldretro-mode .settings-panel{
+  width:min(600px,100%);
+  background:#0000aa;color:#e8ecff;
+  border:1px solid #6a86c8;
+  box-shadow:6px 6px 0 rgba(0,0,0,.55);
+  font-family:"Courier New",monospace;
+  padding:0;
+}
+.settings-standard{display:block}
+.settings-bios{display:none}
+body.oldretro-mode .settings-standard{display:none}
+body.oldretro-mode .settings-bios{display:block}
+
+.bios-titlebar{background:#04040c;color:#fff;padding:8px 12px;font:700 12.5px "Courier New",monospace;border-bottom:1px solid #6a86c8}
+.bios-tabs{display:flex;gap:2px;background:#0000aa;padding:6px 10px 0;border-bottom:1px solid #6a86c8}
+.bios-tab{padding:5px 12px;font:11.5px "Courier New",monospace;color:#b9c6f2}
+.bios-tab.active{background:#e8ecff;color:#00006a;font-weight:700}
+.bios-main{display:grid;grid-template-columns:1fr 190px;min-height:170px}
+.bios-menu{padding:14px 12px;border-right:1px solid #223c9c}
+.bios-item{
+  display:block;width:100%;text-align:left;
+  background:transparent;border:0;color:#fff;
+  font:12.5px "Courier New",monospace;letter-spacing:.2px;
+  padding:6px 8px;cursor:pointer;
+}
+.bios-item b{color:#fff;font-weight:700}
+.bios-item:hover,.bios-item:focus-visible{background:#7fdcff;color:#00006a;outline:none}
+.bios-item:hover b,.bios-item:focus-visible b{color:#00006a}
+.bios-side{display:flex;flex-direction:column}
+.bios-help{flex:1 1 auto;background:#000;color:#e8ecff;padding:10px 11px;font-size:11px;line-height:1.6}
+.bios-keys{background:#000;color:#9fb0d8;padding:9px 11px;font-size:10px;line-height:1.75;border-top:1px solid #223c9c}
+.bios-popup{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:200px;z-index:5;
+  background:#0000aa;border:2px solid #e8ecff;box-shadow:4px 4px 0 rgba(0,0,0,.6);
+}
+.bios-popup[hidden]{display:none}
+.bios-popup-title{background:#e8ecff;color:#00006a;font:700 11.5px "Courier New",monospace;padding:5px 9px}
+.bios-popup-opt{
+  display:block;width:100%;text-align:left;
+  background:transparent;border:0;color:#fff;
+  font:12px "Courier New",monospace;padding:7px 10px;cursor:pointer;
+}
+.bios-popup-opt.highlight,.bios-popup-opt:focus-visible{background:#7fdcff;color:#00006a;outline:none}
+.bios-footer{display:flex;justify-content:space-between;gap:10px;background:#04040c;color:#9fb0d8;padding:6px 12px;font-size:10px;border-top:1px solid #6a86c8}
+
+@media(max-width:640px){
+  .bios-main{grid-template-columns:1fr}
+  .bios-menu{border-right:0;border-bottom:1px solid #223c9c}
+  .bios-help{min-height:70px}
+}
+
+@media(max-width:560px){
+  #settingsOverlay{align-items:flex-end;padding:0}
+  .settings-panel{width:100%;max-width:none;max-height:88vh;border-radius:14px 14px 0 0;box-shadow:none}
+  body.modern-mode .settings-panel{border-radius:14px 14px 0 0}
+  .settings-body{padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+}
+</style>
+
 </head>
 <body>
-<header class="top"><div class="wrap topbar"><a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0-pre</span></a><nav class="nav"><div class="style-switch" role="group" aria-label="Visual style"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div><a data-i18n="home" href="#home">Home</a><a data-i18n="about" href="#about">About</a><a data-i18n="features" href="#features">Features</a><a data-i18n="build" href="#build">Build</a><a data-i18n="networking" href="#networking">Networking</a><a data-i18n="download" href="#download">Download</a><div class="lang"><button aria-expanded="false" class="lang-btn" data-i18n="language" type="button">Language ▾</button><div class="lang-menu" role="menu"><button data-lang="ko" data-lang-label="한국어" role="menuitem" type="button">한국어</button><button data-lang="en" data-lang-label="English" role="menuitem" type="button">English</button><button data-lang="es" data-lang-label="Español" role="menuitem" type="button">Español</button><button data-lang="zh-CN" data-lang-label="中文（简体）" role="menuitem" type="button">中文（简体）</button><button data-lang="zh-TW" data-lang-label="中文（繁體）" role="menuitem" type="button">中文（繁體）</button><button data-lang="ja" data-lang-label="日本語" role="menuitem" type="button">日本語</button><button data-lang="fr" data-lang-label="Français" role="menuitem" type="button">Français</button><button data-lang="de" data-lang-label="Deutsch" role="menuitem" type="button">Deutsch</button><button data-lang="pt-BR" data-lang-label="Português (Brasil)" role="menuitem" type="button">Português (Brasil)</button><button data-lang="it" data-lang-label="Italiano" role="menuitem" type="button">Italiano</button><button data-lang="ru" data-lang-label="Русский" role="menuitem" type="button">Русский</button><button data-lang="vi" data-lang-label="Tiếng Việt" role="menuitem" type="button">Tiếng Việt</button><button data-lang="id" data-lang-label="Bahasa Indonesia" role="menuitem" type="button">Bahasa Indonesia</button><button data-lang="pl" data-lang-label="Polski" role="menuitem" type="button">Polski</button><button data-lang="tr" data-lang-label="Türkçe" role="menuitem" type="button">Türkçe</button><button data-lang="nl" data-lang-label="Nederlands" role="menuitem" type="button">Nederlands</button><button data-lang="sv" data-lang-label="Svenska" role="menuitem" type="button">Svenska</button><button data-lang="uk" data-lang-label="Українська" role="menuitem" type="button">Українська</button><button data-lang="ar" data-lang-label="العربية" role="menuitem" type="button">العربية</button><button data-lang="hi" data-lang-label="हिन्दी" role="menuitem" type="button">हिन्दी</button></div></div></nav></div></header>
+<header class="top"><div class="wrap topbar"><a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0-pre</span></a><nav class="nav"><div class="style-switch" role="group" aria-label="Visual style"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div><a data-i18n="home" href="#home">Home</a><a data-i18n="about" href="#about">About</a><a data-i18n="features" href="#features">Features</a><a data-i18n="build" href="#build">Build</a><a data-i18n="networking" href="#networking">Networking</a><a data-i18n="download" href="#download">Download</a><div class="lang"><button aria-expanded="false" class="lang-btn" data-i18n="language" type="button">Language ▾</button><div class="lang-menu" role="menu"><button data-lang="ko" data-lang-label="한국어" role="menuitem" type="button">한국어</button><button data-lang="en" data-lang-label="English" role="menuitem" type="button">English</button><button data-lang="es" data-lang-label="Español" role="menuitem" type="button">Español</button><button data-lang="zh-CN" data-lang-label="中文（简体）" role="menuitem" type="button">中文（简体）</button><button data-lang="zh-TW" data-lang-label="中文（繁體）" role="menuitem" type="button">中文（繁體）</button><button data-lang="ja" data-lang-label="日本語" role="menuitem" type="button">日本語</button><button data-lang="fr" data-lang-label="Français" role="menuitem" type="button">Français</button><button data-lang="de" data-lang-label="Deutsch" role="menuitem" type="button">Deutsch</button><button data-lang="pt-BR" data-lang-label="Português (Brasil)" role="menuitem" type="button">Português (Brasil)</button><button data-lang="it" data-lang-label="Italiano" role="menuitem" type="button">Italiano</button><button data-lang="ru" data-lang-label="Русский" role="menuitem" type="button">Русский</button><button data-lang="vi" data-lang-label="Tiếng Việt" role="menuitem" type="button">Tiếng Việt</button><button data-lang="id" data-lang-label="Bahasa Indonesia" role="menuitem" type="button">Bahasa Indonesia</button><button data-lang="pl" data-lang-label="Polski" role="menuitem" type="button">Polski</button><button data-lang="tr" data-lang-label="Türkçe" role="menuitem" type="button">Türkçe</button><button data-lang="nl" data-lang-label="Nederlands" role="menuitem" type="button">Nederlands</button><button data-lang="sv" data-lang-label="Svenska" role="menuitem" type="button">Svenska</button><button data-lang="uk" data-lang-label="Українська" role="menuitem" type="button">Українська</button><button data-lang="ar" data-lang-label="العربية" role="menuitem" type="button">العربية</button><button data-lang="hi" data-lang-label="हिन्दी" role="menuitem" type="button">हिन्दी</button></div></div></nav><button aria-haspopup="dialog" aria-label="Settings" class="settings-btn" id="settingsBtn" type="button"><span aria-hidden="true" class="settings-btn-icon">⚙</span></button></div></header>
 <main>
 <section class="hero" id="home"><div class="wrap hero-grid"><div><span class="tag" data-i18n="hero_tag">SEGFAULT777 / MINIWIN / MAIN</span><h1><span>MINI</span><span>WIN</span></h1><p data-i18n="hero_p">A tiny 32-bit x86 desktop operating system that boots from a single MBR disk image into a Windows-95-flavored GUI. Built from the ground up without libc, a bootloader framework, or borrowed kernel code.</p><div class="actions"><a class="btn primary" data-i18n="download_source" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip">DOWNLOAD SOURCE</a><a class="btn" data-i18n="github" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank">VIEW ON GITHUB</a></div></div><div class="monitor-stage"><div class="monitor"><img alt="MiniWin desktop screenshot" loading="eager" src="https://cdn.phototourl.com/free/2026-09-15-a92c382b-1b9f-4b3d-b09b-8c67f4c240cd.png"/><div class="image-credit">MINIWIN // ACTUAL SCREENSHOT</div></div></div></div></section>
 <section id="about"><div class="wrap"><div class="head"><div class="eyebrow" data-i18n="about_eyebrow">01 / THE PROJECT</div><h2 data-i18n="about_h2">A small OS project, built close to the metal.</h2><p data-i18n="about_p">MiniWin is a dependency-free 32-bit x86 OS. Its bootloader handles the real-mode setup and protected-mode jump; the kernel then runs its own display, input, storage, desktop, clock and application code.</p></div><div class="panel"><div class="panel-head" data-i18n="system_information">SYSTEM INFORMATION</div><div class="facts"><div class="fact"><strong>i386</strong><small data-i18n="cpu">CPU target</small></div><div class="fact"><strong>640×400</strong><small data-i18n="display">VBE framebuffer</small></div><div class="fact"><strong>256</strong><small data-i18n="colors">colors</small></div><div class="fact"><strong>4-SLOT</strong><small data-i18n="filesystem">ATA filesystem</small></div></div></div></div></section>
@@ -1438,6 +1702,596 @@ setLanguage(localStorage.getItem('miniwin-language')||'en');
   };
   apply(localStorage.getItem('miniwin-style')||'retro');
   t.addEventListener('click',()=>apply(body.classList.contains('modern-mode')?'retro':'modern'));
+})();
+</script>
+<script id="oldretro-js">
+(()=>{
+  const body=document.body;
+  const SECTION_LABELS={home:'HOME',about:'ABOUT',features:'FEATURES',build:'BUILD',networking:'NETWORKING',download:'DOWNLOAD'};
+  let screenEl=null,bootEl=null,bootTextEl=null,bodyEl=null,menubarEl=null,statusEl=null;
+  let built=false,bootTimer=null,resizeHandler=null,keyBlocker=null;
+
+  function isTouchDevice(){
+    return window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  }
+
+  function positionOverlay(){
+    if(!screenEl)return;
+    const header=document.querySelector('body > header.top');
+    if(header)screenEl.style.top=header.getBoundingClientRect().height+'px';
+  }
+
+  function buildScreen(){
+    if(built)return;
+    screenEl=document.createElement('div');
+    screenEl.id='oldretroScreen';
+    screenEl.innerHTML=
+      '<div class="or-boot" id="orBoot"><pre id="orBootText"></pre></div>'+
+      '<div class="or-titlebar">MINIWIN.EXE \u2014 TEXT MODE SHELL (80386, 640K CONV, 3072K EXT)</div>'+
+      '<div class="or-menubar" id="orMenubar"></div>'+
+      '<div class="or-body" id="orBody" tabindex="0"></div>'+
+      '<div class="or-statusbar" id="orStatus"></div>'+
+      '<div class="or-pagectrl"><button type="button" id="orPageUp">\u25b2 PAGE UP</button><button type="button" id="orPageDown">\u25bc PAGE DOWN</button></div>';
+    document.body.appendChild(screenEl);
+    bootEl=screenEl.querySelector('#orBoot');
+    bootTextEl=screenEl.querySelector('#orBootText');
+    bodyEl=screenEl.querySelector('#orBody');
+    menubarEl=screenEl.querySelector('#orMenubar');
+    statusEl=screenEl.querySelector('#orStatus');
+    bodyEl.style.outline='none';
+    screenEl.querySelector('#orPageUp').addEventListener('click',()=>pageScroll(-1));
+    screenEl.querySelector('#orPageDown').addEventListener('click',()=>pageScroll(1));
+    built=true;
+  }
+
+  function textOf(el){return el?el.textContent.trim():'';}
+
+  function collectSectionParts(section){
+    const parts=[];
+    if(section.id!=='home'){
+      section.querySelectorAll('h1,h2').forEach(h=>{const t=textOf(h);if(t)parts.push({tag:'h',text:t});});
+    }
+    const lead=section.querySelector('.hero-grid p, .head p, .section-head .sub');
+    if(lead){const t=textOf(lead);if(t)parts.push({tag:'p',text:t});}
+    const facts=[...section.querySelectorAll('.fact')].map(f=>{
+      const s=textOf(f.querySelector('strong')),sm=textOf(f.querySelector('small'));
+      return s+(sm?'  \u2014 '+sm:'');
+    }).filter(Boolean);
+    if(facts.length)parts.push({tag:'p',text:facts.join('\n')});
+    section.querySelectorAll('.card').forEach(c=>{
+      const badge=textOf(c.querySelector('.badge')),h3=textOf(c.querySelector('h3')),p=textOf(c.querySelector('p'));
+      let line=(badge?'['+badge+'] ':'')+h3;
+      if(p)line+='\n  '+p;
+      if(line.trim())parts.push({tag:'p',text:line});
+    });
+    section.querySelectorAll('.terminal pre').forEach(pre=>{
+      const t=textOf(pre);
+      if(t)parts.push({tag:'pre',text:t});
+    });
+    section.querySelectorAll('.note').forEach(n=>{
+      const t=textOf(n);
+      if(t)parts.push({tag:'p',text:t});
+    });
+    return parts;
+  }
+
+  function renderShellContent(){
+    if(!bodyEl)return;
+    bodyEl.innerHTML='';
+    const sections=[...document.querySelectorAll('main section[id]')];
+    sections.forEach((section,i)=>{
+      const win=document.createElement('div');
+      win.className='or-window';
+      win.id='or-sec-'+section.id;
+      const title=document.createElement('div');
+      title.className='or-win-title';
+      title.textContent=(i+1)+'. '+(SECTION_LABELS[section.id]||section.id.toUpperCase());
+      win.appendChild(title);
+      if(section.id==='home'){
+        const logo=document.createElement('div');
+        logo.className='or-hero-logo';
+        logo.textContent='M I N I W I N';
+        win.appendChild(logo);
+        const tag=textOf(section.querySelector('.tag'));
+        if(tag){
+          const t=document.createElement('div');
+          t.className='or-hero-tag';
+          t.textContent=tag;
+          win.appendChild(t);
+        }
+      }
+      const winBody=document.createElement('div');
+      winBody.className='or-win-body';
+      collectSectionParts(section).forEach(part=>{
+        const el=document.createElement(part.tag==='pre'?'pre':'p');
+        el.textContent=part.text;
+        winBody.appendChild(el);
+      });
+      win.appendChild(winBody);
+      const links=[...section.querySelectorAll('.actions a')];
+      if(links.length){
+        const wrap=document.createElement('div');
+        wrap.className='or-win-links';
+        links.forEach(a=>{
+          const link=document.createElement('a');
+          link.href=a.getAttribute('href');
+          link.textContent=textOf(a);
+          if(a.target)link.target=a.target;
+          if(a.hasAttribute('rel'))link.rel=a.getAttribute('rel');
+          wrap.appendChild(link);
+        });
+        win.appendChild(wrap);
+      }
+      bodyEl.appendChild(win);
+    });
+    const footer=document.querySelector('body > footer');
+    if(footer){
+      const win=document.createElement('div');
+      win.className='or-window';
+      const title=document.createElement('div');
+      title.className='or-win-title';
+      title.textContent='SYSTEM';
+      win.appendChild(title);
+      const winBody=document.createElement('div');
+      winBody.className='or-win-body';
+      const p=document.createElement('p');
+      p.textContent=textOf(footer).replace(/\s+/g,' ');
+      winBody.appendChild(p);
+      win.appendChild(winBody);
+      bodyEl.appendChild(win);
+    }
+  }
+
+  function renderMenubar(){
+    if(!menubarEl)return;
+    menubarEl.innerHTML='';
+    [...document.querySelectorAll('main section[id]')].forEach((section,i)=>{
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.textContent='F'+(i+1)+' '+(SECTION_LABELS[section.id]||section.id.toUpperCase());
+      btn.addEventListener('click',()=>{
+        const target=document.getElementById('or-sec-'+section.id);
+        if(target&&bodyEl)bodyEl.scrollTop=target.offsetTop-10;
+      });
+      menubarEl.appendChild(btn);
+    });
+  }
+
+  const BOOT_LINES=[
+    'Award Modular BIOS v4.51PG, An Energy Star Ally',
+    'Copyright (C) 1984-96, Award Software, Inc.',
+    '',
+    'MINIWIN SYSTEMS INC.',
+    '80386DX CPU at 33MHz',
+    'Memory Test : 4096K OK',
+    '',
+    'Detecting Primary Master ... MINIWIN-IDE 40MB',
+    'Detecting Primary Slave  ... None',
+    'Detecting Floppy Drive A: ... 1.44M',
+    '',
+    'MINIWIN Bootstrap Loader v1.0',
+    'Loading MINIWIN.SYS ......... OK',
+    'Loading DISPLAY.CLI ......... OK',
+    'Loading MOUSE.DRV ........... skipped (keyboard only)',
+    '',
+    'Starting text-mode shell...',
+    '',
+    'C:\\MINIWIN>RUN SETUP.EXE'
+  ];
+
+  /* Note on BOOTSTRA.386 (github.com/kristopolous/BOOTSTRA.386): its official loading-cursor
+     animation (and the standalone 386-animation package derived from it) is built to run once,
+     tied to the page's initial load event, revealing <body> when that single pass finishes.
+     Calling it again later — e.g. on a keypress, long after "load" has already fired — leaves
+     it waiting for a reveal trigger that never comes, so the screen gets stuck. That's exactly
+     what produced the stuck blue screen. Rather than fight that mismatch, the BIOS/boot text
+     below reproduces the same DOS-blue, monospace 80386 boot aesthetic directly, deterministically,
+     with no dependency on any external script's load timing.
+  */
+  function playBoot(cb){
+    bootTextEl.textContent='';
+    bootEl.style.display='block';
+    let i=0;
+    const step=()=>{
+      if(i>=BOOT_LINES.length){
+        bootTimer=setTimeout(()=>{
+          bootEl.style.display='none';
+          cb();
+        },320);
+        return;
+      }
+      bootTextEl.textContent+=BOOT_LINES[i]+'\n';
+      bootEl.scrollTop=bootEl.scrollHeight;
+      i++;
+      bootTimer=setTimeout(step,BOOT_LINES[i-1]===''?45:75);
+    };
+    step();
+  }
+
+  function pageScroll(dir){
+    if(!bodyEl)return;
+    bodyEl.scrollTop+=bodyEl.clientHeight*0.9*dir;
+  }
+
+  function lockScroll(){
+    if(isTouchDevice())return;
+    bodyEl.classList.add('or-locked');
+    keyBlocker=(e)=>{
+      if(e.key==='PageUp'){e.preventDefault();pageScroll(-1);}
+      else if(e.key==='PageDown'){e.preventDefault();pageScroll(1);}
+    };
+    document.addEventListener('keydown',keyBlocker);
+  }
+
+  function unlockScroll(){
+    if(bodyEl)bodyEl.classList.remove('or-locked');
+    if(keyBlocker){document.removeEventListener('keydown',keyBlocker);keyBlocker=null;}
+  }
+
+  function setToggleLabel(active){
+    const label=document.querySelector('header.top .style-switch .style-label:first-child');
+    if(label)label.textContent=active?'OldRetro':'Retro';
+  }
+
+  function persistOldRetroDefault(active){
+    try{ localStorage.setItem('miniwin-oldretro', active?'1':'0'); }catch(e){}
+  }
+
+  function enterOldRetro(opts){
+    opts=opts||{};
+    if(body.classList.contains('modern-mode')||body.classList.contains('oldretro-mode'))return;
+    buildScreen();
+    renderShellContent();
+    renderMenubar();
+    statusEl.textContent=isTouchDevice()
+      ?'SWIPE TO SCROLL \u00b7 TYPE "RETRO" TO RETURN TO GUI MODE'
+      :'PAGE UP / PAGE DOWN TO SCROLL \u00b7 TYPE "RETRO" TO RETURN TO GUI MODE';
+    body.classList.add('oldretro-mode');
+    document.documentElement.classList.add('oldretro-mode');
+    setToggleLabel(true);
+    persistOldRetroDefault(true);
+    syncSettingsToggle();
+    if(settingsBuilt)renderSettingsAll();
+    positionOverlay();
+    resizeHandler=positionOverlay;
+    window.addEventListener('resize',resizeHandler);
+    bodyEl.scrollTop=0;
+    if(opts.skipBoot){
+      bootEl.style.display='none';
+      lockScroll();
+    }else{
+      playBoot(()=>{
+        lockScroll();
+        bodyEl.focus({preventScroll:true});
+      });
+    }
+  }
+
+  function exitOldRetro(){
+    if(!body.classList.contains('oldretro-mode'))return;
+    if(bootTimer)clearTimeout(bootTimer);
+    unlockScroll();
+    if(resizeHandler){window.removeEventListener('resize',resizeHandler);resizeHandler=null;}
+    body.classList.remove('oldretro-mode');
+    document.documentElement.classList.remove('oldretro-mode');
+    setToggleLabel(false);
+    persistOldRetroDefault(false);
+    syncSettingsToggle();
+    if(settingsBuilt)renderSettingsAll();
+  }
+
+  const styleToggleBtn=document.getElementById('styleToggle');
+  if(styleToggleBtn)styleToggleBtn.addEventListener('click',exitOldRetro);
+
+  /* ---------------- Settings modal (gear button) ----------------
+     Dedicated Retro <-> OldRetro toggle plus a differences panel —
+     the touch/mouse entry point into OldRetro for anyone without a
+     physical keyboard (i.e. every mobile visitor). */
+  const SETTINGS_I18N={
+    ko:{
+      title:'설정',close:'닫기',displayMode:'화면 모드',retro:'Retro',oldretro:'OldRetro',
+      diffBtn:'Retro와 OldRetro의 차이',
+      rows:[
+        ['시대','Retro는 1995년 무렵 마우스 기반 Windows GUI를 재현합니다. OldRetro는 그보다 앞선 DOS 텍스트 모드 시절을 재현합니다.'],
+        ['조작','Retro는 마우스로 창과 아이콘을 다룹니다. OldRetro는 화면 위쪽 F1~F6 메뉴와 키보드로 다룹니다.'],
+        ['스크롤','Retro는 일반적인 마우스 휠 스크롤입니다. OldRetro는 PC에서는 Page Up/Down 키(또는 화면 하단 버튼)로만 움직이고, 모바일에서는 평소처럼 스와이프로 스크롤됩니다.'],
+        ['화면','Retro는 회색 Windows 9x 스타일입니다. OldRetro는 파란 바탕의 단색 텍스트 화면(CLI)입니다.']
+      ],
+      biosLabel:'Display Mode',
+      biosHelpDefault:'사이트의 화면 모드를 선택합니다. 현재: OldRetro (DOS 텍스트 모드 셸).',
+      biosHelpRetro:'Retro: 마우스로 조작하는 Windows 95 스타일 GUI. 창, 아이콘, 일반 휠 스크롤.',
+      biosHelpOldRetro:'OldRetro: DOS 텍스트 모드 CLI 셸. F1~F6 키보드 메뉴, 데스크톱에서는 Page Up/Down으로만 스크롤.'
+    },
+    en:{
+      title:'Settings',close:'Close',displayMode:'Display mode',retro:'Retro',oldretro:'OldRetro',
+      diffBtn:'Difference between Retro and OldRetro',
+      rows:[
+        ['Era','Retro recreates the mouse-driven Windows GUI of around 1995. OldRetro goes back further, to the DOS text-mode era.'],
+        ['Control','Retro is driven with a mouse over windows and icons. OldRetro is driven with the keyboard through the F1\u2013F6 menu bar.'],
+        ['Scrolling','Retro scrolls normally with the mouse wheel. On desktop, OldRetro only moves via Page Up/Down (or the on-screen buttons); on mobile, ordinary swipe scrolling still works.'],
+        ['Look','Retro uses the gray Windows 9x chrome. OldRetro is a blue, monospace text screen (CLI).']
+      ],
+      biosLabel:'Display Mode',
+      biosHelpDefault:'Choose the site\u2019s display mode. Current: OldRetro (DOS text-mode shell).',
+      biosHelpRetro:'Retro: the mouse-driven, Windows 95-style GUI. Windows, icons, normal wheel scrolling.',
+      biosHelpOldRetro:'OldRetro: the DOS text-mode CLI shell. F1\u2013F6 keyboard menu, Page Up/Down scrolling only on desktop.'
+    }
+  };
+  function currentSettingsLang(){
+    const l=window.miniwinLanguage||'en';
+    return l.indexOf('ko')===0?'ko':'en';
+  }
+
+  let settingsOverlay=null,settingsBuilt=false,settingsPanelEl=null,settingsTitleEl=null,
+      settingsModeLabelEl=null,settingsToggleBtn=null,
+      settingsDiffBtn=null,settingsDiffPanel=null,settingsEscHandler=null,
+      biosItemEl=null,biosHelpEl=null,biosKeysEl=null,biosPopupEl=null,
+      biosOptRetroEl=null,biosOptOldRetroEl=null,biosPopupKeyHandler=null,biosHighlight='oldretro';
+
+  function syncSettingsToggle(){
+    if(!settingsToggleBtn)return;
+    settingsToggleBtn.setAttribute('aria-pressed',body.classList.contains('oldretro-mode')?'true':'false');
+  }
+
+  function toggleOldRetroFromSettings(){
+    if(body.classList.contains('oldretro-mode')){
+      exitOldRetro();
+    }else{
+      if(body.classList.contains('modern-mode')&&styleToggleBtn)styleToggleBtn.click();
+      enterOldRetro();
+    }
+  }
+
+  function renderSettingsText(){
+    if(!settingsBuilt)return;
+    const t=SETTINGS_I18N[currentSettingsLang()];
+    settingsTitleEl.textContent=t.title;
+    settingsModeLabelEl.textContent=t.displayMode;
+    settingsOverlay.querySelector('#settingsLabelRetro').textContent=t.retro;
+    settingsOverlay.querySelector('#settingsLabelOldRetro').textContent=t.oldretro;
+    settingsDiffBtn.textContent=t.diffBtn;
+    settingsDiffPanel.innerHTML='';
+    t.rows.forEach(row=>{
+      const dt=document.createElement('dt');dt.textContent=row[0];
+      const dd=document.createElement('dd');dd.textContent=row[1];
+      settingsDiffPanel.appendChild(dt);
+      settingsDiffPanel.appendChild(dd);
+    });
+    settingsOverlay.querySelectorAll('.settings-close').forEach(b=>b.setAttribute('aria-label',t.close));
+  }
+
+  /* ---------------- BIOS-style OldRetro settings screen ----------------
+     An AMI-Aptio-style Setup Utility: a "Display Mode" item that pops a
+     Legacy/UEFI-style two-option selector, with a help pane and key
+     legend, standing in for the plain toggle while in OldRetro. */
+  function renderBiosKeys(){
+    if(!biosKeysEl)return;
+    biosKeysEl.innerHTML='';
+    ['\u2191\u2193: Select Item','Enter: Select','ESC: Exit'].forEach(line=>{
+      const d=document.createElement('div');d.textContent=line;biosKeysEl.appendChild(d);
+    });
+  }
+
+  function updateBiosHelp(which){
+    if(!biosHelpEl)return;
+    const t=SETTINGS_I18N[currentSettingsLang()];
+    if(which==='retro')biosHelpEl.textContent=t.biosHelpRetro;
+    else if(which==='oldretro')biosHelpEl.textContent=t.biosHelpOldRetro;
+    else biosHelpEl.textContent=t.biosHelpDefault;
+  }
+
+  function renderBiosText(){
+    if(!settingsBuilt)return;
+    const t=SETTINGS_I18N[currentSettingsLang()];
+    const isOldRetroNow=body.classList.contains('oldretro-mode');
+    settingsOverlay.querySelector('#biosTitlebarText').textContent='MiniWin Setup Utility \u2013 Copyright (C) 2026 MiniWin Systems Inc.';
+    biosItemEl.innerHTML='';
+    biosItemEl.appendChild(document.createTextNode(t.biosLabel+'\u00a0\u00a0\u00a0\u00a0'));
+    const valueB=document.createElement('b');
+    valueB.textContent='['+(isOldRetroNow?t.oldretro:t.retro)+']';
+    biosItemEl.appendChild(valueB);
+    biosOptRetroEl.textContent=t.retro;
+    biosOptOldRetroEl.textContent=t.oldretro;
+    settingsOverlay.querySelector('#biosPopupTitle').textContent=t.biosLabel;
+    settingsOverlay.querySelector('#biosFooterVersion').textContent='Version 1.0-pre.';
+    settingsOverlay.querySelector('#biosFooterTag').textContent='MW01';
+    renderBiosKeys();
+    updateBiosHelp(null);
+    settingsOverlay.querySelectorAll('.settings-close').forEach(b=>b.setAttribute('aria-label',t.close));
+  }
+
+  function renderSettingsAll(){
+    renderSettingsText();
+    renderBiosText();
+    if(settingsPanelEl){
+      settingsPanelEl.setAttribute('aria-labelledby',body.classList.contains('oldretro-mode')?'biosTitlebarText':'settingsTitle');
+    }
+  }
+
+  function setBiosHighlight(val){
+    biosHighlight=val;
+    biosOptRetroEl.classList.toggle('highlight',val==='retro');
+    biosOptOldRetroEl.classList.toggle('highlight',val==='oldretro');
+    updateBiosHelp(val);
+  }
+
+  function openBiosPopup(){
+    biosHighlight=body.classList.contains('oldretro-mode')?'oldretro':'retro';
+    setBiosHighlight(biosHighlight);
+    biosPopupEl.hidden=false;
+    biosPopupKeyHandler=(e)=>{
+      if(e.key==='ArrowUp'||e.key==='ArrowDown'){
+        e.preventDefault();
+        setBiosHighlight(biosHighlight==='retro'?'oldretro':'retro');
+        (biosHighlight==='retro'?biosOptRetroEl:biosOptOldRetroEl).focus({preventScroll:true});
+      }else if(e.key==='Enter'){
+        e.preventDefault();
+        applyBiosSelection(biosHighlight);
+      }else if(e.key==='Escape'){
+        e.preventDefault();e.stopPropagation();
+        closeBiosPopup();
+        if(biosItemEl)biosItemEl.focus({preventScroll:true});
+      }
+    };
+    document.addEventListener('keydown',biosPopupKeyHandler,true);
+    (biosHighlight==='retro'?biosOptRetroEl:biosOptOldRetroEl).focus({preventScroll:true});
+  }
+
+  function closeBiosPopup(){
+    if(biosPopupEl)biosPopupEl.hidden=true;
+    if(biosPopupKeyHandler){document.removeEventListener('keydown',biosPopupKeyHandler,true);biosPopupKeyHandler=null;}
+  }
+
+  function applyBiosSelection(val){
+    closeBiosPopup();
+    const isOldRetroNow=body.classList.contains('oldretro-mode');
+    if(val==='retro'&&isOldRetroNow){
+      exitOldRetro();
+      closeSettings();
+    }else if(val==='oldretro'&&!isOldRetroNow){
+      if(body.classList.contains('modern-mode')&&styleToggleBtn)styleToggleBtn.click();
+      enterOldRetro();
+      closeSettings();
+    }else{
+      renderBiosText();
+      if(biosItemEl)biosItemEl.focus({preventScroll:true});
+    }
+  }
+
+  function buildSettings(){
+    if(settingsBuilt)return;
+    settingsOverlay=document.createElement('div');
+    settingsOverlay.id='settingsOverlay';
+    settingsOverlay.hidden=true;
+    settingsOverlay.innerHTML=
+      '<div class="settings-backdrop" id="settingsBackdrop"></div>'+
+      '<div class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">'+
+
+        '<div class="settings-standard" id="settingsStandard">'+
+          '<div class="settings-head"><span id="settingsTitle"></span>'+
+            '<button type="button" class="settings-close" id="settingsClose">\u2715</button></div>'+
+          '<div class="settings-body">'+
+            '<div class="settings-row"><span class="settings-row-label" id="settingsModeLabel"></span>'+
+              '<div class="style-switch" id="settingsOldRetroSwitch" role="group">'+
+                '<span class="style-label" id="settingsLabelRetro">Retro</span>'+
+                '<button class="style-toggle" id="settingsOldRetroToggle" type="button" aria-label="Toggle OldRetro mode" aria-pressed="false"><span></span></button>'+
+                '<span class="style-label" id="settingsLabelOldRetro">OldRetro</span>'+
+              '</div>'+
+            '</div>'+
+            '<button type="button" class="settings-diff-btn" id="settingsDiffBtn" aria-expanded="false"></button>'+
+            '<dl class="settings-diff-panel" id="settingsDiffPanel" hidden></dl>'+
+          '</div>'+
+        '</div>'+
+
+        '<div class="settings-bios" id="settingsBios" hidden>'+
+          '<div class="bios-titlebar"><span id="biosTitlebarText"></span>'+
+            '<button type="button" class="settings-close bios-close" id="biosClose">\u2715</button></div>'+
+          '<div class="bios-tabs">'+
+            '<span class="bios-tab">Main</span><span class="bios-tab">Advanced</span>'+
+            '<span class="bios-tab active">Boot</span><span class="bios-tab">Save &amp; Exit</span>'+
+          '</div>'+
+          '<div class="bios-main">'+
+            '<div class="bios-menu"><button type="button" class="bios-item" id="biosModeItem"></button></div>'+
+            '<div class="bios-side"><div class="bios-help" id="biosHelp"></div><div class="bios-keys" id="biosKeys"></div></div>'+
+          '</div>'+
+          '<div class="bios-popup" id="biosPopup" hidden>'+
+            '<div class="bios-popup-title" id="biosPopupTitle"></div>'+
+            '<button type="button" class="bios-popup-opt" id="biosOptRetro" data-val="retro"></button>'+
+            '<button type="button" class="bios-popup-opt" id="biosOptOldRetro" data-val="oldretro"></button>'+
+          '</div>'+
+          '<div class="bios-footer"><span id="biosFooterVersion"></span><span id="biosFooterTag"></span></div>'+
+        '</div>'+
+
+      '</div>';
+    document.body.appendChild(settingsOverlay);
+    settingsPanelEl=settingsOverlay.querySelector('.settings-panel');
+    settingsTitleEl=settingsOverlay.querySelector('#settingsTitle');
+    settingsModeLabelEl=settingsOverlay.querySelector('#settingsModeLabel');
+    settingsToggleBtn=settingsOverlay.querySelector('#settingsOldRetroToggle');
+    settingsDiffBtn=settingsOverlay.querySelector('#settingsDiffBtn');
+    settingsDiffPanel=settingsOverlay.querySelector('#settingsDiffPanel');
+    biosItemEl=settingsOverlay.querySelector('#biosModeItem');
+    biosHelpEl=settingsOverlay.querySelector('#biosHelp');
+    biosKeysEl=settingsOverlay.querySelector('#biosKeys');
+    biosPopupEl=settingsOverlay.querySelector('#biosPopup');
+    biosOptRetroEl=settingsOverlay.querySelector('#biosOptRetro');
+    biosOptOldRetroEl=settingsOverlay.querySelector('#biosOptOldRetro');
+
+    settingsOverlay.querySelector('#settingsBackdrop').addEventListener('click',closeSettings);
+    settingsOverlay.querySelectorAll('.settings-close').forEach(b=>b.addEventListener('click',closeSettings));
+    settingsToggleBtn.addEventListener('click',toggleOldRetroFromSettings);
+    settingsDiffBtn.addEventListener('click',()=>{
+      const willShow=settingsDiffPanel.hidden;
+      settingsDiffPanel.hidden=!willShow;
+      settingsDiffBtn.setAttribute('aria-expanded',String(willShow));
+    });
+    biosItemEl.addEventListener('click',openBiosPopup);
+    biosOptRetroEl.addEventListener('click',()=>applyBiosSelection('retro'));
+    biosOptOldRetroEl.addEventListener('click',()=>applyBiosSelection('oldretro'));
+    biosOptRetroEl.addEventListener('mouseenter',()=>setBiosHighlight('retro'));
+    biosOptOldRetroEl.addEventListener('mouseenter',()=>setBiosHighlight('oldretro'));
+    biosOptRetroEl.addEventListener('focus',()=>setBiosHighlight('retro'));
+    biosOptOldRetroEl.addEventListener('focus',()=>setBiosHighlight('oldretro'));
+
+    settingsBuilt=true;
+    renderSettingsAll();
+    syncSettingsToggle();
+  }
+
+  function openSettings(){
+    buildSettings();
+    renderSettingsAll();
+    syncSettingsToggle();
+    settingsOverlay.hidden=false;
+    settingsEscHandler=(e)=>{if(e.key==='Escape')closeSettings();};
+    document.addEventListener('keydown',settingsEscHandler);
+    const focusTarget=body.classList.contains('oldretro-mode')?biosItemEl:settingsOverlay.querySelector('#settingsClose');
+    if(focusTarget)focusTarget.focus({preventScroll:true});
+  }
+
+  function closeSettings(){
+    if(!settingsOverlay)return;
+    closeBiosPopup();
+    settingsOverlay.hidden=true;
+    if(settingsEscHandler){document.removeEventListener('keydown',settingsEscHandler);settingsEscHandler=null;}
+  }
+
+  const settingsBtn=document.getElementById('settingsBtn');
+  if(settingsBtn)settingsBtn.addEventListener('click',openSettings);
+
+  window.addEventListener('miniwin-language-change',()=>{
+    if(body.classList.contains('oldretro-mode')&&built){
+      renderShellContent();
+      renderMenubar();
+    }
+    if(settingsBuilt)renderSettingsAll();
+  });
+
+  /* Keyboard buffer, mirroring the existing NKBK easter egg pattern above. */
+  let buffer='';
+  document.addEventListener('keydown',(e)=>{
+    if(e.ctrlKey||e.altKey||e.metaKey||e.key.length!==1){return;}
+    const ch=e.key.toLowerCase();
+    if(!/[a-z]/.test(ch)){buffer='';return;}
+    buffer=(buffer+ch).slice(-6);
+    if(buffer.endsWith('old')){
+      buffer='';
+      enterOldRetro();
+    }else if(buffer.endsWith('retro')){
+      buffer='';
+      exitOldRetro();
+    }
+  });
+
+  /* If OldRetro was left as the saved default, restore it instantly on load
+     (no boot replay) — but only when the saved base style is Retro, since
+     OldRetro is a sub-state of Retro, not Modern. */
+  try{
+    const savedStyle=localStorage.getItem('miniwin-style')||'retro';
+    if(savedStyle!=='modern' && localStorage.getItem('miniwin-oldretro')==='1'){
+      enterOldRetro({skipBoot:true});
+    }
+  }catch(e){}
 })();
 </script>
 
