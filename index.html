@@ -812,16 +812,91 @@ body:not(.modern-mode) .style-toggle:focus-visible{
 </style>
 
 <style id="retro-fonts">
-/* 8x8-era typography. Dalmoori is the bundled MiniWin Hangul font family;
-   Public Pixel is a public-domain 8x8 bitmap fallback for Latin/Cyrillic/Latin-ext. */
-@font-face{font-family:DalmooriWeb;src:url("https://cdn.jsdelivr.net/gh/sweetherofonts/fontshero_pack1/dalmoori/dalmoori-Regular.woff2") format("woff2");font-display:swap}
-@font-face{font-family:PublicPixel8;src:url("https://cdn.jsdelivr.net/gh/ggbotnet/public-pixel-font@main/PublicPixel.ttf") format("truetype");font-display:swap}
-body:not(.modern-mode){font-family:PublicPixel8,DalmooriWeb,"Courier New",monospace;image-rendering:pixelated}
-body:not(.modern-mode) :lang(ko),body:not(.modern-mode) :lang(ko-KR){font-family:DalmooriWeb,PublicPixel8,"Courier New",monospace}
-body:not(.modern-mode) :lang(zh-CN),body:not(.modern-mode) :lang(zh-TW),body:not(.modern-mode) :lang(ja){font-family:"QuanPixel",PublicPixel8,DalmooriWeb,"Courier New",monospace}
-body:not(.modern-mode) .logo,body:not(.modern-mode) .hero h1{font-family:PublicPixel8,"Courier New",monospace}
-body:not(.modern-mode) .btn,body:not(.modern-mode) .nav a,body:not(.modern-mode) .lang-btn,body:not(.modern-mode) .lang-menu button{font-family:PublicPixel8,DalmooriWeb,"Courier New",monospace}
+/* Retro / OldRetro typography: Galmuri pixel font (Modern mode is untouched). */
+@import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+
+@font-face {
+    font-family: 'Galmuri11';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/Galmuri11-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+body:not(.modern-mode),
+body:not(.modern-mode) *,
+body.oldretro-mode,
+body.oldretro-mode *,
+body.oldretro-mode #oldretroScreen,
+body.oldretro-mode #oldretroScreen *{
+  font-family:'Galmuri11','Galmuri9','Galmuri7',monospace !important;
+}
+body:not(.modern-mode),body.oldretro-mode{image-rendering:pixelated}
 </style>
+<style id="modern-fonts">
+/* Modern typography: Pretendard (Retro / OldRetro keep Galmuri). */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-display: swap;
+}
+body.modern-mode:not(.oldretro-mode),
+body.modern-mode:not(.oldretro-mode) *{
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif !important;
+}
+body.modern-mode:not(.oldretro-mode) pre,
+body.modern-mode:not(.oldretro-mode) code{
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif !important;
+}
+</style>
+
 
 <style id="retro-scrollbar-final">
 /* Windows 9x scrollbar — Retro only.  Chromium/WebKit uses the exact 16px 9x skin;
