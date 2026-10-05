@@ -1,0 +1,207 @@
+/* Windows 9x Retro finish: gray desktop, gray controls, hard pixel chrome. */
+body:not(.modern-mode){
+  background:#008080;
+  color:#000;
+  font-family:"MS Sans Serif","Arial",sans-serif;
+}
+body:not(.modern-mode) .top{
+  background:#c0c0c0;
+  border-top:1px solid #fff;
+  border-left:1px solid #fff;
+  border-bottom:2px solid #000;
+  box-shadow:0 1px 0 #808080,0 3px 0 #000;
+}
+body:not(.modern-mode) .topbar{height:52px}
+body:not(.modern-mode) .logo{
+  color:#000;
+  font-family:Arial,sans-serif;
+  font-size:19px;
+  letter-spacing:-.7px;
+  text-shadow:none;
+}
+body:not(.modern-mode) .logo span:first-of-type{color:#000080}
+body:not(.modern-mode) .logo .version{color:#000;margin-left:5px}
+
+/* Retro nav buttons: classic raised 3D gray controls. */
+body:not(.modern-mode) .nav{gap:3px}
+body:not(.modern-mode) .nav a,
+body:not(.modern-mode) .lang-btn{
+  color:#000;
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  padding:6px 9px;
+  font:12px "MS Sans Serif",Arial,sans-serif;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+  text-shadow:none;
+}
+body:not(.modern-mode) .nav a:hover,
+body:not(.modern-mode) .nav a.active,
+body:not(.modern-mode) .lang-btn:hover,
+body:not(.modern-mode) .lang.open .lang-btn{
+  color:#fff;
+  background:#000080;
+  border-top-color:#808080;
+  border-left-color:#808080;
+  border-right-color:#fff;
+  border-bottom-color:#fff;
+  box-shadow:none;
+}
+
+/* Retro / Modern switch itself is also a real Windows 9x-style control. */
+body:not(.modern-mode) .style-switch{
+  height:28px;
+  padding:2px 5px;
+  gap:5px;
+  margin-right:2px;
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+}
+body:not(.modern-mode) .style-label{
+  color:#000;
+  font:700 8px "MS Sans Serif",Arial,sans-serif;
+  letter-spacing:0;
+}
+body:not(.modern-mode) .style-label:first-child{color:#000080}
+body:not(.modern-mode) .style-toggle{
+  width:32px;
+  height:16px;
+  background:#808080;
+  border:2px solid;
+  border-top-color:#000;
+  border-left-color:#000;
+  border-right-color:#fff;
+  border-bottom-color:#fff;
+  border-radius:0;
+  box-shadow:inset 1px 1px #404040;
+}
+body:not(.modern-mode) .style-toggle span{
+  top:1px;
+  left:1px;
+  width:12px;
+  height:10px;
+  background:#c0c0c0;
+  border:1px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:none;
+  transition:none;
+}
+body:not(.modern-mode) .style-toggle:active,
+body:not(.modern-mode) .style-toggle:focus:active{
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+}
+
+/* 3px / 2px / 1px black depth: buttons visibly push inward on click. */
+body:not(.modern-mode) .btn{
+  color:#000;
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:3px 3px 0 #000,2px 2px 0 #808080 inset,-1px -1px 0 #dfdfdf inset;
+  text-shadow:none;
+  transform:translate(0,0);
+}
+body:not(.modern-mode) .btn.primary{
+  color:#000;
+  background:#c0c0c0;
+  border-color:#fff #000 #000 #fff;
+  text-shadow:none;
+}
+body:not(.modern-mode) .btn:hover{background:#d0d0d0}
+body:not(.modern-mode) .btn:active{
+  border-top-color:#000;
+  border-left-color:#000;
+  border-right-color:#fff;
+  border-bottom-color:#fff;
+  box-shadow:1px 1px 0 #000 inset;
+  transform:translate(3px,3px);
+}
+
+/* Panels / windows: gray Win9x chrome instead of modern dark cards. */
+body:not(.modern-mode) .panel,
+body:not(.modern-mode) .monitor{
+  background:#c0c0c0;
+  color:#000;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:3px 3px 0 #000,2px 2px 0 #808080 inset,-1px -1px 0 #dfdfdf inset;
+}
+body:not(.modern-mode) .panel-head{
+  color:#fff;
+  background:linear-gradient(90deg,#000080,#1084d0);
+  border:0;border-bottom:2px solid #808080;
+  padding:5px 6px 5px 9px;
+  font:bold 11px "MS Sans Serif",Arial,sans-serif;
+}
+body:not(.modern-mode) .card{background:#c0c0c0;min-height:190px}
+body:not(.modern-mode) .card h3,
+body:not(.modern-mode) .card p,
+body:not(.modern-mode) .head h2,
+body:not(.modern-mode) .head p,
+body:not(.modern-mode) .fact small,
+body:not(.modern-mode) .fact strong{color:#000}
+body:not(.modern-mode) .eyebrow,
+body:not(.modern-mode) .badge{color:#000080}
+body:not(.modern-mode) .badge{background:#c0c0c0;border-color:#000;border-radius:0}
+body:not(.modern-mode) .fact{border-color:#808080}
+body:not(.modern-mode) .terminal pre{color:#000;background:#fff;border:2px inset #808080}
+body:not(.modern-mode) .note{color:#000;background:#fff;border-left-color:#000080}
+body:not(.modern-mode) .rule{border-top-color:#808080;border-bottom-color:#fff}
+body:not(.modern-mode) footer{color:#000;background:#c0c0c0;border-top:2px solid #808080}
+body:not(.modern-mode) .monitor{box-shadow:3px 3px 0 #000,2px 2px 0 #808080 inset}
+body:not(.modern-mode) .monitor img{border:4px inset #808080}
+body:not(.modern-mode) .image-credit{color:#000}
+body:not(.modern-mode) .lang-menu{
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:3px 3px 0 #000;
+}
+body:not(.modern-mode) .lang-menu button{color:#000;border:0;border-radius:0}
+body:not(.modern-mode) .lang-menu button:hover,
+body:not(.modern-mode) .lang-menu button.active{background:#000080;color:#fff}
+body:not(.modern-mode) .lang-menu .check{color:#fff}
+
+/* No rounded modern motion/hover treatment in Retro. */
+body:not(.modern-mode) .card:hover,
+body:not(.modern-mode) .btn:hover{transform:none;transition:none}
+
+@media(max-width:860px){
+  body:not(.modern-mode) .topbar{min-height:52px;padding:4px 0}
+  body:not(.modern-mode) .nav{padding:3px 0 2px}
+  body:not(.modern-mode) .nav a,
+  body:not(.modern-mode) .lang-btn{min-height:34px}
+}
+@media(max-width:420px){
+  body:not(.modern-mode) .style-switch{height:26px;padding:2px 4px}
+  body:not(.modern-mode) .style-label{display:inline;font-size:7px}
+  body:not(.modern-mode) .style-toggle{width:30px;height:15px}
+  body:not(.modern-mode) .nav a,
+  body:not(.modern-mode) .lang-btn{padding:5px 8px;font-size:10px}
+}

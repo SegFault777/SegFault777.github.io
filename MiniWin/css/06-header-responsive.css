@@ -1,0 +1,41 @@
+/* Final header fix: keep Retro/Modern switch inline with Home at every width. */
+.topbar{display:flex;align-items:center;gap:14px;min-width:0}
+.logo{flex:0 0 auto;white-space:nowrap}
+.nav{display:flex;align-items:center;gap:5px;min-width:0;flex:1 1 auto;overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.nav .style-switch,.nav a,.nav .lang{flex:0 0 auto}
+.nav .style-switch{display:flex;align-items:center;justify-content:center}
+@media(max-width:900px){
+  .topbar{height:60px;min-height:60px;padding:6px 0;gap:10px;flex-wrap:nowrap}
+  .nav{width:auto;max-width:none;padding:0;margin:0;overflow-x:auto;overflow-y:visible}
+  .nav a,.nav .lang-btn{min-height:38px;height:38px;display:flex;align-items:center;justify-content:center}
+  .nav .style-switch{height:34px;min-height:34px}
+}
+@media(max-width:700px){
+  .wrap{width:calc(100% - 20px)}
+  .topbar{height:58px;min-height:58px;padding:5px 0;gap:9px}
+  .logo{font-size:19px}
+  .version{font-size:9px;margin-left:4px}
+  .nav{gap:2px;flex:1 1 0;min-width:0}
+  .nav a,.nav .lang-btn{padding:8px 10px;font-size:11px;min-height:38px;height:38px}
+  .nav .style-switch{height:34px;min-height:34px;padding:0 7px;margin-right:2px;gap:6px}
+  .nav .style-label{display:inline;font-size:8px}
+  .nav .style-toggle{width:34px;height:18px}
+  .modern-mode .nav .style-switch{height:34px;min-height:34px;padding:0 7px}
+  .modern-mode .nav .style-toggle{width:36px;height:20px}
+  .lang-menu{position:fixed;top:58px;right:10px;margin-top:5px}
+}
+@media(max-width:420px){
+  .wrap{width:calc(100% - 12px)}
+  .topbar{gap:7px}
+  .logo{font-size:17px}
+  .version{display:none}
+  .nav .style-switch{padding:0 6px;gap:5px}
+  .nav .style-label{font-size:7px}
+  .nav a,.nav .lang-btn{padding-left:9px;padding-right:9px;font-size:10px}
+}
+@media(max-width:350px){
+  .logo{font-size:16px}
+  .nav .style-label{font-size:7px}
+  .nav a,.nav .lang-btn{padding-left:8px;padding-right:8px}
+}

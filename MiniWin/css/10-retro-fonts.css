@@ -1,0 +1,18 @@
+/* Retro / OldRetro typography: Galmuri pixel font (Modern mode is untouched). */
+@import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+
+@font-face {
+    font-family: 'Galmuri11';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/Galmuri11-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+body:not(.modern-mode),
+body:not(.modern-mode) *,
+body.oldretro-mode,
+body.oldretro-mode *,
+body.oldretro-mode #oldretroScreen,
+body.oldretro-mode #oldretroScreen *{
+  font-family:'Galmuri11','Galmuri9','Galmuri7',monospace !important;
+}
+body:not(.modern-mode),body.oldretro-mode{image-rendering:pixelated}

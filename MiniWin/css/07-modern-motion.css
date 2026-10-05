@@ -1,0 +1,24 @@
+/* Modern-only motion: content gently rises into place. Retro stays completely static. */
+@media (prefers-reduced-motion: no-preference){
+  body.modern-mode main section .wrap > .head,
+  body.modern-mode main section .wrap > .panel,
+  body.modern-mode .hero-grid > *{
+    opacity:1;
+    transform:none;
+  }
+  body.modern-mode .modern-reveal{
+    opacity:0;
+    transform:translateY(34px);
+    transition:opacity .62s cubic-bezier(.2,.7,.2,1), transform .62s cubic-bezier(.2,.7,.2,1);
+    will-change:opacity,transform;
+  }
+  body.modern-mode .modern-reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  body.modern-mode .modern-reveal.delay-1{transition-delay:.07s}
+  body.modern-mode .modern-reveal.delay-2{transition-delay:.14s}
+  body.modern-mode .modern-reveal.delay-3{transition-delay:.21s}
+  body.modern-mode .modern-reveal.delay-4{transition-delay:.28s}
+  body.modern-mode .modern-reveal.delay-5{transition-delay:.35s}
+}

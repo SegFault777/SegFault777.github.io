@@ -1,0 +1,29 @@
+/* Final fix: desktop navigation must not clip the language dropdown. */
+@media (min-width: 861px){
+  body > header.top .nav{
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+  body > header.top .lang{
+    position: relative !important;
+    overflow: visible !important;
+    z-index: 100000 !important;
+  }
+  body > header.top .lang-menu{
+    z-index: 100001 !important;
+  }
+}
+@media (max-width: 860px){
+  body > header.top .nav{
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+  }
+  body > header.top .lang{
+    overflow: visible !important;
+    z-index: 100000 !important;
+  }
+  body > header.top .lang-menu{
+    z-index: 100001 !important;
+  }
+}

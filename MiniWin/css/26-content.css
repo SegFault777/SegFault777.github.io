@@ -1,0 +1,2 @@
+/* 스크린샷은 비트맵 글꼴 UI라 확대 시 흐려지지 않게 */
+.monitor img{image-rendering:pixelated}

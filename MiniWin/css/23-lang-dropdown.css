@@ -1,0 +1,62 @@
+/* Language dropdown: always rendered, shown by visibility/opacity. Never clipped by the fixed header. */
+.lang{position:relative !important; z-index:10050 !important; overflow:visible !important;}
+.lang-menu{
+  display:block !important;
+  position:absolute !important;
+  right:0 !important;
+  top:calc(100% + 5px) !important;
+  z-index:10060 !important;
+  max-height:min(70vh,520px);
+  overflow-y:auto;
+  visibility:hidden;
+  opacity:0;
+  pointer-events:none;
+}
+.lang.open .lang-menu{
+  visibility:visible;
+  opacity:1;
+  pointer-events:auto;
+}
+/* Retro: instant Windows 9x behavior. */
+body:not(.modern-mode) .lang-menu,
+body:not(.modern-mode) .lang.open .lang-menu{
+  transform:none !important;
+  transition:none !important;
+  border-radius:0 !important;
+}
+body:not(.modern-mode) .lang-menu{
+  background:#c0c0c0 !important;
+  border:2px outset #c0c0c0 !important;
+  box-shadow:4px 4px 0 #000 !important;
+}
+body:not(.modern-mode) .lang-menu button{
+  background:#c0c0c0 !important;
+  color:#000 !important;
+  border:0 !important;
+  border-radius:0 !important;
+}
+body:not(.modern-mode) .lang-menu button:hover,
+body:not(.modern-mode) .lang-menu button.active{
+  background:#000080 !important;
+  color:#fff !important;
+}
+/* Modern: subtle drop-down slide. */
+body.modern-mode .lang-menu{
+  transform:translateY(-8px) scaleY(.96);
+  transform-origin:top center;
+  transition:opacity .16s ease,transform .18s ease,visibility 0s linear .18s;
+}
+body.modern-mode .lang.open .lang-menu{
+  transform:translateY(0) scaleY(1);
+  transition:opacity .16s ease,transform .18s ease,visibility 0s linear 0s;
+}
+@media(max-width:900px){
+  .lang-menu{position:fixed !important; top:60px !important; right:10px !important; left:auto !important; min-width:180px;}
+}
+@media(max-width:700px){
+  .lang-menu{top:58px !important; right:8px !important; min-width:170px;}
+}
+@media(prefers-reduced-motion:reduce){
+  body.modern-mode .lang-menu,
+  body.modern-mode .lang.open .lang-menu{transition:none !important;transform:none !important;}
+}

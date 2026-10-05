@@ -1,0 +1,244 @@
+/* Stronger visual split: Windows 9x Retro vs Windows 11/Mica-inspired Modern */
+/* RETRO */
+body:not(.modern-mode){
+  image-rendering:auto;
+}
+body:not(.modern-mode) .top{
+  background:#000b1f;
+  border-bottom:2px solid #6f8fb9;
+  box-shadow:0 2px 0 #000,0 7px 18px #0009;
+}
+body:not(.modern-mode) .nav a,
+body:not(.modern-mode) .lang-btn{
+  border-radius:0;
+  font-family:"Courier New",monospace;
+  letter-spacing:-.2px;
+}
+body:not(.modern-mode) .nav a:hover,
+body:not(.modern-mode) .nav a.active,
+body:not(.modern-mode) .lang-btn:hover,
+body:not(.modern-mode) .lang.open .lang-btn{
+  background:#123f83;
+  border-color:#7f9fc7;
+}
+body:not(.modern-mode) .panel,
+body:not(.modern-mode) .monitor,
+body:not(.modern-mode) .btn,
+body:not(.modern-mode) .style-toggle{
+  border-radius:0;
+}
+body:not(.modern-mode) .panel{
+  box-shadow:5px 5px 0 #000;
+}
+body:not(.modern-mode) .btn{
+  box-shadow:3px 3px 0 #000;
+}
+body:not(.modern-mode) .hero h1{
+  font-family:Arial Black,"Trebuchet MS",Arial,sans-serif;
+  text-transform:none;
+}
+body:not(.modern-mode) .style-toggle{
+  border-radius:0;
+  background:#071733;
+  box-shadow:inset 1px 1px #000,inset -1px -1px #56749b;
+}
+body:not(.modern-mode) .style-toggle span{
+  border-radius:1px;
+  background:#dce4ee;
+  box-shadow:1px 1px #000;
+}
+
+/* MODERN / MICA-INSPIRED */
+body.modern-mode{
+  background:
+    radial-gradient(circle at 12% 8%,rgba(92,151,232,.28),transparent 28%),
+    radial-gradient(circle at 88% 0%,rgba(175,125,242,.20),transparent 26%),
+    linear-gradient(135deg,#eaf1f8 0%,#dfe8f2 45%,#edf2f7 100%);
+  color:#15253a;
+}
+body.modern-mode .top{
+  background:rgba(244,248,252,.68);
+  border-bottom:1px solid rgba(120,139,160,.34);
+  box-shadow:0 10px 30px rgba(43,67,91,.14);
+  backdrop-filter:blur(24px) saturate(145%);
+}
+body.modern-mode .topbar{height:68px}
+body.modern-mode .logo{color:#17304c}
+body.modern-mode .logo span{color:#3478be}
+body.modern-mode .nav a,
+body.modern-mode .lang-btn{
+  border-radius:9px;
+  color:#3f556d;
+}
+body.modern-mode .nav a:hover,
+body.modern-mode .nav a.active,
+body.modern-mode .lang-btn:hover,
+body.modern-mode .lang.open .lang-btn{
+  background:rgba(255,255,255,.54);
+  border-color:rgba(129,149,171,.28);
+  color:#17304c;
+  box-shadow:0 4px 14px rgba(51,79,106,.08);
+}
+body.modern-mode .hero{
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
+}
+body.modern-mode .tag,
+body.modern-mode .kicker{
+  background:rgba(255,255,255,.35);
+  border-color:rgba(104,132,161,.28);
+  color:#4c79a2;
+  border-radius:8px;
+  box-shadow:0 6px 18px rgba(52,79,105,.06);
+  backdrop-filter:blur(14px);
+}
+body.modern-mode .hero h1{
+  font-family:"Segoe UI",Arial,sans-serif;
+  letter-spacing:-5px;
+  text-shadow:none;
+  color:#172a41;
+}
+body.modern-mode .hero h1 span{color:#172a41}
+body.modern-mode .hero p{color:#586c82}
+body.modern-mode .monitor{
+  padding:10px;
+  background:rgba(255,255,255,.42);
+  border:1px solid rgba(124,146,168,.35);
+  border-radius:18px;
+  box-shadow:0 24px 50px rgba(34,59,83,.18),inset 0 1px rgba(255,255,255,.8);
+  backdrop-filter:blur(18px) saturate(135%);
+}
+body.modern-mode .monitor img{
+  border:0;
+  border-radius:12px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+}
+body.modern-mode .image-credit{color:#6d8095}
+body.modern-mode section{scroll-margin-top:80px}
+body section[id]{scroll-margin-top:78px}
+body:not(.modern-mode) section[id]{scroll-margin-top:66px}
+body.modern-mode .panel{
+  background:rgba(255,255,255,.46);
+  border:1px solid rgba(126,147,168,.30);
+  border-radius:18px;
+  box-shadow:0 18px 38px rgba(42,64,85,.10),inset 0 1px rgba(255,255,255,.78);
+  backdrop-filter:blur(22px) saturate(145%);
+}
+body.modern-mode .panel-head{
+  background:rgba(247,250,253,.48);
+  border-bottom:1px solid rgba(130,149,168,.24);
+  border-radius:18px 18px 0 0;
+  color:#334b63;
+}
+body.modern-mode .fact,
+body.modern-mode .spec{border-color:rgba(128,148,168,.20)}
+body.modern-mode .fact strong{color:#17304c}
+body.modern-mode .card p{color:#64788e}
+body.modern-mode .badge{border-color:#79a88d;color:#34724f;background:rgba(255,255,255,.18);border-radius:999px}
+body.modern-mode .btn{
+  border:1px solid rgba(113,135,158,.34);
+  border-radius:11px;
+  background:rgba(255,255,255,.62);
+  color:#1d344b;
+  box-shadow:0 8px 22px rgba(34,55,77,.10),inset 0 1px rgba(255,255,255,.95);
+  text-shadow:none;
+}
+body.modern-mode .btn.primary{
+  border-color:rgba(71,125,184,.56);
+  background:linear-gradient(180deg,rgba(91,160,230,.90),rgba(51,113,183,.90));
+  color:#fff;
+}
+body.modern-mode .terminal pre{
+  color:#324a62;
+}
+body.modern-mode .note{
+  background:rgba(255,255,255,.38);
+  border-left-color:#5c8fbe;
+  color:#5d7086;
+  border-radius:0 12px 12px 0;
+  backdrop-filter:blur(12px);
+}
+body.modern-mode footer{
+  background:rgba(242,247,251,.55);
+  border-top-color:rgba(122,144,166,.22);
+  backdrop-filter:blur(18px);
+}
+body.modern-mode .lang-menu{
+  background:rgba(248,251,254,.86);
+  border-color:rgba(122,145,168,.28);
+  border-radius:12px;
+  box-shadow:0 20px 40px rgba(35,56,78,.16);
+  backdrop-filter:blur(22px) saturate(145%);
+}
+body.modern-mode .lang-menu button{color:#415a72}
+body.modern-mode .lang-menu button:hover,
+body.modern-mode .lang-menu button.active{background:rgba(72,128,187,.10);color:#17304c}
+
+/* Refined visual direction ------------------------------------------------ */
+/* Retro: deliberately borrows the visual vocabulary of classic Windows 9x:
+   square geometry, gray chrome, blue title bars, hard 3D edges and compact type. */
+body:not(.modern-mode){
+  background:
+    linear-gradient(#06132a 0 0) top/100% 100% no-repeat,
+    radial-gradient(circle at 50% -15%,#174889 0,transparent 42%),#061226;
+}
+body:not(.modern-mode) .topbar{height:58px}
+body:not(.modern-mode) .logo{font-family:Arial,sans-serif;font-size:21px;letter-spacing:-.8px}
+body:not(.modern-mode) .logo span:first-of-type{color:#74cfff}
+body:not(.modern-mode) .logo .version{font:11px "Courier New",monospace;color:#9fb5d2;margin-left:6px}
+body:not(.modern-mode) .nav{gap:2px;align-items:center}
+body:not(.modern-mode) .nav a,
+body:not(.modern-mode) .lang-btn{
+  padding:7px 10px;
+  border:1px solid transparent;
+  border-radius:0;
+  font:12px "Courier New",monospace;
+}
+body:not(.modern-mode) .hero{padding-top:70px}
+body:not(.modern-mode) .panel,.body:not(.modern-mode) .monitor{border-radius:0}
+body:not(.modern-mode) .panel{box-shadow:4px 4px #000}
+body:not(.modern-mode) .card{background:#0b1a2e}
+body:not(.modern-mode) .panel-head{font-size:11px}
+body:not(.modern-mode) .btn{border-radius:0}
+body:not(.modern-mode) .lang-menu{border-radius:0;box-shadow:4px 4px #000;background:#0b1b31}
+
+/* Modern: Mica-inspired, not a glassmorphism pile. Mica is a quiet, opaque,
+   wallpaper-tinted foundation with a clear hierarchy and restrained elevation. */
+body.modern-mode{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(74,133,205,.22),transparent 30%),
+    radial-gradient(circle at 90% 8%,rgba(151,116,206,.17),transparent 27%),
+    linear-gradient(135deg,#e7edf4 0%,#dfe7ef 48%,#edf2f7 100%);
+}
+body.modern-mode .top{
+  background:rgba(236,241,247,.82);
+  border-bottom:1px solid rgba(104,125,148,.22);
+  box-shadow:0 1px 0 rgba(255,255,255,.8),0 8px 26px rgba(44,63,84,.08);
+  backdrop-filter:blur(22px) saturate(125%);
+}
+body.modern-mode .topbar{height:68px}
+body.modern-mode .logo{font-family:"Segoe UI",Arial,sans-serif;font-size:21px;letter-spacing:-.6px;color:#17304c}
+body.modern-mode .logo span:first-of-type{color:#3478be}
+body.modern-mode .logo .version{color:#647b92}
+body.modern-mode .nav{gap:3px}
+body.modern-mode .nav a,
+body.modern-mode .lang-btn{padding:9px 11px;border-radius:8px;color:#40566d}
+body.modern-mode .nav a:hover,
+body.modern-mode .nav a.active,
+body.modern-mode .lang-btn:hover,
+body.modern-mode .lang.open .lang-btn{background:rgba(255,255,255,.55);border-color:rgba(104,128,151,.20);box-shadow:0 3px 12px rgba(39,62,86,.07)}
+body.modern-mode .hero{padding-top:86px}
+body.modern-mode .head h2{letter-spacing:-1.5px}
+body.modern-mode .panel{box-shadow:0 12px 32px rgba(37,59,81,.09),inset 0 1px rgba(255,255,255,.72)}
+body.modern-mode .card:hover{transform:translateY(-2px);transition:transform .18s ease,box-shadow .18s ease;box-shadow:0 18px 38px rgba(37,59,81,.12),inset 0 1px rgba(255,255,255,.75)}
+body.modern-mode .btn{transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
+body.modern-mode .btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(34,55,77,.13),inset 0 1px rgba(255,255,255,.95)}
+body.modern-mode .lang-menu{top:calc(100% + 8px)}
+
+@media(max-width:900px){
+  .nav{overflow-x:auto;max-width:calc(100vw - 170px);scrollbar-width:none}.nav::-webkit-scrollbar{display:none}
+  .style-switch{flex:0 0 auto}
+}
+@media(max-width:620px){
+  .topbar{height:auto;min-height:62px;gap:8px}.nav{max-width:100%;padding-bottom:3px}.style-switch{flex:0 0 auto}
+}

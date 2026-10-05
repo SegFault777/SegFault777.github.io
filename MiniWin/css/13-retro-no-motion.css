@@ -1,0 +1,30 @@
+/* Retro = instant Windows 9x behavior: no animation, no transition, no smooth scrolling anywhere. */
+html:not(.modern-mode),
+body:not(.modern-mode),
+body:not(.modern-mode) * ,
+body:not(.modern-mode) *::before,
+body:not(.modern-mode) *::after {
+  animation: none !important;
+  animation-delay: 0s !important;
+  animation-duration: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition: none !important;
+  transition-delay: 0s !important;
+  transition-duration: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+html:not(.modern-mode) {
+  scroll-behavior: auto !important;
+}
+
+body:not(.modern-mode) .modern-reveal,
+body:not(.modern-mode) .modern-reveal.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+body:not(.modern-mode) .lang-menu,
+body:not(.modern-mode) .lang.open .lang-menu {
+  transition: none !important;
+}

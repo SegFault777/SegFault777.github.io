@@ -1,0 +1,87 @@
+/* Modern-only: independent, soft motion. Retro remains fully static. */
+@media (prefers-reduced-motion: no-preference){
+  body.modern-mode .modern-reveal{
+    transition-property: opacity, transform;
+    transition-duration: .92s;
+    transition-timing-function: cubic-bezier(.22,.9,.25,1);
+  }
+
+  /* Keep the hero monitor stage itself stationary so the bezel and its contents
+     can enter independently rather than arriving as one block. */
+  body.modern-mode .hero-grid > .monitor-stage.modern-reveal{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+
+  /* The outer monitor/bezel enters from its viewing direction, drifting gently down. */
+  body.modern-mode .monitor-stage .monitor{
+    opacity:0;
+    transform:translate3d(26px,-34px,0) rotateY(-43deg) rotateX(8deg) rotateZ(-1.4deg) scale(.985);
+    transition:
+      opacity 1.05s cubic-bezier(.22,.9,.25,1),
+      transform 1.18s cubic-bezier(.22,.9,.25,1);
+    will-change:transform,opacity;
+  }
+
+  /* Screenshot and caption settle separately after the bezel, so they do not
+     visually arrive in exactly the same motion as the outer frame. */
+  body.modern-mode .monitor-stage .monitor img{
+    opacity:0;
+    transform:translate3d(-14px,8px,0) scale(.988);
+    transition:
+      opacity .92s cubic-bezier(.22,.9,.25,1),
+      transform 1.02s cubic-bezier(.22,.9,.25,1);
+    transition-delay:.10s;
+    will-change:transform,opacity;
+  }
+
+  body.modern-mode .monitor-stage .image-credit{
+    opacity:0;
+    transform:translate3d(0,10px,0);
+    transition:
+      opacity .82s cubic-bezier(.22,.9,.25,1),
+      transform .92s cubic-bezier(.22,.9,.25,1);
+    transition-delay:.19s;
+    will-change:transform,opacity;
+  }
+
+  /* Once the hero stage becomes visible, release each layer independently. */
+  body.modern-mode .hero-grid > .monitor-stage.modern-reveal.is-visible .monitor{
+    opacity:1;
+    transform:rotateY(-43deg) rotateX(8deg) rotateZ(-1.4deg) scale(1);
+  }
+  body.modern-mode .hero-grid > .monitor-stage.modern-reveal.is-visible .monitor img{
+    opacity:1;
+    transform:translate3d(0,0,0) scale(1);
+  }
+  body.modern-mode .hero-grid > .monitor-stage.modern-reveal.is-visible .image-credit{
+    opacity:1;
+    transform:translate3d(0,0,0);
+  }
+
+  /* Other page pieces get the same soft ease: fast through the middle, slow at the end. */
+  body.modern-mode .modern-reveal:not(.hero-grid > .monitor-stage){
+    transition-timing-function:cubic-bezier(.22,.9,.25,1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  body.modern-mode .monitor-stage .monitor,
+  body.modern-mode .monitor-stage .monitor img,
+  body.modern-mode .monitor-stage .image-credit{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+}
+
+@media (max-width:600px) and (prefers-reduced-motion: no-preference){
+  body.modern-mode .monitor-stage .monitor{
+    transform:translate3d(16px,-24px,0) rotateY(-28deg) rotateX(5deg) rotateZ(-1deg) scale(.99);
+    transition-duration:1.05s;
+  }
+  body.modern-mode .hero-grid > .monitor-stage.modern-reveal.is-visible .monitor{
+    transform:rotateY(-28deg) rotateX(5deg) rotateZ(-1deg) scale(1);
+  }
+}

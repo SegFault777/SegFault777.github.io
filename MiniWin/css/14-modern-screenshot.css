@@ -1,0 +1,30 @@
+/* Modern only: the bezel, screenshot, border, credit, and shadow are one tilted object. */
+body.modern-mode .monitor-stage{
+  width:100%;
+  display:block;
+  perspective:1400px;
+  perspective-origin:52% 48%;
+  transform-style:preserve-3d;
+  overflow:visible;
+}
+body.modern-mode .monitor-stage .monitor{
+  transform:rotateY(-36deg) rotateX(6.5deg) rotateZ(-1.2deg);
+  transform-origin:52% 50%;
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+body.modern-mode .monitor-stage .monitor img{
+  transform:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.38);
+}
+body.modern-mode .monitor-stage .image-credit{
+  transform:none;
+}
+@media (max-width:600px){
+  body.modern-mode .monitor-stage{
+    perspective:1000px;
+  }
+  body.modern-mode .monitor-stage .monitor{
+    transform:rotateY(-22deg) rotateX(4deg) rotateZ(-0.8deg);
+  }
+}

@@ -1,0 +1,74 @@
+/* Final responsive pass: keep every navigation item reachable at every width. */
+.topbar{min-width:0}
+.logo{flex:0 0 auto;white-space:nowrap}
+.nav{min-width:0;flex:1 1 auto;align-items:center;justify-content:flex-end}
+.nav > *{flex:0 0 auto}
+
+@media (min-width:1201px){
+  .nav{overflow:visible}
+}
+
+@media (min-width:861px) and (max-width:1200px){
+  .topbar{gap:12px}
+  .nav{overflow-x:auto;justify-content:flex-start;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .nav::-webkit-scrollbar{display:none}
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(340px,430px)}
+}
+
+@media (max-width:860px){
+  .topbar{display:flex;flex-wrap:wrap;align-items:center;padding:8px 0}
+  .logo{margin-right:auto}
+  .nav{order:3;flex:1 0 100%;width:100%;max-width:none;justify-content:flex-start;overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:4px 0 2px;gap:3px}
+  .nav::-webkit-scrollbar{display:none}
+  .nav > *{flex:0 0 auto}
+  .nav a,.lang-btn{min-height:40px;display:flex;align-items:center;justify-content:center;white-space:nowrap}
+  .style-switch{min-height:36px}
+  .hero-grid{grid-template-columns:1fr;gap:38px}
+  .monitor{width:min(100%,560px);margin:0 auto}
+}
+
+@media (max-width:600px){
+  .wrap{width:calc(100% - 24px)}
+  .topbar{padding:7px 0 5px}
+  .logo{font-size:20px}
+  .nav{gap:2px;padding-top:5px}
+  .nav a,.lang-btn{padding:9px 11px;font-size:12px;min-height:42px}
+  .style-switch{height:34px;padding:0 7px;margin-right:1px}
+  .hero{padding:46px 0 58px}
+  .hero h1{font-size:clamp(48px,18vw,78px);line-height:.84;letter-spacing:-4px}
+  .hero p{font-size:16px}
+  .actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .actions .btn{min-height:48px;display:flex;align-items:center;justify-content:center;text-align:center}
+  section{padding:58px 0}
+  .head h2{font-size:clamp(30px,8vw,42px)}
+  .grid{grid-template-columns:1fr}
+  .card{min-height:0}
+  .facts{grid-template-columns:1fr 1fr}
+  .terminal pre{font-size:12px;line-height:1.7}
+}
+
+@media (max-width:420px){
+  .wrap{width:calc(100% - 18px)}
+  .logo{font-size:18px}
+  .version{display:none}
+  .style-label{display:none}
+  .style-toggle{width:38px;height:21px}
+  .modern-mode .style-toggle{width:40px;height:22px}
+  .nav a,.lang-btn{padding:9px 10px;font-size:11px}
+  .facts{grid-template-columns:1fr}
+  .fact{border-right:0!important}
+  .hero{padding-top:38px}
+  .hero h1{font-size:clamp(44px,20vw,68px);letter-spacing:-3px}
+  .hero p{font-size:15px}
+  .monitor{padding:7px}
+  .terminal pre{font-size:11px;padding:16px 14px}
+  .lang-menu{right:0;min-width:170px}
+}
+
+@media (max-width:700px) and (orientation:landscape){
+  .hero{padding:38px 0 48px}
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(280px,44vw);gap:26px}
+  .hero h1{font-size:clamp(42px,10vw,68px)}
+  .hero p{font-size:14px}
+  .monitor{max-width:none}
+}

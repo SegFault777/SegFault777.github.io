@@ -1,0 +1,185 @@
+/* ============================================================
+   SETTINGS — gear button pinned to the far right of the top
+   bar (outside the scrolling nav, so it's always reachable on
+   mobile) plus its modal: a dedicated Retro <-> OldRetro
+   toggle and a "differences" explainer. This is the mouse/touch
+   entry point into OldRetro for anyone without a keyboard.
+   ============================================================ */
+.settings-btn{
+  order:1;
+  flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;min-width:44px;min-height:44px;
+  margin-left:6px;
+  border:1px solid transparent;
+  background:transparent;color:#afc0d5;
+  cursor:pointer;font-size:17px;line-height:1;
+}
+.settings-btn:hover,.settings-btn:focus-visible{background:#102b50;border-color:#315b8d;color:#fff;outline:none}
+body.modern-mode .settings-btn{border-radius:10px;color:#5b748d}
+body.modern-mode .settings-btn:hover,body.modern-mode .settings-btn:focus-visible{background:rgba(255,255,255,.5);color:#1c3d61}
+/* Retro (and OldRetro, which keeps the same gray Win9x header) needs the real
+   3-D beveled button skin used by the rest of the header, not the dark-header
+   flat icon style above — otherwise it's nearly invisible on the gray chrome. */
+body:not(.modern-mode) .settings-btn{
+  color:#000;
+  background:#c0c0c0;
+  border:2px solid;
+  border-top-color:#fff;
+  border-left-color:#fff;
+  border-right-color:#000;
+  border-bottom-color:#000;
+  border-radius:0;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+}
+body:not(.modern-mode) .settings-btn:hover,
+body:not(.modern-mode) .settings-btn:focus-visible{
+  background:#c0c0c0;color:#000;outline:1px dotted #000;outline-offset:-4px;
+}
+body:not(.modern-mode) .settings-btn:active{
+  border-top-color:#000;border-left-color:#000;border-right-color:#fff;border-bottom-color:#fff;
+  box-shadow:inset -1px -1px #dfdfdf,inset 1px 1px #808080;
+}
+
+#settingsOverlay{position:fixed;inset:0;z-index:20000;display:flex;align-items:center;justify-content:center;padding:16px;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif}
+#settingsOverlay[hidden]{display:none}
+.settings-backdrop{position:absolute;inset:0;background:rgba(5,10,20,.55)}
+.settings-panel{position:relative;width:min(430px,100%);max-height:min(86vh,640px);overflow-y:auto;background:#0b182b;border:1px solid #315b8d;box-shadow:6px 6px 0 #000;color:#dbe4ed}
+body.modern-mode .settings-panel{background:#fff;border:1px solid rgba(91,116,141,.25);border-radius:14px;box-shadow:0 20px 60px rgba(15,30,50,.35);color:#22405f}
+.settings-head{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #223c5c;background:inherit;font:700 14px "Courier New",monospace;letter-spacing:.6px}
+body.modern-mode .settings-head{border-bottom:1px solid rgba(91,116,141,.18);font:700 16px "Segoe UI",Arial,sans-serif}
+.settings-close{flex:0 0 auto;width:34px;height:34px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;border:0;background:transparent;color:inherit;font-size:16px;cursor:pointer;border-radius:4px}
+.settings-close:hover{background:rgba(255,255,255,.12)}
+body.modern-mode .settings-close:hover{background:rgba(28,61,97,.08)}
+.settings-body{padding:18px 16px}
+.settings-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.settings-row-label{font-size:13.5px;color:#afc0d5}
+body.modern-mode .settings-row-label{color:#4c6a88}
+#settingsOldRetroSwitch{margin-right:0}
+#settingsOldRetroToggle span{left:2px}
+body.oldretro-mode #settingsOldRetroToggle span{left:19px}
+body.modern-mode.oldretro-mode #settingsOldRetroToggle span{left:19px}
+
+.settings-diff-btn{
+  display:block;width:100%;min-height:44px;padding:11px 12px;
+  background:#12345f;color:#fff;border:1px solid #315b8d;
+  font:700 12.5px "Courier New",monospace;letter-spacing:.4px;cursor:pointer;text-align:center;
+}
+.settings-diff-btn:hover{background:#1a4a86}
+body.modern-mode .settings-diff-btn{background:#e8f1fb;color:#1c3d61;border:1px solid rgba(91,116,141,.25);border-radius:8px;font:700 13.5px "Segoe UI",Arial,sans-serif}
+body.modern-mode .settings-diff-btn:hover{background:#d7e8fa}
+.settings-diff-panel{margin:12px 0 0;padding:12px 14px;background:#08111f;border:1px solid #223c5c;font-size:12.5px;line-height:1.7;color:#c3d2e4}
+.settings-diff-panel[hidden]{display:none}
+body.modern-mode .settings-diff-panel{background:#f4f8fc;border:1px solid rgba(91,116,141,.18);border-radius:8px;color:#33506f}
+.settings-diff-panel dt{font-weight:700;color:#8fdcff;margin-top:12px}
+.settings-diff-panel dt:first-child{margin-top:0}
+body.modern-mode .settings-diff-panel dt{color:#1c6fc9}
+.settings-diff-panel dd{margin:3px 0 0}
+
+/* ---- Retro: a real Windows-95 dialog box, matching every other panel/menu
+   on the site (lang-menu, buttons) instead of a foreign dark "web modal". ---- */
+body:not(.modern-mode):not(.oldretro-mode) .settings-panel{
+  background:#c0c0c0;color:#000;
+  border:2px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;
+  box-shadow:4px 4px 0 #000;
+  font-family:"MS Sans Serif",Arial,sans-serif;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-head{
+  background:linear-gradient(90deg,#000080,#1084d0);color:#fff;
+  border-bottom:2px solid #808080;
+  font:700 13px "MS Sans Serif",Arial,sans-serif;letter-spacing:0;
+  padding:6px 6px 6px 10px;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-close{
+  width:22px;height:22px;min-width:22px;min-height:22px;border-radius:0;
+  background:#c0c0c0;color:#000;font-weight:700;
+  border:1px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-close:hover{background:#c0c0c0}
+body:not(.modern-mode):not(.oldretro-mode) .settings-close:active{
+  border-top-color:#000;border-left-color:#000;border-right-color:#fff;border-bottom-color:#fff;
+  box-shadow:inset -1px -1px #dfdfdf,inset 1px 1px #808080;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-row-label{color:#000}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-btn{
+  background:#c0c0c0;color:#000;border-radius:0;
+  border:2px solid;border-top-color:#fff;border-left-color:#fff;border-right-color:#000;border-bottom-color:#000;
+  box-shadow:inset 1px 1px #dfdfdf,inset -1px -1px #808080;
+  font:700 12px "MS Sans Serif",Arial,sans-serif;letter-spacing:0;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-btn:hover{background:#c0c0c0}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-btn:active{
+  border-top-color:#000;border-left-color:#000;border-right-color:#fff;border-bottom-color:#fff;
+  box-shadow:inset -1px -1px #dfdfdf,inset 1px 1px #808080;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-panel{
+  background:#fff;color:#000;border-radius:0;
+  border:2px solid;border-top-color:#808080;border-left-color:#808080;border-right-color:#fff;border-bottom-color:#fff;
+  font:12px "MS Sans Serif",Arial,sans-serif;
+}
+body:not(.modern-mode):not(.oldretro-mode) .settings-diff-panel dt{color:#000080}
+
+/* ---- OldRetro: not a "window", but an actual BIOS Setup Utility screen —
+   titlebar, tab row, a menu item that pops a Legacy/UEFI-style selector,
+   a help pane, a key legend and a footer bar, styled after the classic
+   AMI Aptio setup screen. Standard settings markup is hidden in this mode
+   (see .settings-standard / .settings-bios visibility below). ---- */
+body.oldretro-mode .settings-panel{
+  width:min(600px,100%);
+  background:#0000aa;color:#e8ecff;
+  border:1px solid #6a86c8;
+  box-shadow:6px 6px 0 rgba(0,0,0,.55);
+  font-family:"Courier New",monospace;
+  padding:0;
+}
+.settings-standard{display:block}
+.settings-bios{display:none}
+body.oldretro-mode .settings-standard{display:none}
+body.oldretro-mode .settings-bios{display:block}
+
+.bios-titlebar{background:#04040c;color:#fff;padding:8px 12px;font:700 12.5px "Courier New",monospace;border-bottom:1px solid #6a86c8}
+.bios-tabs{display:flex;gap:2px;background:#0000aa;padding:6px 10px 0;border-bottom:1px solid #6a86c8}
+.bios-tab{padding:5px 12px;font:11.5px "Courier New",monospace;color:#b9c6f2}
+.bios-tab.active{background:#e8ecff;color:#00006a;font-weight:700}
+.bios-main{display:grid;grid-template-columns:1fr 190px;min-height:170px}
+.bios-menu{padding:14px 12px;border-right:1px solid #223c9c}
+.bios-item{
+  display:block;width:100%;text-align:left;
+  background:transparent;border:0;color:#fff;
+  font:12.5px "Courier New",monospace;letter-spacing:.2px;
+  padding:6px 8px;cursor:pointer;
+}
+.bios-item b{color:#fff;font-weight:700}
+.bios-item:hover,.bios-item:focus-visible{background:#7fdcff;color:#00006a;outline:none}
+.bios-item:hover b,.bios-item:focus-visible b{color:#00006a}
+.bios-side{display:flex;flex-direction:column}
+.bios-help{flex:1 1 auto;background:#000;color:#e8ecff;padding:10px 11px;font-size:11px;line-height:1.6}
+.bios-keys{background:#000;color:#9fb0d8;padding:9px 11px;font-size:10px;line-height:1.75;border-top:1px solid #223c9c}
+.bios-popup{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:200px;z-index:5;
+  background:#0000aa;border:2px solid #e8ecff;box-shadow:4px 4px 0 rgba(0,0,0,.6);
+}
+.bios-popup[hidden]{display:none}
+.bios-popup-title{background:#e8ecff;color:#00006a;font:700 11.5px "Courier New",monospace;padding:5px 9px}
+.bios-popup-opt{
+  display:block;width:100%;text-align:left;
+  background:transparent;border:0;color:#fff;
+  font:12px "Courier New",monospace;padding:7px 10px;cursor:pointer;
+}
+.bios-popup-opt.highlight,.bios-popup-opt:focus-visible{background:#7fdcff;color:#00006a;outline:none}
+.bios-footer{display:flex;justify-content:space-between;gap:10px;background:#04040c;color:#9fb0d8;padding:6px 12px;font-size:10px;border-top:1px solid #6a86c8}
+
+@media(max-width:640px){
+  .bios-main{grid-template-columns:1fr}
+  .bios-menu{border-right:0;border-bottom:1px solid #223c9c}
+  .bios-help{min-height:70px}
+}
+
+@media(max-width:560px){
+  #settingsOverlay{align-items:flex-end;padding:0}
+  .settings-panel{width:100%;max-width:none;max-height:88vh;border-radius:14px 14px 0 0;box-shadow:none}
+  body.modern-mode .settings-panel{border-radius:14px 14px 0 0}
+  .settings-body{padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+}

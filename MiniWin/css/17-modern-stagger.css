@@ -1,0 +1,41 @@
+/* Modern only: text enters from below, one character at a time. */
+@media (prefers-reduced-motion: no-preference){
+  body.modern-mode .char-stagger .char{
+    display:inline-block;
+    opacity:0;
+    transform:translate3d(0,22px,0);
+    transition:opacity .62s cubic-bezier(.16,.84,.18,1),
+               transform .72s cubic-bezier(.16,.84,.18,1);
+    transition-delay:calc(var(--char-i) * .018s + var(--char-delay, 0s));
+    will-change:transform,opacity;
+  }
+
+  body.modern-mode .modern-reveal.is-visible .char-stagger .char{
+    opacity:1;
+    transform:translate3d(0,0,0);
+  }
+
+  /* Keep the parent/background motion separate from its text. */
+  body.modern-mode .modern-reveal.char-motion-parent{
+    transition-timing-function:cubic-bezier(.16,.84,.18,1);
+  }
+
+  /* Headings arrive a touch sooner; body copy follows. */
+  body.modern-mode h1.char-stagger .char{transition-duration:.68s}
+  body.modern-mode h2.char-stagger .char,
+  body.modern-mode h3.char-stagger .char{transition-duration:.64s}
+  body.modern-mode p.char-stagger{--char-delay:.07s}
+  body.modern-mode .eyebrow.char-stagger,
+  body.modern-mode .tag.char-stagger,
+  body.modern-mode .badge.char-stagger,
+  body.modern-mode .panel-head.char-stagger{--char-delay:.02s}
+  body.modern-mode .image-credit.char-stagger{--char-delay:.14s}
+}
+
+@media (prefers-reduced-motion: reduce){
+  body.modern-mode .char-stagger .char{
+    opacity:1 !important;
+    transform:none !important;
+    transition:none !important;
+  }
+}

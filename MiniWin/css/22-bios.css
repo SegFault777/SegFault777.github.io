@@ -1,0 +1,7 @@
+.bios-help{white-space:pre-line}
+.bios-exit{width:220px}
+
+/* BIOS window: the \u2715 button exists only on touch devices; desktop uses ESC -> Save & Exit. */
+#biosClose{display:none !important}
+@media (hover:none){#biosClose{display:flex !important}}
+.settings-kp-help{margin:12px;line-height:1.75}

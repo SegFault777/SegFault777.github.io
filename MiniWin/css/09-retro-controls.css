@@ -1,0 +1,52 @@
+/* Final Win9x control pass: stable, non-animated Retro controls. */
+body:not(.modern-mode) .btn,
+body:not(.modern-mode) .style-toggle,
+body:not(.modern-mode) .style-switch,
+body:not(.modern-mode) .lang-btn,
+body:not(.modern-mode) .lang-menu button{
+  -webkit-appearance:none;
+  appearance:none;
+  animation:none !important;
+}
+body:not(.modern-mode) .btn{
+  background:#c0c0c0;
+}
+body:not(.modern-mode) .btn:hover{
+  background:#c0c0c0;
+}
+/* Pressed buttons: only a subtle darker gray, plus the classic inset bevel. */
+body:not(.modern-mode) .btn:active,
+body:not(.modern-mode) .lang-menu button:active{
+  background:#b8b8b8 !important;
+}
+body:not(.modern-mode) .style-toggle{
+  background:#808080 !important;
+  outline:none;
+  box-shadow:inset 1px 1px #404040 !important;
+  transition:none !important;
+  animation:none !important;
+  filter:none !important;
+}
+body:not(.modern-mode) .style-toggle:hover,
+body:not(.modern-mode) .style-toggle:active,
+body:not(.modern-mode) .style-toggle:focus,
+body:not(.modern-mode) .style-toggle:focus-visible{
+  background:#808080 !important;
+  filter:none !important;
+  animation:none !important;
+}
+body:not(.modern-mode) .style-toggle span{
+  background:#c0c0c0 !important;
+  border-top-color:#fff !important;
+  border-left-color:#fff !important;
+  border-right-color:#000 !important;
+  border-bottom-color:#000 !important;
+  box-shadow:none !important;
+  transition:none !important;
+  animation:none !important;
+  filter:none !important;
+}
+body:not(.modern-mode) .style-toggle:focus-visible{
+  outline:1px dotted #000 !important;
+  outline-offset:1px;
+}

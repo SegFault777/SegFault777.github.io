@@ -1,0 +1,19 @@
+/* Final header behavior: always pinned to the viewport while scrolling. */
+body > header.top{
+  position:fixed !important;
+  top:0;
+  left:0;
+  right:0;
+  width:100%;
+  z-index:9999;
+}
+body > header.top + main{padding-top:64px}
+body:not(.modern-mode) > header.top + main{padding-top:52px}
+@media(max-width:900px){
+  body > header.top + main{padding-top:60px}
+  body:not(.modern-mode) > header.top + main{padding-top:52px}
+}
+@media(max-width:700px){
+  body > header.top + main{padding-top:58px}
+  body:not(.modern-mode) > header.top + main{padding-top:58px}
+}

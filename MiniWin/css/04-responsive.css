@@ -1,0 +1,96 @@
+/* Responsive layout: phone → tablet → desktop → wide screens */
+html{overflow-x:hidden}
+body{min-width:0;overflow-x:hidden}
+img{max-width:100%;height:auto}
+button,a{touch-action:manipulation}
+
+/* Large screens: keep content readable instead of stretching */
+@media (min-width:1440px){
+  .wrap{width:min(1180px,calc(100% - 64px))}
+  .hero-grid{grid-template-columns:minmax(0,1fr) 500px;gap:72px}
+  .hero{padding-top:104px;padding-bottom:110px}
+}
+
+/* Tablet / small laptop */
+@media (max-width:900px){
+  .wrap{width:min(100% - 32px,760px)}
+  .topbar{height:auto;min-height:60px;gap:8px;padding:8px 0}
+  .logo{flex:0 0 auto}
+  .nav{min-width:0;max-width:calc(100% - 150px);overflow-x:auto;overflow-y:visible;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:center}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a,.lang-btn{min-height:42px;display:flex;align-items:center;justify-content:center}
+  .style-switch{min-height:36px}
+  .hero{padding:64px 0 72px}
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,430px);gap:34px}
+  .hero h1{font-size:clamp(52px,10vw,82px)}
+  section{padding:72px 0}
+}
+
+/* Phones: header becomes two clean rows; nav remains horizontally scrollable */
+@media (max-width:700px){
+  .wrap{width:calc(100% - 24px)}
+  .topbar{display:flex;flex-wrap:wrap;align-items:center;padding:9px 0 7px}
+  .logo{font-size:20px}
+  .version{font-size:10px;margin-left:5px}
+  .nav{order:3;width:100%;max-width:none;flex:1 0 100%;gap:2px;padding:2px 0 1px;margin:0;overflow-x:auto;overflow-y:visible}
+  .nav a,.lang-btn{flex:0 0 auto;padding:9px 11px;font-size:12px;min-height:40px}
+  .style-switch{flex:0 0 auto;margin-right:2px;padding:0 7px;height:34px}
+  .style-label{font-size:8px}
+  .lang{flex:0 0 auto}
+  .lang-menu{position:fixed;top:auto;right:12px;margin-top:4px;min-width:180px;z-index:100}
+  .hero{padding:48px 0 58px}
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero h1{font-size:clamp(48px,18vw,76px);letter-spacing:-4px;margin:18px 0 20px}
+  .hero p{font-size:16px;line-height:1.65}
+  .tag{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .monitor{width:100%;max-width:none;padding:9px;box-shadow:7px 8px 0 var(--shadow),0 0 0 1px #000}
+  .monitor img{border-width:4px}
+  .actions{gap:10px;margin-top:22px}
+  .actions .btn{flex:1 1 100%;text-align:center;min-height:46px;padding:12px 14px;display:flex;align-items:center;justify-content:center}
+  section{padding:58px 0}
+  .head,.section-head{margin-bottom:26px}
+  .head h2,.section-head h2{font-size:clamp(30px,8vw,42px);line-height:1.05;letter-spacing:-1.5px}
+  .head p,.section-head .sub{font-size:15px;line-height:1.7}
+  .grid{grid-template-columns:1fr;gap:12px}
+  .card{min-height:0;padding:20px}
+  .facts{grid-template-columns:1fr 1fr}
+  .fact{padding:17px 14px}
+  .fact strong{font-size:21px;overflow-wrap:anywhere}
+  .terminal pre{padding:18px 16px;font-size:12px;line-height:1.7}
+  .note{padding:14px 15px;font-size:14px}
+  .rule{margin:30px 0}
+  .foot{gap:14px;font-size:12px}
+}
+
+/* Very narrow phones */
+@media (max-width:420px){
+  .wrap{width:calc(100% - 20px)}
+  .logo{font-size:18px}
+  .version{display:none}
+  .style-switch{padding:0 6px}
+  .style-label{display:none}
+  .style-toggle{width:36px;height:20px}
+  .modern-mode .style-toggle{width:38px;height:21px}
+  .nav a,.lang-btn{padding-left:10px;padding-right:10px;font-size:11px}
+  .lang-menu{right:10px;min-width:170px}
+  .hero{padding-top:40px}
+  .hero h1{font-size:clamp(44px,20vw,68px);letter-spacing:-3px}
+  .hero p{font-size:15px}
+  .facts{grid-template-columns:1fr}
+  .fact{border-right:0!important;border-bottom:1px solid var(--line)}
+  .fact:last-child{border-bottom:0}
+  .card{padding:18px}
+  .terminal pre{font-size:11px}
+}
+
+/* Landscape phones: use the available width without making text tiny */
+@media (max-width:700px) and (orientation:landscape){
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(260px,42vw);align-items:center}
+  .monitor{max-width:520px}
+  .hero{padding:40px 0 52px}
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
