@@ -1,0 +1,145 @@
+/* Window controls (_ □ X) on the system-information and SHELL title bars. Each theme draws them in its own style:
+   Retro/Win9x bevelled grey, Luna blue capsules, Aero glass, Modern/Mica/Flat Windows-style caption buttons, Breeze
+   and Adwaita round, Oxygen square glossy, and the three macOS themes (Aqua, Sequoia, Liquid Glass) as round dots at the
+   left, red X / yellow _ / green □ in that order. The buttons are decorative: they carry no action (pointer-events none).
+   This file comes last, so the theme blocks below win over the title-bar rules of the earlier files. */
+
+.panel-head{position:relative}
+.wc{position:absolute;right:8px;top:50%;transform:translateY(-50%);display:inline-flex;align-items:center;gap:3px;user-select:none;z-index:2}
+.wc-b{cursor:default;transition:background-color .12s,color .12s,filter .12s}
+.wc-b .g-breeze{display:none}
+.wc-b{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;box-sizing:border-box}
+.wc-b svg{display:block;width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:square;overflow:visible}
+
+/* Retro (Windows 95/98): grey bevelled boxes, black glyphs */
+body:not(.modern-mode) .panel-head{padding-right:82px}
+body:not(.modern-mode) .wc{right:6px;gap:2px}
+body:not(.modern-mode) .wc-b{width:16px;height:14px;background:#c0c0c0;color:#000;box-shadow:inset -1px -1px #404040,inset 1px 1px #ffffff}
+body:not(.modern-mode) .wc-b svg{width:8px;height:8px;stroke-width:1.6}
+
+/* Luna (Windows XP): blue rounded capsules with white glyphs, the close button red-orange */
+body.luna-mode .panel-head{padding-right:86px}
+body.luna-mode .wc{right:8px;gap:3px}
+body.luna-mode .wc-b{width:21px;height:21px;border:1px solid #ffffff;border-radius:3px;color:#ffffff;background:linear-gradient(180deg,#5a9cf8 0,#2a6ff0 48%,#1c5fe0 52%,#3f86f6 100%);box-shadow:0 0 0 1px rgba(0,30,120,.7)}
+body.luna-mode .wc-b svg{width:10px;height:10px;stroke-width:2}
+body.luna-mode .wc-close{background:linear-gradient(180deg,#e89a7c 0,#d4572c 48%,#c2401a 52%,#e46f4f 100%)}
+
+/* Modern (Windows 11): plain glyphs on the title bar, no fill */
+body.modern-mode .panel-head{padding-right:96px}
+body.modern-mode .wc{right:8px;gap:2px}
+body.modern-mode .wc-b{width:28px;height:22px;border-radius:6px;color:#334b63}
+body.modern-mode .wc-b svg{width:9px;height:9px;stroke-width:1.2}
+
+/* Modern Glass: the same glyphs, on a faint frosted pill */
+body.modern-glass-mode .wc-b{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.55);color:#1f3f63}
+
+/* Aero (Windows 7): glass caption buttons hanging from the top edge; the close is the red glass */
+body.aero-mode .panel-head{padding-right:92px}
+body.aero-mode .panel-head::after{display:none}
+body.aero-mode .wc{right:8px;gap:2px}
+body.aero-mode .wc-b{width:26px;height:19px;border:1px solid rgba(40,60,90,.55);border-top:0;border-radius:0 0 5px 5px;color:#1c3c64;background:linear-gradient(180deg,#f2f8fe 0,#c8dcf1 46%,#a9c5e6 50%,#dbe9f8 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+body.aero-mode .wc-close{color:#ffffff;border-color:rgba(60,0,0,.65);background:linear-gradient(180deg,#eab0a4 0,#d5604a 46%,#b92a12 50%,#df7155 100%)}
+body.aero-mode .wc-close svg{stroke-width:1.8}
+
+/* Breeze (KDE): small round buttons, the title stays centred */
+body.breeze-mode .panel-head{padding-right:84px}
+body.breeze-mode .panel-head::after{display:none}
+body.breeze-mode .wc{right:10px;gap:5px}
+body.breeze-mode .wc-b{width:18px;height:18px;border-radius:50%;color:#4d5558;background:rgba(77,85,88,.12)}
+body.breeze-mode .wc-b svg{width:9px;height:9px}
+
+/* Flat (Windows 10): flush caption buttons at the top-right, no border */
+body.flat-mode .panel-head{padding-right:110px}
+body.flat-mode .wc{right:0;top:0;bottom:0;transform:none;gap:0;height:100%}
+body.flat-mode .wc-b{width:36px;height:100%;color:#000000;border-radius:0}
+
+/* Mica (Windows 11 with Mica): flush caption buttons, thin glyphs */
+body.mica-mode .panel-head{padding-right:112px}
+body.mica-mode .wc{right:0;top:0;bottom:0;transform:none;gap:0;height:100%}
+body.mica-mode .wc-b{width:37px;height:100%;color:#1b1b1b;border-radius:0}
+body.mica-mode .wc-b svg{width:10px;height:10px;stroke-width:1.1}
+
+/* Adwaita (GNOME): round grey buttons */
+body.adwaita-mode .panel-head{padding-right:84px}
+body.adwaita-mode .wc{right:8px;gap:4px}
+body.adwaita-mode .wc-b{width:22px;height:22px;border-radius:50%;color:#2e3436;border:1px solid #cdc7c2;background:linear-gradient(#f6f5f4,#e1dedb)}
+
+/* Oxygen (KDE 4): small glossy squares */
+body.oxygen-mode .panel-head{padding-right:84px}
+body.oxygen-mode .wc{right:8px;gap:3px}
+body.oxygen-mode .wc-b{width:20px;height:18px;border-radius:3px;color:#232629;border:1px solid #9ea6ae;background:linear-gradient(#fbfcfc,#dfe3e6)}
+
+/* macOS themes: round dots at the left, in red X / yellow _ / green □ order (the close button first) */
+body.aqua-mode:not(.oldretro-mode) .panel-head::before,
+body.sequoia-mode .panel-head::before{display:none}
+body.liquid-mode .lq-lights{display:none !important}
+body.aqua-mode:not(.oldretro-mode) .wc,
+body.sequoia-mode .wc,
+body.liquid-mode .wc{left:12px;right:auto;top:50%;transform:translateY(-50%);gap:8px}
+body.aqua-mode:not(.oldretro-mode) .wc-b,
+body.sequoia-mode .wc-b,
+body.liquid-mode .wc-b{width:12px;height:12px;border-radius:50%;border:0;color:rgba(0,0,0,.55);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.18)}
+body.aqua-mode:not(.oldretro-mode) .wc-b svg,
+body.sequoia-mode .wc-b svg,
+body.liquid-mode .wc-b svg{width:7px;height:7px;stroke-width:1.3}
+body.aqua-mode:not(.oldretro-mode) .wc-close,
+body.sequoia-mode .wc-close,
+body.liquid-mode .wc-close{order:-1}
+body.aqua-mode:not(.oldretro-mode) .wc-close{color:#5a0000;background:radial-gradient(circle at 36% 30%,#ffb4a9 0,#ff4a3f 45%,#c81d15 85%,#7e0b07 100%);box-shadow:0 1px 1px rgba(60,0,0,.45)}
+body.aqua-mode:not(.oldretro-mode) .wc-min{color:#5a3d00;background:radial-gradient(circle at 36% 30%,#fff3b0 0,#ffd83a 45%,#d9a000 85%,#7a4f00 100%);box-shadow:0 1px 1px rgba(60,40,0,.45)}
+body.aqua-mode:not(.oldretro-mode) .wc-max{color:#0a3d0a;background:radial-gradient(circle at 36% 30%,#c8fbb0 0,#4fd13c 45%,#1f9d25 85%,#0a4f14 100%);box-shadow:0 1px 1px rgba(0,40,0,.45)}
+body.sequoia-mode .wc-close{background:#ff5f57}
+body.sequoia-mode .wc-min{background:#febc2e}
+body.sequoia-mode .wc-max{background:#28c840}
+body.liquid-mode .wc-close{background:#ff5f57}
+body.liquid-mode .wc-min{background:#febc2e}
+body.liquid-mode .wc-max{background:#28c840}
+
+/* Mica's SHELL is a dark console under a light title style: the title and the glyphs take the light colour */
+body.mica-mode .terminal .panel-head{background:#1c1c1c;color:#f3f3f3;border-bottom:1px solid rgba(255,255,255,.08)}
+body.mica-mode .terminal .wc-b{color:#f3f3f3}
+body.mica-mode .terminal .wc-b svg{stroke-width:1.1}
+
+/* the dots' glyphs are a touch heavier on the mac themes, so the X, _ and □ read at this size */
+body.aqua-mode:not(.oldretro-mode) .wc-b svg,
+body.sequoia-mode .wc-b svg,
+body.liquid-mode .wc-b svg{stroke-width:1.5}
+
+/* macOS themes: the dots carry no glyphs. Sequoia and Liquid Glass are flat solid dots (no shadow, no gradient);
+   Aqua keeps its jelly beads. */
+body.aqua-mode:not(.oldretro-mode) .wc-b svg,
+body.sequoia-mode .wc-b svg,
+body.liquid-mode .wc-b svg{display:none}
+body.sequoia-mode .wc-b,
+body.liquid-mode .wc-b{box-shadow:none;background-image:none;border:0}
+
+/* Breeze (KDE): v ^ X, the chevrons in place of the standard glyphs */
+body.breeze-mode .g-std{display:none}
+body.breeze-mode .g-breeze{display:block}
+body.breeze-mode .wc-b svg{width:9px;height:9px;stroke-width:1.3}
+
+/* Hover: each button reacts the way its theme's caption buttons do. The buttons are not wired to anything: clicks do nothing. */
+body:not(.modern-mode) .wc-b:hover{background:#dcdcdc}
+body.luna-mode .wc-b:hover{background:linear-gradient(180deg,#8ec0ff 0,#4b8cfb 48%,#3272f0 52%,#5a9cf8 100%)}
+body.luna-mode .wc-close:hover{background:linear-gradient(180deg,#f4b49a 0,#e26a3e 48%,#d24a1d 52%,#ea7f5f 100%)}
+body.modern-mode .wc-b:hover{background:rgba(0,0,0,.06)}
+body.modern-mode .wc-close:hover{background:#c42b1c;color:#ffffff}
+body.modern-glass-mode .wc-b:hover{background:rgba(255,255,255,.4)}
+body.modern-glass-mode .wc-close:hover{background:rgba(232,17,35,.8);color:#ffffff}
+body.aero-mode .wc-b:hover{filter:brightness(1.08)}
+body.aero-mode .wc-close:hover{filter:brightness(1.14)}
+body.breeze-mode .wc-b:hover{background:rgba(77,85,88,.26)}
+body.breeze-mode .wc-close:hover{background:#da4453;color:#ffffff}
+body.flat-mode .wc-b:hover{background:#e5e5e5}
+body.flat-mode .wc-close:hover{background:#e81123;color:#ffffff}
+body.mica-mode .wc-b:hover{background:rgba(0,0,0,.06)}
+body.mica-mode .wc-close:hover{background:#c42b1c;color:#ffffff}
+body.mica-mode .terminal .wc-b:hover{background:rgba(255,255,255,.12)}
+body.mica-mode .terminal .wc-close:hover{background:#c42b1c;color:#ffffff}
+body.adwaita-mode .wc-b:hover{background:linear-gradient(#ededeb,#d6d3cf)}
+body.adwaita-mode .wc-close:hover{background:#e01b24;color:#ffffff;border-color:#c01c28}
+body.oxygen-mode .wc-b:hover{background:linear-gradient(#ffffff,#e6eaed)}
+body.oxygen-mode .wc-close:hover{background:linear-gradient(#f0a090,#d84a36);color:#ffffff}
+body.aqua-mode:not(.oldretro-mode) .wc-b:hover{filter:brightness(1.12) saturate(1.1)}
+body.sequoia-mode .wc-b:hover,
+body.liquid-mode .wc-b:hover{filter:brightness(1.12)}

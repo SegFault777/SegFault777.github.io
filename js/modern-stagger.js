@@ -88,7 +88,7 @@
     });
   }
 
-  if(reduce.matches){
+  if(reduce.matches||(window.miniwinReduceMotion&&window.miniwinReduceMotion())){
     document.querySelectorAll('.char-stagger').forEach(el=>el.classList.add('char-motion-parent'));
   }
 })();

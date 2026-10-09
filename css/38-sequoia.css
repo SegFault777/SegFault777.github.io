@@ -1,0 +1,124 @@
+/* Sequoia: macOS Sequoia (15). A Modern-layout look that follows the reference screenshots:
+   a Sequoia-style wallpaper glow (deep blue with orange light), a translucent light menu bar,
+   large rounded frosted windows with red/yellow/green traffic lights, rounded widget-like
+   cards, a system-blue accent and pill toggles. Affects body.sequoia-mode only. */
+
+html.sequoia-mode{background:#24479f}
+body.sequoia-mode{
+  background:
+    radial-gradient(48% 40% at 84% 4%,rgba(255,178,110,.95) 0%,rgba(255,178,110,0) 70%),
+    radial-gradient(44% 42% at 96% 88%,rgba(255,132,118,.7) 0%,rgba(255,132,118,0) 70%),
+    radial-gradient(60% 52% at 4% 100%,rgba(26,70,200,.95) 0%,rgba(26,70,200,0) 72%),
+    radial-gradient(40% 36% at 42% 34%,rgba(214,232,255,.55) 0%,rgba(214,232,255,0) 70%),
+    linear-gradient(158deg,#7fb0f5 0%,#4378e0 34%,#2a57bb 66%,#1b3a86 100%) fixed;
+  color:#1d1d1f;
+  font-size:13px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+
+/* One UI font for the whole Sequoia page (Pretendard, with the system fonts as fallback).
+   Code blocks keep a monospace face. */
+body.sequoia-mode,
+body.sequoia-mode *{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif !important}
+body.sequoia-mode pre,
+body.sequoia-mode code,
+body.sequoia-mode .terminal pre{font-family:Menlo,Monaco,"Courier New",monospace !important}
+
+/* menu bar: translucent, frosted, with a hairline bottom edge */
+body.sequoia-mode .top{background:rgba(245,245,247,.6);border:0;border-bottom:.5px solid rgba(0,0,0,.14);box-shadow:none;backdrop-filter:saturate(180%) blur(28px);-webkit-backdrop-filter:saturate(180%) blur(28px)}
+body.sequoia-mode .logo{color:#1d1d1f;font-weight:700;letter-spacing:-.01em;text-shadow:none}
+body.sequoia-mode .logo span:first-of-type{color:#0066d6}
+body.sequoia-mode .logo .version{color:#86868b;font-weight:500}
+body.sequoia-mode .nav a,
+body.sequoia-mode .lang-btn{color:#1d1d1f;background:transparent;border:0;border-radius:6px;box-shadow:none;padding:4px 9px;font-size:13px;font-weight:500;letter-spacing:0;text-shadow:none}
+body.sequoia-mode .nav a:hover,
+body.sequoia-mode .nav a.active,
+body.sequoia-mode .lang-btn:hover,
+body.sequoia-mode .lang.open .lang-btn{background:#0a7aff;color:#fff;border-color:transparent;box-shadow:none}
+
+/* style switch: a soft grey pill, system-blue when on */
+body.sequoia-mode .top .style-switch{height:26px;padding:0 8px;gap:7px;margin-right:4px;background:rgba(120,120,128,.16);border:0;border-radius:999px;box-shadow:none}
+body.sequoia-mode .top .style-label{color:#6e6e73;font-size:12px;font-weight:500;letter-spacing:0;text-shadow:none}
+body.sequoia-mode .top .style-label:first-child{color:#1d1d1f}
+body.sequoia-mode .top .style-toggle{width:36px;height:20px;padding:0;border:0 !important;border-radius:999px !important;background:rgba(120,120,128,.35) !important;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.08) !important;outline:none !important}
+body.sequoia-mode .top .style-toggle span{top:2px;left:2px;width:16px;height:16px;border:0 !important;border-radius:50% !important;background:#ffffff !important;box-shadow:0 1px 3px rgba(0,0,0,.3) !important;transition:none !important}
+body.sequoia-mode .top .style-toggle[aria-pressed="true"]{background:#0a7aff !important}
+body.sequoia-mode .top .style-toggle[aria-pressed="true"] span{left:18px}
+body.sequoia-mode .top .settings-btn{color:#1d1d1f;background:rgba(255,255,255,.7);border:0;border-radius:999px;box-shadow:0 0 0 .5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.08)}
+body.sequoia-mode .top .settings-btn:hover{background:#ffffff}
+
+/* windows: frosted, large radius, soft deep shadow, a light toolbar with traffic lights */
+body.sequoia-mode .panel,
+body.sequoia-mode .monitor{background:rgba(250,250,252,.88);border:.5px solid rgba(255,255,255,.75);border-radius:14px;box-shadow:0 0 0 .5px rgba(0,0,0,.2),0 26px 56px -14px rgba(8,22,70,.55);backdrop-filter:blur(40px) saturate(160%);-webkit-backdrop-filter:blur(40px) saturate(160%)}
+body.sequoia-mode .panel-head{position:relative;background:linear-gradient(rgba(255,255,255,.85),rgba(236,236,240,.85));color:#1d1d1f;border:0;border-bottom:.5px solid rgba(0,0,0,.16);border-radius:14px 14px 0 0;font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;text-align:center;padding:9px 72px;min-height:20px;box-sizing:border-box;cursor:default}
+/* three traffic-light dots: the first is the pseudo-element, the other two are its box-shadow copies */
+body.sequoia-mode .panel-head::before{content:"";position:absolute;left:14px;top:50%;margin-top:-6px;width:12px;height:12px;border-radius:50%;background:#ff5f57;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.18),20px 0 0 0 #febc2e,40px 0 0 0 #28c840}
+body.sequoia-mode .monitor img{border:0;border-radius:8px;image-rendering:auto}
+
+/* widgets: the feature cards and facts read as small frosted tiles */
+body.sequoia-mode .card p,
+body.sequoia-mode .fact small{color:#515154}
+body.sequoia-mode .card h3,
+body.sequoia-mode .fact strong{color:#1d1d1f}
+body.sequoia-mode .fact{background:rgba(255,255,255,.7);border-radius:12px}
+body.sequoia-mode .badge{background:rgba(10,122,255,.12);color:#0a64d6;border:0;border-radius:999px;text-shadow:none;box-shadow:none;font-weight:600}
+body.sequoia-mode .tag{background:rgba(255,255,255,.22);color:#ffffff;border:0;border-radius:999px;text-shadow:none;box-shadow:none;font-weight:600}
+
+/* rounded macOS buttons; the default action is the Sequoia system blue */
+body.sequoia-mode .btn{background:rgba(255,255,255,.92);color:#1d1d1f;border:.5px solid rgba(0,0,0,.14);border-radius:8px;box-shadow:0 1px 2px rgba(0,0,0,.1),inset 0 .5px 0 #ffffff;font-size:13px;font-weight:500;padding:6px 14px;text-shadow:none;transform:none}
+body.sequoia-mode .btn:hover{background:#ffffff;box-shadow:0 2px 6px rgba(0,0,0,.14),inset 0 .5px 0 #ffffff;transform:none}
+body.sequoia-mode .btn:active{background:#e5e5ea;box-shadow:inset 0 1px 2px rgba(0,0,0,.18);transform:none}
+body.sequoia-mode .btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(10,122,255,.55)}
+body.sequoia-mode .btn.primary{background:linear-gradient(#3d9bff,#0a7aff);border-color:#0a6ee0;color:#ffffff;box-shadow:inset 0 .5px 0 rgba(255,255,255,.4),0 1px 2px rgba(0,60,170,.35)}
+body.sequoia-mode .btn.primary:hover{background:linear-gradient(#56a8ff,#1a86ff);border-color:#0a6ee0;color:#ffffff}
+body.sequoia-mode .btn.primary:active{background:#0a6ee0;color:#ffffff}
+
+/* Terminal: a dark Sequoia Terminal window below a light toolbar */
+body.sequoia-mode .terminal{background:rgba(29,29,31,.96);border:.5px solid rgba(255,255,255,.2);border-radius:14px;box-shadow:0 26px 56px -14px rgba(8,22,70,.55)}
+body.sequoia-mode .terminal pre{color:#f5f5f7;background:transparent;border:0}
+
+/* text on the wallpaper: white, softly shadowed */
+body.sequoia-mode .hero h1{color:#ffffff;text-shadow:0 2px 24px rgba(10,30,90,.35);letter-spacing:-.02em;text-transform:none}
+body.sequoia-mode .hero h1 span{color:#ffffff}
+body.sequoia-mode .hero p,
+body.sequoia-mode .head p{color:rgba(255,255,255,.94);text-shadow:0 1px 8px rgba(10,30,90,.3)}
+body.sequoia-mode .head h2{color:#ffffff;text-shadow:0 2px 16px rgba(10,30,90,.35)}
+body.sequoia-mode .eyebrow{color:rgba(255,255,255,.82);text-shadow:0 1px 6px rgba(10,30,90,.3)}
+body.sequoia-mode .note{background:rgba(255,255,255,.74);border:.5px solid rgba(255,255,255,.7);border-radius:12px;color:#1d1d1f;box-shadow:0 8px 24px -10px rgba(8,22,70,.45);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%)}
+body.sequoia-mode footer{background:transparent;color:rgba(255,255,255,.88);border-top:.5px solid rgba(255,255,255,.35);text-shadow:0 1px 6px rgba(10,30,90,.35)}
+
+/* language menu: a frosted macOS pop-up menu */
+body.sequoia-mode .lang-menu{background:rgba(250,250,252,.92);border:.5px solid rgba(0,0,0,.14);border-radius:10px;box-shadow:0 14px 34px rgba(8,22,70,.35);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px)}
+body.sequoia-mode .lang-menu button{color:#1d1d1f;border-radius:6px}
+body.sequoia-mode .lang-menu button:hover,
+body.sequoia-mode .lang-menu button.active{background:#0a7aff;color:#ffffff}
+body.sequoia-mode .lang-menu .check{color:#0a7aff}
+
+/* Settings: a macOS System Settings-style sheet, close button at the left as a red traffic light */
+body.sequoia-mode #settingsOverlay .settings-panel{background:rgba(246,246,248,.94);color:#1d1d1f;border:.5px solid rgba(255,255,255,.7);border-radius:14px;box-shadow:0 0 0 .5px rgba(0,0,0,.2),0 30px 60px -12px rgba(8,22,70,.6);backdrop-filter:blur(40px) saturate(160%);-webkit-backdrop-filter:blur(40px) saturate(160%)}
+body.sequoia-mode #settingsOverlay .settings-head{position:relative;display:flex;justify-content:center;align-items:center;background:linear-gradient(rgba(255,255,255,.85),rgba(236,236,240,.85));color:#1d1d1f;border:0;border-bottom:.5px solid rgba(0,0,0,.16);border-radius:14px 14px 0 0;padding:9px 40px;min-height:28px;font-size:13px;font-weight:600;letter-spacing:0;text-shadow:none}
+body.sequoia-mode #settingsOverlay .settings-close{position:absolute;left:14px;top:50%;margin-top:-6px;width:12px;height:12px;min-width:12px;min-height:12px;padding:0;border-radius:50%;border:0;background:#ff5f57;box-shadow:none;color:transparent;font-size:0}
+body.sequoia-mode #settingsOverlay .settings-close svg{display:none}
+body.sequoia-mode #settingsOverlay .settings-body{padding:14px 18px;background:transparent}
+body.sequoia-mode #settingsOverlay .settings-row{margin-bottom:12px}
+body.sequoia-mode #settingsOverlay .settings-row-label{color:#1d1d1f}
+body.sequoia-mode #settingsOverlay .settings-kp-state{color:#1d1d1f;font-weight:500}
+body.sequoia-mode #settingsOverlay .settings-lang-select{color:#1d1d1f;background:#ffffff;border:.5px solid rgba(0,0,0,.18);border-radius:7px;height:26px;font-size:13px;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+body.sequoia-mode #settingsOverlay #settingsKpSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+body.sequoia-mode #settingsOverlay #settingsKpToggle{width:38px;height:22px;padding:0;border:0 !important;border-radius:999px !important;background:rgba(120,120,128,.35) !important;box-shadow:none !important;outline:none !important}
+body.sequoia-mode #settingsOverlay #settingsKpToggle span{top:2px;left:2px;width:18px;height:18px;border:0 !important;border-radius:50% !important;background:#ffffff !important;box-shadow:0 1px 3px rgba(0,0,0,.3) !important}
+body.sequoia-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"]{background:#0a7aff !important}
+body.sequoia-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"] span{left:18px}
+
+/* the Modern hero adds a light band to its section; Sequoia keeps the wallpaper continuous */
+body.sequoia-mode .hero{background:none}
+
+/* The Modern hero tilts the screenshot in 3D (and animates it in). Sequoia windows are flat,
+   so the hero window is shown straight-on, fully visible from the start. */
+body.sequoia-mode .hero-grid .monitor-stage,
+body.sequoia-mode .hero-grid .monitor-stage .monitor,
+body.sequoia-mode .hero-grid .monitor-stage .monitor img,
+body.sequoia-mode .hero-grid .monitor-stage .image-credit{transform:none !important;opacity:1 !important;transition:none !important;perspective:none !important}

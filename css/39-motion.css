@@ -1,0 +1,104 @@
+/* Animation removal (Settings → 애니메이션 제거; on by default on mobile devices).
+   1) html.reduce-motion turns every transition, animation, smooth scroll and entrance effect off,
+      whatever the OS setting is. It mirrors the prefers-reduced-motion rules of 04, 15 and 16.
+   2) The settings toggle for animation removal is skinned exactly like the 문화어 toggle in every
+      theme: these rules repeat the #settingsKpToggle rules with the new element id. */
+html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{
+  animation-duration:.01ms !important;animation-delay:0s !important;animation-iteration-count:1 !important;
+  transition-duration:.01ms !important;transition-delay:0s !important;scroll-behavior:auto !important}
+html.reduce-motion body.modern-mode .modern-reveal,
+html.reduce-motion body.modern-mode .modern-reveal.is-visible{opacity:1 !important;transform:none !important}
+html.reduce-motion body.modern-mode .monitor-stage .monitor,
+html.reduce-motion body.modern-mode .monitor-stage .monitor img,
+html.reduce-motion body.modern-mode .monitor-stage .image-credit,
+html.reduce-motion body.modern-mode .hero-grid > :first-child,
+html.reduce-motion body.modern-mode .hero-grid > .monitor-stage .monitor,
+html.reduce-motion body.modern-mode .hero-grid > .monitor-stage .monitor img,
+html.reduce-motion body.modern-mode .hero-grid > .monitor-stage .image-credit{opacity:1 !important;transform:none !important;transition:none !important}
+html.reduce-motion .lang-menu,html.reduce-motion .lang.open .lang-menu{transition:none !important;transform:none !important}
+
+/* ---- settings toggle for animation removal (mirrors #settingsKpToggle, per theme) ---- */
+/* from 20-settings-extra.css */
+#settingsMotionSwitch{margin-right:0}
+/* from 20-settings-extra.css */
+#settingsMotionToggle span{left:2px}
+/* from 20-settings-extra.css */
+#settingsMotionToggle[aria-pressed="true"] span{left:19px}
+/* from 20-settings-extra.css */
+body.modern-mode #settingsMotionToggle span{left:3px}
+/* from 20-settings-extra.css */
+body.modern-mode #settingsMotionToggle[aria-pressed="true"] span{left:19px}
+/* from 27-modern-glass.css */
+#settingsMotionToggle span{left:2px}
+/* from 27-modern-glass.css */
+#settingsMotionToggle[aria-pressed="true"] span{left:19px}
+/* from 27-modern-glass.css */
+body.modern-glass-mode #settingsMotionToggle span{left:2px}
+/* from 27-modern-glass.css */
+body.modern-glass-mode #settingsMotionToggle[aria-pressed="true"] span{left:22px}
+/* from 32-luna.css */
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+/* from 32-luna.css */
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionToggle{width:38px;height:20px;padding:0;border:1px solid #003c74 !important;border-radius:3px !important;
+  background:linear-gradient(180deg,#d6d0c5,#fbfaf4) !important;box-shadow:inset 1px 1px 2px rgba(0,0,0,.25) !important;}
+/* from 32-luna.css */
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionToggle span{top:2px;left:2px;width:14px;height:14px;border:1px solid #003c74 !important;border-radius:2px !important;
+  background:linear-gradient(180deg,#ffffff,#c9d6ec) !important;box-shadow:none !important;}
+/* from 32-luna.css */
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:linear-gradient(180deg,#5a9ef6,#1f56d0) !important;border-color:#003c74 !important;}
+/* from 32-luna.css */
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:20px}
+/* from 33-flat.css */
+body.flat-mode #settingsMotionToggle{width:40px;height:20px;border:1px solid #8a8a8a;border-radius:0;background:#fff;box-shadow:none}
+/* from 33-flat.css */
+body.flat-mode #settingsMotionToggle span{top:3px;left:3px;width:12px;height:12px;border-radius:0;background:#5d5d5d;box-shadow:none}
+/* from 33-flat.css */
+body.flat-mode #settingsMotionToggle[aria-pressed="true"]{background:#0067c0;border-color:#0067c0}
+/* from 33-flat.css */
+body.flat-mode #settingsMotionToggle[aria-pressed="true"] span{left:23px;background:#fff}
+/* from 33-flat.css */
+body.flat-mode #settingsMotionSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+/* from 34-adwaita.css */
+body.adwaita-mode #settingsMotionToggle[aria-pressed="true"]{background:#3584e4;border-color:#1c71d8}
+/* from 34-adwaita.css */
+body.adwaita-mode #settingsMotionSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+/* from 35-mica.css */
+body.mica-mode #settingsMotionSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+/* from 35-mica.css */
+body.mica-mode #settingsMotionToggle{width:40px;height:20px;border:1px solid #8a8a8a;border-radius:999px;background:transparent;box-shadow:none}
+/* from 35-mica.css */
+body.mica-mode #settingsMotionToggle span{top:4px;left:4px;width:12px;height:12px;border-radius:50%;background:#5d5d5d;box-shadow:none}
+/* from 35-mica.css */
+body.mica-mode #settingsMotionToggle[aria-pressed="true"]{background:#0067c0;border-color:#0067c0}
+/* from 35-mica.css */
+body.mica-mode #settingsMotionToggle[aria-pressed="true"] span{left:24px;background:#fff}
+/* from 36-oxygen.css */
+body.oxygen-mode #settingsMotionSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+/* from 36-oxygen.css */
+body.oxygen-mode #settingsMotionToggle{width:38px;height:18px;border:1px solid #9ea6ae;border-radius:3px;background:#c4cad0;box-shadow:inset 0 1px 2px rgba(0,0,0,.2)}
+/* from 36-oxygen.css */
+body.oxygen-mode #settingsMotionToggle span{top:2px;left:2px;width:12px;height:12px;border-radius:2px;background:linear-gradient(#ffffff,#d8dde2);box-shadow:none}
+/* from 36-oxygen.css */
+body.oxygen-mode #settingsMotionToggle[aria-pressed="true"]{background:#3daefd;border-color:#2b8fcf}
+/* from 36-oxygen.css */
+body.oxygen-mode #settingsMotionToggle[aria-pressed="true"] span{left:20px}
+/* from 37-aqua.css */
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+/* from 37-aqua.css */
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionToggle{width:38px;height:20px;padding:0;border:1px solid #7b7b7b !important;border-radius:10px !important;background:linear-gradient(#cdcdcd,#f7f7f7) !important;box-shadow:inset 0 1px 3px rgba(0,0,0,.3) !important;outline:none !important}
+/* from 37-aqua.css */
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionToggle span{top:2px;left:2px;width:14px;height:14px;border:1px solid #2f5fb0 !important;border-radius:50% !important;background:radial-gradient(circle at 36% 30%,#ffffff 0,#ffffff 35%,#dfe8f5 100%) !important;box-shadow:0 1px 2px rgba(0,0,0,.35) !important}
+/* from 37-aqua.css */
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:linear-gradient(#a9ccf8,#2f6fd6) !important;border-color:#2a5fb4 !important}
+/* from 37-aqua.css */
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:20px}
+/* from 38-sequoia.css */
+body.sequoia-mode #settingsOverlay #settingsMotionSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+/* from 38-sequoia.css */
+body.sequoia-mode #settingsOverlay #settingsMotionToggle{width:38px;height:22px;padding:0;border:0 !important;border-radius:999px !important;background:rgba(120,120,128,.35) !important;box-shadow:none !important;outline:none !important}
+/* from 38-sequoia.css */
+body.sequoia-mode #settingsOverlay #settingsMotionToggle span{top:2px;left:2px;width:18px;height:18px;border:0 !important;border-radius:50% !important;background:#ffffff !important;box-shadow:0 1px 3px rgba(0,0,0,.3) !important}
+/* from 38-sequoia.css */
+body.sequoia-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:#0a7aff !important}
+/* from 38-sequoia.css */
+body.sequoia-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:18px}

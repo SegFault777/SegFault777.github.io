@@ -31,7 +31,8 @@
     const target=document.getElementById(id);
     if(!target)return;
     const y=Math.max(0,target.getBoundingClientRect().top + window.scrollY - getOffset());
-    window.scrollTo({top:y,behavior:modern()?'smooth':'auto'});
+    const motionOff=!!(window.miniwinReduceMotion&&window.miniwinReduceMotion());
+    window.scrollTo({top:y,behavior:modern()&&!motionOff?'smooth':'auto'});
     setActive(id);
     if(updateHash) history.replaceState(null,'','#'+id);
   };

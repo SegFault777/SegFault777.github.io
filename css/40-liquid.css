@@ -1,0 +1,237 @@
+/* Liquid Glass (Modern layout). The background is the light-bending wave; every UI surface is white glass that
+   lets the wave show through, with no blue fills. The glass material follows the uploaded dynamic-frame-layout
+   reference: the white/alpha palette of its globals and sliders (white/10 hairlines, white/20 fills, white/50 accents),
+   its container shadows (outer drop shadow plus inset top light and bottom shade), and the refraction map that
+   js/glass.js builds with the same signed-distance shader as public/liquid-glass.js. Affects body.liquid-mode only. */
+
+html.liquid-mode{background:#0a3fa6}
+body.liquid-mode{
+  --lq-ink:#1d1d1f; --lq-ink-2:#4a4a4f;
+  --lq-glass:linear-gradient(150deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.44) 55%,rgba(255,255,255,.54) 100%);
+  --lq-sheen:radial-gradient(circle at var(--mx,30%) var(--my,0%),rgba(255,255,255,.55) 0,rgba(255,255,255,0) 42%);
+  /* the reference container: inset top light (0 -1px 4px 1px) and inset bottom shade (0 -10px 25px), plus a hairline rim */
+  --lq-rim:inset 0 0 0 1px rgba(255,255,255,.42),0 -10px 25px inset rgba(0,0,0,.12),0 -1px 4px 1px inset rgba(255,255,255,.74);
+  --lq-drop:0 4px 8px rgba(0,0,0,.22);
+  min-height:100vh;color:var(--lq-ink);background:transparent;  /* the wave below is the backdrop */
+  font-family:'Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:14px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+/* the wave: a fixed layer, so it does not jump on iOS where background-attachment is ignored */
+body.liquid-mode::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(60vw 45vh at 8% -4%,rgba(255,255,255,.7) 0,rgba(255,255,255,0) 60%),
+  radial-gradient(70vw 60vh at 100% 100%,rgba(40,240,255,.92) 0,rgba(40,240,255,0) 60%),
+  radial-gradient(60vw 50vh at 55% 45%,rgba(20,100,255,.88) 0,rgba(20,100,255,0) 70%),
+  radial-gradient(50vw 40vh at 0% 92%,rgba(0,170,230,.85) 0,rgba(0,170,230,0) 70%),
+  linear-gradient(160deg,#bfe0ff 0%,#4f9cf7 30%,#0c5ad8 58%,#0a3aa6 80%,#12b9e0 100%)}
+
+/* one UI font (Apple SD Gothic Neo). The :not(.oldretro-mode) matches the specificity of 11-modern-fonts.css,
+   which would otherwise keep Pretendard; code keeps its monospace. */
+body.liquid-mode:not(.oldretro-mode),
+body.liquid-mode:not(.oldretro-mode) *{font-family:'Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif !important}
+body.liquid-mode:not(.oldretro-mode) pre,
+body.liquid-mode:not(.oldretro-mode) code,
+body.liquid-mode:not(.oldretro-mode) .terminal pre{font-family:Menlo,Monaco,"Courier New",monospace !important}
+
+/* glass surfaces: white and translucent, with the pointer-following sheen and the reference shadows */
+body.liquid-mode .top,
+body.liquid-mode .panel,
+body.liquid-mode .monitor,
+body.liquid-mode .note,
+body.liquid-mode .settings-panel,
+body.liquid-mode .lang-menu{background:var(--lq-sheen),var(--lq-glass);border:1px solid rgba(255,255,255,.45);box-shadow:var(--lq-rim),var(--lq-drop);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%)}
+body.liquid-mode .panel,body.liquid-mode .monitor,body.liquid-mode .settings-panel{border-radius:12px}
+body.liquid-mode .note{border-radius:10px}
+body.liquid-mode .lang-menu{border-radius:10px}
+body.liquid-mode .card{border-color:rgba(255,255,255,.45)}
+body.liquid-mode .fact{background:var(--lq-sheen),rgba(255,255,255,.42);border-radius:12px;box-shadow:var(--lq-rim)}
+body.liquid-mode .top{border:0;border-bottom:1px solid rgba(255,255,255,.45);border-radius:0;box-shadow:var(--lq-rim),0 10px 26px -16px rgba(0,0,0,.35)}
+body.liquid-mode .panel-head{background:linear-gradient(rgba(255,255,255,.42),rgba(255,255,255,.14));color:var(--lq-ink);border:0;border-bottom:1px solid rgba(255,255,255,.45);border-radius:12px 12px 0 0;font-weight:700;text-align:center;letter-spacing:0;text-transform:none}
+body.liquid-mode .monitor img{border:0;border-radius:8px}
+body.liquid-mode .card h3,body.liquid-mode .fact strong{color:var(--lq-ink)}
+body.liquid-mode .card p,body.liquid-mode .fact small{color:var(--lq-ink-2)}
+
+/* header: logo, navigation and the style switch, all white */
+body.liquid-mode .logo{color:var(--lq-ink);text-shadow:0 1px 0 rgba(255,255,255,.6)}
+body.liquid-mode .logo span:first-of-type{color:var(--lq-ink)}
+body.liquid-mode .logo .version{color:var(--lq-ink-2)}
+body.liquid-mode .nav a,body.liquid-mode .lang-btn{color:var(--lq-ink);background:transparent;border:1px solid transparent;border-radius:6px;box-shadow:none;padding:6px 12px;font-size:13px;font-weight:600;letter-spacing:0}
+body.liquid-mode .nav a:hover,body.liquid-mode .lang-btn:hover,body.liquid-mode .lang.open .lang-btn{background:var(--lq-sheen),rgba(255,255,255,.3);border-color:rgba(255,255,255,.6);box-shadow:var(--lq-rim)}
+body.liquid-mode .nav a.active{background:var(--lq-sheen),rgba(255,255,255,.72);color:var(--lq-ink);border-color:rgba(255,255,255,.9);box-shadow:var(--lq-rim),var(--lq-drop)}
+body.liquid-mode .top .style-switch{height:34px;padding:0 12px;gap:10px;margin-right:4px;background:var(--lq-sheen),rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.55);border-radius:999px;box-shadow:var(--lq-rim)}
+body.liquid-mode .top .style-label{color:var(--lq-ink-2);font-size:12px;font-weight:600;letter-spacing:0;text-shadow:none}
+body.liquid-mode .top .style-label:first-child{color:var(--lq-ink)}
+body.liquid-mode .top .settings-btn{color:var(--lq-ink);background:var(--lq-sheen),rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.6);border-radius:999px;box-shadow:var(--lq-rim)}
+
+/* hero on the wave: white type with a deep soft shadow (this text sits on the background, not on glass) */
+body.liquid-mode .hero{background:none}
+body.liquid-mode .hero h1{color:#fff;text-shadow:0 2px 24px rgba(0,30,100,.45);letter-spacing:-.02em}
+body.liquid-mode .hero h1 span{color:#fff}
+body.liquid-mode .hero p,body.liquid-mode .head p{color:rgba(255,255,255,.95);text-shadow:0 1px 10px rgba(0,30,100,.35)}
+body.liquid-mode .head h2{color:#fff;text-shadow:0 2px 18px rgba(0,30,100,.4)}
+body.liquid-mode .eyebrow{color:rgba(255,255,255,.9);text-shadow:0 1px 8px rgba(0,30,100,.4)}
+body.liquid-mode .tag{background:var(--lq-sheen),rgba(255,255,255,.3);color:var(--lq-ink);border:1px solid rgba(255,255,255,.6);border-radius:999px;box-shadow:var(--lq-rim);text-shadow:none;font-weight:600}
+body.liquid-mode .badge{background:var(--lq-sheen),rgba(255,255,255,.3);color:var(--lq-ink);border:1px solid rgba(255,255,255,.6);border-radius:999px;font-weight:700;text-shadow:none;box-shadow:none}
+body.liquid-mode footer{background:transparent;color:rgba(255,255,255,.95);border-top:1px solid rgba(255,255,255,.4);text-shadow:0 1px 8px rgba(0,30,100,.4)}
+
+/* buttons: the Sequoia button (an 8px rounded rectangle), made of white Liquid Glass. The default action is the
+   brightest white pane, so no button is blue. */
+body.liquid-mode .btn{position:relative;background:var(--lq-sheen),rgba(255,255,255,.62);color:var(--lq-ink);border:.5px solid rgba(255,255,255,.85);border-radius:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),inset 0 -1px 4px 1px rgba(255,255,255,.6),var(--lq-drop);font-size:13px;font-weight:500;padding:6px 14px;text-shadow:none;transform:none}
+body.liquid-mode .btn:hover{background:var(--lq-sheen),rgba(255,255,255,.76);box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),inset 0 -1px 4px 1px rgba(255,255,255,.7),0 3px 8px rgba(0,0,0,.22);transform:none}
+body.liquid-mode .btn:active{transform:scale(.98);box-shadow:var(--lq-rim),inset 0 1px 3px rgba(0,0,0,.2)}
+body.liquid-mode .btn:focus-visible{outline:none;box-shadow:var(--lq-rim),0 0 0 3px rgba(255,255,255,.75)}
+body.liquid-mode .btn.primary{background:linear-gradient(180deg,rgba(255,255,255,.7) 0%,rgba(255,255,255,0) 50%),rgba(255,255,255,.82);color:var(--lq-ink);border-color:rgba(255,255,255,.95);font-weight:600;box-shadow:inset 0 .5px 0 #fff,var(--lq-drop)}
+body.liquid-mode .btn.primary:hover{background:linear-gradient(180deg,rgba(255,255,255,.8) 0%,rgba(255,255,255,0) 50%),rgba(255,255,255,.94);color:var(--lq-ink)}
+
+/* terminal: a white glass console with dark type */
+body.liquid-mode .terminal{background:var(--lq-sheen),rgba(255,255,255,.56);border:1px solid rgba(255,255,255,.5);border-radius:12px;box-shadow:var(--lq-rim),var(--lq-drop)}
+body.liquid-mode .terminal pre{color:var(--lq-ink);background:transparent;border:0}
+body.liquid-mode .terminal .panel-head{background:linear-gradient(rgba(255,255,255,.42),rgba(255,255,255,.14));color:var(--lq-ink)}
+
+/* settings sheet and toggles */
+body.liquid-mode #settingsOverlay .settings-panel{color:var(--lq-ink);border-radius:12px}
+body.liquid-mode #settingsOverlay .settings-head{background:linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,.16));color:var(--lq-ink);border-bottom:1px solid rgba(255,255,255,.45);border-radius:12px 12px 0 0;font-weight:700;position:relative;justify-content:center;padding:9px 40px;min-height:20px;font-size:13px}
+body.liquid-mode #settingsOverlay .settings-close{width:30px;height:30px;border-radius:50%;background:var(--lq-sheen),rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.7);box-shadow:var(--lq-rim);color:var(--lq-ink)}  /* replaced by the traffic light below */
+body.liquid-mode #settingsOverlay .settings-row-label{color:var(--lq-ink);font-weight:600}
+body.liquid-mode #settingsOverlay .settings-kp-state{color:var(--lq-ink);font-weight:700}
+body.liquid-mode #settingsOverlay .settings-lang-select{color:var(--lq-ink);background:var(--lq-sheen),rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.7);border-radius:7px;height:30px;padding:0 26px 0 12px;box-shadow:var(--lq-rim)}
+body.liquid-mode #settingsOverlay #settingsKpSwitch,
+body.liquid-mode #settingsOverlay #settingsMotionSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+/* the switch track: translucent white when off, solid white when on. The knob is white when off and ink when on. */
+body.liquid-mode .top .style-toggle,
+body.liquid-mode #settingsOverlay #settingsKpToggle,
+body.liquid-mode #settingsOverlay #settingsMotionToggle{width:44px;height:24px;padding:0;border:1px solid rgba(255,255,255,.75) !important;border-radius:999px !important;background:rgba(255,255,255,.2) !important;box-shadow:inset 0 1px 3px rgba(0,0,0,.18) !important;outline:none !important}
+body.liquid-mode .top .style-toggle{width:40px;height:22px}
+
+/* ---- toggles: the knob and liquid animation, after the switch reference (toggleswitchanimation.gif) ----
+   The knob is a glass capsule, 54% of the track wide. Its left and width are percentages of the track, so one set
+   of keyframes fits the header switch (40x22) and the settings switches (44x24). */
+body.liquid-mode .top .style-toggle span,
+body.liquid-mode #settingsOverlay #settingsKpToggle span,
+body.liquid-mode #settingsOverlay #settingsMotionToggle span{top:2px;bottom:2px;left:6%;width:54%;height:auto;z-index:2;border:0 !important;border-radius:999px !important;background:radial-gradient(circle at 35% 30%,#ffffff 0,#f4f4f6 60%,#dcdce0 100%) !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),0 1px 3px rgba(0,0,0,.25) !important;transition:background .35s ease}
+body.liquid-mode .top .style-toggle[aria-pressed="true"] span,
+body.liquid-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"] span,
+body.liquid-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:40%}
+body.liquid-mode .top .style-toggle[aria-pressed="true"],
+body.liquid-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+body.liquid-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:linear-gradient(180deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 45%),linear-gradient(180deg,#3cf06a,#22e05a 55%,#14d24c) !important;border-color:rgba(255,255,255,.85) !important}
+
+/* section D: the motion itself, read frame by frame from the reference (87 frames, 2.9 s, two switch cycles):
+   - press: under the finger the knob stretches sideways (frames 0-2, 64-66);
+   - liquid: the fill floods across the track as the knob moves; switching on it floods from the left (frames 19-24,
+     67-70), switching off it drains to the right (frames 1-3, 40-49). The fill is the switch green (#5bb65e, sampled from the GIF);
+   - slide: the knob's leading edge goes first and its trailing edge catches up, so it stretches to about 60-65% of
+     the track while it travels (frames 4-8, 27-29, 50-52, 75-77);
+   - settle: the knob returns to its rest width, with a small overshoot (frames 33, 81).
+   The keyframes run only on switches marked .lq-flip by js/glass.js, so nothing moves on page load. */
+body.liquid-mode .top .style-toggle,
+body.liquid-mode #settingsOverlay #settingsKpToggle,
+body.liquid-mode #settingsOverlay #settingsMotionToggle{transition:background .4s ease,border-color .4s ease}
+body.liquid-mode .top .style-toggle:active span{width:64%;left:4%}
+body.liquid-mode .top .style-toggle[aria-pressed="true"]:active span{width:64%;left:32%}
+body.liquid-mode #settingsOverlay #settingsKpToggle:active span,
+body.liquid-mode #settingsOverlay #settingsMotionToggle:active span{width:64%;left:4%}
+body.liquid-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"]:active span,
+body.liquid-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]:active span{width:64%;left:32%}
+
+@keyframes lq-knob-on{
+  0%{left:6%;width:54%}
+  12%{left:4%;width:62%}
+  30%{left:8%;width:62%}
+  50%{left:22%;width:78%}
+  66%{left:36%;width:64%}
+  80%{left:42%;width:52%}
+  92%{left:39.5%;width:54.5%}
+  100%{left:40%;width:54%}}
+@keyframes lq-knob-off{
+  0%{left:40%;width:54%}
+  13%{left:37%;width:62%}
+  27%{left:0%;width:65%}
+  40%{left:3%;width:61%}
+  53%{left:0%;width:62%}
+  67%{left:6%;width:55%}
+  85%{left:6%;width:54%}
+  100%{left:6%;width:54%}}
+/* the liquid: floods from the left when on, drains to the right when off */
+@keyframes lq-pool-on{
+  0%{opacity:0;transform:scaleX(0)}
+  12%{opacity:.9;transform:scaleX(.18)}
+  30%{opacity:1;transform:scaleX(1)}
+  62%{opacity:.9;transform:scaleX(1)}
+  82%{opacity:.5;transform:scaleX(1)}
+  100%{opacity:0;transform:scaleX(1)}}
+@keyframes lq-pool-off{
+  0%{opacity:1;transform:scaleX(1)}
+  30%{opacity:1;transform:scaleX(.9)}
+  55%{opacity:.8;transform:scaleX(.45)}
+  75%{opacity:.4;transform:scaleX(.1)}
+  90%{opacity:0;transform:scaleX(0)}
+  100%{opacity:0;transform:scaleX(0)}}
+body.liquid-mode .top .style-toggle::after,
+body.liquid-mode #settingsOverlay #settingsKpToggle::after,
+body.liquid-mode #settingsOverlay #settingsMotionToggle::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:1;pointer-events:none;opacity:0;transform-origin:left center;background:linear-gradient(90deg,#14d24c,#3cf06a);box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+/* switched off, the liquid drains to the right (the settings rules have higher specificity, so they are named too) */
+body.liquid-mode .top .style-toggle[aria-pressed="false"]::after,
+body.liquid-mode #settingsOverlay #settingsKpToggle[aria-pressed="false"]::after,
+body.liquid-mode #settingsOverlay #settingsMotionToggle[aria-pressed="false"]::after{transform-origin:right center}
+body.liquid-mode .lq-flip[aria-pressed="true"] span{animation:lq-knob-on .55s linear both}
+body.liquid-mode .lq-flip[aria-pressed="false"] span{animation:lq-knob-off .6s linear both}
+body.liquid-mode .lq-flip[aria-pressed="true"]::after{animation:lq-pool-on .55s linear both}
+body.liquid-mode .lq-flip[aria-pressed="false"]::after{animation:lq-pool-off .6s linear both}
+
+/* E. Active navigation item: a glass capsule that swells into place when it is selected. */
+body.liquid-mode .nav a.active{animation:lq-blob-in .7s cubic-bezier(.34,1.56,.64,1)}
+@keyframes lq-blob-in{0%{transform:scale(.72,.8);border-radius:40% 60% 55% 45% / 50% 40% 60% 50%}55%{transform:scale(1.06,.96)}100%{transform:scale(1);border-radius:6px}}
+
+/* ---- motion: the wave flows behind the glass, and touch and the lens react ---- */
+/* A. The wave flows behind the glass. */
+body.liquid-mode::after{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none;background:
+  radial-gradient(38vw 30vh at 30% 35%,rgba(255,255,255,.5) 0,rgba(255,255,255,0) 70%),
+  radial-gradient(34vw 28vh at 74% 62%,rgba(70,235,255,.6) 0,rgba(70,235,255,0) 70%),
+  radial-gradient(42vw 34vh at 52% 88%,rgba(20,110,255,.55) 0,rgba(20,110,255,0) 70%);
+  animation:lq-flow 24s ease-in-out infinite alternate;will-change:transform}
+@keyframes lq-flow{from{transform:translate3d(-2%,-1%,0) scale(1)}to{transform:translate3d(3%,2%,0) scale(1.04)}}
+
+/* B. Touch: a light pool spreads under the finger and lingers. */
+body.liquid-mode .settings-btn{position:relative}  /* the lens below is placed against the gear, not the header */
+body.liquid-mode .btn,body.liquid-mode .settings-btn{isolation:isolate;overflow:hidden}
+body.liquid-mode .btn::after,body.liquid-mode .settings-btn::after{content:"";position:absolute;left:50%;top:72%;width:150%;height:90%;border-radius:50%;z-index:-1;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,.55) 45%,rgba(255,255,255,0) 100%);
+  transform:translate(-50%,-50%) scale(.15);opacity:0;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s ease}
+body.liquid-mode .btn:active::after,body.liquid-mode .settings-btn:active::after{transform:translate(-50%,-50%) scale(1);opacity:1}
+body.liquid-mode .settings-btn:active{transform:scale(.93);transition:transform .15s ease}
+
+/* C. Lens: a light turns inside the round button, and its edge flows on hover. */
+body.liquid-mode .settings-btn::before{content:"";position:absolute;inset:-35%;border-radius:50%;z-index:-1;pointer-events:none;
+  background:conic-gradient(from 0deg,rgba(255,255,255,0) 0deg,rgba(255,255,255,.75) 40deg,rgba(255,255,255,0) 90deg,rgba(255,255,255,.5) 200deg,rgba(255,255,255,0) 260deg,rgba(255,255,255,.6) 320deg,rgba(255,255,255,0) 360deg);
+  }
+body.liquid-mode .settings-btn:hover{animation:lq-blob 2.4s ease-in-out infinite}
+@keyframes lq-blob{0%,100%{border-radius:50%}33%{border-radius:58% 42% 46% 54% / 46% 56% 44% 54%}66%{border-radius:44% 56% 52% 48% / 58% 42% 50% 50%}}
+
+/* ---- Sequoia window chrome (the Liquid Glass surfaces keep their material) ----
+   A title bar with the three traffic lights at the left and the title centred. The lights are real round elements
+   (.lq-lights, added by js/theme.js), solid and flat. The settings sheet closes with the red sphere. */
+.lq-lights{display:none}
+body.liquid-mode .panel-head{position:relative;padding:9px 72px;min-height:20px;box-sizing:border-box;font-size:13px;font-weight:600}
+body.liquid-mode .lq-lights{display:block;position:absolute;left:14px;top:50%;margin-top:-6px;width:52px;height:12px;pointer-events:none}
+body.liquid-mode .lq-lights i{position:absolute;top:0;width:12px;height:12px;border-radius:50%;display:block;background:#ff5f57}
+body.liquid-mode .lq-lights i:nth-child(1){left:0;background:#ff5f57}
+body.liquid-mode .lq-lights i:nth-child(2){left:20px;background:#febc2e}
+body.liquid-mode .lq-lights i:nth-child(3){left:40px;background:#28c840}
+body.liquid-mode #settingsOverlay .settings-close{position:absolute;left:14px;top:50%;margin-top:-6px;width:12px;height:12px;min-width:12px;min-height:12px;padding:0;border:0;border-radius:50%;
+  background:#ff5f57;box-shadow:none;color:transparent;font-size:0;transform:none}
+body.liquid-mode #settingsOverlay .settings-close:hover{transform:none;filter:none}
+body.liquid-mode #settingsOverlay .settings-close svg{display:none}
+
+/* refraction (Chromium): js/glass.js builds each element's displacement map with the reference shader, and this rule
+   bends the backdrop through it. Small pills (nav, tags, switches) keep the plain blur, because the displacement rim
+   greys out a small shape. */
+html.lg-svg body.liquid-mode :is(.panel,.monitor,.settings-panel,.settings-help-card,footer,.btn,.note,.lang-menu),
+html.lg-svg body.liquid-mode .top .style-toggle:active span{
+  backdrop-filter:blur(1.5px) var(--lg-filter,blur(0px)) blur(3px) saturate(1.2) brightness(1.04);-webkit-backdrop-filter:blur(3px) saturate(1.2) brightness(1.04)}
+html.lg-svg body.liquid-mode [data-lg][data-lg]{backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}
+
+@media (prefers-reduced-transparency:reduce){
+  body.liquid-mode .top,body.liquid-mode .panel,body.liquid-mode .monitor,body.liquid-mode .settings-panel,body.liquid-mode footer{background:rgba(255,255,255,.82);-webkit-backdrop-filter:none;backdrop-filter:none}
+}

@@ -162,6 +162,15 @@ body.oldretro-mode .settings-bios{display:block}
   background:#0000aa;border:2px solid #e8ecff;box-shadow:4px 4px 0 rgba(0,0,0,.6);
 }
 .bios-popup[hidden]{display:none}
+/* The option list is centred over the BIOS window itself (not the settings panel). With 13 entries
+   it can be taller than the window, so it scrolls inside its own frame; the focused item is
+   scrolled into view by the browser, so keyboard navigation keeps working. */
+.settings-bios{position:relative}
+.bios-popup{max-height:calc(100% - 12px);overflow-y:auto;box-sizing:border-box;scrollbar-width:thin;scrollbar-color:#7fdcff #0000aa}
+/* The help pane changes height with the highlighted entry (and with the language). Reserving the
+   tallest case keeps the BIOS window from resizing while the option list is open, which would
+   otherwise move the list under the pointer and reset its scroll position. */
+.settings-bios .bios-main{min-height:252px}
 .bios-popup-title{background:#e8ecff;color:#00006a;font:700 11.5px "Courier New",monospace;padding:5px 9px}
 .bios-popup-opt{
   display:block;width:100%;text-align:left;

@@ -18,7 +18,6 @@
 <script defer src="js/glass.js?v=1.0-rc"></script>
 </head>
 <body>
-<svg class="aqua-filters" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><filter id="aqua-aliased" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%"><feConvolveMatrix in="SourceGraphic" order="3" kernelMatrix="0 -0.7 0 -0.7 3.8 -0.7 0 -0.7 0" divisor="1" preserveAlpha="true" result="sharp"/><feComponentTransfer in="sharp"><feFuncA type="discrete" tableValues="0 1"/></feComponentTransfer></filter></svg>
 <header class="top"><div class="wrap topbar">
   <a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0-rc</span></a>
   <nav class="nav">
@@ -47,7 +46,7 @@
 
 <section id="about"><div class="wrap">
   <div class="head"><div class="eyebrow" data-i18n="about_eyebrow"></div><h2 data-i18n="about_h2"></h2><p data-i18n="about_p"></p></div>
-  <div class="panel"><div class="panel-head" data-i18n="system_information"></div><div class="facts">
+  <div class="panel"><div class="panel-head"><span data-i18n="system_information"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div><div class="facts">
     <div class="fact"><strong>i386</strong><small data-i18n="cpu"></small></div><div class="fact"><strong>640×480</strong><small data-i18n="display"></small></div><div class="fact"><strong>32-bit</strong><small data-i18n="colors"></small></div><div class="fact"><strong>1 MB</strong><small data-i18n="image_size"></small></div>
   </div></div>
 </div></section>
@@ -70,7 +69,7 @@
 
 <section id="build"><div class="wrap">
   <div class="head"><div class="eyebrow" data-i18n="build_eyebrow"></div><h2 data-i18n="build_h2"></h2><p data-i18n="build_p"></p></div>
-  <div class="panel terminal"><div class="panel-head"><span data-i18n="quick_start"></span><span class="win-caps" aria-hidden="true"><span class="win-cap win-close"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></span></div><pre><span class="dim"># clone and build → build/os-image.img (1 MB)</span>
+  <div class="panel terminal"><div class="panel-head"><span data-i18n="quick_start"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div><pre><span class="dim"># clone and build → build/os-image.img (1 MB)</span>
 <span class="cyan">$</span> git clone https://github.com/SegFault777/MiniWin.git
 <span class="cyan">$</span> cd MiniWin &amp;&amp; ./build.sh &amp;&amp; tools/install_all.sh
 
