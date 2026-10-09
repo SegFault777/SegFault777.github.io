@@ -23,3 +23,9 @@ body.modern-mode .settings-help-head{border-bottom:1px solid rgba(91,116,141,.18
 body:not(.modern-mode):not(.oldretro-mode) .settings-help-card{background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #000 #000 #fff;box-shadow:inset -1px -1px #808080,inset 1px 1px #dfdfdf}
 body:not(.modern-mode):not(.oldretro-mode) .settings-help-head{background:#000080;color:#fff;border-bottom:0;padding:4px 6px 4px 8px;font-size:12px}
 body:not(.modern-mode):not(.oldretro-mode) .settings-help-close{width:18px;height:16px;background:#c0c0c0;color:#000;border:2px solid;border-color:#fff #404040 #404040 #fff;font-size:10px}
+
+/* Settings: the close X is an SVG glyph so it stays crisp in every theme. */
+.settings-close svg,.settings-help-close svg{display:block;width:12px;height:12px;pointer-events:none}
+/* 문화어 row: toggle + an explicit On/Off word beside it (the "More clear" reference). */
+.settings-kp-control{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.settings-kp-state{min-width:22px;font-size:12px;font-weight:600;white-space:nowrap;text-align:left}

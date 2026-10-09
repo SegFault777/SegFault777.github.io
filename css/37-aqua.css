@@ -1,0 +1,86 @@
+/* Aqua: Mac OS X. A Retro-layout flavour: the Retro rules (body:not(.modern-mode) ...) also match it,
+   so the selectors below are written more specifically than theirs, and where those use !important,
+   Aqua uses !important too. Affects body.aqua-mode only (OldRetro is excluded). */
+body.aqua-mode:not(.oldretro-mode){background:linear-gradient(180deg,#2f6fd1 0%,#6aa6ef 38%,#b9dbfa 70%,#e7f3fd 100%);color:#000;font-family:"Lucida Grande","Helvetica Neue",Verdana,Arial,sans-serif;font-size:13px}
+
+/* Same font as Modern Glass (Pretendard, applied the same way: !important on every element), and no
+   font smoothing. Anti-aliasing is removed by the aqua-aliased SVG filter in index.html (see below). */
+body.aqua-mode:not(.oldretro-mode),
+body.aqua-mode:not(.oldretro-mode) *{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,sans-serif !important}
+body.aqua-mode:not(.oldretro-mode){-webkit-font-smoothing:none}
+
+/* menu bar (the header) */
+body.aqua-mode:not(.oldretro-mode) .top{background:linear-gradient(180deg,#f7f7f7 0%,#e4e4e4 50%,#cfcfcf 51%,#dadada 100%);border:0;border-bottom:1px solid #7a7a7a;box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 2px 6px rgba(0,0,0,.25)}
+body.aqua-mode:not(.oldretro-mode) .logo{color:#000;font-family:"Lucida Grande",Verdana,Arial,sans-serif;text-shadow:none}
+body.aqua-mode:not(.oldretro-mode) .logo span:first-of-type{color:#1d4f9c}
+body.aqua-mode:not(.oldretro-mode) .logo .version{color:#555}
+body.aqua-mode:not(.oldretro-mode) .nav a,body.aqua-mode:not(.oldretro-mode) .lang-btn{color:#000;background:transparent;border:1px solid transparent;border-radius:4px;box-shadow:none;padding:4px 9px;font:12px "Lucida Grande",Verdana,Arial,sans-serif;letter-spacing:0;text-shadow:none}
+body.aqua-mode:not(.oldretro-mode) .nav a:hover,body.aqua-mode:not(.oldretro-mode) .nav a.active,body.aqua-mode:not(.oldretro-mode) .lang-btn:hover,body.aqua-mode:not(.oldretro-mode) .lang.open .lang-btn{background:#3d6fdb;border-color:#24509e;color:#fff;box-shadow:none}
+body.aqua-mode:not(.oldretro-mode) .top .style-switch{height:26px;padding:0 6px;gap:6px;margin-right:4px;background:linear-gradient(#ffffff,#d4d4d4);border:1px solid #7e7e7e;border-radius:999px;box-shadow:inset 0 1px 0 #fff}
+body.aqua-mode:not(.oldretro-mode) .top .style-label{color:#222;font:700 10px "Lucida Grande",Verdana,sans-serif;letter-spacing:0;text-shadow:none}
+body.aqua-mode:not(.oldretro-mode) .top .style-label:first-child{color:#000}
+body.aqua-mode:not(.oldretro-mode) .top .style-toggle{width:34px;height:16px;padding:0;border:1px solid #6e6e6e !important;border-radius:999px !important;background:linear-gradient(#cfcfcf,#f5f5f5) !important;box-shadow:inset 0 1px 2px rgba(0,0,0,.25) !important;outline:none !important}
+body.aqua-mode:not(.oldretro-mode) .top .style-toggle span{top:1px;left:1px;width:12px;height:12px;border:1px solid #2f5fb0 !important;border-radius:50% !important;background:radial-gradient(circle at 35% 30%,#ffffff 0,#8fbcf6 45%,#2f6fd6 100%) !important;box-shadow:0 1px 0 #7a2a27 !important;transition:none !important}
+body.aqua-mode:not(.oldretro-mode) .top .style-toggle[aria-pressed="true"] span{left:19px}
+body.aqua-mode:not(.oldretro-mode) .top .settings-btn{color:#000;background:linear-gradient(#ffffff,#d4d4d4);border:1px solid #7e7e7e;border-radius:999px;box-shadow:inset 0 1px 0 #fff}
+body.aqua-mode:not(.oldretro-mode) .top .settings-btn:hover{background:linear-gradient(#ffffff,#e6eefb);border-color:#3d6fdb}
+body.aqua-mode:not(.oldretro-mode) .top .settings-btn:active{background:linear-gradient(#cfd8e8,#e6e6e6);box-shadow:inset 0 1px 2px rgba(0,0,0,.25)}
+
+/* windows: grey Aqua frames with a centered title and traffic-light buttons */
+body.aqua-mode:not(.oldretro-mode) .panel{background:#ededed;border:1px solid #6e6e6e;border-radius:7px;box-shadow:0 3px 0 #8a8a8a}
+body.aqua-mode:not(.oldretro-mode) .panel-head{position:relative;background:linear-gradient(#f2f2f2 0%,#d6d6d6 48%,#bcbcbc 52%,#d0d0d0 100%);color:#111;border:0;border-bottom:1px solid #7a7a7a;border-radius:7px 7px 0 0;font:700 12px "Lucida Grande",Verdana,sans-serif;letter-spacing:0;text-transform:none;text-align:center;text-shadow:0 1px 0 #fff;padding:5px 34px;min-height:22px;box-sizing:border-box;cursor:default}
+body.aqua-mode:not(.oldretro-mode) .panel-head::before{content:"";position:absolute;left:12px;top:50%;margin-top:-6px;width:12px;height:12px;border-radius:50%;box-sizing:border-box;border:1px solid #a33d3a;background:radial-gradient(circle at 35% 30%,#ffc6bf 0,#ff6259 45%,#c94a42 100%)}
+body.aqua-mode:not(.oldretro-mode) .card p,body.aqua-mode:not(.oldretro-mode) .fact small{color:#333}
+body.aqua-mode:not(.oldretro-mode) .card h3,body.aqua-mode:not(.oldretro-mode) .fact strong{color:#000;font-family:"Lucida Grande",Verdana,sans-serif}
+body.aqua-mode:not(.oldretro-mode) .badge,body.aqua-mode:not(.oldretro-mode) .tag{background:linear-gradient(#ffffff,#e4e4e4);color:#1d4f9c;border:1px solid #7f8fa8;border-radius:999px;font-family:"Lucida Grande",Verdana,sans-serif;text-shadow:none;box-shadow:none}
+body.aqua-mode:not(.oldretro-mode) .monitor{background:#ededed;border:1px solid #6e6e6e;border-radius:7px;box-shadow:0 3px 0 #8a8a8a}
+body.aqua-mode:not(.oldretro-mode) .monitor img{border:0;image-rendering:pixelated}
+
+/* glossy Aqua buttons: capsules, blue for the default action */
+body.aqua-mode:not(.oldretro-mode) .btn{background:linear-gradient(#ffffff 0%,#f1f1f1 48%,#dedede 52%,#f6f6f6 100%);color:#000;border:1px solid #7f7f7f;border-radius:14px;box-shadow:0 1px 0 #7f7f7f;font:12px "Lucida Grande",Verdana,sans-serif;text-shadow:none;padding:6px 14px}
+body.aqua-mode:not(.oldretro-mode) .btn:hover{background:linear-gradient(#ffffff 0%,#f7f7f7 48%,#e6e6e6 52%,#fbfbfb 100%);box-shadow:0 1px 0 #7f7f7f;transform:none}
+body.aqua-mode:not(.oldretro-mode) .btn:active{background:linear-gradient(#d7d7d7,#eaeaea) !important;box-shadow:inset 0 1px 2px rgba(0,0,0,.3);transform:none}
+body.aqua-mode:not(.oldretro-mode) .btn.primary{background:linear-gradient(#a9cbf7 0%,#4a8ee9 48%,#2f72dd 52%,#6aa6f2 100%);border-color:#2a5fb4;color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,.25)}
+body.aqua-mode:not(.oldretro-mode) .btn.primary:hover{background:linear-gradient(#b9d7f9,#5b98ee 48%,#3b7fe2 52%,#78b1f5 100%)}
+body.aqua-mode:not(.oldretro-mode) .btn.primary:active{background:linear-gradient(#2f72dd,#4a8ee9) !important;color:#fff}
+
+/* Terminal.app-style white console */
+body.aqua-mode:not(.oldretro-mode) .terminal{background:#ffffff;border:1px solid #6e6e6e;border-radius:0 0 7px 7px;box-shadow:0 3px 0 #8a8a8a}
+body.aqua-mode:not(.oldretro-mode) .terminal pre{color:#000;background:#ffffff;border:0;font-family:Menlo,Monaco,"Courier New",monospace}
+
+/* text on the blue desktop */
+body.aqua-mode:not(.oldretro-mode) .hero h1{font-family:"Lucida Grande","Helvetica Neue",Arial,sans-serif;color:#fff;text-shadow:0 2px 0 #1b4f99,0 4px 10px rgba(0,0,0,.35);text-transform:none}
+body.aqua-mode:not(.oldretro-mode) .hero h1 span{color:#fff}
+body.aqua-mode:not(.oldretro-mode) .hero p,body.aqua-mode:not(.oldretro-mode) .head p{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45);font-family:"Lucida Grande",Verdana,sans-serif}
+body.aqua-mode:not(.oldretro-mode) .head h2{color:#fff;text-shadow:0 2px 0 #1b4f99,0 3px 8px rgba(0,0,0,.35);font-family:"Lucida Grande",Verdana,sans-serif}
+body.aqua-mode:not(.oldretro-mode) .eyebrow{color:#ffe38a;text-shadow:0 1px 2px rgba(0,0,0,.5);font-family:"Lucida Grande",Verdana,sans-serif}
+body.aqua-mode:not(.oldretro-mode) .note{background:#f6f6f6;border:1px solid #9b9b9b;border-left:4px solid #2f72dd;border-radius:6px;color:#222;box-shadow:0 2px 0 #9b9b9b;backdrop-filter:none}
+body.aqua-mode:not(.oldretro-mode) footer{background:transparent;color:#fff;border-top:1px solid rgba(255,255,255,.5);text-shadow:0 1px 2px rgba(0,0,0,.5);font-family:"Lucida Grande",Verdana,sans-serif}
+body.aqua-mode:not(.oldretro-mode) .lang-menu{background:#f4f4f4;border:1px solid #6e6e6e;border-radius:6px;box-shadow:0 3px 0 #6e6e6e}
+body.aqua-mode:not(.oldretro-mode) .lang-menu button{color:#000;font-family:"Lucida Grande",Verdana,sans-serif;border-radius:3px}
+body.aqua-mode:not(.oldretro-mode) .lang-menu button:hover,body.aqua-mode:not(.oldretro-mode) .lang-menu button.active{background:#3d6fdb;color:#fff}
+
+/* Settings: a Mac OS X sheet. The red traffic-light button is the close control, at the left. */
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-panel{width:min(440px,100%);max-height:min(86vh,640px);background:#ececec;color:#000;border:1px solid #5f5f5f;border-radius:8px;box-shadow:0 6px 0 #6e6e6e;font-family:"Lucida Grande",Verdana,sans-serif;padding:0}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-head{position:relative;display:flex;justify-content:center;align-items:center;background:linear-gradient(#f2f2f2,#d3d3d3 50%,#c2c2c2 51%,#d6d6d6);color:#111;border:0;border-bottom:1px solid #7a7a7a;border-radius:8px 8px 0 0;padding:6px 40px;min-height:28px;font:700 13px "Lucida Grande",Verdana,sans-serif;letter-spacing:0;text-shadow:0 1px 0 #fff}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-close{position:absolute;left:12px;top:50%;margin-top:-6px;width:12px;height:12px;min-width:12px;min-height:12px;padding:0;border-radius:50%;border:1px solid #a33d3a;background:radial-gradient(circle at 35% 30%,#ffc6bf 0,#ff6259 45%,#c94a42 100%);box-shadow:none;color:transparent;font-size:0}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-close svg{display:none}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-body{padding:14px 16px;background:#ececec}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-row{margin-bottom:12px}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-row-label{color:#000;font:12px "Lucida Grande",Verdana,sans-serif}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-kp-state{color:#000;font:700 12px "Lucida Grande",Verdana,sans-serif}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-lang-select{color:#000;background:linear-gradient(#ffffff,#e4e4e4);border:1px solid #7f7f7f;border-radius:6px;height:24px;padding:0 22px 0 8px;font:12px "Lucida Grande",Verdana,sans-serif;font-weight:400;box-shadow:0 1px 0 #9a9a9a}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-help-btn{width:18px;height:18px;min-width:18px;min-height:18px;padding:0;border-radius:50%;background:linear-gradient(#ffffff,#d2d2d2);color:#1d4f9c;border:1px solid #7f7f7f;font:700 11px "Lucida Grande",Verdana,sans-serif;box-shadow:none}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsKpSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsKpToggle{width:38px;height:20px;padding:0;border:1px solid #7b7b7b !important;border-radius:10px !important;background:linear-gradient(#cdcdcd,#f7f7f7) !important;box-shadow:inset 0 1px 2px rgba(0,0,0,.25) !important;outline:none !important}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsKpToggle span{top:2px;left:2px;width:14px;height:14px;border:1px solid #2f5fb0 !important;border-radius:50% !important;background:radial-gradient(circle at 35% 30%,#ffffff 0,#ffffff 30%,#dfe8f5 100%) !important;box-shadow:0 1px 0 #7a2a27 !important}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsKpToggle[aria-pressed="true"]{background:linear-gradient(#8fbcf6,#2f6fd6) !important;border-color:#2a5fb4 !important}
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay #settingsKpToggle[aria-pressed="true"] span{left:20px}
+
+/* Anti-aliasing off: the aqua-aliased filter (index.html) turns every semi-transparent edge into a hard
+   pixel, so the Pretendard text and the round shapes are crisp instead of smudged. */
+body.aqua-mode:not(.oldretro-mode) .top,
+body.aqua-mode:not(.oldretro-mode) main,
+body.aqua-mode:not(.oldretro-mode) footer,
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-panel,
+body.aqua-mode:not(.oldretro-mode) #settingsOverlay .settings-help-card{filter:url(#aqua-aliased)}

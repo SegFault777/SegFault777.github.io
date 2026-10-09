@@ -1,0 +1,155 @@
+/* Luna (Windows XP): a Retro-layout flavour. Active only when body.luna-mode is set. */
+body.luna-mode{background:linear-gradient(180deg,#2e6fd9 0%,#78b2f2 52%,#6cb14a 52.2%,#3c8a24 100%) fixed;color:#000;font-family:Tahoma,Verdana,"Trebuchet MS",sans-serif}
+body.luna-mode .top{background:linear-gradient(180deg,#3f8cf3,#245edb 10%,#2456d6 60%,#1e4cc0 90%,#1941a5);border-bottom:1px solid #0c2d8c;box-shadow:none}
+body.luna-mode .logo,body.luna-mode .nav a,body.luna-mode .lang-btn,body.luna-mode .style-label{color:#fff}
+body.luna-mode .logo span:first-of-type{color:#ffe38a}
+body.luna-mode .logo .version{color:#dfe9ff}
+body.luna-mode .nav a,body.luna-mode .lang-btn{border-radius:3px;font-family:Tahoma,Verdana,sans-serif}
+body.luna-mode .nav a:hover,body.luna-mode .nav a.active,body.luna-mode .lang-btn:hover,body.luna-mode .lang.open .lang-btn{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5)}
+body.luna-mode .style-switch{background:#1c4fb8;border-color:#0c2d8c}
+body.luna-mode .style-toggle{background:#ece9d8;border-color:#003c74;box-shadow:none}
+body.luna-mode .style-toggle span{background:#3c9d3c}
+body.luna-mode .hero h1{color:#fff;text-shadow:3px 3px #0a2a66}
+body.luna-mode .hero p,body.luna-mode .head p{color:#fff;text-shadow:1px 1px #0a2a66}
+body.luna-mode .head h2{color:#fff;text-shadow:2px 2px #0a2a66}
+body.luna-mode .eyebrow{color:#ffe38a}
+body.luna-mode .tag{background:#ece9d8;color:#000;border-color:#0831d9}
+body.luna-mode .image-credit{color:#fff}
+body.luna-mode .monitor{background:#ece9d8;border:1px solid #0831d9;box-shadow:3px 4px 8px rgba(0,0,0,.4)}
+body.luna-mode .panel{background:#ece9d8;border:1px solid #0831d9;border-radius:8px 8px 0 0;box-shadow:3px 4px 10px rgba(0,0,0,.4)}
+body.luna-mode .panel-head{background:linear-gradient(180deg,#0997ff,#0053ee 9%,#0050ee 80%,#06f 100%);color:#fff;border:0;border-radius:7px 7px 0 0;font:700 12px Tahoma,Verdana,sans-serif;text-shadow:1px 1px #0008}
+body.luna-mode .card{background:#ece9d8}
+body.luna-mode .card h3,body.luna-mode .fact strong{color:#000}
+body.luna-mode .card p,body.luna-mode .fact small{color:#333}
+body.luna-mode .fact{border-color:#aca899}
+body.luna-mode .badge{color:#0a5ad8;border-color:#0a5ad8;background:#fff}
+body.luna-mode .btn{background:linear-gradient(#fff,#d6d0c5);color:#000;border:1px solid #003c74;border-radius:3px;box-shadow:none}
+body.luna-mode .btn:hover{background:linear-gradient(#fff,#e8e4d6)}
+body.luna-mode .btn.primary{background:linear-gradient(#5b9cf5,#1f5fd6);color:#fff}
+body.luna-mode .terminal{background:#000}
+body.luna-mode .terminal pre{color:#c6e2ff}
+body.luna-mode .note{background:#fffbe6;color:#000;border-left-color:#0a5ad8}
+body.luna-mode .rule{background:#7f9db9}
+body.luna-mode footer{color:#fff;border-top-color:#245edb;background:transparent}
+body.luna-mode .lang-menu{background:#fff;border:1px solid #0831d9;border-radius:0;box-shadow:4px 6px 14px rgba(0,0,0,.35)}
+body.luna-mode .lang-menu button{color:#000}
+body.luna-mode .lang-menu button:hover,body.luna-mode .lang-menu button.active{background:#316ac5;color:#fff}
+
+/* ============================================================
+   Luna: top menu buttons and the settings window (Windows XP look).
+   Retro's Win9x rules (body:not(.modern-mode) …) also match Luna, so the
+   selectors below are more specific than theirs; where Retro uses
+   !important, the Luna declaration is !important too.
+   ============================================================ */
+
+/* ---- top menu: XP-style buttons instead of gray bevels ---- */
+body.luna-mode .top .nav a,
+body.luna-mode .top .lang-btn{
+  background:transparent;border:1px solid transparent;border-radius:3px;box-shadow:none;
+  color:#fff;text-shadow:1px 1px #0a2a66;font:700 12px Tahoma,Verdana,sans-serif;letter-spacing:0;padding:6px 10px;
+}
+body.luna-mode .top .nav a:hover,
+body.luna-mode .top .nav a.active,
+body.luna-mode .top .lang-btn:hover,
+body.luna-mode .top .lang.open .lang-btn{
+  background:linear-gradient(180deg,#ffffff 0%,#e4ecfb 50%,#bcd0ef 100%);
+  border-color:#003c74;color:#000;text-shadow:none;box-shadow:none;
+}
+body.luna-mode .top .style-switch{
+  height:30px;padding:0 8px;gap:6px;margin-right:4px;border:1px solid #003c74;border-radius:3px;
+  background:linear-gradient(180deg,#3f8cf3,#1f56d0);box-shadow:inset 0 1px rgba(255,255,255,.4);
+}
+body.luna-mode .top .style-label{color:#fff;font:700 10px Tahoma,Verdana,sans-serif;letter-spacing:0;text-shadow:1px 1px #0a2a66}
+body.luna-mode .top .style-toggle{
+  width:38px;height:20px;padding:0;border:1px solid #003c74 !important;border-radius:3px !important;
+  background:linear-gradient(180deg,#d6d0c5,#fbfaf4) !important;box-shadow:inset 1px 1px 2px rgba(0,0,0,.25) !important;
+}
+body.luna-mode .top .style-toggle span{
+  top:2px;left:2px;width:14px;height:14px;border:1px solid #003c74 !important;border-radius:2px !important;
+  background:linear-gradient(180deg,#9be59b,#2f9a2f) !important;box-shadow:none !important;
+}
+body.luna-mode .top .style-toggle[aria-pressed="true"] span{left:20px}
+body.luna-mode .top .settings-btn{
+  color:#000;background:linear-gradient(180deg,#ffffff 0%,#ece9d8 55%,#d6d0c5 100%);
+  border:1px solid #003c74;border-radius:3px;box-shadow:none;
+}
+body.luna-mode .top .settings-btn:hover,
+body.luna-mode .top .settings-btn:focus-visible{
+  background:linear-gradient(180deg,#ffffff 0%,#fff6d5 55%,#f5d98a 100%);border-color:#e09a2b;color:#000;box-shadow:none;outline:none;
+}
+body.luna-mode .top .settings-btn:active{background:linear-gradient(180deg,#d6d0c5,#ece9d8);box-shadow:inset 1px 1px 2px rgba(0,0,0,.25)}
+
+/* ---- Luna settings window: XP frame, blue title bar, red X close (X only) ---- */
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-panel{
+  width:min(440px,100%);max-height:min(86vh,640px);padding:0;
+  background:#ece9d8;color:#000;font-family:Tahoma,Verdana,"Trebuchet MS",sans-serif;
+  border:3px solid #0831d9;border-top:0;border-radius:8px 8px 3px 3px;box-shadow:4px 5px 12px rgba(0,0,0,.45);
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-head,
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-help-head{
+  background:linear-gradient(180deg,#0997ff 0%,#0053ee 9%,#0050ee 80%,#0066ff 100%);
+  color:#fff;border:0;border-radius:7px 7px 0 0;padding:5px 5px 5px 9px;min-height:30px;
+  font:700 12.5px Tahoma,Verdana,sans-serif;letter-spacing:0;text-shadow:1px 1px #0a2a66;
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-close,
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-help-close{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:21px;height:21px;min-width:21px;min-height:21px;padding:0;margin:0;
+  color:#fff;border:1px solid #fff;border-radius:3px;box-shadow:inset -1px -1px 0 rgba(0,0,0,.25);cursor:pointer;
+  background:linear-gradient(180deg,#f5b3a0 0%,#e8643a 45%,#d64a1a 55%,#e96a40 100%);
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-close:hover,
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-help-close:hover{
+  background:linear-gradient(180deg,#f9c6b6 0%,#f07a50 45%,#e25a2a 55%,#f07a50 100%);
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-close:active,
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-help-close:active{box-shadow:inset 1px 1px 2px rgba(0,0,0,.35)}
+
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-body{padding:14px 16px;background:#ece9d8;color:#000}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-row{margin-bottom:14px}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-row-label{color:#000;font:11px Tahoma,Verdana,sans-serif}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-kp-state{color:#000;font:700 11px Tahoma,Verdana,sans-serif}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-help-btn{
+  width:20px;height:20px;min-width:20px;min-height:20px;padding:0;border-radius:3px;
+  background:linear-gradient(180deg,#ffffff,#d6d0c5);color:#003c74;border:1px solid #003c74;
+  font:700 11px Tahoma,Verdana,sans-serif;box-shadow:none;
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-lang-select{
+  color:#000;background:#fff;border:1px solid #7f9db9;border-radius:0;height:24px;
+  padding:0 22px 0 6px;font:11px Tahoma,Verdana,sans-serif;font-weight:400;box-shadow:none;
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsKpSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsKpToggle{
+  width:38px;height:20px;padding:0;border:1px solid #003c74 !important;border-radius:3px !important;
+  background:linear-gradient(180deg,#d6d0c5,#fbfaf4) !important;box-shadow:inset 1px 1px 2px rgba(0,0,0,.25) !important;
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsKpToggle span{
+  top:2px;left:2px;width:14px;height:14px;border:1px solid #003c74 !important;border-radius:2px !important;
+  background:linear-gradient(180deg,#ffffff,#c9d6ec) !important;box-shadow:none !important;
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsKpToggle[aria-pressed="true"]{
+  background:linear-gradient(180deg,#5a9ef6,#1f56d0) !important;border-color:#003c74 !important;
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay #settingsKpToggle[aria-pressed="true"] span{left:20px}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-help-card{
+  width:min(380px,100%);max-height:80vh;overflow-y:auto;background:#ece9d8;color:#000;
+  font-family:Tahoma,Verdana,"Trebuchet MS",sans-serif;border:3px solid #0831d9;border-top:0;
+  border-radius:8px 8px 3px 3px;box-shadow:4px 5px 12px rgba(0,0,0,.45);
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-diff-panel{
+  background:#fff;color:#000;border:1px solid #7f9db9;border-radius:0;font:11px Tahoma,Verdana,sans-serif;margin:12px;padding:10px 12px;
+}
+body.luna-mode:not(.oldretro-mode) #settingsOverlay .settings-diff-panel dt{color:#0a246a}
+
+/* ---- Luna: QUICK START panel. Only a red X in the title bar, and it does nothing.
+        Hidden in every other theme. ---- */
+.win-caps{display:none}
+body.luna-mode .terminal .panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:24px}
+body.luna-mode .terminal .win-caps{display:inline-flex;align-items:center;flex:0 0 auto}
+body.luna-mode .terminal .win-cap{
+  display:inline-flex;align-items:center;justify-content:center;width:21px;height:19px;margin:0;
+  color:#fff;border:1px solid #fff;border-radius:3px;box-shadow:inset -1px -1px 0 rgba(0,0,0,.25);
+  background:linear-gradient(180deg,#f5b3a0 0%,#e8643a 45%,#d64a1a 55%,#e96a40 100%);
+  pointer-events:none;
+}
+body.luna-mode .terminal .win-cap svg{display:block;width:10px;height:10px}

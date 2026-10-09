@@ -1,0 +1,56 @@
+/* Adwaita: GNOME. Light libadwaita windows (#f6f5f4 background, #ebebeb headerbar, #3584e4 accent,
+   rounded cards and separated rows) under a black GNOME Shell top bar. Affects body.adwaita-mode only.
+   The settings toggle rules at the end of this file are unchanged. */
+body.adwaita-mode{background:#f6f5f4;color:#2e3436;font-family:Cantarell,"Adwaita Sans","Noto Sans",system-ui,sans-serif}
+body.adwaita-mode .top{background:#000000;border-bottom:0;box-shadow:none;backdrop-filter:none}
+body.adwaita-mode .logo,body.adwaita-mode .nav a,body.adwaita-mode .lang-btn{color:#eeeeec}
+body.adwaita-mode .logo span:first-of-type{color:#78aeed}
+body.adwaita-mode .logo .version{color:#9a9996}
+body.adwaita-mode .nav a,body.adwaita-mode .lang-btn{border-radius:99px;border:0}
+body.adwaita-mode .nav a:hover,body.adwaita-mode .nav a.active,body.adwaita-mode .lang-btn:hover,body.adwaita-mode .lang.open .lang-btn{background:rgba(238,238,236,.12);border-color:transparent;color:#ffffff;box-shadow:none}
+body.adwaita-mode .top .style-switch{background:rgba(238,238,236,.08);border-color:transparent;border-radius:99px}
+body.adwaita-mode .top .style-label{color:#9a9996}
+body.adwaita-mode .top .style-label:first-child{color:#eeeeec}
+body.adwaita-mode .style-toggle{background:#5e5c64;border-color:transparent;border-radius:99px;box-shadow:none}
+body.adwaita-mode .style-toggle span{background:#fff}
+body.adwaita-mode .panel{background:#ffffff;border:0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.04);backdrop-filter:none}
+body.adwaita-mode .panel-head{background:#ffffff;color:#2e3436;border-bottom:1px solid #deddda;border-radius:12px 12px 0 0;font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none}
+body.adwaita-mode .card p,body.adwaita-mode .fact small{color:#5e5c64}
+body.adwaita-mode .badge,body.adwaita-mode .tag{border-radius:99px;color:#1c71d8;border-color:#cdc7c2;background:#ffffff;backdrop-filter:none}
+body.adwaita-mode .hero h1,body.adwaita-mode .head h2,body.adwaita-mode .fact strong{color:#2e3436;text-shadow:none}
+body.adwaita-mode .hero p,body.adwaita-mode .head p{color:#5e5c64;text-shadow:none}
+body.adwaita-mode .eyebrow{color:#1c71d8}
+body.adwaita-mode .monitor{background:#ffffff;border:0;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.04);backdrop-filter:none}
+body.adwaita-mode .monitor img{border:0;border-radius:8px}
+body.adwaita-mode .btn{background:#ffffff;color:#2e3436;border:1px solid #cdc7c2;border-radius:6px;box-shadow:0 1px 2px rgba(0,0,0,.08);backdrop-filter:none}
+body.adwaita-mode .btn:hover{background:#f6f5f4}
+body.adwaita-mode .btn:active{background:#ebe9e7;box-shadow:inset 0 1px 2px rgba(0,0,0,.1)}
+body.adwaita-mode .btn.primary{background:#3584e4;border-color:#1c71d8;color:#fff}
+body.adwaita-mode .btn.primary:hover{background:#1c71d8}
+body.adwaita-mode .btn.primary:active{background:#1a5fb4}
+body.adwaita-mode .terminal{background:#241f31}
+body.adwaita-mode .terminal pre{color:#f6f5f4}
+body.adwaita-mode .note{background:#ffffff;border-left-color:#3584e4;border-radius:0 9px 9px 0;color:#5e5c64;backdrop-filter:none}
+body.adwaita-mode footer{background:transparent;color:#5e5c64;border-top-color:#deddda;backdrop-filter:none}
+body.adwaita-mode .lang-menu{background:#ffffff;border:0;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.25),0 0 0 1px rgba(0,0,0,.08);backdrop-filter:none}
+body.adwaita-mode .lang-menu button{color:#2e3436;border-radius:8px}
+body.adwaita-mode .lang-menu button:hover,body.adwaita-mode .lang-menu button.active{background:#ebebeb;color:#2e3436}
+body.adwaita-mode .lang-menu .check{color:#3584e4}
+body.adwaita-mode .hero h1 span{color:#2e3436}
+
+/* Settings window as a GNOME preferences dialog: headerbar with a centered title, rows in a card. */
+body.adwaita-mode .settings-panel{background:#f6f5f4;color:#2e3436;border:0;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.3),0 0 0 1px rgba(0,0,0,.12)}
+body.adwaita-mode .settings-head{display:grid;grid-template-columns:34px 1fr 34px;align-items:center;background:#ebebeb;color:#2e3436;border-bottom:1px solid #cdc7c2;border-radius:12px 12px 0 0;padding:6px 8px;font:700 15px Cantarell,"Adwaita Sans","Noto Sans",system-ui,sans-serif;letter-spacing:0}
+body.adwaita-mode .settings-head > span:first-child{grid-column:2;text-align:center}
+body.adwaita-mode .settings-close{grid-column:3;justify-self:end;width:34px;height:34px;min-width:34px;min-height:34px;border-radius:99px;background:transparent;color:#2e3436}
+body.adwaita-mode .settings-close:hover{background:rgba(0,0,0,.08)}
+body.adwaita-mode .settings-body{padding:16px;background:#f6f5f4}
+body.adwaita-mode .settings-row{margin:0;padding:12px 16px;background:#ffffff;border-bottom:1px solid #deddda}
+body.adwaita-mode .settings-row:first-child{border-radius:12px 12px 0 0}
+body.adwaita-mode .settings-row:last-child{border-bottom:0;border-radius:0 0 12px 12px}
+body.adwaita-mode .settings-row-label{color:#2e3436;font-size:14px}
+body.adwaita-mode .settings-lang-select{color:#2e3436;background:#ffffff;border:1px solid #cdc7c2;border-radius:6px;height:32px;font-size:13px;font-weight:400}
+
+/* 문화어 toggle: blue track when on, as in the Adwaita switch reference. */
+body.adwaita-mode #settingsKpToggle[aria-pressed="true"]{background:#3584e4;border-color:#1c71d8}
+body.adwaita-mode #settingsKpSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}

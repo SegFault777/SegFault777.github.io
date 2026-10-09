@@ -1,0 +1,55 @@
+/* Oxygen: the KDE Plasma 4 look (see the reference). A dark Plasma panel, light window frames with
+   centered titles, a blue highlight and glossy buttons. Affects body.oxygen-mode only. */
+body.oxygen-mode{background:#eff0f1;color:#232629;font-family:"Noto Sans","DejaVu Sans",system-ui,Arial,sans-serif}
+body.oxygen-mode .top{background:linear-gradient(180deg,#4a5b6d 0%,#2e3d4d 50%,#1f2a36 100%);border-bottom:1px solid #111b25;box-shadow:inset 0 1px 0 rgba(255,255,255,.18);backdrop-filter:none}
+body.oxygen-mode .logo,body.oxygen-mode .nav a,body.oxygen-mode .lang-btn{color:#eff0f1}
+body.oxygen-mode .logo span:first-of-type{color:#3daefd}
+body.oxygen-mode .logo .version{color:#bdc3c7}
+body.oxygen-mode .nav a,body.oxygen-mode .lang-btn{border-radius:3px;border:1px solid transparent}
+body.oxygen-mode .nav a:hover,body.oxygen-mode .nav a.active,body.oxygen-mode .lang-btn:hover,body.oxygen-mode .lang.open .lang-btn{background:linear-gradient(#5b7fa3,#3b5b7c);border-color:#243548;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+body.oxygen-mode .top .style-switch{background:linear-gradient(#3b4b5c,#27333f);border:1px solid #17212b;border-radius:3px;box-shadow:none}
+body.oxygen-mode .top .style-label{color:#bdc3c7}
+body.oxygen-mode .top .style-label:first-child{color:#eff0f1}
+body.oxygen-mode .top .style-toggle{width:36px;height:18px;border:1px solid #111b25;border-radius:3px;background:#1b2530;box-shadow:inset 0 1px 2px rgba(0,0,0,.4)}
+body.oxygen-mode .top .style-toggle span{top:2px;left:2px;width:12px;height:12px;border-radius:2px;background:linear-gradient(#ffffff,#d8dde2)}
+body.oxygen-mode .top .style-toggle[aria-pressed="true"]{background:#3daefd;border-color:#2b8fcf}
+body.oxygen-mode .top .style-toggle[aria-pressed="true"] span{left:20px}
+body.oxygen-mode .panel{background:#fcfcfc;border:1px solid #bcc3ca;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.12);backdrop-filter:none}
+body.oxygen-mode .panel-head{background:linear-gradient(#f8f9fa,#e4e7ea);color:#232629;border-bottom:1px solid #b8bec5;border-radius:3px 3px 0 0;font-family:inherit;font-size:13px;font-weight:700;letter-spacing:0;text-transform:none;text-align:center}
+body.oxygen-mode .card p,body.oxygen-mode .fact small{color:#5d6469}
+body.oxygen-mode .badge,body.oxygen-mode .tag{border-radius:3px;color:#2a7fba;border:1px solid #3daefd;background:#f1f9fe;backdrop-filter:none}
+body.oxygen-mode .hero h1,body.oxygen-mode .fact strong,body.oxygen-mode .head h2{color:#232629;text-shadow:none}
+body.oxygen-mode .hero h1 span{color:#232629}
+body.oxygen-mode .hero p,body.oxygen-mode .head p{color:#5d6469;text-shadow:none}
+body.oxygen-mode .eyebrow{color:#2a7fba}
+body.oxygen-mode .monitor{background:#fcfcfc;border:1px solid #bcc3ca;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.12);backdrop-filter:none}
+body.oxygen-mode .monitor img{border:0;border-radius:2px}
+body.oxygen-mode .btn{background:linear-gradient(#fdfdfd,#e8e8e8);color:#232629;border:1px solid #b5bbc0;border-radius:3px;box-shadow:inset 0 1px 0 #fff,0 1px 1px rgba(0,0,0,.08);backdrop-filter:none}
+body.oxygen-mode .btn:hover{background:linear-gradient(#f5fbff,#d9ecfb);border-color:#3daefd;box-shadow:inset 0 1px 0 #fff;transform:none}
+body.oxygen-mode .btn:active{background:linear-gradient(#d7e9f8,#c2dcf1);border-color:#3daefd;box-shadow:inset 0 1px 2px rgba(0,0,0,.15);transform:none}
+body.oxygen-mode .btn.primary{background:linear-gradient(#67c0fb,#3daefd 55%,#2e9be9);border-color:#2a7fbd;color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,.2)}
+body.oxygen-mode .btn.primary:hover{background:linear-gradient(#7ccbfc,#4fb4fd 55%,#3aa3ef);border-color:#2a7fbd}
+body.oxygen-mode .btn.primary:active{background:linear-gradient(#2e9be9,#3daefd);border-color:#1f6a9e}
+body.oxygen-mode .terminal{background:#232629;border:1px solid #111b25;border-radius:4px}
+body.oxygen-mode .terminal pre{color:#eff0f1}
+body.oxygen-mode .note{background:#e5f4fd;border-left:3px solid #3daefd;border-radius:0 3px 3px 0;color:#3b4348;backdrop-filter:none}
+body.oxygen-mode footer{background:transparent;color:#5d6469;border-top-color:#bcc3ca;backdrop-filter:none}
+body.oxygen-mode .lang-menu{background:#fcfcfc;border:1px solid #8b949d;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,.25);backdrop-filter:none}
+body.oxygen-mode .lang-menu button{color:#232629;border-radius:3px}
+body.oxygen-mode .lang-menu button:hover,body.oxygen-mode .lang-menu button.active{background:#3daefd;color:#fff}
+body.oxygen-mode .lang-menu .check{color:#3daefd}
+
+/* Settings window: a KDE-style dialog with a centered title bar and a small close button. */
+body.oxygen-mode .settings-panel{background:#efefef;color:#232629;border:1px solid #8b949d;border-radius:4px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+body.oxygen-mode .settings-head{position:relative;justify-content:center;background:linear-gradient(#f8f9fa,#e4e7ea);color:#232629;border-bottom:1px solid #b8bec5;border-radius:4px 4px 0 0;padding:6px 36px;font:700 13px "Noto Sans","DejaVu Sans",system-ui,sans-serif;letter-spacing:0}
+body.oxygen-mode .settings-close{position:absolute;right:6px;top:50%;margin-top:-10px;width:20px;height:20px;min-width:20px;min-height:20px;border-radius:3px;border:1px solid #b5bbc0;background:linear-gradient(#fdfdfd,#e8e8e8);color:#232629}
+body.oxygen-mode .settings-close:hover{background:linear-gradient(#ff8a80,#e23c31);border-color:#b92b22;color:#fff}
+body.oxygen-mode .settings-body{padding:14px 16px;background:#efefef}
+body.oxygen-mode .settings-row-label{color:#232629}
+body.oxygen-mode .settings-lang-select{color:#232629;background:linear-gradient(#fdfdfd,#e8e8e8);border:1px solid #b5bbc0;border-radius:3px;height:28px;font-size:13px;font-weight:400}
+body.oxygen-mode #settingsKpSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
+body.oxygen-mode #settingsKpToggle{width:38px;height:18px;border:1px solid #9ea6ae;border-radius:3px;background:#c4cad0;box-shadow:inset 0 1px 2px rgba(0,0,0,.2)}
+body.oxygen-mode #settingsKpToggle span{top:2px;left:2px;width:12px;height:12px;border-radius:2px;background:linear-gradient(#ffffff,#d8dde2);box-shadow:none}
+body.oxygen-mode #settingsKpToggle[aria-pressed="true"]{background:#3daefd;border-color:#2b8fcf}
+body.oxygen-mode #settingsKpToggle[aria-pressed="true"] span{left:20px}
+body.oxygen-mode .settings-kp-state{color:#232629}

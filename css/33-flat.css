@@ -1,0 +1,59 @@
+/* Flat: a Windows 10 look (light chrome, #0078d7 accent, square controls, Segoe UI).
+   Affects body.flat-mode only. The settings window and its toggle are below and unchanged here. */
+body.flat-mode{background:#f0f0f0;color:#000;font-family:"Segoe UI",system-ui,Arial,sans-serif}
+body.flat-mode .top{background:#ffffff;border-bottom:1px solid #cccccc;box-shadow:none;backdrop-filter:none}
+body.flat-mode .logo,body.flat-mode .nav a,body.flat-mode .lang-btn{color:#000}
+body.flat-mode .logo span:first-of-type{color:#0078d7}
+body.flat-mode .logo .version{color:#666}
+body.flat-mode .nav a,body.flat-mode .lang-btn{border-radius:0;border:1px solid transparent;color:#000}
+body.flat-mode .nav a:hover,body.flat-mode .nav a.active,body.flat-mode .lang-btn:hover,body.flat-mode .lang.open .lang-btn{background:#e5f3ff;border-color:#cce8ff;color:#000;box-shadow:none}
+body.flat-mode .top .style-switch{background:#ffffff;border-color:#cccccc;border-radius:0}
+body.flat-mode .top .style-label{color:#666}
+body.flat-mode .top .style-label:first-child{color:#000}
+body.flat-mode .style-toggle{background:#555;border-color:#555;border-radius:0;box-shadow:none}
+body.flat-mode .style-toggle span{background:#fff;border-radius:0}
+body.flat-mode .panel{background:#ffffff;border:1px solid #cccccc;border-radius:0;box-shadow:none;backdrop-filter:none}
+body.flat-mode .panel-head{background:#ffffff;color:#000;border-bottom:1px solid #e5e5e5;border-radius:0;font-weight:600}
+body.flat-mode .card p,body.flat-mode .fact small{color:#5c5c5c}
+body.flat-mode .badge,body.flat-mode .tag{border-radius:0;color:#0078d7;border-color:#0078d7;background:transparent;backdrop-filter:none}
+body.flat-mode .hero h1,body.flat-mode .fact strong,body.flat-mode .head h2{color:#000;text-shadow:none}
+body.flat-mode .hero p,body.flat-mode .head p{color:#5c5c5c;text-shadow:none}
+body.flat-mode .eyebrow{color:#0078d7}
+body.flat-mode .monitor{background:#ffffff;border:1px solid #cccccc;border-radius:0;box-shadow:none;backdrop-filter:none}
+body.flat-mode .monitor img{border-radius:0;box-shadow:none}
+body.flat-mode .btn{background:#e1e1e1;color:#000;border:1px solid #adadad;border-radius:0;box-shadow:none;backdrop-filter:none}
+body.flat-mode .btn:hover{background:#e5f1fb;border-color:#0078d7;box-shadow:none;transform:none}
+body.flat-mode .btn:active{background:#cce4f7;border-color:#005499;transform:none}
+body.flat-mode .btn.primary{background:#0078d7;border-color:#0078d7;color:#fff}
+body.flat-mode .btn.primary:hover{background:#106ebe;border-color:#106ebe}
+body.flat-mode .btn.primary:active{background:#005a9e;border-color:#005a9e}
+body.flat-mode .terminal{background:#0c0c0c;border:1px solid #cccccc}
+body.flat-mode .terminal pre{color:#cccccc}
+body.flat-mode .note{background:#e5f1fb;border-left-color:#0078d7;border-radius:0;color:#000;backdrop-filter:none}
+body.flat-mode footer{background:transparent;color:#5c5c5c;border-top-color:#cccccc;backdrop-filter:none}
+body.flat-mode .lang-menu{background:#ffffff;border:1px solid #cccccc;border-radius:0;box-shadow:0 4px 12px rgba(0,0,0,.15);backdrop-filter:none}
+body.flat-mode .lang-menu button{color:#000;border-radius:0}
+body.flat-mode .lang-menu button:hover,body.flat-mode .lang-menu button.active{background:#e5f3ff;color:#000}
+body.flat-mode .lang-menu .check{color:#0078d7}
+body.flat-mode .hero h1 span{color:#000}
+
+/* ---- Flat settings window: no round corners, no soft shadow, no circles ---- */
+body.flat-mode .settings-panel,
+body.flat-mode .settings-help-card{border-radius:0;box-shadow:none;border:1px solid #dedede}
+body.flat-mode .settings-head{color:#1f1f1f;border-bottom:1px solid #e1e1e1}
+body.flat-mode .settings-help-btn{border-radius:0}
+body.flat-mode .settings-close,
+body.flat-mode .settings-help-close{border-radius:0}
+body.flat-mode .settings-close:hover{background:#e81123;color:#fff}
+body.flat-mode .settings-close:active{background:#c50f1f;color:#fff}
+body.flat-mode .settings-help-close:hover{background:#e6e6e6}
+body.flat-mode .settings-lang-select,
+body.flat-mode .settings-diff-panel,
+body.flat-mode .settings-diff-btn{border-radius:0}
+/* 문화어 toggle: square Windows-style switch; blue track with a white knob when on (the reference). */
+body.flat-mode #settingsKpToggle{width:40px;height:20px;border:1px solid #8a8a8a;border-radius:0;background:#fff;box-shadow:none}
+body.flat-mode #settingsKpToggle span{top:3px;left:3px;width:12px;height:12px;border-radius:0;background:#5d5d5d;box-shadow:none}
+body.flat-mode #settingsKpToggle[aria-pressed="true"]{background:#0067c0;border-color:#0067c0}
+body.flat-mode #settingsKpToggle[aria-pressed="true"] span{left:23px;background:#fff}
+body.flat-mode .settings-kp-state{color:#1f1f1f;font-family:"Segoe UI",system-ui,Arial,sans-serif}
+body.flat-mode #settingsKpSwitch{background:transparent;border:0;box-shadow:none;height:auto;padding:0;margin:0}
