@@ -1,0 +1,165 @@
+/* ===== Breeze — KDE Plasma "Breeze" (light) =====
+   Flat #eff0f1 window chrome, #fcfcfc content, #3daee9 accent, thin grey borders,
+   centred caption with ⌄ ⌃ ✕ controls, a translucent Plasma panel, Konsole-style terminal.
+   Font: Noto Sans (Breeze's default). */
+body.breeze-mode:not(.oldretro-mode),
+body.breeze-mode:not(.oldretro-mode) *,
+body.breeze-mode:not(.oldretro-mode) pre,
+body.breeze-mode:not(.oldretro-mode) code{font-family:"Noto Sans","Open Sans","Segoe UI",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif !important}
+body.breeze-mode:not(.oldretro-mode) pre,body.breeze-mode:not(.oldretro-mode) pre *{font-family:"Hack","Noto Sans Mono","DejaVu Sans Mono",Consolas,"Courier New",monospace !important}
+
+body.breeze-mode{
+  --bz-win:#eff0f1; --bz-view:#fcfcfc; --bz-text:#232627; --bz-dim:#7f8c8d; --bz-line:#bdc3c7;
+  --bz-acc:#3daee9; --bz-acc-d:#1d99f3; --bz-sel:rgba(61,174,233,.22); --bz-ok:#27ae60;
+  --bz-shadow:0 0 0 1px rgba(0,0,0,.30),0 10px 28px rgba(0,0,0,.38),0 2px 6px rgba(0,0,0,.25);
+  min-height:100vh;color:var(--bz-text);background:#5a4fb0;
+}
+/* Plasma-style wallpaper on a fixed layer */
+body.breeze-mode::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(55vmax 38vmax at 0% 0%,rgba(214,86,140,.75),rgba(214,86,140,0) 66%),
+    radial-gradient(50vmax 36vmax at 100% 6%,rgba(150,92,210,.55),rgba(150,92,210,0) 66%),
+    radial-gradient(60vmax 40vmax at 90% 100%,rgba(61,174,233,.60),rgba(61,174,233,0) 66%),
+    radial-gradient(44vmax 30vmax at 6% 100%,rgba(255,150,120,.35),rgba(255,150,120,0) 66%),
+    linear-gradient(160deg,#a94b86 0%,#6c52b6 45%,#2f68c2 100%);
+}
+
+/* ---- Plasma panel ---- */
+body.breeze-mode .top{
+  background:rgba(239,240,241,.86);border-bottom:1px solid rgba(0,0,0,.28);
+  box-shadow:0 4px 14px rgba(0,0,0,.28);
+  -webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);
+}
+body.breeze-mode .logo{color:var(--bz-text)}
+body.breeze-mode .logo span:first-of-type{color:var(--bz-acc-d)}
+body.breeze-mode .logo .version{color:var(--bz-dim)}
+body.breeze-mode .nav a{
+  color:var(--bz-text);background:transparent;border:1px solid transparent;border-bottom:2px solid transparent;border-radius:4px;box-shadow:none;
+  transition:background .12s ease,border-color .12s ease;
+}
+body.breeze-mode .nav a:hover{background:rgba(61,174,233,.14);border-color:rgba(61,174,233,.55);border-bottom-color:rgba(61,174,233,.55);color:var(--bz-text)}
+body.breeze-mode .nav a.active{background:rgba(61,174,233,.22);border-color:rgba(61,174,233,.35);border-bottom-color:var(--bz-acc);color:var(--bz-text);box-shadow:none}
+body.breeze-mode .settings-btn{
+  color:var(--bz-text);background:var(--bz-win);border:1px solid var(--bz-line);border-radius:4px;box-shadow:none;
+}
+body.breeze-mode .settings-btn:hover,body.breeze-mode .settings-btn:focus-visible{background:#e3eff7;border-color:var(--bz-acc);outline:none;box-shadow:0 0 0 1px var(--bz-acc)}
+body.breeze-mode .settings-btn:active{background:#d3e6f3}
+
+/* ---- switch (Breeze slider switch) ---- */
+body.breeze-mode .style-switch{border:1px solid var(--bz-line);border-radius:4px;background:var(--bz-win);box-shadow:none}
+body.breeze-mode .style-label{font-weight:600;font-size:11px;color:var(--bz-dim);white-space:nowrap}
+body.breeze-mode .style-label:first-child{color:var(--bz-dim)}
+body.breeze-mode .style-label:last-child{color:var(--bz-dim)}
+body.breeze-mode .style-toggle[aria-pressed="true"] ~ .style-label:last-child{color:var(--bz-acc-d)}
+body.breeze-mode .style-toggle[aria-pressed="true"] ~ .style-label:last-child{font-weight:700}
+body.breeze-mode .style-toggle{
+  width:38px;height:20px;border:1px solid #9aa3a8;border-radius:999px;background:#d9dcdf;box-shadow:inset 0 1px 2px rgba(0,0,0,.18);
+  transition:background .18s ease,border-color .18s ease;
+}
+body.breeze-mode .style-toggle[aria-pressed="true"]{background:var(--bz-acc);border-color:#2a8fc9}
+body.breeze-mode .style-toggle span{
+  top:2px;width:14px;height:14px;border-radius:50%;border:1px solid #8d969b;background:var(--bz-view);
+  box-shadow:0 1px 2px rgba(0,0,0,.3);transition:left .16s ease;
+}
+body.breeze-mode .style-toggle:focus-visible{outline:2px solid var(--bz-acc);outline-offset:2px}
+#settingsBreezeToggle span{left:2px}
+#settingsBreezeToggle[aria-pressed="true"] span{left:19px}
+body.modern-mode #settingsBreezeToggle span{left:3px}
+body.modern-mode #settingsBreezeToggle[aria-pressed="true"] span{left:19px}
+body.modern-glass-mode #settingsBreezeToggle span{left:2px}
+body.modern-glass-mode #settingsBreezeToggle[aria-pressed="true"] span{left:22px}
+
+/* ---- desktop text ---- */
+body.breeze-mode .hero h1,body.breeze-mode .hero h1 span{color:#fff;letter-spacing:-2px;text-shadow:0 2px 10px rgba(30,10,70,.55)}
+body.breeze-mode .hero p,body.breeze-mode .head p{color:#f4f1fb;text-shadow:0 1px 3px rgba(30,10,70,.7)}
+body.breeze-mode .head h2{color:#fff;text-shadow:0 2px 8px rgba(30,10,70,.55)}
+body.breeze-mode .eyebrow{color:#ffd6ea;text-shadow:0 1px 3px rgba(30,10,70,.7)}
+body.breeze-mode .tag{color:var(--bz-text);background:var(--bz-win);border:1px solid var(--bz-line);border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+body.breeze-mode .image-credit{color:var(--bz-dim)}
+
+/* ---- buttons ---- */
+body.breeze-mode .btn{
+  color:var(--bz-text);background:linear-gradient(180deg,#f7f8f8,#eff0f1);
+  border:1px solid var(--bz-line);border-radius:4px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 2px 6px rgba(0,0,0,.22);
+  transition:background .12s ease,border-color .12s ease,box-shadow .12s ease;
+}
+body.breeze-mode .btn:hover{background:linear-gradient(180deg,#f0f7fc,#e1eef7);border-color:var(--bz-acc);box-shadow:0 0 0 1px var(--bz-acc),0 2px 6px rgba(0,0,0,.22)}
+body.breeze-mode .btn:active{background:#d3e6f3}
+body.breeze-mode .btn:focus-visible{outline:2px solid var(--bz-acc);outline-offset:2px}
+body.breeze-mode .btn.primary{color:#fff;background:linear-gradient(180deg,#4ab6ee,#3daee9);border-color:#2a8fc9;text-shadow:0 1px 0 rgba(0,60,100,.35)}
+body.breeze-mode .btn.primary:hover{background:linear-gradient(180deg,#5ec0f2,#48b4ec);box-shadow:0 0 0 1px #1d99f3,0 2px 8px rgba(0,0,0,.25)}
+
+/* ---- windows ---- */
+body.breeze-mode .panel,body.breeze-mode .monitor{
+  background:var(--bz-view);color:var(--bz-text);border:0;border-radius:6px;overflow:hidden;
+  box-shadow:var(--bz-shadow);
+  transition:box-shadow .2s ease,transform .2s ease;
+}
+body.breeze-mode .card:hover{box-shadow:0 0 0 2px var(--bz-acc),0 12px 30px rgba(0,0,0,.4)}
+body.breeze-mode .card h3{color:var(--bz-text)}
+body.breeze-mode .card p,body.breeze-mode .fact small{color:#4d5558}
+body.breeze-mode .fact strong{color:var(--bz-text)}
+body.breeze-mode .fact{border-color:#e1e3e5 !important}
+body.breeze-mode .badge{color:#fff;background:var(--bz-ok);border:0;border-radius:3px;font-weight:700}
+body.breeze-mode .monitor{background:var(--bz-win);padding:6px}
+body.breeze-mode .monitor img{border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
+/* title bar: centred caption, ⌄ ⌃ ✕ on the right */
+body.breeze-mode .panel-head{
+  position:relative;display:block;text-align:center;font-weight:600;font-size:12.5px;letter-spacing:.1px;
+  color:var(--bz-text);background:linear-gradient(180deg,#e9eaec,#dcdee0);
+  border-bottom:1px solid #c5c9cc;padding-left:64px;padding-right:64px;
+}
+body.breeze-mode .panel-head::after{
+  content:"\2304   \2303   \2715";white-space:pre;position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  font-size:13px;line-height:1;color:#4d5558;letter-spacing:1px;pointer-events:none;
+}
+body.breeze-mode .note{
+  color:var(--bz-text);background:#e3eff7;border:1px solid rgba(61,174,233,.55);border-left:4px solid var(--bz-acc);border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+body.breeze-mode .rule{border-color:rgba(255,255,255,.25)}
+/* Konsole */
+body.breeze-mode .terminal pre{background:#232627;color:#fcfcfc;border-top:1px solid #31363b}
+body.breeze-mode .terminal pre .dim{color:#7f8c8d}
+body.breeze-mode .terminal pre .cyan{color:#1abc9c}
+body.breeze-mode .terminal pre .green{color:#11d116}
+body.breeze-mode footer{
+  color:var(--bz-text);background:rgba(239,240,241,.88);border-top:1px solid rgba(0,0,0,.28);box-shadow:0 -4px 14px rgba(0,0,0,.25);
+  -webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);
+}
+
+/* ---- settings dialog ---- */
+body.breeze-mode .settings-backdrop{background:rgba(20,10,50,.40)}
+body.breeze-mode .settings-panel,body.breeze-mode .settings-help-card{
+  background:var(--bz-win);color:var(--bz-text);border:0;border-radius:6px;box-shadow:var(--bz-shadow);
+}
+body.breeze-mode .settings-head,body.breeze-mode .settings-help-head{
+  position:relative;justify-content:center;text-align:center;font-weight:600;font-size:13px;color:var(--bz-text);
+  background:linear-gradient(180deg,#e9eaec,#dcdee0);border-bottom:1px solid #c5c9cc;
+}
+body.breeze-mode .settings-head > span,body.breeze-mode .settings-help-head > span{flex:1;text-align:center}
+body.breeze-mode .settings-close,body.breeze-mode .settings-help-close{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);width:26px;height:26px;min-width:26px;min-height:26px;margin:0;padding:0;
+  color:#4d5558;border-radius:4px;background:transparent;font-size:13px;
+}
+body.breeze-mode .settings-close:hover,body.breeze-mode .settings-help-close:hover{background:#da4453;color:#fff}
+body.breeze-mode .settings-body{background:var(--bz-win)}
+body.breeze-mode .settings-row-label{color:var(--bz-text);font-weight:500}
+body.breeze-mode .settings-help-btn{color:#fff;background:var(--bz-acc);border:0;border-radius:50%}
+body.breeze-mode .settings-diff-panel,body.breeze-mode .settings-diff-panel dt{color:var(--bz-text)}
+body.breeze-mode .settings-lang-select{
+  color:var(--bz-text);background:var(--bz-view);border:1px solid var(--bz-line);border-radius:4px;height:30px;box-shadow:none;
+}
+body.breeze-mode .settings-lang-select:focus-visible{outline:none;border-color:var(--bz-acc);box-shadow:0 0 0 1px var(--bz-acc)}
+@media (max-width:700px){
+  body.breeze-mode .settings-panel{border-radius:8px 8px 0 0}
+  body.breeze-mode .nav .style-switch{padding:0 8px;gap:6px}
+  body.breeze-mode .nav .style-label{display:inline;font-size:9px}
+  body.breeze-mode .nav .style-toggle{width:38px;height:20px}
+  body.breeze-mode .nav a{padding-left:11px;padding-right:11px}
+  body.breeze-mode .panel-head{padding-left:54px;padding-right:54px;font-size:12px}
+  body.breeze-mode .panel-head::after{right:8px;font-size:12px}
+}
+@media (prefers-reduced-transparency:reduce){
+  body.breeze-mode .top,body.breeze-mode footer{-webkit-backdrop-filter:none !important;backdrop-filter:none !important;background:#eff0f1}
+}

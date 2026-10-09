@@ -286,7 +286,7 @@
      physical keyboard (i.e. every mobile visitor). */
   const SETTINGS_I18N={
     ko:{
-      title:'설정',close:'닫기',displayMode:'화면 모드',retro:'Retro',oldretro:'OldRetro',glass:'Modern Glass',glassHelp:'Modern Glass는 반투명·블러·둥근 레이어를 사용하는 Apple 스타일의 유리 질감입니다.',kpDefault:'문화어 기본 활성화',
+      title:'설정',close:'닫기',displayMode:'화면 모드',layout:'레이아웃',retro:'Retro',oldretro:'OldRetro',glass:'Modern Glass',glassHelp:'Modern Glass는 반투명·블러·둥근 레이어를 사용하는 Apple 스타일의 유리 질감입니다.',kpDefault:'문화어 기본 활성화',
       kpHelp:'문화어는 조선민주주의인민공화국(북한)의 표준어입니다. 이 설정을 켜 두면 언어 메뉴에서 한국어를 고를 때 기본으로 문화어 표기가 적용되고, 끄면 일반 한국어(남한 표준어) 표기로 보입니다. 영어 등 다른 언어에는 영향이 없으며, 선택은 이 기기에 저장됩니다.',
       biosHowDesktop:'이 창을 닫으려면 ESC를 누른 뒤 [Save & Exit]에서 Enter를 누르세요. 창 바깥을 눌러도 닫히지 않습니다.',
       biosHowTouch:'이 창을 닫으려면 창 바깥을 터치해 Save & Exit 창을 띄운 뒤 [Save & Exit]를 터치하세요.',
@@ -306,10 +306,12 @@
       biosHelpRetro:'Retro: 마우스로 조작하는 Windows 95 스타일 GUI. 창, 아이콘, 일반 휠 스크롤.',
       biosHelpOldRetro:'OldRetro: DOS 텍스트 모드 CLI 셸. F1~F6 키보드 메뉴, 데스크톱에서는 Page Up/Down으로만 스크롤.',
       biosHelpGlass:'Modern Glass: 반투명 유리 질감의 Apple 스타일 화면. 선택하면 OldRetro를 나가 Modern Glass로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.',
-      biosHelpAero:'Aero: Windows Vista/7 시절의 반투명 유리 창 느낌의 화면. 선택하면 OldRetro를 나가 Aero로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.'
+      biosHelpAero:'Aero: Windows Vista/7 시절의 반투명 유리 창 느낌의 화면. 선택하면 OldRetro를 나가 Aero로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.',
+      biosHelpBreeze:'Breeze: Linux KDE Plasma의 Breeze 스타일 화면. 선택하면 OldRetro를 나가 Breeze로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.',
+      biosHelpModern:'Modern: 깔끔한 Windows 11 스타일의 밝은 화면. 선택하면 OldRetro를 나가 Modern으로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.'
     },
     en:{
-      title:'Settings',close:'Close',displayMode:'Display mode',retro:'Retro',oldretro:'OldRetro',glass:'Modern Glass',glassHelp:'Modern Glass uses translucent, blurred and rounded layers inspired by Apple-style glass interfaces.',kpDefault:'Use \ubb38\ud654\uc5b4 by default',
+      title:'Settings',close:'Close',displayMode:'Display mode',layout:'Layout',retro:'Retro',oldretro:'OldRetro',glass:'Modern Glass',glassHelp:'Modern Glass uses translucent, blurred and rounded layers inspired by Apple-style glass interfaces.',kpDefault:'Use \ubb38\ud654\uc5b4 by default',
       kpHelp:'\ubb38\ud654\uc5b4 (Munhwaeo) is the standard form of Korean used in North Korea. When this is on, choosing Korean in the language menu shows the site in \ubb38\ud654\uc5b4 wording by default; when it is off, you get regular (South Korean standard) Korean. Other languages are not affected, and the choice is saved on this device.',
       biosHowDesktop:'To close this window, press ESC, then press Enter on [Save & Exit]. Clicking outside the window does not close it.',
       biosHowTouch:'To close this window, tap outside it to open the Save & Exit box, then tap [Save & Exit].',
@@ -329,7 +331,9 @@
       biosHelpRetro:'Retro: the mouse-driven, Windows 95-style GUI. Windows, icons, normal wheel scrolling.',
       biosHelpOldRetro:'OldRetro: the DOS text-mode CLI shell. F1\u2013F6 keyboard menu, Page Up/Down scrolling only on desktop.',
       biosHelpGlass:'Modern Glass: the translucent, Apple-style glass look. Selecting it leaves OldRetro for Modern Glass; switching back to Retro with the top toggle brings OldRetro back.',
-      biosHelpAero:'Aero: the translucent glass-window look of Windows Vista/7. Selecting it leaves OldRetro for Aero; switching back to Retro with the top toggle brings OldRetro back.'
+      biosHelpAero:'Aero: the translucent glass-window look of Windows Vista/7. Selecting it leaves OldRetro for Aero; switching back to Retro with the top toggle brings OldRetro back.',
+      biosHelpBreeze:'Breeze: the look of KDE Plasma on Linux. Selecting it leaves OldRetro for Breeze; switching back to Retro with the top toggle brings OldRetro back.',
+      biosHelpModern:'Modern: the clean, light Windows 11-style look. Selecting it leaves OldRetro for Modern; switching back to Retro with the top toggle brings OldRetro back.'
     }
   };
   function currentSettingsLang(){
@@ -338,10 +342,10 @@
   }
 
   let settingsOverlay=null,settingsBuilt=false,settingsPanelEl=null,settingsTitleEl=null,
-      settingsModeLabelEl=null,settingsToggleBtn=null,settingsGlassToggle=null,
+      settingsModeLabelEl=null,settingsLayoutSel=null,
       settingsHelpBtn=null,settingsHelpPop=null,settingsHelpTitleEl=null,settingsDiffPanel=null,settingsKpToggle=null,settingsKpLabelEl=null,settingsHelpKeyHandler=null,settingsEscHandler=null,settingsKpHelpBtn=null,settingsKpHelpBody=null,helpKind=null,
       biosItemEl=null,biosHelpEl=null,biosKeysEl=null,biosPopupEl=null,
-      biosOptRetroEl=null,biosOptOldRetroEl=null,biosOptGlassEl=null,biosOptAeroEl=null,biosKpItemEl=null,biosPopupKeyHandler=null,biosHighlight='oldretro';
+      biosOptRetroEl=null,biosOptOldRetroEl=null,biosOptGlassEl=null,biosOptAeroEl=null,biosOptBreezeEl=null,biosOptModernEl=null,biosKpItemEl=null,biosPopupKeyHandler=null,biosHighlight='oldretro';
 
   let biosExitEl=null,biosExitSaveEl=null,biosExitCancelEl=null,biosExitKeyHandler=null,
       biosExitHighlight='save',lastPointerType=null,biosPrevTab=null;
@@ -353,14 +357,20 @@
   function prefOldRetro(){try{return localStorage.getItem('miniwin-oldretro')==='1'}catch(e){return body.classList.contains('oldretro-mode')}}
   function variantPref(){
     let v=null;try{v=localStorage.getItem('miniwin-modern-variant')}catch(e){}
-    if(v!=='modern'&&v!=='modern-glass'&&v!=='aero')v=typeof window.miniwinPlatformDefault==='function'?window.miniwinPlatformDefault():'modern';
+    if(v!=='modern'&&v!=='modern-glass'&&v!=='aero'&&v!=='breeze')v=typeof window.miniwinPlatformDefault==='function'?window.miniwinPlatformDefault():'modern';
     return v;
   }
   function prefGlass(){return variantPref()==='modern-glass'}
   function prefAero(){return variantPref()==='aero'}
+  function prefBreeze(){return variantPref()==='breeze'}
+  /* the Layout dropdown shows the layout that is on screen right now */
+  function currentLayout(){
+    if(body.classList.contains('oldretro-mode'))return 'oldretro';
+    if(!body.classList.contains('modern-mode'))return 'retro';
+    return body.classList.contains('modern-glass-mode')?'modern-glass':body.classList.contains('aero-mode')?'aero':body.classList.contains('breeze-mode')?'breeze':'modern';
+  }
   function syncSettingsToggle(){
-    if(!settingsToggleBtn)return;
-    settingsToggleBtn.setAttribute('aria-pressed',prefOldRetro()?'true':'false');
+    if(settingsLayoutSel)settingsLayoutSel.value=currentLayout();
     if(settingsKpToggle){
       let on=false;try{on=localStorage.getItem('miniwin-kp-default')==='1'}catch(e){}
       settingsKpToggle.setAttribute('aria-pressed',on?'true':'false');
@@ -390,7 +400,7 @@
     helpKind=kind||'mode';
     renderHelpPop();
     settingsHelpPop.hidden=false;
-    const opener=helpKind==='kp'?settingsKpHelpBtn:(helpKind==='glass'?settingsOverlay.querySelector('#settingsGlassHelpBtn'):settingsHelpBtn); opener.setAttribute('aria-expanded','true');
+    const opener=helpKind==='kp'?settingsKpHelpBtn:settingsHelpBtn; opener.setAttribute('aria-expanded','true');
     settingsHelpKeyHandler=(e)=>{
       if(e.key==='Escape'){e.preventDefault();e.stopPropagation();const b=helpKind==='kp'?settingsKpHelpBtn:settingsHelpBtn;closeHelpPop();if(b)b.focus({preventScroll:true});}
     };
@@ -406,48 +416,35 @@
     if(settingsHelpKeyHandler){document.removeEventListener('keydown',settingsHelpKeyHandler,true);settingsHelpKeyHandler=null;}
   }
 
-  function toggleOldRetroFromSettings(){
-    if(body.classList.contains('oldretro-mode')){
-      exitOldRetro();
-    }else if(prefOldRetro()){
-      /* OldRetro is saved as on but Modern is showing: switching it off only clears the choice */
-      persistOldRetroDefault(false);syncSettingsToggle();
-    }else{
-      if(body.classList.contains('modern-mode')&&typeof window.miniwinApplyStyle==='function')window.miniwinApplyStyle('retro');
+  function syncGlassToggle(){syncSettingsToggle()}
+  /* Layout dropdown: Retro Layout = Retro / OldRetro, Modern Layout = Modern / Modern Glass / Aero / Breeze */
+  function selectLayout(val){
+    const apply=window.miniwinApplyStyle;
+    if(typeof apply!=='function')return;
+    const isOld=body.classList.contains('oldretro-mode');
+    if(val==='oldretro'){
+      if(isOld)return;
+      if(body.classList.contains('modern-mode'))apply('retro');
       enterOldRetro();
+    }else if(val==='retro'){
+      if(isOld)exitOldRetro();            /* explicit Retro clears the saved OldRetro choice */
+      else{
+        if(body.classList.contains('modern-mode'))apply('retro');
+        persistOldRetroDefault(false);
+      }
+    }else{
+      if(isOld)exitOldRetro(true);        /* leaving OldRetro for a Modern layout keeps OldRetro saved */
+      apply(val);
     }
+    syncSettingsToggle();
   }
-
-  function syncGlassToggle(){
-    if(settingsGlassToggle)settingsGlassToggle.setAttribute('aria-pressed',prefGlass()?'true':'false');
-    const at=settingsOverlay&&settingsOverlay.querySelector('#settingsAeroToggle');
-    if(at)at.setAttribute('aria-pressed',prefAero()?'true':'false');
-  }
-  /* Modern / Modern Glass / Aero are one saved choice; each switch turns its own variant on, or falls back to plain Modern. */
-  function toggleVariant(v){
-    if(typeof window.miniwinApplyStyle!=='function')return;
-    const turnOn=variantPref()!==v,next=turnOn?v:'modern';
-    if(body.classList.contains('modern-mode')||turnOn){window.miniwinApplyStyle(next);}
-    else{ /* Retro is showing and this variant is saved as on: switching it off only clears the choice */
-      try{localStorage.setItem('miniwin-modern-variant','modern')}catch(e){}
-      if(typeof window.miniwinSyncLabels==='function')window.miniwinSyncLabels();
-    }
-    syncGlassToggle();
-  }
-  function toggleModernGlass(){toggleVariant('modern-glass')}
-  function toggleAero(){toggleVariant('aero')}
   window.addEventListener('miniwin-style-change',()=>{syncSettingsToggle();syncGlassToggle();});
 
   function renderSettingsText(){
     if(!settingsBuilt)return;
     const t=SETTINGS_I18N[currentSettingsLang()];
     settingsTitleEl.textContent=t.title;
-    settingsModeLabelEl.textContent=t.displayMode;
-    settingsOverlay.querySelector('#settingsGlassLabel').textContent=t.glass;
-    settingsOverlay.querySelector('#settingsGlassHelpBtn').setAttribute('aria-label',t.glassHelp);
-    settingsOverlay.querySelector('#settingsGlassHelpBtn').title=t.glassHelp;
-    settingsOverlay.querySelector('#settingsLabelRetro').textContent=t.retro;
-    settingsOverlay.querySelector('#settingsLabelOldRetro').textContent=t.oldretro;
+    settingsModeLabelEl.textContent=t.layout||t.displayMode;
     settingsKpHelpBody.textContent=t.kpHelp;
     settingsKpHelpBtn.setAttribute('aria-label',t.kpDefault);
     settingsKpHelpBtn.title=t.kpDefault;
@@ -490,6 +487,8 @@
     else if(which==='oldretro')biosHelpEl.textContent=t.biosHelpOldRetro;
     else if(which==='glass')biosHelpEl.textContent=t.biosHelpGlass;
     else if(which==='aero')biosHelpEl.textContent=t.biosHelpAero;
+    else if(which==='breeze')biosHelpEl.textContent=t.biosHelpBreeze;
+    else if(which==='modern')biosHelpEl.textContent=t.biosHelpModern;
     else if(which==='kp')biosHelpEl.textContent=t.kpHelp;
     else if(which==='exitsave')biosHelpEl.textContent=t.biosHelpExitSave;
     else if(which==='exitcancel')biosHelpEl.textContent=t.biosHelpExitCancel;
@@ -510,6 +509,8 @@
     biosOptOldRetroEl.textContent=t.oldretro;
     biosOptGlassEl.textContent=t.glass;
     biosOptAeroEl.textContent='Aero';
+    biosOptBreezeEl.textContent='Breeze';
+    biosOptModernEl.textContent='Modern';
     let kpOn=false;try{kpOn=localStorage.getItem('miniwin-kp-default')==='1'}catch(e){}
     biosKpItemEl.innerHTML='';
     biosKpItemEl.appendChild(document.createTextNode(t.kpDefault+'\u00a0\u00a0\u00a0\u00a0'));
@@ -531,7 +532,7 @@
     }
   }
 
-  function biosOptEl(v){return v==='retro'?biosOptRetroEl:v==='glass'?biosOptGlassEl:v==='aero'?biosOptAeroEl:biosOptOldRetroEl}
+  function biosOptEl(v){return v==='retro'?biosOptRetroEl:v==='glass'?biosOptGlassEl:v==='aero'?biosOptAeroEl:v==='breeze'?biosOptBreezeEl:v==='modern'?biosOptModernEl:biosOptOldRetroEl}
 
   function setBiosHighlight(val){
     biosHighlight=val;
@@ -539,6 +540,8 @@
     biosOptOldRetroEl.classList.toggle('highlight',val==='oldretro');
     biosOptGlassEl.classList.toggle('highlight',val==='glass');
     biosOptAeroEl.classList.toggle('highlight',val==='aero');
+    biosOptBreezeEl.classList.toggle('highlight',val==='breeze');
+    biosOptModernEl.classList.toggle('highlight',val==='modern');
     updateBiosHelp(val);
   }
 
@@ -549,7 +552,7 @@
     biosPopupKeyHandler=(e)=>{
       if(e.key==='ArrowUp'||e.key==='ArrowDown'){
         e.preventDefault();
-        const order=['retro','oldretro','glass','aero'];
+        const order=['retro','oldretro','modern','glass','aero','breeze'];
         let i=order.indexOf(biosHighlight)+(e.key==='ArrowDown'?1:-1);
         i=(i+order.length)%order.length;
         setBiosHighlight(order[i]);
@@ -578,10 +581,10 @@
     if(val==='retro'&&isOldRetroNow){
       exitOldRetro();
       closeSettings();
-    }else if(val==='glass'||val==='aero'){
+    }else if(val==='modern'||val==='glass'||val==='aero'||val==='breeze'){
       /* leaving OldRetro for Modern Glass / Aero keeps OldRetro as the saved retro flavour */
       if(isOldRetroNow)exitOldRetro(true);
-      if(typeof window.miniwinApplyStyle==='function')window.miniwinApplyStyle(val==='aero'?'aero':'modern-glass');
+      if(typeof window.miniwinApplyStyle==='function')window.miniwinApplyStyle({modern:'modern',glass:'modern-glass',aero:'aero',breeze:'breeze'}[val]);
       syncGlassToggle();
       closeSettings();
     }else if(val==='oldretro'&&!isOldRetroNow){
@@ -655,20 +658,9 @@
           '<div class="settings-head"><span id="settingsTitle"></span>'+
             '<button type="button" class="settings-close" id="settingsClose">\u2715</button></div>'+
           '<div class="settings-body">'+
-            '<div class="settings-row"><span class="settings-label-wrap"><span class="settings-row-label" id="settingsModeLabel"></span>'+
+            '<div class="settings-row" id="settingsLayoutRow"><span class="settings-label-wrap"><label class="settings-row-label" id="settingsModeLabel" for="settingsLayoutSelect"></label>'+
               '<button type="button" class="settings-help-btn" id="settingsHelpBtn" aria-haspopup="dialog" aria-expanded="false">?</button></span>'+
-              '<div class="style-switch" id="settingsOldRetroSwitch" role="group">'+
-                '<span class="style-label" id="settingsLabelRetro">Retro</span>'+
-                '<button class="style-toggle" id="settingsOldRetroToggle" type="button" aria-label="Toggle OldRetro mode" aria-pressed="false"><span></span></button>'+
-                '<span class="style-label" id="settingsLabelOldRetro">OldRetro</span>'+
-              '</div>'+
-            '</div>'+
-            '<div class="settings-row" id="settingsGlassRow"><span class="settings-label-wrap"><span class="settings-row-label" id="settingsGlassLabel">Modern Glass</span>'+ 
-              '<button type="button" class="settings-help-btn" id="settingsGlassHelpBtn" aria-haspopup="dialog" aria-expanded="false">?</button></span>'+
-              '<div class="style-switch" id="settingsGlassSwitch" role="group"><span class="style-label" id="settingsLabelModern">Modern</span><button class="style-toggle" id="settingsGlassToggle" type="button" aria-label="Toggle Modern Glass" aria-pressed="false"><span></span></button><span class="style-label" id="settingsLabelGlass">Modern Glass</span></div>'+
-            '</div>'+
-            '<div class="settings-row" id="settingsAeroRow"><span class="settings-label-wrap"><span class="settings-row-label" id="settingsAeroLabel">Aero</span></span>'+
-              '<div class="style-switch" id="settingsAeroSwitch" role="group"><span class="style-label">Modern</span><button class="style-toggle" id="settingsAeroToggle" type="button" aria-label="Toggle Aero" aria-pressed="false"><span></span></button><span class="style-label">Aero</span></div>'+
+              '<select class="settings-lang-select" id="settingsLayoutSelect"></select>'+
             '</div>'+
             '<div class="settings-row" id="settingsLangRow"><label class="settings-row-label" id="settingsLangLabel" for="settingsLangSelect">Language</label>'+
               '<select class="settings-lang-select" id="settingsLangSelect"></select>'+
@@ -697,8 +689,10 @@
             '<div class="bios-popup-title" id="biosPopupTitle"></div>'+
             '<button type="button" class="bios-popup-opt" id="biosOptRetro" data-val="retro"></button>'+
             '<button type="button" class="bios-popup-opt" id="biosOptOldRetro" data-val="oldretro"></button>'+
+            '<button type="button" class="bios-popup-opt" id="biosOptModern" data-val="modern"></button>'+
             '<button type="button" class="bios-popup-opt" id="biosOptGlass" data-val="glass"></button>'+
             '<button type="button" class="bios-popup-opt" id="biosOptAero" data-val="aero"></button>'+
+            '<button type="button" class="bios-popup-opt" id="biosOptBreeze" data-val="breeze"></button>'+
           '</div>'+
           '<div class="bios-popup bios-exit" id="biosExit" hidden role="dialog" aria-label="Save &amp; Exit">'+
             '<div class="bios-popup-title">Save &amp; Exit</div>'+
@@ -724,8 +718,10 @@
     settingsPanelEl=settingsOverlay.querySelector('.settings-panel');
     settingsTitleEl=settingsOverlay.querySelector('#settingsTitle');
     settingsModeLabelEl=settingsOverlay.querySelector('#settingsModeLabel');
-    settingsToggleBtn=settingsOverlay.querySelector('#settingsOldRetroToggle');
-    settingsGlassToggle=settingsOverlay.querySelector('#settingsGlassToggle');
+    settingsLayoutSel=settingsOverlay.querySelector('#settingsLayoutSelect');
+    settingsLayoutSel.innerHTML=
+      '<optgroup label="Retro Layout"><option value="retro">Retro</option><option value="oldretro">OldRetro</option></optgroup>'+
+      '<optgroup label="Modern Layout"><option value="modern">Modern</option><option value="modern-glass">Modern Glass</option><option value="aero">Aero</option><option value="breeze">Breeze</option></optgroup>';
     const langSel=settingsOverlay.querySelector('#settingsLangSelect');
     langSel.innerHTML=(window.miniwinLanguages||[]).map(l=>'<option value="'+l[0]+'">'+l[1]+'</option>').join('');
     langSel.addEventListener('change',()=>{if(typeof window.setLanguage==='function')window.setLanguage(langSel.value)});
@@ -745,6 +741,8 @@
     biosOptOldRetroEl=settingsOverlay.querySelector('#biosOptOldRetro');
     biosOptGlassEl=settingsOverlay.querySelector('#biosOptGlass');
     biosOptAeroEl=settingsOverlay.querySelector('#biosOptAero');
+    biosOptBreezeEl=settingsOverlay.querySelector('#biosOptBreeze');
+    biosOptModernEl=settingsOverlay.querySelector('#biosOptModern');
     biosKpItemEl=settingsOverlay.querySelector('#biosKpItem');
     biosExitEl=settingsOverlay.querySelector('#biosExit');
     biosExitSaveEl=settingsOverlay.querySelector('#biosExitSave');
@@ -765,10 +763,7 @@
     biosExitCancelEl.addEventListener('mouseenter',()=>setExitHighlight('cancel'));
     biosExitSaveEl.addEventListener('focus',()=>setExitHighlight('save'));
     biosExitCancelEl.addEventListener('focus',()=>setExitHighlight('cancel'));
-    settingsToggleBtn.addEventListener('click',toggleOldRetroFromSettings);
-    settingsGlassToggle.addEventListener('click',toggleModernGlass);
-    settingsOverlay.querySelector('#settingsAeroToggle').addEventListener('click',toggleAero);
-    settingsOverlay.querySelector('#settingsGlassHelpBtn').addEventListener('click',()=>{if(!settingsHelpPop.hidden&&helpKind==='glass')closeHelpPop();else{closeHelpPop();openHelpPop('glass')}});
+    settingsLayoutSel.addEventListener('change',()=>selectLayout(settingsLayoutSel.value));
     settingsHelpBtn.addEventListener('click',()=>{if(!settingsHelpPop.hidden&&helpKind==='mode')closeHelpPop();else{closeHelpPop();openHelpPop('mode');}});
     settingsKpHelpBtn.addEventListener('click',()=>{if(!settingsHelpPop.hidden&&helpKind==='kp')closeHelpPop();else{closeHelpPop();openHelpPop('kp');}});
     settingsOverlay.querySelector('#settingsHelpClose').addEventListener('click',closeHelpPop);
@@ -779,6 +774,12 @@
     biosOptOldRetroEl.addEventListener('click',()=>applyBiosSelection('oldretro'));
     biosOptGlassEl.addEventListener('click',()=>applyBiosSelection('glass'));
     biosOptAeroEl.addEventListener('click',()=>applyBiosSelection('aero'));
+    biosOptBreezeEl.addEventListener('click',()=>applyBiosSelection('breeze'));
+    biosOptModernEl.addEventListener('click',()=>applyBiosSelection('modern'));
+    biosOptModernEl.addEventListener('mouseenter',()=>setBiosHighlight('modern'));
+    biosOptModernEl.addEventListener('focus',()=>setBiosHighlight('modern'));
+    biosOptBreezeEl.addEventListener('mouseenter',()=>setBiosHighlight('breeze'));
+    biosOptBreezeEl.addEventListener('focus',()=>setBiosHighlight('breeze'));
     biosOptAeroEl.addEventListener('mouseenter',()=>setBiosHighlight('aero'));
     biosOptAeroEl.addEventListener('focus',()=>setBiosHighlight('aero'));
     biosOptGlassEl.addEventListener('mouseenter',()=>setBiosHighlight('glass'));
