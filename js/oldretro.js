@@ -470,11 +470,9 @@
     settingsTitleEl.textContent=t.title;
     settingsModeLabelEl.textContent=t.layout||t.displayMode;
     settingsKpHelpBody.textContent=t.kpHelp;
-    settingsKpHelpBtn.setAttribute('aria-label',t.kpDefault);
-    settingsKpHelpBtn.title=t.kpDefault;
+    if(settingsKpHelpBtn){settingsKpHelpBtn.setAttribute('aria-label',t.kpDefault);settingsKpHelpBtn.title=t.kpDefault;}
     renderHelpPop();
-    settingsHelpBtn.setAttribute('aria-label',t.diffBtn);
-    settingsHelpBtn.title=t.diffBtn;
+    if(settingsHelpBtn){settingsHelpBtn.setAttribute('aria-label',t.diffBtn);settingsHelpBtn.title=t.diffBtn;}
     settingsKpLabelEl.textContent=t.kpDefault;
     settingsKpToggle.setAttribute('aria-label',t.kpDefault);
     syncMotionUI();
@@ -729,14 +727,14 @@
             '<button type="button" class="settings-close" id="settingsClose"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div>'+
           '<div class="settings-body">'+
             '<div class="settings-row" id="settingsLayoutRow"><span class="settings-label-wrap"><label class="settings-row-label" id="settingsModeLabel" for="settingsLayoutSelect"></label>'+
-              '<button type="button" class="settings-help-btn" id="settingsHelpBtn" aria-haspopup="dialog" aria-expanded="false">?</button></span>'+
+              '</span>'+
               '<select class="settings-lang-select" id="settingsLayoutSelect"></select>'+
             '</div>'+
             '<div class="settings-row" id="settingsLangRow"><label class="settings-row-label" id="settingsLangLabel" for="settingsLangSelect">Language</label>'+
               '<select class="settings-lang-select" id="settingsLangSelect"></select>'+
             '</div>'+
             '<div class="settings-row" id="settingsKpRow"><span class="settings-label-wrap"><span class="settings-row-label" id="settingsKpLabel"></span>'+
-              '<button type="button" class="settings-help-btn" id="settingsKpHelpBtn" aria-haspopup="dialog" aria-expanded="false">?</button></span>'+
+              '</span>'+
               '<div class="settings-kp-control"><div class="style-switch" id="settingsKpSwitch" role="group">'+
                 '<button class="style-toggle" id="settingsKpToggle" type="button" aria-pressed="false"><span></span></button>'+
               '</div><span class="settings-kp-state" id="settingsKpState" aria-hidden="true"></span></div>'+
@@ -859,8 +857,8 @@
     biosExitSaveEl.addEventListener('focus',()=>setExitHighlight('save'));
     biosExitCancelEl.addEventListener('focus',()=>setExitHighlight('cancel'));
     settingsLayoutSel.addEventListener('change',()=>selectLayout(settingsLayoutSel.value));
-    settingsHelpBtn.addEventListener('click',()=>{if(!settingsHelpPop.hidden&&helpKind==='mode')closeHelpPop();else{closeHelpPop();openHelpPop('mode');}});
-    settingsKpHelpBtn.addEventListener('click',()=>{if(!settingsHelpPop.hidden&&helpKind==='kp')closeHelpPop();else{closeHelpPop();openHelpPop('kp');}});
+    if(settingsHelpBtn)settingsHelpBtn.addEventListener('click',()=>{if(!settingsHelpPop.hidden&&helpKind==='mode')closeHelpPop();else{closeHelpPop();openHelpPop('mode');}});
+    if(settingsKpHelpBtn)settingsKpHelpBtn.addEventListener('click',()=>{if(!settingsHelpPop.hidden&&helpKind==='kp')closeHelpPop();else{closeHelpPop();openHelpPop('kp');}});
     settingsOverlay.querySelector('#settingsHelpClose').addEventListener('click',closeHelpPop);
     settingsOverlay.querySelector('#settingsHelpBack').addEventListener('click',closeHelpPop);
     settingsKpToggle.addEventListener('click',()=>{setKpDefault(settingsKpToggle.getAttribute('aria-pressed')!=='true');});

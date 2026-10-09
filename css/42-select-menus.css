@@ -1,0 +1,84 @@
+/* Settings dropdowns (Layout and Language): the list takes the theme's language-menu skin (the existing .lang-menu rules),
+   with these additions. The group headings are captions, not body-size lines, and the Breeze and Liquid Glass lists get
+   their own look. This file comes last, so it wins over the title-bar and language-menu rules of the earlier files. */
+
+.sel-menu{font-size:13px;line-height:1.4}
+.sel-menu .sel-group{font-size:11px;font-weight:700;letter-spacing:.2px;opacity:.62;padding:7px 10px 2px;white-space:nowrap;pointer-events:none;user-select:none}
+.sel-menu button{font-size:inherit;font-family:inherit;text-align:left;white-space:nowrap}
+
+/* Breeze (KDE): a light grey list with the Breeze selection blue */
+body.breeze-mode .sel-menu .sel-group{color:#4d5558}
+body.breeze-mode .sel-menu button{color:#232629;border-radius:3px}
+body.breeze-mode .sel-menu button:hover{background:rgba(61,174,233,.22);color:#232629}
+body.breeze-mode .sel-menu button.active{background:#3daee9;color:#ffffff}
+body.breeze-mode .sel-menu .check{color:#ffffff}
+
+/* Liquid Glass: a white glass list (opaque enough that the sheet behind does not show through the text), ink type,
+   and a bright glass pill for the selected item */
+body.liquid-mode .sel-menu .sel-group{color:var(--lq-ink-2);opacity:1}
+body.liquid-mode .sel-menu button{color:var(--lq-ink);border-radius:8px;opacity:1}
+body.liquid-mode .sel-menu button:hover{background:rgba(255,255,255,.9);box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+body.liquid-mode .sel-menu button.active{background:linear-gradient(180deg,#ffffff,#eef2f6);color:var(--lq-ink);font-weight:700;box-shadow:var(--lq-rim),0 2px 6px rgba(0,25,80,.15)}
+body.liquid-mode .sel-menu .check{color:var(--lq-ink)}
+
+/* Layout list: each entry is drawn in the look of the theme it names. Its rest look and its selected/hover look use
+   that theme's own shapes, colours and fonts (glossy capsule for Aqua, bevel for Retro, the XP blue bar for Luna, ...).
+   The selector is doubled so these win over the current theme's menu skin, and the font is forced past the global font rule. */
+html body .sel-menu.sel-menu button.th-retro{background:#c0c0c0 !important;color:#000000 !important;box-shadow:inset -1px -1px #404040,inset 1px 1px #ffffff !important;border:0 !important;border-radius:0 !important;font-weight:700 !important;font-family:"Courier New",monospace !important}
+html body .sel-menu.sel-menu button.th-retro:hover,html body .sel-menu.sel-menu button.th-retro.active{background:#000080 !important;color:#ffffff !important;box-shadow:none !important;font-weight:700 !important}
+html body .sel-menu.sel-menu button.th-retro .check{color:#ffffff !important}
+html body .sel-menu.sel-menu button.th-oldretro{background:#0000aa !important;color:#d8d8ff !important;box-shadow:none !important;border:0 !important;border-radius:0 !important;font-weight:400 !important;font-family:"Courier New",monospace !important}
+html body .sel-menu.sel-menu button.th-oldretro:hover,html body .sel-menu.sel-menu button.th-oldretro.active{background:#aaaaaa !important;color:#00006a !important;box-shadow:none !important;font-weight:700 !important}
+html body .sel-menu.sel-menu button.th-oldretro .check{color:#00006a !important}
+html body .sel-menu.sel-menu button.th-luna{background:#ffffff !important;color:#000000 !important;border:1px solid transparent !important;border-radius:3px !important;box-shadow:none !important;font-weight:400 !important;font-family:Tahoma,Verdana,sans-serif !important}
+html body .sel-menu.sel-menu button.th-luna:hover,html body .sel-menu.sel-menu button.th-luna.active{background:linear-gradient(#3d95ff,#0053ee) !important;color:#ffffff !important;border:1px solid #002c74 !important;box-shadow:none !important;font-weight:400 !important}
+html body .sel-menu.sel-menu button.th-luna .check{color:#ffffff !important}
+html body .sel-menu.sel-menu button.th-aqua{background:linear-gradient(rgba(255,255,255,.95) 0%,rgba(255,255,255,0) 50%),linear-gradient(#f7f7f7,#d8d8d8) !important;color:#000000 !important;border:1px solid #7f7f7f !important;border-radius:14px !important;box-shadow:0 1px 2px rgba(0,0,0,.3) !important;font-weight:500 !important;margin-bottom:4px !important;font-family:"Lucida Grande","Helvetica Neue",Pretendard,sans-serif !important}
+html body .sel-menu.sel-menu button.th-aqua:hover,html body .sel-menu.sel-menu button.th-aqua.active{background:linear-gradient(rgba(255,255,255,.75) 0%,rgba(255,255,255,0) 50%),linear-gradient(#8dbcf8,#3a7ce6 50%,#2c64cf 52%,#4f8ce9) !important;color:#ffffff !important;border:1px solid #2a5fb4 !important;border-radius:14px !important;box-shadow:0 1px 2px rgba(0,0,0,.3) !important;text-shadow:0 -1px 0 rgba(0,0,0,.3) !important;font-weight:500 !important;margin-bottom:4px !important}
+html body .sel-menu.sel-menu button.th-aqua .check{color:#ffffff !important}
+html body .sel-menu.sel-menu button.th-modern{background:transparent !important;color:#1b1b1b !important;border:0 !important;border-radius:6px !important;box-shadow:none !important;font-weight:400 !important;font-family:"Segoe UI Variable","Segoe UI",sans-serif !important}
+html body .sel-menu.sel-menu button.th-modern:hover,html body .sel-menu.sel-menu button.th-modern.active{background:rgba(0,103,192,.12) !important;color:#0067c0 !important;border:0 !important;border-radius:6px !important;box-shadow:inset 3px 0 0 #0067c0 !important;font-weight:600 !important}
+html body .sel-menu.sel-menu button.th-modern .check{color:#0067c0 !important}
+html body .sel-menu.sel-menu button.th-modern-glass{background:rgba(255,255,255,.22) !important;color:#1b3552 !important;border:1px solid rgba(255,255,255,.5) !important;border-radius:999px !important;box-shadow:none !important;font-weight:500 !important;font-family:"Apple SD Gothic Neo",sans-serif !important}
+html body .sel-menu.sel-menu button.th-modern-glass:hover,html body .sel-menu.sel-menu button.th-modern-glass.active{background:rgba(10,91,208,.9) !important;color:#ffffff !important;border:1px solid rgba(10,91,208,.9) !important;border-radius:999px !important;box-shadow:none !important;font-weight:700 !important}
+html body .sel-menu.sel-menu button.th-modern-glass .check{color:#ffffff !important}
+html body .sel-menu.sel-menu button.th-aero{background:linear-gradient(rgba(255,255,255,.7),rgba(255,255,255,.2)) !important;color:#0a2748 !important;border:1px solid rgba(255,255,255,.6) !important;border-radius:3px !important;box-shadow:none !important;font-weight:400 !important;font-family:"Segoe UI",sans-serif !important}
+html body .sel-menu.sel-menu button.th-aero:hover,html body .sel-menu.sel-menu button.th-aero.active{background:linear-gradient(rgba(255,255,255,.7) 0%,rgba(255,255,255,0) 45%),linear-gradient(#bfe0fb,#5ea9e6 52%,#3b8ad9) !important;color:#0a2748 !important;border:1px solid #2d6da8 !important;border-radius:3px !important;box-shadow:none !important;text-shadow:0 1px 0 rgba(255,255,255,.6) !important;font-weight:700 !important}
+html body .sel-menu.sel-menu button.th-aero .check{color:#0a2748 !important}
+html body .sel-menu.sel-menu button.th-breeze{background:transparent !important;color:#232629 !important;border:0 !important;border-radius:3px !important;box-shadow:none !important;font-weight:400 !important;font-family:"Noto Sans",sans-serif !important}
+html body .sel-menu.sel-menu button.th-breeze:hover,html body .sel-menu.sel-menu button.th-breeze.active{background:#3daee9 !important;color:#ffffff !important;border:0 !important;border-radius:3px !important;box-shadow:none !important;font-weight:400 !important}
+html body .sel-menu.sel-menu button.th-breeze .check{color:#ffffff !important}
+html body .sel-menu.sel-menu button.th-flat{background:transparent !important;color:#000000 !important;border:0 !important;border-bottom:1px solid #e5e5e5 !important;border-radius:0 !important;box-shadow:none !important;font-weight:400 !important;font-family:"Segoe UI",sans-serif !important}
+html body .sel-menu.sel-menu button.th-flat:hover,html body .sel-menu.sel-menu button.th-flat.active{background:#0078d7 !important;color:#ffffff !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;font-weight:600 !important}
+html body .sel-menu.sel-menu button.th-flat .check{color:#ffffff !important}
+html body .sel-menu.sel-menu button.th-adwaita{background:transparent !important;color:#2e3436 !important;border:0 !important;border-radius:8px !important;box-shadow:none !important;font-weight:400 !important;font-family:Cantarell,sans-serif !important}
+html body .sel-menu.sel-menu button.th-adwaita:hover,html body .sel-menu.sel-menu button.th-adwaita.active{background:#3584e4 !important;color:#ffffff !important;border:0 !important;border-radius:8px !important;box-shadow:none !important;font-weight:700 !important}
+html body .sel-menu.sel-menu button.th-adwaita .check{color:#ffffff !important}
+html body .sel-menu.sel-menu button.th-mica{background:transparent !important;color:#1b1b1b !important;border:0 !important;border-radius:4px !important;box-shadow:none !important;font-weight:400 !important;font-family:"Segoe UI Variable","Segoe UI",sans-serif !important}
+html body .sel-menu.sel-menu button.th-mica:hover,html body .sel-menu.sel-menu button.th-mica.active{background:rgba(0,0,0,.06) !important;color:#1b1b1b !important;border:0 !important;border-radius:4px !important;box-shadow:inset 3px 0 0 #0067c0 !important;font-weight:600 !important}
+html body .sel-menu.sel-menu button.th-mica .check{color:#0067c0 !important}
+html body .sel-menu.sel-menu button.th-oxygen{background:linear-gradient(#fdfdfd,#e8e8e8) !important;color:#232629 !important;border:1px solid #b8bec5 !important;border-radius:3px !important;box-shadow:none !important;font-weight:400 !important;font-family:"Oxygen Sans","Noto Sans",sans-serif !important}
+html body .sel-menu.sel-menu button.th-oxygen:hover,html body .sel-menu.sel-menu button.th-oxygen.active{background:linear-gradient(#7fd0ff,#3daefd 50%,#2b9ae6 52%,#5ec1ff) !important;color:#ffffff !important;border:1px solid #2b8fcf !important;border-radius:3px !important;box-shadow:none !important;font-weight:600 !important}
+html body .sel-menu.sel-menu button.th-oxygen .check{color:#ffffff !important}
+html body .sel-menu.sel-menu button.th-sequoia{background:transparent !important;color:#1d1d1f !important;border:0 !important;border-radius:6px !important;box-shadow:none !important;font-weight:400 !important;font-family:"SF Pro Text",-apple-system,Pretendard,sans-serif !important}
+html body .sel-menu.sel-menu button.th-sequoia:hover,html body .sel-menu.sel-menu button.th-sequoia.active{background:#0a7aff !important;color:#ffffff !important;border:0 !important;border-radius:6px !important;box-shadow:none !important;font-weight:600 !important}
+html body .sel-menu.sel-menu button.th-sequoia .check{color:#ffffff !important}
+html body .sel-menu.sel-menu button.th-liquid{background:transparent !important;color:#1d1d1f !important;border:0 !important;border-radius:8px !important;box-shadow:none !important;font-weight:500 !important;font-family:"Apple SD Gothic Neo",sans-serif !important}
+html body .sel-menu.sel-menu button.th-liquid:hover,html body .sel-menu.sel-menu button.th-liquid.active{background:linear-gradient(#ffffff,#eef2f6) !important;color:#1d1d1f !important;border:0 !important;border-radius:8px !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.9),0 2px 6px rgba(0,25,80,.15) !important;font-weight:700 !important}
+html body .sel-menu.sel-menu button.th-liquid .check{color:#1d1d1f !important}
+
+/* ---- the dropdown panel's own surface, per theme (the entries above are not changed here) ---- */
+html body:not(.modern-mode) .sel-menu.sel-menu{background:#c0c0c0 !important;color:#000000 !important;border:1px solid #000000 !important;border-radius:0 !important;box-shadow:inset 1px 1px #ffffff,inset -1px -1px #404040,3px 3px 0 #000000 !important;padding:3px !important}
+html body.oldretro-mode .sel-menu.sel-menu{background:#0000aa !important;color:#d8d8ff !important;border:2px solid #aaaaaa !important;border-radius:0 !important;box-shadow:none !important}
+html body.modern-mode .sel-menu.sel-menu{background:rgba(252,252,253,.98) !important;color:#1b1b1b !important;border:1px solid rgba(0,0,0,.08) !important;border-radius:8px !important;box-shadow:0 8px 24px rgba(0,0,0,.14) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.modern-glass-mode .sel-menu.sel-menu{background:rgba(255,255,255,.42) !important;color:#1b3552 !important;border:1px solid rgba(255,255,255,.7) !important;border-radius:16px !important;box-shadow:0 12px 32px rgba(0,30,80,.28),inset 0 1px 0 rgba(255,255,255,.8) !important;backdrop-filter:blur(24px) saturate(160%) !important;-webkit-backdrop-filter:blur(24px) saturate(160%) !important}
+html body.aero-mode .sel-menu.sel-menu{background:linear-gradient(rgba(255,255,255,.88),rgba(214,232,250,.82)) !important;color:#0a2748 !important;border:1px solid #6e9ccc !important;border-radius:6px !important;box-shadow:0 6px 16px rgba(0,30,80,.4),inset 0 0 0 1px rgba(255,255,255,.6) !important;backdrop-filter:blur(12px) !important;-webkit-backdrop-filter:blur(12px) !important}
+html body.breeze-mode .sel-menu.sel-menu{background:#eff0f1 !important;color:#232629 !important;border:1px solid #bdc3c7 !important;border-radius:4px !important;box-shadow:0 2px 10px rgba(0,0,0,.22) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.flat-mode .sel-menu.sel-menu{background:#ffffff !important;color:#000000 !important;border:0 !important;border-radius:0 !important;box-shadow:0 0 0 1px #c8c8c8,0 4px 10px rgba(0,0,0,.18) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.adwaita-mode .sel-menu.sel-menu{background:#ffffff !important;color:#2e3436 !important;border:1px solid rgba(0,0,0,.14) !important;border-radius:12px !important;box-shadow:0 6px 18px rgba(0,0,0,.28) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.mica-mode .sel-menu.sel-menu{background:rgba(243,243,243,.92) !important;color:#1b1b1b !important;border:1px solid rgba(0,0,0,.08) !important;border-radius:8px !important;box-shadow:0 8px 24px rgba(0,0,0,.14) !important;backdrop-filter:blur(30px) !important;-webkit-backdrop-filter:blur(30px) !important}
+html body.oxygen-mode .sel-menu.sel-menu{background:linear-gradient(#f4f5f6,#dfe3e6) !important;color:#232629 !important;border:1px solid #9ea6ae !important;border-radius:4px !important;box-shadow:0 4px 10px rgba(0,0,0,.35),inset 0 1px 0 #ffffff !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.sequoia-mode .sel-menu.sel-menu{background:rgba(246,246,248,.86) !important;color:#1d1d1f !important;border:.5px solid rgba(0,0,0,.14) !important;border-radius:10px !important;box-shadow:0 14px 34px rgba(8,22,70,.35) !important;backdrop-filter:blur(30px) saturate(180%) !important;-webkit-backdrop-filter:blur(30px) saturate(180%) !important}
+html body.liquid-mode .sel-menu.sel-menu{background:linear-gradient(150deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.86) 55%,rgba(255,255,255,.92) 100%) !important;color:#1d1d1f !important;border:1px solid rgba(255,255,255,.9) !important;border-radius:12px !important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.42),0 -1px 4px 1px inset rgba(255,255,255,.74),0 14px 30px -10px rgba(0,25,80,.45) !important;backdrop-filter:blur(20px) saturate(160%) !important;-webkit-backdrop-filter:blur(20px) saturate(160%) !important}
+html body.luna-mode .sel-menu.sel-menu{background:#ece9d8 !important;color:#000000 !important;border:3px solid #0831d9 !important;border-radius:7px 7px 3px 3px !important;box-shadow:3px 3px 6px rgba(0,0,0,.35) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.aqua-mode:not(.oldretro-mode) .sel-menu.sel-menu{background:repeating-linear-gradient(180deg,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.05) 2px 3px),#ececec !important;color:#000000 !important;border:1px solid #5d5d5d !important;border-radius:8px !important;box-shadow:0 8px 18px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.9) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
