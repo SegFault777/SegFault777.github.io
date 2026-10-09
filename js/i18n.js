@@ -36,19 +36,8 @@
   }
   window.setLanguage = setLanguage;
 
-  /* 언어 드롭다운 */
-  const wrap = document.querySelector('.lang'), btn = wrap.querySelector('.lang-btn'), menu = wrap.querySelector('.lang-menu');
-  menu.innerHTML = LANGS.map(([code, label]) =>
-    `<button type="button" role="menuitem" data-lang="${code}" data-lang-label="${label}">${label}</button>`).join('');
-  const toggle = open => { wrap.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); };
-  btn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); toggle(!wrap.classList.contains('open')); });
-  menu.addEventListener('click', e => {
-    const item = e.target.closest('button[data-lang]');
-    if (item) { setLanguage(item.dataset.lang); toggle(false); }
-    e.stopPropagation();
-  });
-  document.addEventListener('click', e => { if (!wrap.contains(e.target)) toggle(false); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+  /* 언어 선택은 설정 창(oldretro.js)에 있습니다. */
+  window.miniwinLanguages = LANGS;
 
   /* 숨겨진 모드: 한국어에서 NKBK 입력 */
   let buf = '';

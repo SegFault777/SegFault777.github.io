@@ -12,3 +12,6 @@
 .modern-mode .style-toggle span{top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(28,55,81,.25)}
 .modern-mode .style-toggle span{left:19px}
 @media(max-width:900px){.style-switch{flex:0 0 auto}.nav{overflow-x:auto;max-width:calc(100vw - 170px);scrollbar-width:none}.nav::-webkit-scrollbar{display:none}}
+body.modern-glass-mode .style-label{font-family:'Apple SD Gothic Neo',sans-serif;font-weight:600;letter-spacing:.2px}
+body.modern-glass-mode .style-toggle{width:36px;height:20px;border-radius:999px}
+body.modern-glass-mode .style-toggle span{top:3px;left:19px;width:12px;height:12px;border-radius:50%}

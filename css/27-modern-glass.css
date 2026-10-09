@@ -1,0 +1,162 @@
+@font-face{font-family:'Apple SD Gothic Neo';font-weight:100;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Thin.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Thin.ttf') format('truetype')}
+@font-face{font-family:'Apple SD Gothic Neo';font-weight:200;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-ExtraLight.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-ExtraLight.ttf') format('truetype')}
+@font-face{font-family:'Apple SD Gothic Neo';font-weight:300;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Light.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Light.ttf') format('truetype')}
+@font-face{font-family:'Apple SD Gothic Neo';font-weight:400;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Regular.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Regular.ttf') format('truetype')}
+@font-face{font-family:'Apple SD Gothic Neo';font-weight:500;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Medium.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Medium.ttf') format('truetype')}
+@font-face{font-family:'Apple SD Gothic Neo';font-weight:600;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-SemiBold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-SemiBold.ttf') format('truetype')}
+@font-face{font-family:'Apple SD Gothic Neo';font-weight:700;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Bold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Bold.ttf') format('truetype')}
+@font-face{font-family:'Apple SD Gothic Neo';font-weight:800;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-ExtraBold.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-ExtraBold.ttf') format('truetype')}
+@font-face{font-family:'Apple SD Gothic Neo';font-weight:900;font-style:normal;font-display:swap;src:url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.woff2') format('woff2'),url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/AppleSDGothicNeo-Black.ttf') format('truetype')}
+
+/* ===== Modern Glass — Apple "Liquid Glass" =====
+   Nearly clear material: the page behind it is blurred a little, saturated, and
+   (Chromium) physically bent at the rim by an SVG displacement map that js/glass.js
+   generates for every glass element's exact size. A thin lit rim, a pointer-following
+   specular sheen and a soft contact shadow finish the look. */
+body.modern-glass-mode{
+  --lg-ink:#0f2238; --lg-ink-2:#1e3a58; --lg-accent:#0a84ff;
+  --lg-rim:inset 0 0 0 1px rgba(255,255,255,.42),
+           inset 2px 2px 1px -1px rgba(255,255,255,.95),
+           inset -2px -2px 1px -1px rgba(255,255,255,.75),
+           inset 0 0 14px rgba(255,255,255,.18),
+           inset 0 -10px 16px -10px rgba(40,140,255,.28);
+  --lg-drop:0 1px 2px rgba(10,30,60,.08),0 14px 34px rgba(20,50,100,.22);
+  --lg-sheen:radial-gradient(90% 70% at var(--mx,20%) var(--my,0%),rgba(255,255,255,.42),rgba(255,255,255,0) 60%),
+             linear-gradient(140deg,rgba(255,255,255,.34),rgba(255,255,255,.03) 38%,rgba(255,255,255,.03) 62%,rgba(255,255,255,.22));
+}
+html.modern-glass-mode,body.modern-glass-mode{font-family:'Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+/* Beat 11-modern-fonts.css (Pretendard !important): Modern Glass is Apple SD Gothic Neo only. */
+body.modern-glass-mode:not(.oldretro-mode),
+body.modern-glass-mode:not(.oldretro-mode) *,
+body.modern-glass-mode:not(.oldretro-mode) pre,
+body.modern-glass-mode:not(.oldretro-mode) code{font-family:'Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif !important}
+
+/* A vivid scene behind the glass, so refraction has something to bend. */
+body.modern-glass-mode{
+  min-height:100vh;color:var(--lg-ink);
+  background:
+    radial-gradient(34vw 26vw at 88% 84%,#ffc619 0,rgba(255,198,25,.0) 72%),
+    radial-gradient(26vw 22vw at 70% 100%,#ff9d0a 0,rgba(255,157,10,0) 70%),
+    radial-gradient(30vw 24vw at 6% 92%,#ff6aa8 0,rgba(255,106,168,0) 72%),
+    radial-gradient(26vw 22vw at 96% 6%,#b86bff 0,rgba(184,107,255,0) 72%),
+    radial-gradient(34vw 28vw at 22% 36%,#ffffff 0,rgba(255,255,255,0) 70%),
+    radial-gradient(36vw 30vw at 62% 30%,#38e0c0 0,rgba(56,224,192,0) 70%),
+    linear-gradient(165deg,#5aa5ff,#8cc4ff 55%,#4f93ee);
+  background-attachment:fixed;
+}
+
+/* ---- big surfaces ---- */
+body.modern-glass-mode .top,
+body.modern-glass-mode .panel,
+body.modern-glass-mode .monitor,
+body.modern-glass-mode .settings-panel,
+body.modern-glass-mode .settings-help-card,
+body.modern-glass-mode footer{
+  background:var(--lg-sheen),rgba(255,255,255,.17);
+  border:0;color:var(--lg-ink);
+  box-shadow:var(--lg-rim),var(--lg-drop);
+  -webkit-backdrop-filter:var(--lg-filter,) blur(14px) saturate(190%);
+  backdrop-filter:var(--lg-filter,) blur(14px) saturate(190%);
+}
+body.modern-glass-mode .top{border-radius:0 0 30px 30px;border-bottom:0}
+body.modern-glass-mode .panel,body.modern-glass-mode .monitor{border-radius:32px;overflow:hidden;transition:transform .5s cubic-bezier(.2,.9,.25,1.2),box-shadow .4s ease,background-color .4s ease}
+body.modern-glass-mode .card{border-color:transparent}
+body.modern-glass-mode .card:hover{transform:translateY(-4px) scale(1.012);box-shadow:var(--lg-rim),0 2px 4px rgba(10,30,60,.08),0 26px 56px rgba(20,50,100,.28)}
+body.modern-glass-mode .panel-head{background:rgba(255,255,255,.10);border-bottom:.5px solid rgba(255,255,255,.55);color:#1f3f63}
+body.modern-glass-mode .monitor img{border-radius:24px}
+body.modern-glass-mode footer{border-radius:30px 30px 0 0}
+
+body.modern-glass-mode .logo{color:#0c2038;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+body.modern-glass-mode .logo span:first-of-type{color:#0a5fd0}
+body.modern-glass-mode .logo .version{color:#2d5078}
+
+/* ---- capsule controls: clear glass, lit rim ---- */
+body.modern-glass-mode .nav a,
+body.modern-glass-mode .btn,
+body.modern-glass-mode .style-switch,
+body.modern-glass-mode .settings-btn,
+body.modern-glass-mode .tag,body.modern-glass-mode .badge{
+  color:#12304f;border:0;border-radius:999px;
+  background:var(--lg-sheen),rgba(255,255,255,.07);
+  box-shadow:var(--lg-rim),0 6px 16px rgba(10,40,90,.16);
+  -webkit-backdrop-filter:var(--lg-filter,) blur(3px) saturate(220%) brightness(1.08);
+  backdrop-filter:var(--lg-filter,) blur(3px) saturate(220%) brightness(1.08);
+  transition:transform .4s cubic-bezier(.2,.9,.25,1.5),box-shadow .25s ease,color .2s ease,background-color .25s ease;
+}
+body.modern-glass-mode .nav a:hover,body.modern-glass-mode .btn:hover,body.modern-glass-mode .settings-btn:hover{transform:scale(1.07);color:#062c57;background:var(--lg-sheen),rgba(255,255,255,.14)}
+body.modern-glass-mode .nav a:active,body.modern-glass-mode .btn:active{transform:scale(.95)}
+body.modern-glass-mode .nav a.active{background:var(--lg-sheen),rgba(255,255,255,.26);color:#062c57}
+body.modern-glass-mode .btn.primary{
+  color:#fff;text-shadow:0 1px 2px rgba(0,40,110,.45);
+  background:var(--lg-sheen),linear-gradient(180deg,rgba(40,150,255,.62),rgba(0,105,240,.55));
+  box-shadow:var(--lg-rim),0 10px 26px rgba(10,100,240,.42);
+}
+body.modern-glass-mode .tag,body.modern-glass-mode .badge{color:#0d3a68}
+body.modern-glass-mode .note{
+  background:var(--lg-sheen),rgba(255,255,255,.12);border:0;color:#12385f;border-radius:24px;box-shadow:var(--lg-rim);
+  -webkit-backdrop-filter:var(--lg-filter,) blur(8px) saturate(200%);backdrop-filter:var(--lg-filter,) blur(8px) saturate(200%)}
+
+/* ---- switch: labels + glass lens knob ---- */
+body.modern-glass-mode .style-switch{padding:0 14px;gap:10px;height:40px}
+body.modern-glass-mode .style-label{font-weight:600;font-size:11px;letter-spacing:0;color:#2f4d6e;white-space:nowrap;transition:color .25s ease}
+body.modern-glass-mode .style-label:first-child{color:#2f4d6e}
+body.modern-glass-mode .style-label:last-child{color:#2f4d6e}
+/* highlight the label of the side that is currently on */
+body.modern-glass-mode .style-toggle[aria-pressed="true"] ~ .style-label:last-child,
+body.modern-glass-mode .style-toggle[aria-pressed="false"] ~ .style-label:last-child{color:#2f4d6e}
+body.modern-glass-mode .style-switch .style-toggle[aria-pressed="true"] ~ .style-label{color:#0a5bd0;font-weight:700}
+body.modern-glass-mode #styleToggle ~ .style-label{color:#0a5bd0;font-weight:700}
+
+body.modern-glass-mode .style-toggle{
+  position:relative;width:58px;height:28px;border:0;border-radius:999px;overflow:visible;
+  background:linear-gradient(180deg,#34c759,#2fbd54);
+  box-shadow:inset 0 2px 4px rgba(0,70,20,.35),inset 0 -1px 1px rgba(255,255,255,.35),0 0 0 .5px rgba(0,70,20,.25);
+  transition:background .3s ease}
+body.modern-glass-mode .style-toggle[aria-pressed="false"]:not(#styleToggle){background:linear-gradient(180deg,#9aa6b6,#b3bdca)}
+body.modern-glass-mode .style-toggle span{
+  top:50%;left:22px;width:34px;height:24px;margin-top:-12px;border-radius:999px;
+  background:linear-gradient(180deg,#fff,#eef2f7);
+  box-shadow:0 3px 8px rgba(0,30,60,.30),0 0 0 .5px rgba(0,0,0,.08),inset 0 1px 1px #fff;
+  transition:left .42s cubic-bezier(.3,1.5,.5,1),width .25s ease,background .25s ease,box-shadow .25s ease,margin .25s ease,height .25s ease;
+}
+/* pressed: the knob turns into a clear glass lens that magnifies the track beneath it (as on iOS 26) */
+body.modern-glass-mode .style-toggle:active span{
+  width:42px;height:30px;margin-top:-15px;
+  background:var(--lg-sheen),rgba(255,255,255,.04);
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),inset 3px 3px 3px -2px #fff,inset -3px -3px 3px -2px rgba(255,255,255,.8),inset 0 0 12px rgba(255,255,255,.35),0 6px 14px rgba(0,50,90,.25);
+  -webkit-backdrop-filter:var(--lg-filter,) saturate(220%);backdrop-filter:var(--lg-filter,) saturate(220%);
+}
+body.modern-glass-mode #styleToggle span,
+body.modern-glass-mode #styleToggle[aria-pressed="true"] span{left:22px}
+body.modern-glass-mode #styleToggle[aria-pressed="false"] span{left:2px}
+/* settings toggles: position follows the on/off state in every theme */
+#settingsGlassToggle span,#settingsKpToggle span,#settingsOldRetroToggle span{left:2px}
+#settingsGlassToggle[aria-pressed="true"] span,#settingsKpToggle[aria-pressed="true"] span{left:19px}
+body.modern-glass-mode #settingsGlassToggle span,body.modern-glass-mode #settingsKpToggle span,body.modern-glass-mode #settingsOldRetroToggle span{left:2px}
+body.modern-glass-mode #settingsGlassToggle[aria-pressed="true"] span,body.modern-glass-mode #settingsKpToggle[aria-pressed="true"] span,body.modern-glass-mode body.oldretro-mode #settingsOldRetroToggle span{left:22px}
+body.modern-glass-mode.oldretro-mode #settingsOldRetroToggle span{left:22px}
+body.modern-mode:not(.modern-glass-mode) #settingsGlassToggle span{left:3px}
+body.modern-mode:not(.modern-glass-mode) #settingsGlassToggle[aria-pressed="true"] span{left:19px}
+
+/* ---- text ---- */
+body.modern-glass-mode .head p,body.modern-glass-mode .hero p,body.modern-glass-mode .card p,body.modern-glass-mode .fact small,body.modern-glass-mode .image-credit{color:var(--lg-ink-2)}
+body.modern-glass-mode .hero h1,body.modern-glass-mode .hero h1 span{color:#0c2038;letter-spacing:-4px;text-shadow:0 2px 0 rgba(255,255,255,.35)}
+body.modern-glass-mode .eyebrow{color:#0a4fb0}
+
+/* ---- settings modal ---- */
+body.modern-glass-mode .settings-backdrop{background:rgba(10,40,90,.20);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+body.modern-glass-mode .settings-panel,body.modern-glass-mode .settings-help-card{border-radius:34px;background:var(--lg-sheen),rgba(255,255,255,.22);-webkit-backdrop-filter:var(--lg-filter,) blur(22px) saturate(200%);backdrop-filter:var(--lg-filter,) blur(22px) saturate(200%);box-shadow:var(--lg-rim),0 30px 80px rgba(10,30,70,.34)}
+body.modern-glass-mode .settings-row-label{color:#1d3d60;font-weight:600}
+body.modern-glass-mode .settings-head,body.modern-glass-mode .settings-help-head{border-bottom:.5px solid rgba(255,255,255,.6);color:#0f2a48}
+body.modern-glass-mode .settings-help-btn{color:#0a4fb0;background:rgba(255,255,255,.35);border:0;box-shadow:var(--lg-rim)}
+body.modern-glass-mode .settings-help-back{background:rgba(10,40,90,.16)}
+body.modern-glass-mode .settings-close{border-radius:50%}
+body.modern-glass-mode .settings-close:hover{background:rgba(255,255,255,.35)}
+
+@media (prefers-reduced-motion:reduce){
+  body.modern-glass-mode .card:hover,body.modern-glass-mode .nav a:hover,body.modern-glass-mode .btn:hover{transform:none}
+  body.modern-glass-mode .style-toggle span{transition:none}
+}
+@media (prefers-reduced-transparency:reduce){
+  body.modern-glass-mode .top,body.modern-glass-mode .panel,body.modern-glass-mode .monitor,body.modern-glass-mode .settings-panel,body.modern-glass-mode footer{background:rgba(250,252,255,.92);-webkit-backdrop-filter:none;backdrop-filter:none}
+}

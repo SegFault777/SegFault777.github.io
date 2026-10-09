@@ -1,0 +1,17 @@
+/* Language selector now lives in Settings (moved out of the header). */
+.settings-lang-select{flex:0 1 190px;min-width:0;max-width:60%;height:34px;padding:0 28px 0 10px;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;color:#dbe4ed;background:#0a1b31;border:1px solid #315276;border-radius:2px}
+.settings-lang-select:focus-visible{outline:1px solid #8bc8ff;outline-offset:2px}
+body.modern-mode .settings-lang-select{color:#22405f;background:#fff;border:1px solid rgba(91,116,141,.3);border-radius:10px}
+body:not(.modern-mode):not(.oldretro-mode) .settings-lang-select{color:#000;background:#fff;border:2px solid;border-color:#404040 #fff #fff #404040;border-radius:0;height:26px}
+body.modern-glass-mode .settings-lang-select{color:#1b3552;border:0;border-radius:999px;height:36px;padding:0 30px 0 14px;
+  background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,.12)),rgba(255,255,255,.18);
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.55),inset 1.5px 1.5px 1px -.5px rgba(255,255,255,.95),inset -1.5px -1.5px 1px -.5px rgba(255,255,255,.6),0 4px 14px rgba(31,50,90,.12);
+  -webkit-backdrop-filter:blur(14px) saturate(190%);backdrop-filter:blur(14px) saturate(190%)}
+
+/* Settings switches follow the saved choice (aria-pressed), not the mode that is on screen. */
+#settingsOldRetroToggle[aria-pressed="true"] span{left:19px}
+#settingsOldRetroToggle[aria-pressed="false"] span{left:2px}
+body.modern-glass-mode #settingsOldRetroToggle[aria-pressed="true"] span{left:22px}
+body.modern-glass-mode #settingsOldRetroToggle[aria-pressed="false"] span{left:2px}
+body.modern-mode:not(.modern-glass-mode) #settingsOldRetroToggle[aria-pressed="true"] span{left:19px}
+body.modern-mode:not(.modern-glass-mode) #settingsOldRetroToggle[aria-pressed="false"] span{left:3px}
