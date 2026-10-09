@@ -9,6 +9,7 @@
   let ok=false;
   try{ok=!!(window.CSS&&CSS.supports&&CSS.supports('backdrop-filter','url(#x) blur(2px)'))}catch(e){}
   if(!ok)return;
+  root.classList.add('lg-svg');
   const NS='http://www.w3.org/2000/svg';
   const svg=document.createElementNS(NS,'svg');
   svg.setAttribute('width','0');svg.setAttribute('height','0');svg.setAttribute('aria-hidden','true');
@@ -17,27 +18,19 @@
   const state=new WeakMap();let uid=0;
   const ro='ResizeObserver' in window?new ResizeObserver(es=>es.forEach(e=>build(e.target))):null;
 
-  function mapFor(w,h,r,bezel){
-    const k=Math.min(1,320/Math.max(w,h)),cw=Math.max(2,Math.round(w*k)),ch=Math.max(2,Math.round(h*k));
-    const c=document.createElement('canvas');c.width=cw;c.height=ch;
-    const g=c.getContext('2d'),img=g.createImageData(cw,ch),d=img.data;
-    const hw=w/2,hh=h/2,rr=Math.min(r,hw,hh),bz=Math.max(1,bezel);
-    for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){
-      const px=(x+.5)/k-hw,py=(y+.5)/k-hh;
-      const qx=Math.abs(px)-(hw-rr),qy=Math.abs(py)-(hh-rr);
-      const ox=Math.max(qx,0),oy=Math.max(qy,0);
-      const sdf=Math.hypot(ox,oy)+Math.min(Math.max(qx,qy),0)-rr; /* <0 inside */
-      const dist=-sdf;let nx=0,ny=0,m=0;
-      if(dist>=0&&dist<bz){
-        if(qx>0&&qy>0){const l=Math.hypot(qx,qy)||1;nx=qx/l*Math.sign(px);ny=qy/l*Math.sign(py)}
-        else if(qx>qy){nx=Math.sign(px)}else{ny=Math.sign(py)}
-        const t=1-dist/bz;m=t*t*(3-2*t)*t; /* strongest at the very rim, eases to 0 inside */
-        nx=-nx*m;ny=-ny*m; /* sample from further inside -> edge content is pulled/bent inward */
-      }
-      const i=(y*cw+x)*4;
-      d[i]=Math.round(128+nx*127);d[i+1]=Math.round(128+ny*127);d[i+2]=128;d[i+3]=255;
-    }
-    g.putImageData(img,0,0);return c.toDataURL();
+  /* Displacement map (supplied recipe, sized to the element): a grey base, a red X-gradient and a green
+     Y-gradient screen-blended on top, and a blurred grey rounded rectangle that flattens the middle so
+     only the rim bends the backdrop. */
+  function mapSvg(w,h,r){
+    const inset=Math.max(3,Math.min(14,Math.min(w,h)*.05)),rx=Math.max(0,Math.min(r-inset,(w-2*inset)/2,(h-2*inset)/2));
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'"><defs>'+
+      '<linearGradient id="Y" x1="0" x2="0" y1="7%" y2="93%"><stop offset="0%" stop-color="#0F0"/><stop offset="100%" stop-color="#000"/></linearGradient>'+
+      '<linearGradient id="X" x1="5%" x2="95%" y1="0" y2="0"><stop offset="0%" stop-color="#F00"/><stop offset="100%" stop-color="#000"/></linearGradient></defs>'+
+      '<rect width="'+w+'" height="'+h+'" fill="#808080"/>'+
+      '<g filter="blur(2px)"><rect width="'+w+'" height="'+h+'" fill="#000080"/>'+
+      '<rect width="'+w+'" height="'+h+'" fill="url(#Y)" style="mix-blend-mode:screen"/>'+
+      '<rect width="'+w+'" height="'+h+'" fill="url(#X)" style="mix-blend-mode:screen"/>'+
+      '<rect x="'+inset+'" y="'+inset+'" width="'+(w-2*inset)+'" height="'+(h-2*inset)+'" rx="'+rx+'" ry="'+rx+'" fill="#808080" filter="blur('+inset+'px)"/></g></svg>';
   }
 
   function build(el){
@@ -47,24 +40,32 @@
     const cs=getComputedStyle(el);
     let r=parseFloat(cs.borderTopLeftRadius)||0;if(/%/.test(cs.borderTopLeftRadius))r=Math.min(w,h)/2*parseFloat(cs.borderTopLeftRadius)/50;
     r=Math.min(r,w/2,h/2);
+    /* Large text-bearing surfaces keep the plain blur/saturate material: refraction there left a hard-edged patch. */
+    if(Math.min(w,h)>120&&!el.matches('.top')){el.setAttribute('data-lg','flat');el.style.removeProperty('--lg-filter');state.delete(el);return}
+    el.removeAttribute('data-lg');
     const key=w+'x'+h+'x'+Math.round(r);
     let s=state.get(el);
     if(s&&s.key===key)return;
-    const bezel=Math.max(5,Math.min(26,Math.min(w,h)*.42));
-    const scale=bezel*2.4;
+    /* 144 / 142 / 140 for the 420x280 original -> scaled by the element's short side, capped at 34: bigger values leave a hard-edged patch on large panels */
+    const k=Math.max(12,Math.min(34,Math.min(w,h)*.514))/144;
+    const sc=[144,142,140].map(v=>(v*k).toFixed(1));
     const id=s?s.id:'lgf'+(++uid);
     let f=document.getElementById(id);
     if(!f){f=document.createElementNS(NS,'filter');f.id=id;defs.appendChild(f)}
-    f.setAttribute('filterUnits','userSpaceOnUse');f.setAttribute('primitiveUnits','userSpaceOnUse');
-    f.setAttribute('x','0');f.setAttribute('y','0');f.setAttribute('width',w);f.setAttribute('height',h);
+    f.setAttribute('filterUnits','userSpaceOnUse');f.setAttribute('x','0');f.setAttribute('y','0');f.setAttribute('width',w);f.setAttribute('height',h);
     f.setAttribute('color-interpolation-filters','sRGB');
-    f.innerHTML='<feImage href="'+mapFor(w,h,r,bezel)+'" x="0" y="0" width="'+w+'" height="'+h+'" result="map" preserveAspectRatio="none"/>'+
-      '<feDisplacementMap in="SourceGraphic" in2="map" scale="'+scale.toFixed(1)+'" xChannelSelector="R" yChannelSelector="G"/>';
+    const href='data:image/svg+xml;utf8,'+encodeURIComponent(mapSvg(w,h,r));
+    const disp=v=>'<feDisplacementMap in="SourceGraphic" in2="displacementMap" scale="'+v+'" xChannelSelector="R" yChannelSelector="G"/>';
+    f.innerHTML='<feImage x="0" y="0" width="'+w+'" height="'+h+'" href="'+href+'" result="displacementMap"/>'+
+      disp(sc[0])+'<feColorMatrix type="matrix" result="displacedR" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"/>'+
+      disp(sc[1])+'<feColorMatrix type="matrix" result="displacedG" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0"/>'+
+      disp(sc[2])+'<feColorMatrix type="matrix" result="displacedB" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0"/>'+
+      '<feBlend in="displacedR" in2="displacedG" mode="screen" result="rg"/><feBlend in="rg" in2="displacedB" mode="screen"/>';
     el.style.setProperty('--lg-filter','url(#'+id+')');
     state.set(el,{id,key});
   }
   function all(){document.querySelectorAll(SEL).forEach(el=>{build(el);if(ro&&!el.__lgro){el.__lgro=1;ro.observe(el)}})}
-  function clear(){document.querySelectorAll(SEL).forEach(el=>el.style.removeProperty('--lg-filter'));state.forEach&&0;defs.innerHTML='';uidReset()}
+  function clear(){document.querySelectorAll(SEL).forEach(el=>{el.style.removeProperty('--lg-filter');el.removeAttribute('data-lg')});defs.innerHTML='';uidReset()}
   function uidReset(){document.querySelectorAll(SEL).forEach(el=>state.delete(el))}
   function sync(){if(body.classList.contains('modern-glass-mode'))requestAnimationFrame(all);else clear()}
   window.addEventListener('miniwin-style-change',sync);

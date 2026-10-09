@@ -1,0 +1,29 @@
+/* Mobile / touch fixes (loaded last). */
+@media (max-width:900px){
+  /* the gear sits at the far right of the single header row, the nav scrolls in between */
+  body > header.top .topbar{flex-wrap:nowrap}
+  body > header.top .nav{order:0 !important;flex:1 1 0 !important;width:auto !important;max-width:none !important;min-width:0}
+  body > header.top .settings-btn{order:2;margin-left:2px}
+}
+@media (max-width:700px){
+  /* Modern Glass header switch: keep the knob inside its track and the labels readable */
+  body.modern-glass-mode .nav .style-switch{height:34px;min-height:34px;padding:0 10px;gap:7px}
+  body.modern-glass-mode .nav .style-toggle{width:58px;height:28px}
+  body.modern-glass-mode .nav .style-label{display:inline;font-size:9px;font-weight:700}
+  body.modern-glass-mode .nav a{font-size:12px;padding-left:12px;padding-right:12px}
+  body.modern-glass-mode .settings-btn{width:40px;height:40px;min-width:40px;min-height:40px}
+  body.modern-glass-mode .top{border-radius:0 0 22px 22px}
+  body.modern-glass-mode .hero h1{letter-spacing:-3px}
+  /* settings sheet: every switch shows what its two sides mean, rows wrap instead of overflowing */
+  #settingsOverlay .style-label{display:inline !important;font-size:11px !important;letter-spacing:0}
+  #settingsOverlay .settings-row{flex-wrap:wrap;row-gap:8px}
+  #settingsOverlay .settings-label-wrap{flex:1 1 140px;min-width:0}
+  #settingsOverlay .settings-row .style-switch{margin-left:auto;flex:0 0 auto}
+  #settingsOverlay .settings-lang-select{flex:1 1 170px;max-width:100%;min-height:44px}
+  #settingsOverlay .settings-help-btn{min-width:28px;min-height:28px;width:28px;height:28px}
+}
+@media (max-width:420px){
+  body.modern-glass-mode .hero p{font-size:15px}
+}
+/* never let the page scroll sideways, whatever a theme adds */
+html,body{max-width:100%;overflow-x:hidden}

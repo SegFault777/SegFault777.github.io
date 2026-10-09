@@ -15,14 +15,11 @@
    specular sheen and a soft contact shadow finish the look. */
 body.modern-glass-mode{
   --lg-ink:#0f2238; --lg-ink-2:#1e3a58; --lg-accent:#0a84ff;
-  --lg-rim:inset 0 0 0 1px rgba(255,255,255,.42),
-           inset 2px 2px 1px -1px rgba(255,255,255,.95),
-           inset -2px -2px 1px -1px rgba(255,255,255,.75),
-           inset 0 0 14px rgba(255,255,255,.18),
-           inset 0 -10px 16px -10px rgba(40,140,255,.28);
-  --lg-drop:0 1px 2px rgba(10,30,60,.08),0 14px 34px rgba(20,50,100,.22);
-  --lg-sheen:radial-gradient(90% 70% at var(--mx,20%) var(--my,0%),rgba(255,255,255,.42),rgba(255,255,255,0) 60%),
-             linear-gradient(140deg,rgba(255,255,255,.34),rgba(255,255,255,.03) 38%,rgba(255,255,255,.03) 62%,rgba(255,255,255,.22));
+  --lg-rim:inset 0 0 0 1px rgba(255,255,255,.15),
+           inset 1.5px 1.5px 0 rgba(255,255,255,.5),
+           inset 0 0 12px rgba(255,255,255,.2);
+  --lg-drop:0 8px 32px rgba(0,0,0,.2);
+  --lg-sheen:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0));
 }
 html.modern-glass-mode,body.modern-glass-mode{font-family:'Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 /* Beat 11-modern-fonts.css (Pretendard !important): Modern Glass is Apple SD Gothic Neo only. */
@@ -32,18 +29,16 @@ body.modern-glass-mode:not(.oldretro-mode) pre,
 body.modern-glass-mode:not(.oldretro-mode) code{font-family:'Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif !important}
 
 /* A vivid scene behind the glass, so refraction has something to bend. */
-body.modern-glass-mode{
-  min-height:100vh;color:var(--lg-ink);
-  background:
+body.modern-glass-mode{min-height:100vh;color:var(--lg-ink);background:#8cc4ff}
+/* fixed scene layer (iOS ignores background-attachment:fixed, and it janks while scrolling) */
+body.modern-glass-mode::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
     radial-gradient(34vw 26vw at 88% 84%,#ffc619 0,rgba(255,198,25,.0) 72%),
     radial-gradient(26vw 22vw at 70% 100%,#ff9d0a 0,rgba(255,157,10,0) 70%),
     radial-gradient(30vw 24vw at 6% 92%,#ff6aa8 0,rgba(255,106,168,0) 72%),
     radial-gradient(26vw 22vw at 96% 6%,#b86bff 0,rgba(184,107,255,0) 72%),
     radial-gradient(34vw 28vw at 22% 36%,#ffffff 0,rgba(255,255,255,0) 70%),
     radial-gradient(36vw 30vw at 62% 30%,#38e0c0 0,rgba(56,224,192,0) 70%),
-    linear-gradient(165deg,#5aa5ff,#8cc4ff 55%,#4f93ee);
-  background-attachment:fixed;
-}
+    linear-gradient(165deg,#5aa5ff,#8cc4ff 55%,#4f93ee);}
 
 /* ---- big surfaces ---- */
 body.modern-glass-mode .top,
@@ -52,11 +47,9 @@ body.modern-glass-mode .monitor,
 body.modern-glass-mode .settings-panel,
 body.modern-glass-mode .settings-help-card,
 body.modern-glass-mode footer{
-  background:var(--lg-sheen),rgba(255,255,255,.17);
+  background:var(--lg-sheen),rgba(255,255,255,.16);
   border:0;color:var(--lg-ink);
   box-shadow:var(--lg-rim),var(--lg-drop);
-  -webkit-backdrop-filter:var(--lg-filter,) blur(14px) saturate(190%);
-  backdrop-filter:var(--lg-filter,) blur(14px) saturate(190%);
 }
 body.modern-glass-mode .top{border-radius:0 0 30px 30px;border-bottom:0}
 body.modern-glass-mode .panel,body.modern-glass-mode .monitor{border-radius:32px;overflow:hidden;transition:transform .5s cubic-bezier(.2,.9,.25,1.2),box-shadow .4s ease,background-color .4s ease}
@@ -77,10 +70,8 @@ body.modern-glass-mode .style-switch,
 body.modern-glass-mode .settings-btn,
 body.modern-glass-mode .tag,body.modern-glass-mode .badge{
   color:#12304f;border:0;border-radius:999px;
-  background:var(--lg-sheen),rgba(255,255,255,.07);
+  background:var(--lg-sheen),rgba(255,255,255,.12);
   box-shadow:var(--lg-rim),0 6px 16px rgba(10,40,90,.16);
-  -webkit-backdrop-filter:var(--lg-filter,) blur(3px) saturate(220%) brightness(1.08);
-  backdrop-filter:var(--lg-filter,) blur(3px) saturate(220%) brightness(1.08);
   transition:transform .4s cubic-bezier(.2,.9,.25,1.5),box-shadow .25s ease,color .2s ease,background-color .25s ease;
 }
 body.modern-glass-mode .nav a:hover,body.modern-glass-mode .btn:hover,body.modern-glass-mode .settings-btn:hover{transform:scale(1.07);color:#062c57;background:var(--lg-sheen),rgba(255,255,255,.14)}
@@ -93,8 +84,7 @@ body.modern-glass-mode .btn.primary{
 }
 body.modern-glass-mode .tag,body.modern-glass-mode .badge{color:#0d3a68}
 body.modern-glass-mode .note{
-  background:var(--lg-sheen),rgba(255,255,255,.12);border:0;color:#12385f;border-radius:24px;box-shadow:var(--lg-rim);
-  -webkit-backdrop-filter:var(--lg-filter,) blur(8px) saturate(200%);backdrop-filter:var(--lg-filter,) blur(8px) saturate(200%)}
+  background:var(--lg-sheen),rgba(255,255,255,.12);border:0;color:#12385f;border-radius:24px;box-shadow:var(--lg-rim);}
 
 /* ---- switch: labels + glass lens knob ---- */
 body.modern-glass-mode .style-switch{padding:0 14px;gap:10px;height:40px}
@@ -124,7 +114,6 @@ body.modern-glass-mode .style-toggle:active span{
   width:42px;height:30px;margin-top:-15px;
   background:var(--lg-sheen),rgba(255,255,255,.04);
   box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),inset 3px 3px 3px -2px #fff,inset -3px -3px 3px -2px rgba(255,255,255,.8),inset 0 0 12px rgba(255,255,255,.35),0 6px 14px rgba(0,50,90,.25);
-  -webkit-backdrop-filter:var(--lg-filter,) saturate(220%);backdrop-filter:var(--lg-filter,) saturate(220%);
 }
 body.modern-glass-mode #styleToggle span,
 body.modern-glass-mode #styleToggle[aria-pressed="true"] span{left:22px}
@@ -145,7 +134,7 @@ body.modern-glass-mode .eyebrow{color:#0a4fb0}
 
 /* ---- settings modal ---- */
 body.modern-glass-mode .settings-backdrop{background:rgba(10,40,90,.20);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-body.modern-glass-mode .settings-panel,body.modern-glass-mode .settings-help-card{border-radius:34px;background:var(--lg-sheen),rgba(255,255,255,.22);-webkit-backdrop-filter:var(--lg-filter,) blur(22px) saturate(200%);backdrop-filter:var(--lg-filter,) blur(22px) saturate(200%);box-shadow:var(--lg-rim),0 30px 80px rgba(10,30,70,.34)}
+body.modern-glass-mode .settings-panel,body.modern-glass-mode .settings-help-card{border-radius:34px;background:var(--lg-sheen),rgba(255,255,255,.22);box-shadow:var(--lg-rim),0 30px 80px rgba(10,30,70,.34)}
 body.modern-glass-mode .settings-row-label{color:#1d3d60;font-weight:600}
 body.modern-glass-mode .settings-head,body.modern-glass-mode .settings-help-head{border-bottom:.5px solid rgba(255,255,255,.6);color:#0f2a48}
 body.modern-glass-mode .settings-help-btn{color:#0a4fb0;background:rgba(255,255,255,.35);border:0;box-shadow:var(--lg-rim)}
@@ -153,10 +142,29 @@ body.modern-glass-mode .settings-help-back{background:rgba(10,40,90,.16)}
 body.modern-glass-mode .settings-close{border-radius:50%}
 body.modern-glass-mode .settings-close:hover{background:rgba(255,255,255,.35)}
 
+
+/* ===== Liquid Glass material (supplied spec) =====
+   Fallback (Safari / Firefox / no SVG filter): plain blur + saturate.
+   Chromium: blur(1.5px) -> SVG refraction + chromatic dispersion (js/glass.js, #lgf*) -> blur(3px) saturate brightness.
+   -webkit- is written first so the unprefixed declaration wins where both are aliases. */
+body.modern-glass-mode :is(.top,.panel,.monitor,.settings-panel,.settings-help-card,footer,.nav a,.btn,.style-switch,.settings-btn,.tag,.badge,.note){
+  -webkit-backdrop-filter:blur(12px) saturate(1.8) brightness(1.15) contrast(1.05);
+  backdrop-filter:blur(12px) saturate(1.8) brightness(1.15) contrast(1.05);
+}
+html.lg-svg body.modern-glass-mode :is(.top,.panel,.monitor,.settings-panel,.settings-help-card,footer,.nav a,.btn,.style-switch,.settings-btn,.tag,.badge,.note),
+html.lg-svg body.modern-glass-mode .style-toggle:active span{
+  -webkit-backdrop-filter:blur(12px) saturate(1.8) brightness(1.15) contrast(1.05);
+  backdrop-filter:blur(1.5px) var(--lg-filter,blur(0px)) blur(3px) saturate(1.5) brightness(1.1);
+}
+
+html.lg-svg body.modern-glass-mode [data-lg][data-lg]{
+  -webkit-backdrop-filter:blur(12px) saturate(1.8) brightness(1.15) contrast(1.05);
+  backdrop-filter:blur(12px) saturate(1.8) brightness(1.15) contrast(1.05);
+}
 @media (prefers-reduced-motion:reduce){
   body.modern-glass-mode .card:hover,body.modern-glass-mode .nav a:hover,body.modern-glass-mode .btn:hover{transform:none}
   body.modern-glass-mode .style-toggle span{transition:none}
 }
 @media (prefers-reduced-transparency:reduce){
-  body.modern-glass-mode .top,body.modern-glass-mode .panel,body.modern-glass-mode .monitor,body.modern-glass-mode .settings-panel,body.modern-glass-mode footer{background:rgba(250,252,255,.92);-webkit-backdrop-filter:none;backdrop-filter:none}
+  body.modern-glass-mode .top,body.modern-glass-mode .panel,body.modern-glass-mode .monitor,body.modern-glass-mode .settings-panel,body.modern-glass-mode footer{background:rgba(250,252,255,.92);-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
 }

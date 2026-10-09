@@ -39,3 +39,6 @@
     transition:none !important;
   }
 }
+
+/* Words never break mid-word while characters animate individually. */
+.char-stagger .word{display:inline-block;white-space:nowrap}
