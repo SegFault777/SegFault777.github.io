@@ -235,6 +235,10 @@
   function enterOldRetro(opts){
     opts=opts||{};
     if(body.classList.contains('modern-mode')||body.classList.contains('oldretro-mode'))return;
+    /* Drop the previous layout's look first. Its body classes (system6-mode, platinum-mode, luna-mode, aqua-mode ...)
+       would otherwise keep styling the menu bar and the Settings corners in OldRetro. apply(..., false) changes only
+       the classes, not the saved layout, so leaving OldRetro still returns to the layout that was chosen before. */
+    if(typeof window.miniwinApplyStyle==='function')window.miniwinApplyStyle('retro',false);
     buildScreen();
     renderShellContent();
     renderMenubar();
@@ -347,7 +351,7 @@
       settingsModeLabelEl=null,settingsLayoutSel=null,
       settingsHelpBtn=null,settingsHelpPop=null,settingsHelpTitleEl=null,settingsDiffPanel=null,settingsKpToggle=null,settingsKpLabelEl=null,settingsHelpKeyHandler=null,settingsEscHandler=null,settingsKpHelpBtn=null,settingsKpHelpBody=null,helpKind=null,
       biosItemEl=null,biosHelpEl=null,biosKeysEl=null,biosPopupEl=null,
-      biosOptRetroEl=null,biosOptOldRetroEl=null,biosOptGlassEl=null,biosOptAeroEl=null,biosOptBreezeEl=null,biosOptModernEl=null,biosOptModernAquaEl=null,biosOptMaterialEl=null,biosOptLunaEl=null,biosOptFlatEl=null,biosOptAdwaitaEl=null,biosOptAquaEl=null,biosOptMicaEl=null,biosOptOxygenEl=null,biosOptSequoiaEl=null,biosOptLiquidEl=null,biosKpItemEl=null,biosPopupKeyHandler=null,biosHighlight='oldretro';
+      biosOptRetroEl=null,biosOptOldRetroEl=null,biosOptGlassEl=null,biosOptAeroEl=null,biosOptBreezeEl=null,biosOptModernEl=null,biosOptModernAquaEl=null,biosOptModernAquaYosemiteEl=null,biosOptMaterialEl=null,biosOptLunaEl=null,biosOptFlatEl=null,biosOptAdwaitaEl=null,biosOptAquaEl=null,biosOptMicaEl=null,biosOptOxygenEl=null,biosOptSequoiaEl=null,biosOptLiquidEl=null,biosKpItemEl=null,biosPopupKeyHandler=null,biosHighlight='oldretro';
 
   let biosExitEl=null,biosExitSaveEl=null,biosExitCancelEl=null,biosExitKeyHandler=null,
       biosExitHighlight='save',lastPointerType=null,biosPrevTab=null;
@@ -359,7 +363,7 @@
   function prefOldRetro(){try{return localStorage.getItem('miniwin-oldretro')==='1'}catch(e){return body.classList.contains('oldretro-mode')}}
   function variantPref(){
     let v=null;try{v=localStorage.getItem('miniwin-modern-variant')}catch(e){}
-    if(!['modern','modern-aqua','material','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(v))v=typeof window.miniwinPlatformDefault==='function'?window.miniwinPlatformDefault():'modern';
+    if(!['modern','modern-aqua','modern-aqua-yosemite','material','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(v))v=typeof window.miniwinPlatformDefault==='function'?window.miniwinPlatformDefault():'modern';
     return v;
   }
   function prefGlass(){return variantPref()==='modern-glass'}
@@ -370,9 +374,10 @@
     if(body.classList.contains('oldretro-mode'))return 'oldretro';
     if(body.classList.contains('luna-mode'))return 'luna';
     if(body.classList.contains('aqua-mode'))return 'aqua';
+    if(body.classList.contains('system6-mode'))return 'system6';
     if(body.classList.contains('platinum-mode'))return body.classList.contains('platinum-lime')?'platinum-lime':body.classList.contains('platinum-magenta')?'platinum-magenta':'platinum-lavender';
     if(!body.classList.contains('modern-mode'))return 'retro';
-    return body.classList.contains('material-mode')?'material':body.classList.contains('modern-aqua-mode')?'modern-aqua':body.classList.contains('modern-glass-mode')?'modern-glass':body.classList.contains('aero-mode')?'aero':body.classList.contains('breeze-mode')?'breeze':body.classList.contains('flat-mode')?'flat':body.classList.contains('adwaita-mode')?'adwaita':body.classList.contains('mica-mode')?'mica':body.classList.contains('oxygen-mode')?'oxygen':body.classList.contains('sequoia-mode')?'sequoia':body.classList.contains('liquid-mode')?'liquid':'modern';
+    return body.classList.contains('modern-aqua-yosemite-mode')?'modern-aqua-yosemite':body.classList.contains('material-mode')?'material':body.classList.contains('modern-aqua-mode')?'modern-aqua':body.classList.contains('modern-glass-mode')?'modern-glass':body.classList.contains('aero-mode')?'aero':body.classList.contains('breeze-mode')?'breeze':body.classList.contains('flat-mode')?'flat':body.classList.contains('adwaita-mode')?'adwaita':body.classList.contains('mica-mode')?'mica':body.classList.contains('oxygen-mode')?'oxygen':body.classList.contains('sequoia-mode')?'sequoia':body.classList.contains('liquid-mode')?'liquid':'modern';
   }
   function syncSettingsToggle(){
     syncMotionUI();
@@ -552,13 +557,14 @@
     biosOptLunaEl.textContent='Luna';
     biosOptFlatEl.textContent='Flat';
     biosOptAdwaitaEl.textContent='Adwaita';
-    biosOptAquaEl.textContent='Aqua';
+    biosOptAquaEl.textContent='Old Aqua';
     biosOptMicaEl.textContent='Mica';
     biosOptOxygenEl.textContent='Oxygen';
     biosOptSequoiaEl.textContent='Sequoia';
     biosOptLiquidEl.textContent='Liquid Glass';
     biosOptModernEl.textContent='Modern';
-    biosOptModernAquaEl.textContent='Modern Aqua';
+    biosOptModernAquaEl.textContent='Mid Aqua';
+    biosOptModernAquaYosemiteEl.textContent='Modern Aqua';
     biosOptMaterialEl.textContent='Material';
     let kpOn=false;try{kpOn=localStorage.getItem('miniwin-kp-default')==='1'}catch(e){}
     biosKpItemEl.innerHTML='';
@@ -566,7 +572,7 @@
     const kpB=document.createElement('b');kpB.textContent=kpOn?'[Enabled]':'[Disabled]';biosKpItemEl.appendChild(kpB);
     if(biosMotionItemEl){biosMotionItemEl.innerHTML='';biosMotionItemEl.appendChild(document.createTextNode(t.motion+'\u00a0\u00a0\u00a0\u00a0'));const mB=document.createElement('b');mB.textContent=reduceMotionNow()?'[Enabled]':'[Disabled]';biosMotionItemEl.appendChild(mB);}
     settingsOverlay.querySelector('#biosPopupTitle').textContent=t.biosLabel;
-    settingsOverlay.querySelector('#biosFooterVersion').textContent='Version 1.0-rc.';
+    settingsOverlay.querySelector('#biosFooterVersion').textContent='Version 1.0.';
     settingsOverlay.querySelector('#biosFooterTag').textContent='MW01';
     renderBiosKeys();
     updateBiosHelp(null);
@@ -590,7 +596,7 @@
     if(top<pop.scrollTop)pop.scrollTop=top;
     else if(bottom>pop.scrollTop+pop.clientHeight)pop.scrollTop=bottom-pop.clientHeight;
   }
-  function biosOptEl(v){return v==='liquid'?biosOptLiquidEl:v==='sequoia'?biosOptSequoiaEl:v==='aqua'?biosOptAquaEl:v==='mica'?biosOptMicaEl:v==='oxygen'?biosOptOxygenEl:v==='luna'?biosOptLunaEl:v==='flat'?biosOptFlatEl:v==='adwaita'?biosOptAdwaitaEl:v==='retro'?biosOptRetroEl:v==='glass'?biosOptGlassEl:v==='aero'?biosOptAeroEl:v==='breeze'?biosOptBreezeEl:v==='modern'?biosOptModernEl:v==='modern-aqua'?biosOptModernAquaEl:v==='material'?biosOptMaterialEl:biosOptOldRetroEl}
+  function biosOptEl(v){return v==='modern-aqua-yosemite'?biosOptModernAquaYosemiteEl:v==='liquid'?biosOptLiquidEl:v==='sequoia'?biosOptSequoiaEl:v==='aqua'?biosOptAquaEl:v==='mica'?biosOptMicaEl:v==='oxygen'?biosOptOxygenEl:v==='luna'?biosOptLunaEl:v==='flat'?biosOptFlatEl:v==='adwaita'?biosOptAdwaitaEl:v==='retro'?biosOptRetroEl:v==='glass'?biosOptGlassEl:v==='aero'?biosOptAeroEl:v==='breeze'?biosOptBreezeEl:v==='modern'?biosOptModernEl:v==='modern-aqua'?biosOptModernAquaEl:v==='material'?biosOptMaterialEl:biosOptOldRetroEl}
 
   function setBiosHighlight(val){
     biosHighlight=val;
@@ -601,6 +607,7 @@
     biosOptBreezeEl.classList.toggle('highlight',val==='breeze');
     biosOptModernEl.classList.toggle('highlight',val==='modern');
     biosOptModernAquaEl.classList.toggle('highlight',val==='modern-aqua');
+    biosOptModernAquaYosemiteEl.classList.toggle('highlight',val==='modern-aqua-yosemite');
     biosOptMaterialEl.classList.toggle('highlight',val==='material');
     biosOptLunaEl.classList.toggle('highlight',val==='luna');
     biosOptFlatEl.classList.toggle('highlight',val==='flat');
@@ -620,7 +627,7 @@
     biosPopupKeyHandler=(e)=>{
       if(e.key==='ArrowUp'||e.key==='ArrowDown'){
         e.preventDefault();
-        const order=['retro','oldretro','modern','modern-aqua','material','glass','aero','breeze','luna','flat','adwaita','aqua','mica','oxygen','sequoia','liquid'];
+        const order=['retro','oldretro','modern','modern-aqua','modern-aqua-yosemite','material','glass','aero','breeze','luna','flat','adwaita','aqua','mica','oxygen','sequoia','liquid'];
         let i=order.indexOf(biosHighlight)+(e.key==='ArrowDown'?1:-1);
         i=(i+order.length)%order.length;
         setBiosHighlight(order[i]);
@@ -658,7 +665,7 @@
       if(isOldRetroNow)exitOldRetro();else persistOldRetroDefault(false);
       if(typeof window.miniwinApplyStyle==='function')window.miniwinApplyStyle('luna');
       syncGlassToggle();closeSettings();
-    }else if(val==='modern-aqua'||val==='material'){
+    }else if(val==='modern-aqua'||val==='modern-aqua-yosemite'||val==='material'){
       /* leaving OldRetro for Modern Aqua keeps OldRetro as the saved retro flavour */
       if(isOldRetroNow)exitOldRetro(true);
       if(typeof window.miniwinApplyStyle==='function')window.miniwinApplyStyle(val);
@@ -779,6 +786,7 @@
             '<button type="button" class="bios-popup-opt" id="biosOptOldRetro" data-val="oldretro"></button>'+
             '<button type="button" class="bios-popup-opt" id="biosOptModern" data-val="modern"></button>'+
             '<button type="button" class="bios-popup-opt" id="biosOptModernAqua" data-val="modern-aqua"></button>'+
+            '<button type="button" class="bios-popup-opt" id="biosOptModernAquaYosemite" data-val="modern-aqua-yosemite"></button>'+
             '<button type="button" class="bios-popup-opt" id="biosOptMaterial" data-val="material"></button>'+
             '<button type="button" class="bios-popup-opt" id="biosOptGlass" data-val="glass"></button>'+
             '<button type="button" class="bios-popup-opt" id="biosOptAero" data-val="aero"></button>'+
@@ -818,8 +826,8 @@
     settingsModeLabelEl=settingsOverlay.querySelector('#settingsModeLabel');
     settingsLayoutSel=settingsOverlay.querySelector('#settingsLayoutSelect');
     settingsLayoutSel.innerHTML=
-      '<optgroup label="Retro Layout"><option value="retro">Retro</option><option value="oldretro">OldRetro</option><option value="luna">Luna</option><option value="aqua">Aqua</option><option value="platinum-lavender">Platinum Lavender</option><option value="platinum-lime">Platinum Lime</option><option value="platinum-magenta">Platinum Magenta</option></optgroup>'+
-      '<optgroup label="Modern Layout"><option value="modern">Modern</option><option value="modern-aqua">Modern Aqua</option><option value="material">Material</option><option value="modern-glass">Modern Glass</option><option value="aero">Aero</option><option value="breeze">Breeze</option><option value="flat">Flat</option><option value="adwaita">Adwaita</option><option value="mica">Mica</option><option value="oxygen">Oxygen</option><option value="sequoia">Sequoia</option><option value="liquid">Liquid Glass</option></optgroup>';
+      '<optgroup label="Retro Layout"><option value="retro">Retro</option><option value="oldretro">OldRetro</option><option value="luna">Luna</option><option value="aqua">Old Aqua</option><option value="platinum-lavender">Platinum Lavender</option><option value="platinum-lime">Platinum Lime</option><option value="platinum-magenta">Platinum Magenta</option><option value="system6">System 6</option></optgroup>'+
+      '<optgroup label="Modern Layout"><option value="modern">Modern</option><option value="modern-aqua">Mid Aqua</option><option value="modern-aqua-yosemite">Modern Aqua</option><option value="material">Material</option><option value="modern-glass">Modern Glass</option><option value="aero">Aero</option><option value="breeze">Breeze</option><option value="flat">Flat</option><option value="adwaita">Adwaita</option><option value="mica">Mica</option><option value="oxygen">Oxygen</option><option value="sequoia">Sequoia</option><option value="liquid">Liquid Glass</option></optgroup>';
     const langSel=settingsOverlay.querySelector('#settingsLangSelect');
     langSel.innerHTML=(window.miniwinLanguages||[]).map(l=>'<option value="'+l[0]+'">'+l[1]+'</option>').join('');
     langSel.addEventListener('change',()=>{if(typeof window.setLanguage==='function')window.setLanguage(langSel.value)});
@@ -853,6 +861,7 @@
     biosOptAdwaitaEl=settingsOverlay.querySelector('#biosOptAdwaita');
     biosOptModernEl=settingsOverlay.querySelector('#biosOptModern');
     biosOptModernAquaEl=settingsOverlay.querySelector('#biosOptModernAqua');
+    biosOptModernAquaYosemiteEl=settingsOverlay.querySelector('#biosOptModernAquaYosemite');
     biosOptMaterialEl=settingsOverlay.querySelector('#biosOptMaterial');
     biosKpItemEl=settingsOverlay.querySelector('#biosKpItem');
     biosMotionItemEl=settingsOverlay.querySelector('#biosMotionItem');
@@ -908,6 +917,9 @@
     biosOptModernAquaEl.addEventListener('click',()=>applyBiosSelection('modern-aqua'));
     biosOptModernAquaEl.addEventListener('mouseenter',()=>setBiosHighlight('modern-aqua'));
     biosOptModernAquaEl.addEventListener('focus',()=>setBiosHighlight('modern-aqua'));
+    biosOptModernAquaYosemiteEl.addEventListener('click',()=>applyBiosSelection('modern-aqua-yosemite'));
+    biosOptModernAquaYosemiteEl.addEventListener('mouseenter',()=>setBiosHighlight('modern-aqua-yosemite'));
+    biosOptModernAquaYosemiteEl.addEventListener('focus',()=>setBiosHighlight('modern-aqua-yosemite'));
     biosOptMaterialEl.addEventListener('click',()=>applyBiosSelection('material'));
     biosOptMaterialEl.addEventListener('mouseenter',()=>setBiosHighlight('material'));
     biosOptMaterialEl.addEventListener('focus',()=>setBiosHighlight('material'));

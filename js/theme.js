@@ -18,7 +18,7 @@
   const DEFAULTS={
     win11:['mica','mica'],win10:['flat','flat'],win8:['flat','flat'],win7:['aero','aero'],vista:['aero','aero'],
     xp:['luna','modern'],win2000:['retro','modern'],win9x:['retro','modern'],
-    mac_tahoe:['liquid','liquid'],mac_sequoia:['sequoia','sequoia'],mac_aqua:['aqua','modern'],mac_mavericks:['modern-aqua','modern-aqua'],
+    mac_tahoe:['liquid','liquid'],mac_sequoia:['sequoia','sequoia'],mac_aqua:['aqua','modern'],mac_mavericks:['modern-aqua','modern-aqua'],mac_yosemite:['modern-aqua-yosemite','modern-aqua-yosemite'],
     ios:['sequoia','sequoia'],android:['material','material'],linux:['modern','modern'],other:['modern','modern']
   };
   let osVersion=null; /* {platform, major, minor} from Client Hints, filled in asynchronously */
@@ -35,14 +35,28 @@
     return 'win10';
   };
   const macKey=()=>{
-    let maj=0,min=0;
-    if(osVersion&&osVersion.platform==='macOS'&&osVersion.major>0){maj=osVersion.major;min=osVersion.minor}
+    let maj=0,min=0,fromHints=false;
+    if(osVersion&&osVersion.platform==='macOS'&&osVersion.major>0){maj=osVersion.major;min=osVersion.minor;fromHints=true}
     else{const m=/Mac OS X (\d+)[_.](\d+)/.exec(ua);if(m){maj=+m[1];min=+m[2]}}
     if(!maj)return 'mac_sequoia';
+    /* Safari and Chromium freeze the macOS version in the user agent at 10_15_7. Without Client Hints that value
+       cannot be trusted, so it is treated as the current macOS (Sequoia). Chromium's Client Hints give the real one. */
+    if(!fromHints&&maj===10&&min===15)return 'mac_sequoia';
     if(maj>=16)return 'mac_tahoe';                              /* macOS 26 Tahoe, macOS 27 Golden Gate and later */
-    if(maj>=11||(maj===10&&min>=10))return 'mac_sequoia';      /* OS X 10.10 through macOS 15 */
-    if(maj===10&&min>=4)return 'mac_mavericks';                /* OS X 10.4–10.9 (Mavericks look) */
+    if(maj>=11)return 'mac_sequoia';                            /* macOS 11 Big Sur through macOS 15 Sequoia */
+    if(maj===10&&min>=10)return 'mac_yosemite';                /* OS X 10.10 Yosemite through 10.15 Catalina */
+    if(maj===10&&min>=4)return 'mac_mavericks';                /* OS X 10.4–10.9 */
     return 'mac_aqua';                                          /* OS X 10.0–10.3 */
+  };
+  /* the terrain wallpaper of Modern Aqua follows the macOS release: 10.10 Yosemite, 10.11 El Capitan, 10.12 Sierra,
+     10.13 High Sierra, 10.14 Mojave, 10.15 Catalina. The frozen 10_15_7 value and unknown versions use Yosemite
+     (or Catalina when the user agent says 10.15). */
+  const WALLPAPERS={10:'yosemite',11:'elcapitan',12:'sierra',13:'highsierra',14:'mojave',15:'catalina'};
+  const wallpaperKey=()=>{
+    if(osVersion&&osVersion.platform==='macOS'&&osVersion.major===10&&WALLPAPERS[osVersion.minor])return WALLPAPERS[osVersion.minor];
+    const m=/Mac OS X 10[_.](\d+)/.exec(ua);
+    if(m&&WALLPAPERS[+m[1]])return WALLPAPERS[+m[1]];
+    return 'yosemite';
   };
   const platformKey=()=>{
     if(/iPad|iPhone|iPod/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1))return 'ios';
@@ -68,11 +82,14 @@
   let textReady=!window.miniwinLanguageReady; /* wait for translated text so the layout is final */
   if('IntersectionObserver' in window)observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');observer.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
   const PLATINUM=['platinum-lavender','platinum-lime','platinum-magenta'];
-  const normalise=m=>['retro','luna','aqua','platinum-lavender','platinum-lime','platinum-magenta','modern','modern-aqua','material','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(m)?m:platformDefault();
-  const sync=m=>{const modern=m!=='retro'&&m!=='luna'&&m!=='aqua'&&!PLATINUM.includes(m);t.setAttribute('aria-pressed',String(modern));t.setAttribute('data-theme',m);t.setAttribute('aria-label',modern?'Switch to Retro style':'Switch to Modern style');};
-  const apply=(m,save=true)=>{m=normalise(m);if(save&&PLATINUM.includes(get('miniwin-style'))){try{localStorage.setItem('miniwin-retro-flavour',get('miniwin-style'))}catch(e){}} /* leaving a Platinum variant remembers it for the Retro toggle */const liq=m==='liquid',seq=m==='sequoia',aqua=m==='aqua',maqua=m==='modern-aqua',mat=m==='material',mica=m==='mica',oxy=m==='oxygen',luna=m==='luna',plat=PLATINUM.includes(m),modern=m!=='retro'&&!luna&&!aqua&&!plat,glass=m==='modern-glass',aero=m==='aero',breeze=m==='breeze',flat=m==='flat',adw=m==='adwaita';[['modern-mode',modern],['modern-glass-mode',glass],['aero-mode',aero],['breeze-mode',breeze],['luna-mode',luna],['flat-mode',flat],['adwaita-mode',adw],['aqua-mode',aqua],['mica-mode',mica],['oxygen-mode',oxy],['sequoia-mode',seq],['liquid-mode',liq],['platinum-mode',plat],['modern-aqua-mode',maqua],['material-mode',mat]].forEach(([c,on])=>{root.classList.toggle(c,on);body.classList.toggle(c,on)});
+  const normalise=m=>['retro','luna','aqua','system6','platinum-lavender','platinum-lime','platinum-magenta','modern','modern-aqua','modern-aqua-yosemite','material','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(m)?m:platformDefault();
+  const sync=m=>{const modern=m!=='retro'&&m!=='luna'&&m!=='aqua'&&m!=='system6'&&!PLATINUM.includes(m);t.setAttribute('aria-pressed',String(modern));t.setAttribute('data-theme',m);t.setAttribute('aria-label',modern?'Switch to Retro style':'Switch to Modern style');};
+  const apply=(m,save=true)=>{m=normalise(m);if(save&&PLATINUM.includes(get('miniwin-style'))){try{localStorage.setItem('miniwin-retro-flavour',get('miniwin-style'))}catch(e){}} /* leaving a Platinum variant remembers it for the Retro toggle */const liq=m==='liquid',seq=m==='sequoia',aqua=m==='aqua',maqua=m==='modern-aqua',ayos=m==='modern-aqua-yosemite',mat=m==='material',mica=m==='mica',oxy=m==='oxygen',luna=m==='luna',plat=PLATINUM.includes(m),s6=m==='system6',modern=m!=='retro'&&!luna&&!aqua&&!plat&&!s6,glass=m==='modern-glass',aero=m==='aero',breeze=m==='breeze',flat=m==='flat',adw=m==='adwaita';[['modern-mode',modern],['modern-glass-mode',glass],['aero-mode',aero],['breeze-mode',breeze],['luna-mode',luna],['flat-mode',flat],['adwaita-mode',adw],['aqua-mode',aqua],['mica-mode',mica],['oxygen-mode',oxy],['sequoia-mode',seq],['liquid-mode',liq],['platinum-mode',plat],['modern-aqua-mode',maqua],['modern-aqua-yosemite-mode',ayos],['material-mode',mat],['system6-mode',s6]].forEach(([c,on])=>{root.classList.toggle(c,on);body.classList.toggle(c,on)});
     /* the accent of the Platinum variant: lime and magenta add a class to the body (lavender is the base) */
-    ['platinum-lime','platinum-magenta'].forEach(c=>{body.classList.toggle(c,m===c)});if(modern&&save)try{localStorage.setItem('miniwin-modern-variant',m)}catch(e){} /* only a real choice is remembered, not a platform guess */if(save&&(m==='retro'||luna||aqua||plat))try{localStorage.setItem('miniwin-retro-flavour',m)}catch(e){}sync(m);syncLabels();if(save)try{localStorage.setItem('miniwin-style',m)}catch(e){}window.dispatchEvent(new CustomEvent('miniwin-style-change',{detail:m}));const reduce=reduceMotionOn();revealItems.forEach(el=>{el.classList.remove('is-visible');if(!modern||reduce)el.classList.add('is-visible')});if(observer){if(modern&&!reduce&&textReady)revealItems.forEach(el=>observer.observe(el));else revealItems.forEach(el=>observer.unobserve(el))}return m};
+    ['platinum-lime','platinum-magenta'].forEach(c=>{body.classList.toggle(c,m===c)});
+    /* the Modern Aqua terrain wallpaper for this macOS release (body.wp-*) */
+    const wpKey=ayos?wallpaperKey():null;
+    ['yosemite','elcapitan','sierra','highsierra','mojave','catalina'].forEach(k=>body.classList.toggle('wp-'+k,k===wpKey));if(modern&&save)try{localStorage.setItem('miniwin-modern-variant',m)}catch(e){} /* only a real choice is remembered, not a platform guess */if(save&&(m==='retro'||luna||aqua||plat||s6))try{localStorage.setItem('miniwin-retro-flavour',m)}catch(e){}sync(m);syncLabels(m);if(save)try{localStorage.setItem('miniwin-style',m)}catch(e){}window.dispatchEvent(new CustomEvent('miniwin-style-change',{detail:m}));const reduce=reduceMotionOn();revealItems.forEach(el=>{el.classList.remove('is-visible');if(!modern||reduce)el.classList.add('is-visible')});if(observer){if(modern&&!reduce&&textReady)revealItems.forEach(el=>observer.observe(el));else revealItems.forEach(el=>observer.unobserve(el))}return m};
   const get=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
   /* Animation removal. The visitor's choice (miniwin-reduce-motion = "1" or "0") always wins. Without a choice
      it is on for mobile devices and when the OS asks for reduced motion. */
@@ -80,12 +97,12 @@
   const reduceMotionOn=()=>{const s=get('miniwin-reduce-motion');if(s==='1')return true;if(s==='0')return false;return isMobileDevice()||matchMedia('(prefers-reduced-motion: reduce)').matches};
   const applyMotion=()=>{const on=reduceMotionOn();root.classList.toggle('reduce-motion',on);body.classList.toggle('reduce-motion',on)};
   const setReduceMotion=on=>{try{localStorage.setItem('miniwin-reduce-motion',on?'1':'0')}catch(e){}applyMotion();apply(t.getAttribute('data-theme')||platformDefault(),false);window.dispatchEvent(new CustomEvent('miniwin-motion-change',{detail:!!on}))};
-  const variant=()=>{const v=get('miniwin-modern-variant');return ['modern','modern-aqua','material','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(v)?v:platformModern()};
-  const retroPref=()=>{const cur=get('miniwin-style');if(PLATINUM.includes(cur))return cur;const f=get('miniwin-retro-flavour');return f==='luna'||f==='aqua'||f==='retro'||PLATINUM.includes(f)?f:platformRetro()};
+  const variant=()=>{const v=get('miniwin-modern-variant');return ['modern','modern-aqua','modern-aqua-yosemite','material','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(v)?v:platformModern()};
+  const retroPref=(cur0)=>{const cur=cur0!==undefined?cur0:get('miniwin-style');if(PLATINUM.includes(cur)||cur==='aqua'||cur==='luna'||cur==='retro'||cur==='system6')return cur;const f=get('miniwin-retro-flavour');return f==='luna'||f==='aqua'||f==='retro'||f==='system6'||PLATINUM.includes(f)?f:platformRetro()};
   /* Header labels follow the saved preferences (OldRetro / Modern Glass), whichever mode is showing. */
   /* the header's modern label shows the layout on screen when it is a modern one, and the saved variant otherwise */
-  const shownVariant=()=>{const c=get('miniwin-style');return ['modern','modern-aqua','material','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(c)?c:variant()};
-  const syncLabels=()=>{const ls=document.querySelectorAll('header.top .style-switch .style-label');if(ls.length<2)return;ls[0].textContent=get('miniwin-oldretro')==='1'?'OldRetro':retroPref()==='luna'?'Luna':retroPref()==='aqua'?'Aqua':({'platinum-lavender':'Platinum Lavender','platinum-lime':'Platinum Lime','platinum-magenta':'Platinum Magenta'})[retroPref()]||'Retro';ls[ls.length-1].textContent={'modern-aqua':'Modern Aqua','material':'Material','modern-glass':'Modern Glass','aero':'Aero','breeze':'Breeze','flat':'Flat','adwaita':'Adwaita','mica':'Mica','oxygen':'Oxygen','sequoia':'Sequoia','liquid':'Liquid Glass'}[shownVariant()]||'Modern'};
+  const shownVariant=(c0)=>{const c=c0!==undefined?c0:get('miniwin-style');return ['modern','modern-aqua','modern-aqua-yosemite','material','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(c)?c:variant()};
+  const syncLabels=(cur)=>{const ls=document.querySelectorAll('header.top .style-switch .style-label');if(ls.length<2)return;ls[0].textContent=get('miniwin-oldretro')==='1'?'OldRetro':retroPref(cur)==='luna'?'Luna':retroPref(cur)==='aqua'?'Old Aqua':({'system6':'System 6','platinum-lavender':'Platinum Lavender','platinum-lime':'Platinum Lime','platinum-magenta':'Platinum Magenta'})[retroPref(cur)]||'Retro';ls[ls.length-1].textContent={'modern-aqua':'Mid Aqua','modern-aqua-yosemite':'Modern Aqua','material':'Material','modern-glass':'Modern Glass','aero':'Aero','breeze':'Breeze','flat':'Flat','adwaita':'Adwaita','mica':'Mica','oxygen':'Oxygen','sequoia':'Sequoia','liquid':'Liquid Glass'}[shownVariant(cur)]||'Modern'};
   window.miniwinSyncLabels=syncLabels;window.miniwinApplyStyle=apply;
   window.miniwinPlatformDefault=platformModern;   /* Modern variant for this platform (used by the BIOS list) */
   window.miniwinPlatformStyle=platformDefault;    /* layout shown by default on this platform */
@@ -101,7 +118,10 @@
   apply(get('miniwin-style')||platformDefault(),false);
   hintsReady.then(()=>{
     const key=platformKey();
-    if(key===platform)return;
+    if(key===platform){ /* the same family, but the exact macOS release may now be known (wallpaper) */
+      if(body.classList.contains('modern-aqua-yosemite-mode'))apply(get('miniwin-style')||platformDefault(),false);
+      return;
+    }
     platform=key;
     if(!get('miniwin-style'))apply(platformDefault(),false);
     else syncLabels();

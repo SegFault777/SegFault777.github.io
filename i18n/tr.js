@@ -10,16 +10,13 @@
   "github": "GITHUB’TA GÖR",
   "about_eyebrow": "01 / PROJE",
   "about_h2": "Donanıma yakın geliştirilmiş küçük bir işletim sistemi projesi.",
-  "about_p": "MiniWin, bağımlılığı olmayan 32 bit x86 bir işletim sistemidir. Bootloader gerçek ve korumalı kip geçişini hazırlar; kernel görüntü, giriş, depolama, masaüstü, saat ve uygulamaları yönetir.",
   "system_information": "SİSTEM BİLGİSİ",
   "features_eyebrow": "02 / İÇERİK",
   "features_h2": "Depoda gerçekten neler var?",
-  "desktop_title": "Klasik pencere yöneticisi",
   "build_eyebrow": "03 / DERLE & ÇALIŞTIR",
   "build_h2": "Disk imajını derle.",
   "quick_start": "HIZLI BAŞLANGIÇ — SHELL",
   "network_eyebrow": "04 / AĞ",
   "download_eyebrow": "05 / AL",
   "download_h2": "Parçalarına ayır.",
-  "download_p": "Kaynağı indir, kernel’i incele, değiştir ve imajı yeniden oluştur."
 };

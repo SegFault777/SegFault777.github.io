@@ -1,0 +1,173 @@
+/* Modern Aqua (OS X 10.10 Yosemite through 10.15 Catalina). The Aqua structure stays (menu bar, windows with a title
+   bar and window controls, buttons), but the look is flat, in the iOS 7 direction: no gloss, no leather or pinstripes,
+   flat icons and buttons, a thinner system face, translucent menu bar and windows that let the background show
+   through, and a blue accent for the system elements. Mojave (10.14) added Dark Mode, so a dark appearance follows
+   the system setting. Active only when body.modern-aqua-yosemite-mode is set. */
+
+html body.modern-mode.modern-aqua-yosemite-mode{
+  --my-ink:#1d1d1f; --my-ink-2:#3c3c43; --my-blue:#007aff; --my-blue-d:#0062cc;
+  --my-glass:rgba(255,255,255,.78); --my-glass-strong:rgba(255,255,255,.9); --my-line:rgba(0,0,0,.14);
+  color:var(--my-ink);
+  background-color:#2b3f58;
+  background-image:var(--my-wallpaper,linear-gradient(180deg,#6fa9de 0%,#9ccbee 48%,#d6ecfb 100%));
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+/* the terrain wallpapers: one per macOS release, chosen by the theme script (body.wp-*) */
+html body.modern-mode.modern-aqua-yosemite-mode.wp-yosemite{--my-wallpaper:url("assets/wallpapers/yosemite.jpg")}
+html body.modern-mode.modern-aqua-yosemite-mode.wp-elcapitan{--my-wallpaper:url("assets/wallpapers/elcapitan.jpg")}
+html body.modern-mode.modern-aqua-yosemite-mode.wp-sierra{--my-wallpaper:url("assets/wallpapers/sierra.jpg")}
+html body.modern-mode.modern-aqua-yosemite-mode.wp-highsierra{--my-wallpaper:url("assets/wallpapers/highsierra.jpg")}
+html body.modern-mode.modern-aqua-yosemite-mode.wp-mojave{--my-wallpaper:url("assets/wallpapers/mojave.jpg")}
+html body.modern-mode.modern-aqua-yosemite-mode.wp-catalina{--my-wallpaper:url("assets/wallpapers/catalina.jpg")}
+/* a thinner system face (Helvetica Neue Light for text, Medium for headings), not the site's body face */
+html body.modern-mode.modern-aqua-yosemite-mode *{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;font-weight:300 !important}
+html body.modern-mode.modern-aqua-yosemite-mode pre,
+html body.modern-mode.modern-aqua-yosemite-mode pre *,
+html body.modern-mode.modern-aqua-yosemite-mode code{font-family:Menlo,Monaco,"Courier New",monospace !important;font-weight:400 !important}
+
+/* the menu bar: translucent, with the background showing through; the active item is the flat system blue */
+html body.modern-mode.modern-aqua-yosemite-mode .top{background:rgba(246,246,246,.72);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border-bottom:1px solid var(--my-line);box-shadow:none}
+html body.modern-mode.modern-aqua-yosemite-mode .logo{color:var(--my-ink);font-size:14px;font-weight:500 !important;letter-spacing:0;text-shadow:none}
+html body.modern-mode.modern-aqua-yosemite-mode .logo span:first-of-type{color:var(--my-ink)}
+html body.modern-mode.modern-aqua-yosemite-mode .logo .version{color:#8e8e93;font-size:10px;margin-left:5px}
+html body.modern-mode.modern-aqua-yosemite-mode .top .nav a,
+html body.modern-mode.modern-aqua-yosemite-mode .top .lang-btn{color:var(--my-ink);background:transparent;border:0;border-radius:4px;box-shadow:none;font-size:13px;padding:4px 9px}
+html body.modern-mode.modern-aqua-yosemite-mode .top .nav a:hover,
+html body.modern-mode.modern-aqua-yosemite-mode .top .lang-btn:hover{background:rgba(0,0,0,.06)}
+html body.modern-mode.modern-aqua-yosemite-mode .top .nav a.active,
+html body.modern-mode.modern-aqua-yosemite-mode .top .lang.open .lang-btn{background:var(--my-blue);color:#fff}
+html body.modern-mode.modern-aqua-yosemite-mode .top .style-switch{background:rgba(255,255,255,.6);border:1px solid var(--my-line);border-radius:5px;height:24px;padding:0 8px;box-shadow:none}
+html body.modern-mode.modern-aqua-yosemite-mode .top .style-label{color:var(--my-ink);font-size:12px;letter-spacing:0;text-shadow:none}
+html body.modern-mode.modern-aqua-yosemite-mode .top .style-toggle{background:#e5e5ea !important;border:0 !important;border-radius:999px !important;box-shadow:none !important}
+html body.modern-mode.modern-aqua-yosemite-mode .top .style-toggle span{background:#ffffff !important;border:0 !important;border-radius:999px !important;box-shadow:0 1px 2px rgba(0,0,0,.25) !important}
+html body.modern-mode.modern-aqua-yosemite-mode .top .style-toggle[aria-pressed="true"]{background:#34c759 !important}
+html body.modern-mode.modern-aqua-yosemite-mode .top .settings-btn{color:var(--my-ink);background:var(--my-glass);border:1px solid var(--my-line);border-radius:5px;box-shadow:none}
+
+/* the hero: large light type on the sky, with no shadow */
+html body.modern-mode.modern-aqua-yosemite-mode .hero h1{color:#ffffff;font-size:64px;font-weight:300 !important;letter-spacing:-.5px;text-shadow:0 1px 6px rgba(0,40,80,.2)}
+html body.modern-mode.modern-aqua-yosemite-mode .hero p,
+html body.modern-mode.modern-aqua-yosemite-mode .head p{color:#ffffff;font-size:18px;line-height:1.5;text-shadow:0 1px 4px rgba(0,40,80,.2)}
+html body.modern-mode.modern-aqua-yosemite-mode .head h2{color:#ffffff;font-size:36px;font-weight:400 !important;text-shadow:0 1px 6px rgba(0,40,80,.2)}
+html body.modern-mode.modern-aqua-yosemite-mode .eyebrow{color:#ffffff;font-size:12px;font-weight:400 !important;letter-spacing:1px;text-shadow:none}
+html body.modern-mode.modern-aqua-yosemite-mode .tag,
+html body.modern-mode.modern-aqua-yosemite-mode .badge{background:var(--my-glass);color:var(--my-ink);border:1px solid var(--my-line);border-radius:5px;box-shadow:none;font-size:12px}
+html body.modern-mode.modern-aqua-yosemite-mode footer{color:#ffffff;background:transparent;border-top:1px solid rgba(255,255,255,.35);text-shadow:0 1px 4px rgba(0,40,80,.2)}
+
+/* buttons: flat. The default is the system blue; the others are flat, light, with a hairline outline */
+html body.modern-mode.modern-aqua-yosemite-mode .btn{display:inline-flex;align-items:center;justify-content:center;line-height:1;background:var(--my-glass-strong);color:var(--my-blue);border:1px solid var(--my-line);border-radius:5px;box-shadow:none;height:30px;padding:0 14px;font-size:13px;text-shadow:none}
+html body.modern-mode.modern-aqua-yosemite-mode .btn:hover{background:#ffffff}
+html body.modern-mode.modern-aqua-yosemite-mode .btn:active{background:#e8e8ed}
+html body.modern-mode.modern-aqua-yosemite-mode .btn.primary{background:var(--my-blue);color:#fff;border:1px solid var(--my-blue)}
+html body.modern-mode.modern-aqua-yosemite-mode .btn.primary:hover{background:var(--my-blue-d);border-color:var(--my-blue-d)}
+
+/* windows: translucent, with a flat title bar, a hairline and 6 px corners */
+html body.modern-mode.modern-aqua-yosemite-mode .panel,
+html body.modern-mode.modern-aqua-yosemite-mode .monitor,
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-panel{background:var(--my-glass);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--my-line);border-radius:6px;box-shadow:0 12px 28px rgba(0,0,0,.18);overflow:visible;position:relative}
+html body.modern-mode.modern-aqua-yosemite-mode .panel-head{position:relative;height:22px;min-height:22px;box-sizing:border-box;padding:0 60px;margin:0;background:rgba(236,236,236,.92);border:0;border-bottom:1px solid var(--my-line);border-radius:6px 6px 0 0;box-shadow:none;color:#4d4d4d;text-align:center;font:400 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:0;text-transform:none}
+html body.modern-mode.modern-aqua-yosemite-mode .panel-head::before{content:none !important;display:none !important}
+html body.modern-mode.modern-aqua-yosemite-mode .panel-head > span:not(.wc):not(.lq-lights){color:#4d4d4d;font-weight:500 !important;background:none;border:0;padding:0;display:inline}
+html body.modern-mode.modern-aqua-yosemite-mode .panel-head[data-status]::after{display:none}
+html body.modern-mode.modern-aqua-yosemite-mode .panel:has(> .panel-head[data-status]) > :not(.panel-head){margin-top:0}
+html body.modern-mode.modern-aqua-yosemite-mode .panel::before,
+html body.modern-mode.modern-aqua-yosemite-mode .panel::after{content:none !important;display:none !important}
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-head{background:rgba(236,236,236,.92);color:#4d4d4d;border-bottom:1px solid var(--my-line);font:400 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;text-align:center}
+
+/* window controls: flat coloured circles at the left (close, minimise, zoom); no glyphs and no gloss */
+html body.modern-mode.modern-aqua-yosemite-mode .wc{left:9px;right:auto;top:50%;transform:translateY(-50%);gap:8px;display:flex}
+html body.modern-mode.modern-aqua-yosemite-mode .panel-head .wc{left:9px}
+html body.modern-mode.modern-aqua-yosemite-mode .wc-min{display:inline-block}
+html body.modern-mode.modern-aqua-yosemite-mode .wc-close{order:-1}
+html body.modern-mode.modern-aqua-yosemite-mode .wc-b{width:12px;height:12px;border-radius:50%;border:0;color:transparent;box-shadow:none}
+html body.modern-mode.modern-aqua-yosemite-mode .wc-b svg{display:none}
+html body.modern-mode.modern-aqua-yosemite-mode .wc-max::after{content:none}
+html body.modern-mode.modern-aqua-yosemite-mode .wc-close{background:#ff5f57}
+html body.modern-mode.modern-aqua-yosemite-mode .wc-min{background:#febc2e}
+html body.modern-mode.modern-aqua-yosemite-mode .wc-max{background:#28c840}
+
+/* content: cards are light glass with a hairline; the terminal is a flat white console */
+html body.modern-mode.modern-aqua-yosemite-mode .card,
+html body.modern-mode.modern-aqua-yosemite-mode .fact{background:rgba(255,255,255,.7);border:1px solid var(--my-line);border-radius:6px;box-shadow:none;color:var(--my-ink)}
+html body.modern-mode.modern-aqua-yosemite-mode .card h3,
+html body.modern-mode.modern-aqua-yosemite-mode .fact strong{color:var(--my-ink);font-size:17px;font-weight:500 !important}
+html body.modern-mode.modern-aqua-yosemite-mode .card p,
+html body.modern-mode.modern-aqua-yosemite-mode .fact small{color:var(--my-ink-2);font-size:14px;line-height:1.5}
+html body.modern-mode.modern-aqua-yosemite-mode .note{background:rgba(255,204,0,.2);border:1px solid rgba(255,204,0,.45);border-radius:6px;color:var(--my-ink)}
+html body.modern-mode.modern-aqua-yosemite-mode .terminal{background:rgba(255,255,255,.88);border:1px solid var(--my-line);border-radius:6px;box-shadow:0 12px 28px rgba(0,0,0,.18)}
+html body.modern-mode.modern-aqua-yosemite-mode .terminal pre{color:var(--my-ink);background:transparent}
+html body.modern-mode.modern-aqua-yosemite-mode .terminal pre .dim{color:#8e8e93}
+html body.modern-mode.modern-aqua-yosemite-mode .terminal pre .cyan{color:var(--my-blue)}
+html body.modern-mode.modern-aqua-yosemite-mode .terminal pre .green{color:#248a3d}
+
+/* settings controls */
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay #settingsKpToggle,
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay #settingsMotionToggle{background:#e5e5ea !important;border:0 !important;border-radius:999px !important;box-shadow:none !important}
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:#34c759 !important}
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay #settingsKpToggle span,
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay #settingsMotionToggle span{background:#ffffff !important;border:0 !important;border-radius:999px !important;box-shadow:0 1px 2px rgba(0,0,0,.25) !important}
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-lang-select{background:#ffffff;border:1px solid var(--my-line);border-radius:5px;color:var(--my-ink);box-shadow:none}
+
+/* the Layout dropdown: translucent with a shadow; the highlighted entry is the system blue */
+html body.modern-mode.modern-aqua-yosemite-mode .sel-menu.sel-menu{background:var(--my-glass-strong) !important;color:var(--my-ink) !important;border:1px solid var(--my-line) !important;border-radius:6px !important;box-shadow:0 10px 24px rgba(0,0,0,.2) !important;backdrop-filter:blur(20px) !important;-webkit-backdrop-filter:blur(20px) !important}
+html body.modern-mode.modern-aqua-yosemite-mode .sel-menu.sel-menu .sel-group{color:#8e8e93 !important;font-size:11px !important;font-weight:500 !important;border-bottom:0 !important}
+html body .sel-menu.sel-menu button.th-modern-aqua-yosemite{background:transparent !important;border:0 !important;border-radius:4px !important;box-shadow:none !important;margin:0 4px !important;padding:4px 26px 4px 10px !important;position:relative !important;color:var(--my-ink) !important;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;font-size:13px !important;font-weight:300 !important;width:calc(100% - 8px) !important;text-align:left !important}
+html body.modern-mode.modern-aqua-yosemite-mode .sel-menu.sel-menu button.th-modern-aqua-yosemite:hover,
+html body.modern-mode.modern-aqua-yosemite-mode .sel-menu.sel-menu button.th-modern-aqua-yosemite:focus-visible{background:var(--my-blue) !important;color:#ffffff !important}
+html body.modern-mode.modern-aqua-yosemite-mode .sel-menu.sel-menu button.th-modern-aqua-yosemite.active:not(:hover){color:var(--my-blue) !important;font-weight:400 !important;background:transparent !important}
+html body.modern-mode.modern-aqua-yosemite-mode .sel-menu.sel-menu button.th-modern-aqua-yosemite .check{position:absolute !important;right:10px !important;top:50% !important;transform:translateY(-50%) !important;float:none !important;display:block !important;margin:0 !important;color:var(--my-blue) !important}
+html body.modern-mode.modern-aqua-yosemite-mode .sel-menu.sel-menu button.th-modern-aqua-yosemite:hover .check,
+html body.modern-mode.modern-aqua-yosemite-mode .sel-menu.sel-menu button.th-modern-aqua-yosemite:focus-visible .check{color:#ffffff !important}
+
+/* Dark appearance (Mojave and later): follows the system setting; the same flat shapes on a dark ground */
+@media (prefers-color-scheme: dark){
+  html body.modern-mode.modern-aqua-yosemite-mode{
+    --my-ink:#f5f5f7; --my-ink-2:#c7c7cc; --my-glass:rgba(44,44,46,.8); --my-glass-strong:rgba(58,58,60,.92); --my-line:rgba(255,255,255,.14);
+    color:var(--my-ink);
+    background-color:#0b1420;
+    background-image:linear-gradient(rgba(6,12,20,.42),rgba(6,12,20,.42)),var(--my-wallpaper,linear-gradient(180deg,#1c2a3a 0%,#13202f 55%,#0b1420 100%));
+  }
+  html body.modern-mode.modern-aqua-yosemite-mode .top{background:rgba(40,40,42,.72)}
+  html body.modern-mode.modern-aqua-yosemite-mode .top .nav a,
+  html body.modern-mode.modern-aqua-yosemite-mode .top .lang-btn,
+  html body.modern-mode.modern-aqua-yosemite-mode .logo{color:var(--my-ink)}
+  html body.modern-mode.modern-aqua-yosemite-mode .top .nav a:hover,
+  html body.modern-mode.modern-aqua-yosemite-mode .top .lang-btn:hover{background:rgba(255,255,255,.1)}
+  html body.modern-mode.modern-aqua-yosemite-mode .btn{background:rgba(255,255,255,.12);color:#0a84ff}
+  html body.modern-mode.modern-aqua-yosemite-mode .btn:hover{background:rgba(255,255,255,.18)}
+  html body.modern-mode.modern-aqua-yosemite-mode .panel-head,
+  html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-head{background:rgba(58,58,60,.92);color:#e5e5ea}
+  html body.modern-mode.modern-aqua-yosemite-mode .panel-head > span:not(.wc):not(.lq-lights){color:#e5e5ea}
+  html body.modern-mode.modern-aqua-yosemite-mode .card,
+  html body.modern-mode.modern-aqua-yosemite-mode .fact{background:rgba(255,255,255,.08)}
+  html body.modern-mode.modern-aqua-yosemite-mode .terminal{background:rgba(20,20,22,.9)}
+  html body.modern-mode.modern-aqua-yosemite-mode .terminal pre{color:#f5f5f7}
+  html body.modern-mode.modern-aqua-yosemite-mode .sel-menu.sel-menu{background:rgba(58,58,60,.94) !important;color:var(--my-ink) !important}
+  html body .sel-menu.sel-menu button.th-modern-aqua-yosemite{color:var(--my-ink) !important}
+}
+
+/* ---- Settings window: the traffic lights at the left of the title bar (red close, yellow, green), as on the
+   panels. The close button draws the red circle and its box-shadow draws the yellow and green ones. ---- */
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-head{position:relative !important;padding:0 60px !important;text-align:center !important;display:flex !important;align-items:center !important;justify-content:center !important;min-height:22px}
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-close{
+  position:absolute !important;left:9px !important;top:50% !important;transform:translateY(-50%) !important;
+  width:12px !important;height:12px !important;min-width:0 !important;min-height:0 !important;padding:0 !important;margin:0 !important;
+  border:0 !important;border-radius:50% !important;background:#ff5f57 !important;color:transparent !important;font-size:0 !important;
+  box-shadow:16px 0 0 #febc2e,32px 0 0 #28c840 !important;
+}
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-close svg{display:none !important}
+
+/* ---- Settings text and controls: readable in both appearances ---- */
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-row-label{color:var(--my-ink) !important;font-weight:400 !important}
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-kp-state{color:var(--my-ink-2) !important;font-weight:400 !important}
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-lang-select{background:#ffffff !important;color:var(--my-ink) !important;border:1px solid var(--my-line) !important}
+html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-lang-select option{background:#ffffff;color:#1d1d1f}
+@media (prefers-color-scheme: dark){
+  html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-row-label{color:#f5f5f7 !important}
+  html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-kp-state{color:#c7c7cc !important}
+  html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-lang-select{background:rgba(255,255,255,.14) !important;color:#f5f5f7 !important;border:1px solid rgba(255,255,255,.24) !important}
+  html body.modern-mode.modern-aqua-yosemite-mode #settingsOverlay .settings-lang-select option{background:#2c2c2e;color:#f5f5f7}
+}

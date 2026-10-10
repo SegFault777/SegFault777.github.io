@@ -1,0 +1,152 @@
+/* System 6 (Apple Macintosh System 6, 1984–1991). A black-and-white layout built from the pixels of the System 6
+   reference screens (css/assets/system6): a 50% checkerboard desktop, a one-row menu bar, and
+   document windows whose frame, striped title band, close box, zoom box and grow box are cut from a 1x System 6
+   window. Every colour is black or white; the type stays the Retro bitmap face (Galmuri). Active only when
+   body.system6-mode is set. The rules use html body.system6-mode so they beat the Retro rules they replace. */
+
+/* desktop: the 50% checkerboard, one pixel per cell */
+html body.system6-mode{
+  color:#000;
+  background-color:#fff !important;
+  background-image:none !important;
+}
+/* the checkerboard lives in its own fixed layer behind the page: it does not scroll, so it is not repainted with the
+   content while the page moves, and the colour of the desktop stays the same during a scroll */
+html body.system6-mode::before{
+  content:"";
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:url("assets/system6/desk.png");
+  background-size:2px 2px;
+  background-repeat:repeat;
+  image-rendering:pixelated;
+  transform:translateZ(0);
+}
+
+/* menu bar: 19 px of white with a 1 px black rule underneath, as the System 6 menu bar */
+html body.system6-mode > header.top{background:#fff !important;border-bottom:1px solid #000 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.system6-mode > header.top .topbar{height:19px !important;min-height:19px !important;padding:0 !important;gap:0 !important;align-items:center}
+html body.system6-mode .logo{color:#000;font-size:12px;letter-spacing:0;text-shadow:none;display:inline-flex;align-items:center;height:19px;padding:0 10px 0 4px}
+html body.system6-mode .logo .version{color:#000;font-size:10px}
+html body.system6-mode .top .nav a,
+html body.system6-mode .top .lang-btn{color:#000;background:transparent;border:0;border-radius:0;box-shadow:none;height:19px;line-height:19px;padding:0 7px;font-size:12px;text-shadow:none}
+html body.system6-mode .top .nav a:hover,
+html body.system6-mode .top .nav a.active,
+html body.system6-mode .top .lang-btn:hover,
+html body.system6-mode .top .lang.open .lang-btn{background:#000;color:#fff;border:0;box-shadow:none}
+html body.system6-mode .top .style-switch{background:#fff;border:1px solid #000;border-radius:0;height:15px;padding:0 4px;gap:4px;margin:0 6px 0 0;box-shadow:none}
+html body.system6-mode .top .style-label{color:#000;font-size:10px;text-shadow:none}
+html body.system6-mode .top .style-toggle{width:24px;height:9px;padding:0;background:#fff !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:none !important}
+html body.system6-mode .top .style-toggle span{top:1px;left:1px;width:5px;height:5px;background:#000 !important;border:0 !important;border-radius:0 !important;box-shadow:none !important}
+html body.system6-mode .top .style-toggle[aria-pressed="true"]{background:#000 !important}
+html body.system6-mode .top .style-toggle[aria-pressed="true"] span{left:16px;background:#fff !important}
+html body.system6-mode .top .settings-btn{color:#000;background:#fff;border:1px solid #000;border-radius:0;box-shadow:none;height:15px;min-height:15px;width:19px;min-width:19px;padding:0}
+html body.system6-mode .top .settings-btn:hover{background:#000;color:#fff}
+
+/* windows, the hero, the settings sheet: one frame, cut from the System 6 window (16 px title band, 1 px borders) */
+html body.system6-mode .panel,
+html body.system6-mode .monitor,
+html body.system6-mode .hero,
+html body.system6-mode .terminal,
+html body.system6-mode #settingsOverlay .settings-panel{
+  position:relative;
+  border:0 !important;border-radius:0 !important;box-shadow:none !important;overflow:visible !important;
+  background-color:#fff !important;
+  background-image:url("assets/system6/win-tl.png"),url("assets/system6/win-tr.png"),url("assets/system6/win-bl.png"),url("assets/system6/win-br.png"),url("assets/system6/win-tm.png"),url("assets/system6/win-b.png"),url("assets/system6/win-l.png"),url("assets/system6/win-r.png") !important;
+  background-position:left top,right top,left bottom,right bottom,left top,left bottom,left top,right top !important;
+  background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,repeat-x,repeat-x,repeat-y,repeat-y !important;
+  background-origin:border-box !important;background-clip:border-box !important;
+  padding:17px 4px 4px 4px !important;
+}
+html body.system6-mode .panel-head{position:absolute;top:0;left:0;right:0;height:16px;margin:0;padding:0;display:flex;align-items:center;justify-content:center;background:none !important;border:0 !important;box-shadow:none !important;color:#000;pointer-events:none}
+html body.system6-mode .panel-head::before{content:none !important;display:none !important}
+html body.system6-mode .panel-head > span:not(.wc):not(.lq-lights){position:relative;z-index:1;display:inline-block;background:#fff;color:#000;padding:0 8px;line-height:14px;font-size:11px;letter-spacing:0;text-shadow:none;border:0}
+html body.system6-mode .panel-head[data-status]::after{display:none}
+html body.system6-mode .panel:has(> .panel-head[data-status]) > :not(.panel-head){margin-top:0}
+html body.system6-mode .panel::before,
+html body.system6-mode .panel::after{content:none !important;display:none !important}
+/* the close box is in the frame; its button is transparent and sits over the box. The zoom box is drawn by the frame. */
+html body.system6-mode .wc{position:absolute;left:9px;top:4px;right:auto;width:11px;height:11px;transform:none;display:block;gap:0;z-index:3;pointer-events:none}
+html body.system6-mode .wc-close{position:absolute;left:0;top:0;width:11px;height:11px;min-width:0;min-height:0;padding:0;margin:0;border:0;background:transparent;color:transparent;font-size:0;box-shadow:none;pointer-events:auto}
+html body.system6-mode .wc-close svg{display:none}
+html body.system6-mode .wc-min,
+html body.system6-mode .wc-max{display:none !important}
+html body.system6-mode #settingsOverlay .settings-head{position:absolute;top:0;left:0;right:0;height:16px;padding:0;margin:0;background:none;border:0;box-shadow:none;color:#000;display:flex;align-items:center;justify-content:center;text-align:center}
+html body.system6-mode #settingsOverlay .settings-head > span{position:relative;z-index:1;background:#fff;padding:0 8px;line-height:14px;font-size:11px}
+html body.system6-mode #settingsOverlay .settings-close{position:absolute;left:9px;top:4px;width:11px;height:11px;min-width:0;min-height:0;padding:0;margin:0;border:0;border-radius:0;background:transparent;color:transparent;font-size:0;box-shadow:none;z-index:3;transform:none}
+html body.system6-mode #settingsOverlay .settings-close svg{display:none}
+
+/* content: white cards with a 1 px black frame; headings sit on white so they read on the checkerboard */
+html body.system6-mode .card,
+html body.system6-mode .fact,
+html body.system6-mode .note{background:#fff;border:1px solid #000;border-radius:0;box-shadow:none;color:#000}
+html body.system6-mode .card h3,
+html body.system6-mode .fact strong{color:#000;text-shadow:none}
+html body.system6-mode .card p,
+html body.system6-mode .fact small{color:#000}
+html body.system6-mode .head{background:#fff;border:1px solid #000;padding:8px 12px}
+html body.system6-mode .head h2,
+html body.system6-mode .head p{color:#000;text-shadow:none}
+html body.system6-mode .hero h1,
+html body.system6-mode .hero h1 span{color:#000;text-shadow:none}
+html body.system6-mode .hero p,
+html body.system6-mode .hero p{color:#000;text-shadow:none}
+html body.system6-mode .eyebrow{color:#000;text-shadow:none;background:#fff;border:1px solid #000;display:inline-block;padding:0 4px}
+html body.system6-mode .tag,
+html body.system6-mode .badge{background:#fff;color:#000;border:1px solid #000;border-radius:0;box-shadow:none;text-shadow:none}
+html body.system6-mode footer{background:#fff;color:#000;border:1px solid #000;border-width:1px 0 0 0;text-shadow:none}
+html body.system6-mode .terminal pre{color:#000;background:transparent}
+html body.system6-mode .terminal pre .dim{color:#000}
+html body.system6-mode .terminal pre .cyan,
+html body.system6-mode .terminal pre .green{color:#000}
+
+/* buttons: a black outline on white; the pressed and hovered state inverts to black with white text; the default
+   button has the heavier 2 px outline */
+html body.system6-mode .btn{display:inline-flex;align-items:center;justify-content:center;height:22px;padding:0 12px;background:#fff;color:#000;border:1px solid #000;border-radius:0;box-shadow:none;font-size:12px;text-shadow:none;transform:none}
+html body.system6-mode .btn:hover,
+html body.system6-mode .btn:active{background:#000;color:#fff;box-shadow:none}
+html body.system6-mode .btn.primary{border:2px solid #000;padding:0 11px}
+html body.system6-mode .btn.primary:hover{background:#000;color:#fff}
+
+/* settings controls: a square switch, and the popup as a white box with a black frame */
+html body.system6-mode #settingsOverlay .settings-lang-select{background:#fff;color:#000;border:1px solid #000;border-radius:0;height:22px;padding:0 6px;box-shadow:none;font-size:12px}
+html body.system6-mode #settingsOverlay .settings-row-label,
+html body.system6-mode #settingsOverlay .settings-kp-state{color:#000;text-shadow:none}
+html body.system6-mode #settingsOverlay #settingsKpToggle,
+html body.system6-mode #settingsOverlay #settingsMotionToggle{width:34px !important;height:16px !important;background:#fff !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:none !important}
+html body.system6-mode #settingsOverlay #settingsKpToggle span,
+html body.system6-mode #settingsOverlay #settingsMotionToggle span{top:2px !important;left:2px !important;width:10px !important;height:10px !important;background:#000 !important;border:0 !important;border-radius:0 !important;box-shadow:none !important}
+html body.system6-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+html body.system6-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:#000 !important}
+html body.system6-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"] span,
+html body.system6-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:20px !important;background:#fff !important}
+
+/* menus: a white popup with a black frame; the highlighted item is inverted, as a System 6 menu */
+html body.system6-mode .sel-menu.sel-menu{background:#fff !important;color:#000 !important;border:1px solid #000 !important;border-radius:0 !important;padding:2px 0 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.system6-mode .sel-menu.sel-menu .sel-group{color:#000 !important;font-size:10px !important;font-weight:400 !important;border-bottom:1px solid #000 !important;margin:0 !important;padding:6px 10px 2px !important}
+html body .sel-menu.sel-menu button.th-system6,
+html body.system6-mode .sel-menu.sel-menu button.th-system6{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;margin:0 !important;padding:3px 24px 3px 12px !important;position:relative !important;color:#000 !important;font-family:inherit !important;font-size:12px !important;font-weight:400 !important;width:100% !important;text-align:left !important}
+html body.system6-mode .sel-menu.sel-menu button.th-system6:hover,
+html body.system6-mode .sel-menu.sel-menu button.th-system6:focus-visible{background:#000 !important;color:#fff !important}
+html body.system6-mode .sel-menu.sel-menu button.th-system6.active:not(:hover){color:#000 !important;font-weight:400 !important;background:transparent !important}
+html body.system6-mode .sel-menu.sel-menu button.th-system6 .check{position:absolute !important;right:8px !important;top:50% !important;transform:translateY(-50%) !important;float:none !important;display:block !important;margin:0 !important;color:#000 !important}
+html body.system6-mode .sel-menu.sel-menu button.th-system6:hover .check,
+html body.system6-mode .sel-menu.sel-menu button.th-system6:focus-visible .check{color:#fff !important}
+
+/* phones: the menu bar stays one 19 px row (the menu names scrolling sideways, the settings button) */
+@media (max-width:640px){
+  html body.system6-mode > header.top{padding-left:0 !important;padding-right:0 !important}
+  html body.system6-mode > header.top .topbar{flex-wrap:nowrap !important;height:19px !important;min-height:19px !important;padding:0 !important;gap:0 !important;overflow:hidden !important}
+  html body.system6-mode > header.top .topbar > .logo{order:0 !important;flex:0 0 auto !important;height:19px !important;min-height:19px !important;padding:0 6px 0 4px !important}
+  html body.system6-mode > header.top .topbar > .nav{order:0 !important;flex:1 1 0 !important;width:auto !important;max-width:none !important;min-width:0 !important;height:19px !important;display:flex !important;flex-wrap:nowrap !important;align-items:center !important;gap:0 !important;padding:0 !important;margin:0 !important;overflow-x:auto !important;overflow-y:hidden !important;scrollbar-width:none}
+  html body.system6-mode > header.top .topbar > .nav::-webkit-scrollbar{display:none}
+  html body.system6-mode > header.top .topbar > .nav > *{flex:0 0 auto !important}
+  html body.system6-mode > header.top .topbar > .settings-btn{order:0 !important;margin:0 4px 0 0 !important;flex:0 0 auto !important}
+  html body.system6-mode .top .nav a,
+  html body.system6-mode .top .lang-btn{min-height:19px !important;height:19px !important;padding:0 6px !important}
+  html body.system6-mode .top .style-switch{height:15px !important;margin:0 4px !important}
+  html body.system6-mode .top .style-toggle{width:24px !important;height:9px !important}
+  html body.system6-mode .btn{min-height:22px !important}
+}

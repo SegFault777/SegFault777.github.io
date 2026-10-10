@@ -8,7 +8,7 @@
     ['ar','العربية'],['hi','हिन्दी']
   ];
   const FALLBACK = { 'ko-kp': 'ko' };           /* Missing keys fall back to the chosen language, then to English. */
-  const VERSION = '1.0-rc';                     /* same ?v= as the other assets */
+  const VERSION = '1.0';                     /* same ?v= as the other assets */
   /* Translation files are downloaded only when needed: the chosen language, its fallback, and English. */
   const FILES = new Set([...LANGS.map(l => l[0]), 'ko-kp']);
   window.I18N = window.I18N || {};
