@@ -42,3 +42,7 @@
 
 /* Words never break mid-word while characters animate individually. */
 .char-stagger .word{display:inline-block;white-space:nowrap}
+
+/* The letters stay inline in every layout. Modern sets them to inline-block; once the page switches to another
+   layout, the hero's own span rules would make each letter a block and stack the word one letter per line. */
+.char-stagger .char{display:inline-block;white-space:nowrap}

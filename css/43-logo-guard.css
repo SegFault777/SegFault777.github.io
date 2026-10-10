@@ -1,0 +1,6 @@
+/* The MiniWin logo always reads as one horizontal line, in every theme and through every switch. It never shrinks
+   inside the header, never wraps, and keeps the writing mode of the page, so its letters cannot stack vertically. */
+.logo,
+.logo span,
+.logo .version{writing-mode:horizontal-tb !important;text-orientation:mixed !important;white-space:nowrap !important;word-break:normal !important;overflow-wrap:normal !important}
+.topbar > .logo{flex:0 0 auto !important;flex-shrink:0 !important;min-width:max-content !important}

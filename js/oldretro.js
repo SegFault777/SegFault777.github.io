@@ -370,6 +370,7 @@
     if(body.classList.contains('oldretro-mode'))return 'oldretro';
     if(body.classList.contains('luna-mode'))return 'luna';
     if(body.classList.contains('aqua-mode'))return 'aqua';
+    if(body.classList.contains('platinum-mode'))return body.classList.contains('platinum-lime')?'platinum-lime':body.classList.contains('platinum-magenta')?'platinum-magenta':'platinum-lavender';
     if(!body.classList.contains('modern-mode'))return 'retro';
     return body.classList.contains('modern-glass-mode')?'modern-glass':body.classList.contains('aero-mode')?'aero':body.classList.contains('breeze-mode')?'breeze':body.classList.contains('flat-mode')?'flat':body.classList.contains('adwaita-mode')?'adwaita':body.classList.contains('mica-mode')?'mica':body.classList.contains('oxygen-mode')?'oxygen':body.classList.contains('sequoia-mode')?'sequoia':body.classList.contains('liquid-mode')?'liquid':'modern';
   }
@@ -456,6 +457,10 @@
       if(isOld)exitOldRetro();
       else persistOldRetroDefault(false);
       apply('aqua');
+    }else if(val.indexOf('platinum-')===0){
+      if(isOld)exitOldRetro();
+      else persistOldRetroDefault(false);
+      apply(val);
     }else{
       if(isOld)exitOldRetro(true);        /* leaving OldRetro for a Modern layout keeps OldRetro saved */
       apply(val);
@@ -801,7 +806,7 @@
     settingsModeLabelEl=settingsOverlay.querySelector('#settingsModeLabel');
     settingsLayoutSel=settingsOverlay.querySelector('#settingsLayoutSelect');
     settingsLayoutSel.innerHTML=
-      '<optgroup label="Retro Layout"><option value="retro">Retro</option><option value="oldretro">OldRetro</option><option value="luna">Luna</option><option value="aqua">Aqua</option></optgroup>'+
+      '<optgroup label="Retro Layout"><option value="retro">Retro</option><option value="oldretro">OldRetro</option><option value="luna">Luna</option><option value="aqua">Aqua</option><option value="platinum-lavender">Platinum Lavender</option><option value="platinum-lime">Platinum Lime</option><option value="platinum-magenta">Platinum Magenta</option></optgroup>'+
       '<optgroup label="Modern Layout"><option value="modern">Modern</option><option value="modern-glass">Modern Glass</option><option value="aero">Aero</option><option value="breeze">Breeze</option><option value="flat">Flat</option><option value="adwaita">Adwaita</option><option value="mica">Mica</option><option value="oxygen">Oxygen</option><option value="sequoia">Sequoia</option><option value="liquid">Liquid Glass</option></optgroup>';
     const langSel=settingsOverlay.querySelector('#settingsLangSelect');
     langSel.innerHTML=(window.miniwinLanguages||[]).map(l=>'<option value="'+l[0]+'">'+l[1]+'</option>').join('');

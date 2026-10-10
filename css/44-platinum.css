@@ -1,0 +1,270 @@
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen&display=swap");
+/* Platinum (Mac OS 9 "Platinum" look), a Retro-layout flavour with three accents:
+   Lavender (the Mac OS 9 default), Lime and Magenta. Active only when body.platinum-mode is set; the accent variant
+   adds body.platinum-lime or body.platinum-magenta (lavender is the base). Reference: the Mac OS 9 Appearance panel
+   (lavender, lime and magenta accents) and the Platinum desktops and windows. */
+
+html body.platinum-mode{
+  --pt-desk:#8585c2; --pt-acc:#8f8ccf; --pt-acc-l:#e3e0f6; --pt-acc-d:#4a4590;
+  --pt-face:#dddddd; --pt-ink:#000000; --pt-link:#5b56b0;
+  /* Mac OS 9 faces: Chicago for menus and window titles, Geneva for text. Chicago ships only with Mac OS 9, so
+     Silkscreen (a bitmap-style face) stands in where it is missing. */
+  --pt-title:Chicago,Silkscreen,Geneva,Verdana,sans-serif;
+  --pt-ui:Geneva,"Lucida Grande",Verdana,sans-serif;
+}
+html body.platinum-mode.platinum-lime{--pt-desk:#6f9a4a; --pt-acc:#8bc442; --pt-acc-l:#e5f3c5; --pt-acc-d:#3d6a12; --pt-link:#3d7a10}
+html body.platinum-mode.platinum-magenta{--pt-desk:#9a4a8c; --pt-acc:#c9449f; --pt-acc-l:#f6d2ea; --pt-acc-d:#7a1e5f; --pt-link:#a2227a}
+
+/* the desktop: the accent's colour with a fine dot screen */
+html body.platinum-mode{
+  color:var(--pt-ink);
+  font-family:var(--pt-ui);
+  background-color:var(--pt-desk);
+  background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:4px 4px;
+  background-attachment:fixed;
+}
+html body.platinum-mode .topbar{height:52px}
+
+/* the menu bar: the Platinum grey with a black rule */
+html body.platinum-mode .top{background:linear-gradient(#ffffff,#dddddd 55%,#c9c9c9);border-bottom:1px solid #000;box-shadow:none}
+html body.platinum-mode .logo{color:#000;font-family:var(--pt-ui);font-size:15px;font-weight:700;letter-spacing:0;text-shadow:none;font-family:var(--pt-title)}
+html body.platinum-mode .logo span:first-of-type{color:var(--pt-acc-d)}
+html body.platinum-mode .logo .version{color:#000;font-weight:400;font-size:10px;margin-left:5px}
+html body.platinum-mode .top .nav a,
+html body.platinum-mode .top .lang-btn{color:#000;background:transparent;border:0;border-radius:0;box-shadow:none;font:12px var(--pt-title);padding:4px 8px}
+html body.platinum-mode .top .nav a:hover,
+html body.platinum-mode .top .nav a.active,
+html body.platinum-mode .top .lang-btn:hover,
+html body.platinum-mode .top .lang.open .lang-btn{background:var(--pt-acc);color:#ffffff;border:0;box-shadow:none}
+html body.platinum-mode .top .style-switch{background:#ffffff;border:1px solid #000;border-radius:0;height:30px;padding:0 10px;box-shadow:none}
+html body.platinum-mode .top .style-label{color:#000;font:11px var(--pt-title);letter-spacing:0;text-shadow:none}
+html body.platinum-mode .top .settings-btn{color:#000;background:linear-gradient(#ffffff,#dddddd);border:1px solid #000;border-radius:0;box-shadow:inset 1px 1px #fff}
+
+/* the switch: a white Platinum track; the knob is a bevelled grey square-cornered button; ON fills with the accent */
+html body.platinum-mode .top .style-toggle,
+html body.platinum-mode #settingsOverlay #settingsKpToggle,
+html body.platinum-mode #settingsOverlay #settingsMotionToggle{background:#ffffff !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:inset 1px 1px 2px rgba(0,0,0,.2) !important}
+html body.platinum-mode .top .style-toggle[aria-pressed="true"],
+html body.platinum-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+html body.platinum-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:var(--pt-acc) !important}
+html body.platinum-mode .top .style-toggle span,
+html body.platinum-mode #settingsOverlay #settingsKpToggle span,
+html body.platinum-mode #settingsOverlay #settingsMotionToggle span{background:linear-gradient(#ffffff,#dddddd) !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:inset 1px 1px #fff !important}
+
+/* the hero on the desktop: white titles with a hard black shadow, as Mac OS 9 title text */
+html body.platinum-mode .hero h1{color:#ffffff;text-shadow:3px 3px 0 #000}
+html body.platinum-mode .hero p,
+html body.platinum-mode .head p{color:#ffffff;text-shadow:1px 1px 0 rgba(0,0,0,.6)}
+html body.platinum-mode .head h2{color:#ffffff;text-shadow:2px 2px 0 #000}
+html body.platinum-mode .eyebrow{color:var(--pt-acc-l);text-shadow:1px 1px 0 #000}
+html body.platinum-mode .tag,
+html body.platinum-mode .badge{background:#ffffff;color:#000;border:1px solid #000;border-radius:0;box-shadow:1px 1px 0 #000;font-weight:700}
+html body.platinum-mode footer{color:#ffffff;border-top:1px solid rgba(255,255,255,.5);background:transparent;text-shadow:1px 1px 0 #000}
+
+/* windows: the Platinum window (grey face, black outline, hard drop shadow) with a striped title bar */
+html body.platinum-mode .panel,
+html body.platinum-mode .monitor{background:var(--pt-face);border:1px solid #000;border-radius:8px 8px 0 0;box-shadow:3px 3px 0 #000}
+html body.platinum-mode .monitor{border-radius:4px}
+html body.platinum-mode .panel-head{position:relative;background:repeating-linear-gradient(180deg,#ffffff 0 1px,var(--pt-acc-l) 1px 3px);color:#000;border:0;border-bottom:1px solid #000;border-radius:7px 7px 0 0;text-align:center;padding:4px 84px;font:700 12px var(--pt-title);letter-spacing:0;text-transform:none;min-height:20px;box-sizing:border-box}
+html body.platinum-mode .panel-head > span:not(.wc):not(.lq-lights){display:inline-block;background:var(--pt-face);border:1px solid #000;padding:0 10px;line-height:14px}
+html body.platinum-mode #settingsOverlay .settings-head,
+html body.platinum-mode #settingsOverlay .settings-head{background:repeating-linear-gradient(180deg,#ffffff 0 1px,var(--pt-acc-l) 1px 3px) !important;color:#000 !important;border-bottom:1px solid #000 !important;background:repeating-linear-gradient(180deg,#ffffff 0 1px,var(--pt-acc-l) 1px 3px);color:#000;border-bottom:1px solid #000;font:700 12px var(--pt-title);text-align:center;letter-spacing:0}
+html body.platinum-mode #settingsOverlay .settings-panel{background:var(--pt-face);border:1px solid #000;border-radius:8px 8px 0 0;box-shadow:3px 3px 0 #000;color:#000;font-family:var(--pt-ui)}
+html body.platinum-mode .card,
+html body.platinum-mode .fact{background:#ffffff;border:1px solid #000;box-shadow:2px 2px 0 rgba(0,0,0,.45);color:#000}
+html body.platinum-mode .card h3,
+html body.platinum-mode .fact strong{color:#000;font-family:var(--pt-ui)}
+html body.platinum-mode .card p,
+html body.platinum-mode .fact small{color:#222}
+html body.platinum-mode .note{background:#ffffe6;color:#000;border:1px solid #000;border-left-width:4px;border-left-color:var(--pt-acc)}
+
+/* buttons: Mac OS 9 push buttons, a rounded grey face with a black outline and a 1px bevel; the default is outlined heavier */
+html body.platinum-mode .btn{background:linear-gradient(#ffffff,#dddddd);color:#000;border:1px solid #000;border-radius:6px;box-shadow:inset 1px 1px #ffffff,inset -1px -1px #888888,1px 1px 0 #000;font:700 12px var(--pt-title);letter-spacing:0;text-shadow:none}
+html body.platinum-mode .btn:hover{background:linear-gradient(#ffffff,#eeeeee)}
+html body.platinum-mode .btn:active{background:linear-gradient(#cfcfcf,#dddddd);box-shadow:inset 1px 1px #888888,inset -1px -1px #ffffff}
+html body.platinum-mode .btn.primary{border:2px solid #000;background:linear-gradient(#ffffff,var(--pt-acc-l));box-shadow:inset 1px 1px #ffffff,1px 1px 0 #000}
+
+/* terminal: a white Mac console with black type */
+html body.platinum-mode .terminal{background:#ffffff;border:1px solid #000;border-radius:8px 8px 0 0;box-shadow:3px 3px 0 #000}
+html body.platinum-mode .terminal pre{color:#000;background:transparent}
+html body.platinum-mode .terminal pre .dim{color:#666}
+html body.platinum-mode .terminal pre .cyan{color:var(--pt-link)}
+html body.platinum-mode .terminal pre .green{color:#1a7a1a}
+
+/* the Platinum window controls: small square boxes with the glyph (the close box is first) */
+html body.platinum-mode .wc{gap:4px}
+html body.platinum-mode .wc-b{width:15px;height:13px;background:linear-gradient(#ffffff,#dddddd);color:#000;border:1px solid #000;border-radius:0;box-shadow:inset 1px 1px #fff}
+html body.platinum-mode .wc-b svg{width:8px;height:8px;stroke-width:1.5}
+html body.platinum-mode .wc-close{background:#ffffff}
+
+/* the Layout dropdown: a white Platinum menu with a black outline, the same hard shadow */
+html body.platinum-mode .sel-menu.sel-menu{background:#ffffff !important;color:#000000 !important;border:1px solid #000000 !important;border-radius:0 !important;box-shadow:3px 3px 0 #000000 !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+/* the three Platinum entries, drawn in their accent (plain text at rest, the Platinum bar on hover) */
+html body .sel-menu.sel-menu button.th-platinum-lavender,
+html body .sel-menu.sel-menu button.th-platinum-lime,
+html body .sel-menu.sel-menu button.th-platinum-magenta{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;margin:0 !important;padding:6px 10px !important;color:#000000 !important;font-family:var(--pt-ui) !important}
+html body .sel-menu.sel-menu button.th-platinum-lavender{color:#4a4590 !important}
+html body .sel-menu.sel-menu button.th-platinum-lime{color:#3d6a12 !important}
+html body .sel-menu.sel-menu button.th-platinum-magenta{color:#7a1e5f !important}
+html body .sel-menu.sel-menu button.th-platinum-lavender:hover,html body .sel-menu.sel-menu button.th-platinum-lavender:focus-visible{background:#8f8ccf !important;color:#ffffff !important;box-shadow:inset 0 0 0 1px #000 !important}
+html body .sel-menu.sel-menu button.th-platinum-lime:hover,html body .sel-menu.sel-menu button.th-platinum-lime:focus-visible{background:#8bc442 !important;color:#ffffff !important;box-shadow:inset 0 0 0 1px #000 !important}
+html body .sel-menu.sel-menu button.th-platinum-magenta:hover,html body .sel-menu.sel-menu button.th-platinum-magenta:focus-visible{background:#c9449f !important;color:#ffffff !important;box-shadow:inset 0 0 0 1px #000 !important}
+html body .sel-menu.sel-menu button.th-platinum-lavender.active:not(:hover),html body .sel-menu.sel-menu button.th-platinum-lime.active:not(:hover),html body .sel-menu.sel-menu button.th-platinum-magenta.active:not(:hover){font-weight:700 !important;background:transparent !important;box-shadow:none !important}
+html body .sel-menu.sel-menu button.th-platinum-lavender .check{color:#4a4590 !important}
+html body .sel-menu.sel-menu button.th-platinum-lime .check{color:#3d6a12 !important}
+html body .sel-menu.sel-menu button.th-platinum-magenta .check{color:#7a1e5f !important}
+
+/* Retro's bitmap font (Galmuri) is forced with !important on every non-modern page. Platinum takes its own faces over it:
+   Geneva-style text everywhere, Chicago-style menus and window titles, and monospace only for code. */
+html body.platinum-mode,
+html body.platinum-mode *{font-family:var(--pt-ui) !important}
+html body.platinum-mode .logo,
+html body.platinum-mode .top .nav a,
+html body.platinum-mode .top .lang-btn,
+html body.platinum-mode .top .style-label,
+html body.platinum-mode .panel-head,
+html body.platinum-mode .panel-head *,
+html body.platinum-mode .settings-head,
+html body.platinum-mode #settingsOverlay .settings-head *{font-family:var(--pt-title) !important}
+html body.platinum-mode pre,
+html body.platinum-mode pre *,
+html body.platinum-mode code{font-family:Monaco,"Courier New",monospace !important}
+
+/* ---- The Mac OS 9 window, as in the Copland HD reference: a white content area, a striped title bar with the
+   title in a small box, a close box at the left and a zoom box at the right, and a 1px outline with rounded top
+   corners. There are no glyph buttons here. ---- */
+html body.platinum-mode .panel,
+html body.platinum-mode .monitor,
+html body.platinum-mode #settingsOverlay .settings-panel{background:#ffffff;border:1px solid #000;border-radius:8px 8px 0 0;box-shadow:none}
+html body.platinum-mode .monitor{border-radius:8px 8px 0 0}
+html body.platinum-mode .panel-head{height:20px;min-height:20px;padding:0 40px;box-sizing:border-box;line-height:18px;background:repeating-linear-gradient(180deg,#ffffff 0 1px,#c4c4c4 1px 2px);border:0;border-bottom:1px solid #000;border-radius:7px 7px 0 0;overflow:visible}
+html body.platinum-mode .panel-head > span:not(.wc):not(.lq-lights){background:#ffffff;border:1px solid #000;padding:0 8px;line-height:14px;position:relative;z-index:1}
+html body.platinum-mode #settingsOverlay .settings-head{border-radius:7px 7px 0 0}
+html body.platinum-mode .terminal{box-shadow:none;border-radius:8px 8px 0 0}
+
+/* the boxes: the close box at the left, the zoom box at the right; the minimise control is not on a Mac window */
+html body.platinum-mode .wc{left:0;right:0;top:50%;transform:translateY(-50%);gap:0;display:flex;justify-content:space-between;padding:0 8px;box-sizing:border-box;width:100%}
+html body.platinum-mode .panel-head{display:block !important;text-align:center}
+html body.platinum-mode .panel-head > span:not(.wc):not(.lq-lights){display:inline-block;vertical-align:middle}
+
+html body.platinum-mode .wc-min{display:none}
+html body.platinum-mode .wc-close{order:-1}
+html body.platinum-mode .wc-b{position:relative;width:12px;height:12px;background:#ffffff;border:1px solid #000;border-radius:0;box-shadow:none;color:#000}
+html body.platinum-mode .wc-b svg{display:none}
+html body.platinum-mode .wc-max::after{content:"";position:absolute;left:2px;top:2px;right:2px;bottom:2px;border:1px solid #000}
+
+/* ---- Square windows: Mac OS 9 windows have square corners, so the window, its title bar, the console and the
+   settings sheet are all square. The control group spans the title bar: the close box at the left, the zoom box
+   at the right. ---- */
+html body.platinum-mode .panel,
+html body.platinum-mode .monitor,
+html body.platinum-mode .terminal,
+html body.platinum-mode #settingsOverlay .settings-panel,
+html body.platinum-mode .panel-head,
+html body.platinum-mode #settingsOverlay .settings-head{border-radius:0 !important}
+html body.platinum-mode .wc{left:0;right:0;width:auto;justify-content:space-between;padding:0 8px;box-sizing:border-box}
+html body.platinum-mode .panel-head .wc-max{position:static;right:auto}
+
+/* ---- No round shapes in Platinum: every corner is square (windows, buttons, tags, switches, menus, the gear button) ---- */
+html body.platinum-mode *,
+html body.platinum-mode *::before,
+html body.platinum-mode *::after{border-radius:0 !important}
+
+/* ---- The window frame is the Copland HD reference, pixel for pixel. css/assets holds the reference's own pixels for
+   the nine parts of the frame (corners, edges, the title bar with its stripes, the close and zoom boxes, and the
+   info band); the window is drawn with border-image, so the corners and edges are the reference's, at any size.
+   The title text and the item count are the only parts that are written on top of it. ---- */
+html body.platinum-mode .panel{
+  background:#ffffff !important;
+  border-style:solid !important;
+  border-width:43px 20px 7px 6px !important;
+  border-image:url("assets/platinum-frame-lavender.png") 43 20 7 6 fill / 43px 20px 7px 6px / 0 repeat stretch !important;
+  border-radius:0 !important;box-shadow:none !important;
+  position:relative;
+}
+html body.platinum-lime .panel{border-image:url("assets/platinum-frame-lime.png") 43 20 7 6 fill / 43px 20px 7px 6px / 0 repeat stretch !important}
+html body.platinum-magenta .panel{border-image:url("assets/platinum-frame-magenta.png") 43 20 7 6 fill / 43px 20px 7px 6px / 0 repeat stretch !important}
+/* the title bar (rows 0-21): the reference's left and right ends, with its stripe tile between them. The site's
+   title text is written in the middle, over the stripes. */
+html body.platinum-mode .panel-head{
+  position:absolute;top:-43px;left:-6px;right:-20px;height:22px;margin:0;padding:0;
+  display:flex;align-items:center;justify-content:center;
+  background-color:transparent;
+  background-image:url("assets/platinum-title-left-lavender.png"),url("assets/platinum-title-right-lavender.png"),url("assets/platinum-title-mid-lavender.png");
+  background-position:left top,right top,left top;
+  background-repeat:no-repeat,no-repeat,repeat-x;
+  border:0 !important;box-shadow:none !important;overflow:visible;
+}
+html body.platinum-lime .panel-head{background-image:url("assets/platinum-title-left-lime.png"),url("assets/platinum-title-right-lime.png"),url("assets/platinum-title-mid-lime.png")}
+html body.platinum-magenta .panel-head{background-image:url("assets/platinum-title-left-magenta.png"),url("assets/platinum-title-right-magenta.png"),url("assets/platinum-title-mid-magenta.png")}
+html body.platinum-mode .panel-head::before{content:none !important;display:none !important}
+html body.platinum-mode .panel-head > span:not(.wc):not(.lq-lights){
+  position:relative;z-index:1;display:inline-block;background:#ffffff;border:1px solid #000;padding:0 6px;line-height:12px;
+  font:700 11px var(--pt-title);
+}
+/* the frame draws the close and zoom boxes, so the controls are not drawn again */
+html body.platinum-mode .wc{display:none !important}
+/* the item count sits in the info band (rows 22-42 of the window) */
+html body.platinum-mode .panel-head[data-status]::after{
+  content:attr(data-status);position:absolute;left:6px;right:20px;top:22px;height:21px;box-sizing:border-box;
+  padding:0 2px;line-height:17px;text-align:left;white-space:nowrap;overflow:hidden;background:none;
+  font:11px var(--pt-ui);color:#000;z-index:1;
+}
+
+/* ---- Panels with no title bar (the feature cards) keep the window frame and its corners. Their top band is drawn
+   with the same title strips as the windows that have a title bar, and the white panel background stays inside the
+   frame (background-clip: padding-box), so no white shows around the frame. ---- */
+html body.platinum-mode .panel{background-clip:padding-box !important}
+html body.platinum-mode .panel:not(:has(> .panel-head))::before{
+  content:"";position:absolute;top:-43px;left:-6px;right:-20px;height:22px;pointer-events:none;
+  background-image:url("assets/platinum-title-left-lavender.png"),url("assets/platinum-title-right-lavender.png"),url("assets/platinum-title-mid-lavender.png");
+  background-position:left top,right top,left top;background-repeat:no-repeat,no-repeat,repeat-x;
+}
+html body.platinum-lime .panel:not(:has(> .panel-head))::before{background-image:url("assets/platinum-title-left-lime.png"),url("assets/platinum-title-right-lime.png"),url("assets/platinum-title-mid-lime.png")}
+html body.platinum-magenta .panel:not(:has(> .panel-head))::before{background-image:url("assets/platinum-title-left-magenta.png"),url("assets/platinum-title-right-magenta.png"),url("assets/platinum-title-mid-magenta.png")}
+
+/* ---- The Platinum settings window has the same window frame and title bar as the system-information window.
+   Its close button is transparent and sits over the frame's close box, so it still closes the window. ---- */
+html body.platinum-mode #settingsOverlay .settings-panel{
+  position:relative !important;overflow:visible !important;
+  background:#ffffff !important;border-style:solid !important;
+  border-width:43px 20px 7px 6px !important;
+  border-image:url("assets/platinum-frame-lavender.png") 43 20 7 6 fill / 43px 20px 7px 6px / 0 repeat stretch !important;
+  border-radius:0 !important;box-shadow:none !important;
+}
+html body.platinum-lime #settingsOverlay .settings-panel{border-image:url("assets/platinum-frame-lime.png") 43 20 7 6 fill / 43px 20px 7px 6px / 0 repeat stretch !important}
+html body.platinum-magenta #settingsOverlay .settings-panel{border-image:url("assets/platinum-frame-magenta.png") 43 20 7 6 fill / 43px 20px 7px 6px / 0 repeat stretch !important}
+html body.platinum-mode #settingsOverlay .settings-head{
+  position:absolute !important;top:-41px !important;left:-6px !important;right:-20px !important;height:18px !important;
+  margin:0 !important;padding:0 30px !important;box-sizing:border-box;
+  display:flex !important;align-items:center;justify-content:center;
+  background-color:transparent !important;
+  background-image:url("assets/platinum-title-left-lavender.png"),url("assets/platinum-title-right-lavender.png"),url("assets/platinum-title-mid-lavender.png") !important;
+  background-position:left top,right top,left top !important;background-repeat:no-repeat,no-repeat,repeat-x !important;
+  border:0 !important;box-shadow:none !important;color:#000 !important;font:700 11px var(--pt-title) !important;
+}
+html body.platinum-lime #settingsOverlay .settings-head{background-image:url("assets/platinum-title-left-lime.png"),url("assets/platinum-title-right-lime.png"),url("assets/platinum-title-mid-lime.png") !important}
+html body.platinum-magenta #settingsOverlay .settings-head{background-image:url("assets/platinum-title-left-magenta.png"),url("assets/platinum-title-right-magenta.png"),url("assets/platinum-title-mid-magenta.png") !important}
+html body.platinum-mode #settingsOverlay .settings-head > span{
+  position:relative;z-index:1;display:inline-block;background:#ffffff;border:1px solid #000;padding:0 6px;line-height:12px;color:#000;
+}
+html body.platinum-mode #settingsOverlay .settings-close{
+  position:absolute !important;left:6px !important;top:50% !important;transform:translateY(-50%);
+  width:11px !important;height:11px !important;min-width:0 !important;min-height:0 !important;padding:0 !important;margin:0 !important;
+  background:transparent !important;border:0 !important;box-shadow:none !important;color:transparent !important;font-size:0 !important;
+  z-index:3;
+}
+html body.platinum-mode #settingsOverlay .settings-close svg{display:none}
+
+/* ---- The Platinum entries keep the check mark at the right of the row, centred on the text line, with the right
+   column reserved so the names never run into it. ---- */
+html body .sel-menu.sel-menu button.th-platinum-lavender,
+html body .sel-menu.sel-menu button.th-platinum-lime,
+html body .sel-menu.sel-menu button.th-platinum-magenta{position:relative !important;padding-right:26px !important}
+html body .sel-menu.sel-menu button.th-platinum-lavender .check,
+html body .sel-menu.sel-menu button.th-platinum-lime .check,
+html body .sel-menu.sel-menu button.th-platinum-magenta .check{
+  position:absolute !important;right:10px !important;top:50% !important;transform:translateY(-50%) !important;
+  left:auto !important;float:none !important;display:block !important;margin:0 !important;width:auto !important;line-height:1 !important;
+}
