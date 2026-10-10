@@ -1,7 +1,7 @@
-/* Animation removal (Settings → 애니메이션 제거; on by default on mobile devices).
+/* Animation removal (Settings → "Reduce motion"; on by default on mobile devices).
    1) html.reduce-motion turns every transition, animation, smooth scroll and entrance effect off,
       whatever the OS setting is. It mirrors the prefers-reduced-motion rules of 04, 15 and 16.
-   2) The settings toggle for animation removal is skinned exactly like the 문화어 toggle in every
+   2) The settings toggle for animation removal is skinned exactly like the Munhwaeo toggle in every
       theme: these rules repeat the #settingsKpToggle rules with the new element id. */
 html.reduce-motion *,html.reduce-motion *::before,html.reduce-motion *::after{
   animation-duration:.01ms !important;animation-delay:0s !important;animation-iteration-count:1 !important;

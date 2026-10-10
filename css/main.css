@@ -1,4 +1,4 @@
-/* 캐스케이드 순서가 곧 우선순위입니다. 순서를 바꾸지 마세요. */
+/* The cascade order is the priority order. Do not reorder these imports. */
 @import url("01-base.css?v=1.0-rc");
 @import url("02-style-switch.css?v=1.0-rc");
 @import url("03-theme-split.css?v=1.0-rc");
@@ -42,3 +42,5 @@
 @import url("42-select-menus.css?v=1.0-rc");
 @import url("43-logo-guard.css?v=1.0-rc");
 @import url("44-platinum.css?v=1.0-rc");
+@import url("45-modern-aqua.css?v=1.0-rc");
+@import url("46-material.css?v=1.0-rc");

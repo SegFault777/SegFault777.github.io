@@ -1,5 +1,5 @@
-/* i18n: data-i18n 속성 기반 번역, 언어 메뉴, 숨겨진 NKBK 모드.
-   외부 계약(다른 모듈이 사용): window.setLanguage, window.miniwinLanguage, 'miniwin-language-change' 이벤트 */
+/* i18n: translation driven by data-i18n attributes, the language menu, and a hidden NKBK mode.
+   External contract (used by other modules): window.setLanguage, window.miniwinLanguage, and the 'miniwin-language-change' event. */
 (() => {
   const LANGS = [
     ['ko','한국어'],['en','English'],['es','Español'],['zh-CN','中文（简体）'],['zh-TW','中文（繁體）'],['ja','日本語'],
@@ -7,9 +7,9 @@
     ['id','Bahasa Indonesia'],['pl','Polski'],['tr','Türkçe'],['nl','Nederlands'],['sv','Svenska'],['uk','Українська'],
     ['ar','العربية'],['hi','हिन्दी']
   ];
-  const FALLBACK = { 'ko-kp': 'ko' };           /* 누락된 키: 지정 언어 → 영어 순으로 대체 */
+  const FALLBACK = { 'ko-kp': 'ko' };           /* Missing keys fall back to the chosen language, then to English. */
   const VERSION = '1.0-rc';                     /* same ?v= as the other assets */
-  /* 번역 파일은 필요할 때만 내려받습니다: 고른 언어, 그 대체 언어, 영어. */
+  /* Translation files are downloaded only when needed: the chosen language, its fallback, and English. */
   const FILES = new Set([...LANGS.map(l => l[0]), 'ko-kp']);
   window.I18N = window.I18N || {};
   const I18N = window.I18N;
@@ -69,10 +69,10 @@
   }
   window.setLanguage = setLanguage;
 
-  /* 언어 선택은 설정 창(oldretro.js)에 있습니다. */
+  /* The language choice lives in the settings window (oldretro.js). */
   window.miniwinLanguages = LANGS;
 
-  /* 숨겨진 모드: 한국어에서 NKBK 입력 */
+  /* Hidden mode: type NKBK while Korean is selected. */
   let buf = '';
   document.addEventListener('keydown', e => {
     if (window.miniwinLanguage !== 'ko' || e.ctrlKey || e.altKey || e.metaKey || e.key.length !== 1) return;

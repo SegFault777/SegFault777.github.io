@@ -50,7 +50,7 @@ body.flat-mode .settings-help-close:hover{background:#e6e6e6}
 body.flat-mode .settings-lang-select,
 body.flat-mode .settings-diff-panel,
 body.flat-mode .settings-diff-btn{border-radius:0}
-/* 문화어 toggle: square Windows-style switch; blue track with a white knob when on (the reference). */
+/* Munhwaeo toggle: a square Windows-style switch; blue track with a white knob when on (the reference). */
 body.flat-mode #settingsKpToggle{width:40px;height:20px;border:1px solid #8a8a8a;border-radius:0;background:#fff;box-shadow:none}
 body.flat-mode #settingsKpToggle span{top:3px;left:3px;width:12px;height:12px;border-radius:0;background:#5d5d5d;box-shadow:none}
 body.flat-mode #settingsKpToggle[aria-pressed="true"]{background:#0067c0;border-color:#0067c0}

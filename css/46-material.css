@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+/* Material (Material You), built from the Material design examples: a flat lavender ground (#E2E0F9), pill-shaped
+   buttons and chips (a tonal lavender #C8B3FD, a solid purple #675496, and an outlined pill), filled surfaces with
+   24 to 28 px corners (#F8F2FA, #FFF7FE), a pink accent (#FBAFFE), purple switches, and filled text fields with an
+   underline. Selectors use html body.modern-mode.material-mode so they beat the Modern rules they replace. */
+
+html body.modern-mode.material-mode{
+  --md-ground:#E2E0F9; --md-surface:#FFF7FE; --md-surface-low:#F8F2FA; --md-surface-high:#EEE8F6;
+  --md-tonal:#C8B3FD; --md-tonal-on:#1D192B;
+  --md-primary:#675496; --md-on-primary:#FFFFFF;
+  --md-pink:#FBAFFE; --md-pink-on:#3E0A3F;
+  --md-on-surface:#1D1B20; --md-on-surface-variant:#49454F; --md-outline:#79747E; --md-field:#E6E0E9;
+  color:var(--md-on-surface);
+  background-color:var(--md-ground);
+  background-image:none;
+  background-attachment:scroll;
+  font-family:Roboto,"Google Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+html body.modern-mode.material-mode *{font-family:Roboto,"Google Sans",system-ui,-apple-system,"Segoe UI",sans-serif !important}
+html body.modern-mode.material-mode pre,
+html body.modern-mode.material-mode pre *,
+html body.modern-mode.material-mode code{font-family:"Roboto Mono",Menlo,Monaco,"Courier New",monospace !important}
+
+/* top app bar: on the ground, the navigation items are pills; the active item is the tonal lavender */
+html body.modern-mode.material-mode .top{background:var(--md-ground);border:0;box-shadow:none}
+html body.modern-mode.material-mode .logo{color:var(--md-on-surface);font-size:22px;font-weight:500;letter-spacing:0;text-shadow:none}
+html body.modern-mode.material-mode .logo span:first-of-type{color:var(--md-primary)}
+html body.modern-mode.material-mode .logo .version{color:var(--md-on-surface-variant);font-size:12px;font-weight:400}
+html body.modern-mode.material-mode .top .nav a,
+html body.modern-mode.material-mode .top .lang-btn{color:var(--md-on-surface-variant);background:transparent;border:0;border-radius:999px;box-shadow:none;font-size:14px;font-weight:500;letter-spacing:0;padding:8px 16px}
+html body.modern-mode.material-mode .top .nav a:hover,
+html body.modern-mode.material-mode .top .lang-btn:hover{background:rgba(200,179,253,.45);color:var(--md-on-surface)}
+html body.modern-mode.material-mode .top .nav a.active,
+html body.modern-mode.material-mode .top .lang.open .lang-btn{background:var(--md-tonal);color:var(--md-tonal-on)}
+html body.modern-mode.material-mode .top .style-switch{background:var(--md-surface-low);border:0;border-radius:999px;height:36px;padding:0 14px;box-shadow:none}
+html body.modern-mode.material-mode .top .style-label{color:var(--md-on-surface-variant);font-size:13px;font-weight:500;letter-spacing:0;text-shadow:none}
+html body.modern-mode.material-mode .top .style-label:last-child{color:var(--md-on-surface)}
+html body.modern-mode.material-mode .top .settings-btn{color:var(--md-on-surface-variant);background:var(--md-surface-low);border:0;border-radius:999px;box-shadow:none}
+html body.modern-mode.material-mode .top .settings-btn:hover{background:var(--md-tonal)}
+
+/* switches: the purple track with a white knob when on; the outlined track with a grey knob when off */
+html body.modern-mode.material-mode .top .style-toggle,
+html body.modern-mode.material-mode #settingsOverlay #settingsKpToggle,
+html body.modern-mode.material-mode #settingsOverlay #settingsMotionToggle{width:52px !important;height:32px !important;background:var(--md-surface-high) !important;border:2px solid var(--md-outline) !important;border-radius:999px !important;box-shadow:none !important;padding:0 !important;box-sizing:border-box}
+html body.modern-mode.material-mode .top .style-toggle[aria-pressed="true"],
+html body.modern-mode.material-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+html body.modern-mode.material-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:var(--md-primary) !important;border-color:var(--md-primary) !important}
+html body.modern-mode.material-mode .top .style-toggle span,
+html body.modern-mode.material-mode #settingsOverlay #settingsKpToggle span,
+html body.modern-mode.material-mode #settingsOverlay #settingsMotionToggle span{top:6px !important;bottom:auto !important;height:16px !important;width:16px !important;left:6px !important;border-radius:50% !important;background:var(--md-outline) !important;border:0 !important;box-shadow:none !important}
+html body.modern-mode.material-mode .top .style-toggle[aria-pressed="true"] span,
+html body.modern-mode.material-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"] span,
+html body.modern-mode.material-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:24px !important;top:4px !important;height:24px !important;width:24px !important;background:#FFFFFF !important}
+
+/* hero: display type in the on-surface colour, body copy in the variant colour */
+html body.modern-mode.material-mode .hero h1,
+html body.modern-mode.material-mode .hero h1 span{color:var(--md-on-surface);font-size:64px;font-weight:500;line-height:1.1;letter-spacing:-.5px;text-shadow:none}
+html body.modern-mode.material-mode .hero p,
+html body.modern-mode.material-mode .head p{color:var(--md-on-surface-variant);font-size:18px;line-height:1.55;text-shadow:none}
+html body.modern-mode.material-mode .head h2{color:var(--md-on-surface);font-size:40px;font-weight:500;text-shadow:none}
+html body.modern-mode.material-mode .eyebrow{color:var(--md-primary);font-size:12px;font-weight:500;letter-spacing:1.5px;text-shadow:none}
+html body.modern-mode.material-mode .tag,
+html body.modern-mode.material-mode .badge{background:var(--md-tonal);color:var(--md-tonal-on);border:0;border-radius:999px;box-shadow:none;font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;padding:6px 14px}
+html body.modern-mode.material-mode footer{color:var(--md-on-surface-variant);background:transparent;border-top:1px solid rgba(121,116,126,.3);text-shadow:none}
+
+/* buttons: the solid purple primary, the tonal lavender pill (as "Select" and "Add"), and the outlined pill */
+html body.modern-mode.material-mode .btn{display:inline-flex;align-items:center;justify-content:center;line-height:1;background:var(--md-tonal);color:var(--md-tonal-on);border:0;border-radius:999px;box-shadow:none;height:44px;padding:0 24px;font-size:15px;font-weight:500;letter-spacing:.1px;text-shadow:none}
+html body.modern-mode.material-mode .btn:hover{background:#B9A0FA;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+html body.modern-mode.material-mode .btn:active{background:#AD92F5}
+html body.modern-mode.material-mode .btn.primary{background:var(--md-primary);color:var(--md-on-primary)}
+html body.modern-mode.material-mode .btn.primary:hover{background:#5F4A8A;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+html body.modern-mode.material-mode .btn.outline{background:transparent;color:var(--md-primary);border:1px solid var(--md-outline)}
+
+/* surfaces: panels and cards are the filled surface (#F8F2FA) with 28 px corners; no outline, no heavy shadow */
+html body.modern-mode.material-mode .panel,
+html body.modern-mode.material-mode .monitor{background:var(--md-surface-low);border:0;border-radius:28px;box-shadow:none;overflow:visible;position:relative}
+html body.modern-mode.material-mode .panel-head{background:transparent;border:0;box-shadow:none;height:auto;min-height:0;padding:20px 24px 8px 28px;margin:0;color:var(--md-on-surface);text-align:left;font:400 22px/28px Roboto,system-ui,sans-serif;letter-spacing:0;text-transform:none;display:flex;align-items:center}
+html body.modern-mode.material-mode .panel-head::before{content:none !important;display:none !important}
+html body.modern-mode.material-mode .panel-head > span:not(.wc):not(.lq-lights){background:none;border:0;padding:0;color:var(--md-on-surface);font-weight:400;font-size:22px;line-height:28px}
+html body.modern-mode.material-mode .panel-head[data-status]::after{display:none}
+html body.modern-mode.material-mode .panel:has(> .panel-head[data-status]) > :not(.panel-head){margin-top:0}
+html body.modern-mode.material-mode .panel::before,
+html body.modern-mode.material-mode .panel::after{content:none !important;display:none !important}
+html body.modern-mode.material-mode .card,
+html body.modern-mode.material-mode .fact{background:var(--md-surface);border:0;border-radius:24px;box-shadow:none}
+html body.modern-mode.material-mode .card h3,
+html body.modern-mode.material-mode .fact strong{color:var(--md-on-surface);font-size:22px;font-weight:400}
+html body.modern-mode.material-mode .card p,
+html body.modern-mode.material-mode .fact small{color:var(--md-on-surface-variant);font-size:16px;line-height:1.5}
+html body.modern-mode.material-mode .note{background:var(--md-pink);color:var(--md-pink-on);border:0;border-radius:24px}
+html body.modern-mode.material-mode .terminal{background:#1B1B1F;border:0;border-radius:28px;box-shadow:none}
+html body.modern-mode.material-mode .terminal .panel-head{color:#E6E1E5}
+html body.modern-mode.material-mode .terminal .panel-head > span:not(.wc):not(.lq-lights){color:#E6E1E5}
+html body.modern-mode.material-mode .terminal pre{color:#E6E1E5;background:transparent}
+html body.modern-mode.material-mode .terminal pre .dim{color:#938F99}
+html body.modern-mode.material-mode .terminal pre .cyan{color:var(--md-tonal)}
+html body.modern-mode.material-mode .terminal pre .green{color:#A8DAB5}
+
+/* window controls: round icon buttons; hover shows the tonal lavender */
+html body.modern-mode.material-mode .wc{display:flex;gap:4px;right:14px;left:auto;top:50%;transform:translateY(-50%)}
+html body.modern-mode.material-mode .wc-b{width:36px;height:36px;border-radius:999px;background:transparent;border:0;color:var(--md-on-surface-variant);box-shadow:none}
+html body.modern-mode.material-mode .wc-b:hover{background:var(--md-tonal);color:var(--md-tonal-on)}
+html body.modern-mode.material-mode .wc-b svg{width:12px;height:12px;stroke-width:1.5}
+html body.modern-mode.material-mode .wc-max::after{content:none}
+
+/* settings dialog: the 28 px surface with the title in the headline style */
+html body.modern-mode.material-mode #settingsOverlay .settings-panel{background:var(--md-surface);border:0;border-radius:28px;box-shadow:none;overflow:visible}
+html body.modern-mode.material-mode #settingsOverlay .settings-head{background:transparent;border:0;box-shadow:none;color:var(--md-on-surface);font:400 24px/32px Roboto,system-ui,sans-serif;padding:24px 24px 12px 28px}
+html body.modern-mode.material-mode #settingsOverlay .settings-close{width:40px;height:40px;border-radius:999px;background:transparent;border:0;color:var(--md-on-surface-variant)}
+html body.modern-mode.material-mode #settingsOverlay .settings-close:hover{background:var(--md-tonal)}
+html body.modern-mode.material-mode #settingsOverlay .settings-row-label{color:var(--md-on-surface);font-size:16px;font-weight:400}
+/* the filled text field: the field colour with an underline, as in the reference */
+html body.modern-mode.material-mode #settingsOverlay .settings-lang-select{background:var(--md-field);color:var(--md-on-surface);border:0;border-bottom:1px solid var(--md-on-surface-variant);border-radius:4px 4px 0 0;height:56px;padding:0 16px;box-shadow:none}
+html body.modern-mode.material-mode #settingsOverlay .settings-lang-select:focus{outline:none;border-bottom:2px solid var(--md-primary)}
+
+/* the Layout dropdown: a light surface with 16 px corners; entries are plain at rest, the pill on hover */
+html body.modern-mode.material-mode .sel-menu.sel-menu{background:var(--md-surface) !important;color:var(--md-on-surface) !important;border:0 !important;border-radius:16px !important;padding:8px 0 !important;box-shadow:0 2px 8px rgba(0,0,0,.12) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.modern-mode.material-mode .sel-menu.sel-menu .sel-group{color:var(--md-on-surface-variant) !important;font-size:12px !important;font-weight:500 !important;letter-spacing:.5px;border-bottom:0 !important;margin:0 !important;padding:12px 16px 4px !important}
+html body .sel-menu.sel-menu button.th-material,
+html body.material-mode .sel-menu.sel-menu button.th-material{background:transparent !important;border:0 !important;border-radius:999px !important;box-shadow:none !important;margin:0 !important;padding:6px 26px 6px 10px !important;position:relative !important;color:var(--md-on-surface) !important;font-family:Roboto,system-ui,sans-serif !important;font-size:13px !important;line-height:normal !important;font-weight:400 !important;width:100% !important;text-align:left !important}
+html body.material-mode .sel-menu.sel-menu button.th-material:hover,
+html body.material-mode .sel-menu.sel-menu button.th-material:focus-visible{background:var(--md-tonal) !important;color:var(--md-tonal-on) !important}
+html body.material-mode .sel-menu.sel-menu button.th-material.active:not(:hover){color:var(--md-primary) !important;font-weight:500 !important;background:transparent !important}
+html body.material-mode .sel-menu.sel-menu button.th-material .check{position:absolute !important;right:14px !important;top:50% !important;transform:translateY(-50%) !important;float:none !important;display:block !important;margin:0 !important;color:var(--md-primary) !important}
+html body.material-mode .sel-menu.sel-menu button.th-material:hover .check,
+html body.material-mode .sel-menu.sel-menu button.th-material:focus-visible .check{color:var(--md-tonal-on) !important}

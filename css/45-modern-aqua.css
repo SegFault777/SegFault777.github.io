@@ -1,0 +1,125 @@
+/* Modern Aqua: the OS X 10.4–10.9 (Mavericks) look inside the Modern layout. The Aqua structure stays (menu bar,
+   windows with a title bar and traffic lights, glossy blue default buttons), but the textures are flat: no leather,
+   no linen, no pinstripes. Active only when body.modern-aqua-mode is set. */
+
+html body.modern-aqua-mode{
+  --ma-desk:#2e8fa6;
+  --ma-ink:#1d1d1f; --ma-ink-2:#4d4d4d;
+  --ma-blue:#3b7fe6; --ma-blue-d:#2a62c4;
+  --ma-win-line:rgba(0,0,0,.32);
+  color:var(--ma-ink);
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  background-color:#2a8aa5;
+  background-image:
+    radial-gradient(70vw 45vh at 80% 0%,rgba(90,220,170,.55) 0,rgba(90,220,170,0) 70%),
+    radial-gradient(60vw 40vh at 15% 10%,rgba(60,200,140,.45) 0,rgba(60,200,140,0) 70%),
+    linear-gradient(180deg,#2fa98f 0%,#2a8aa8 35%,#2d6fb4 68%,#2f58a6 100%);
+  background-attachment:fixed;
+}
+/* the whole interface uses the Mavericks system face, not the site's body face */
+html body.modern-mode.modern-aqua-mode *{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important}
+html body.modern-mode.modern-aqua-mode pre,
+html body.modern-mode.modern-aqua-mode pre *,
+html body.modern-mode.modern-aqua-mode code{font-family:Menlo,Monaco,"Courier New",monospace !important}
+
+/* the menu bar: light, with a hairline rule and black type; an open menu is the system blue */
+html body.modern-aqua-mode .top{background:linear-gradient(#f2f2f2,#e2e2e2);border-bottom:1px solid #9c9c9c;box-shadow:none}
+html body.modern-aqua-mode .logo{color:#000;font-size:14px;font-weight:700;letter-spacing:0;text-shadow:none}
+html body.modern-aqua-mode .logo span:first-of-type{color:#000}
+html body.modern-aqua-mode .logo .version{color:#555;font-weight:400;font-size:10px;margin-left:5px}
+html body.modern-aqua-mode .top .nav a,
+html body.modern-aqua-mode .top .lang-btn{color:#000;background:transparent;border:0;border-radius:4px;box-shadow:none;font-size:13px;font-weight:400;padding:3px 8px}
+html body.modern-aqua-mode .top .nav a:hover,
+html body.modern-aqua-mode .top .nav a.active,
+html body.modern-aqua-mode .top .lang-btn:hover,
+html body.modern-aqua-mode .top .lang.open .lang-btn{background:var(--ma-blue);color:#fff;border:0;box-shadow:none}
+html body.modern-aqua-mode .top .style-switch{background:#fbfbfb;border:1px solid #b5b5b5;border-radius:5px;height:24px;padding:0 8px;box-shadow:none}
+html body.modern-aqua-mode .top .style-label{color:#222;font-size:12px;font-weight:400;letter-spacing:0;text-shadow:none}
+html body.modern-aqua-mode .top .style-toggle{background:#e4e4e4 !important;border:1px solid #b5b5b5 !important;border-radius:9px !important;box-shadow:none !important}
+html body.modern-aqua-mode .top .style-toggle span{background:linear-gradient(#ffffff,#f0f0f0) !important;border:1px solid #9a9a9a !important;border-radius:8px !important;box-shadow:0 1px 1px rgba(0,0,0,.2) !important}
+html body.modern-aqua-mode .top .style-toggle[aria-pressed="true"]{background:#3fb24f !important;border-color:#2c8a3a !important}
+html body.modern-aqua-mode .top .settings-btn{color:#222;background:linear-gradient(#ffffff,#e5e5e5);border:1px solid #a9a9a9;border-radius:5px;box-shadow:none}
+
+/* the hero sits on the desktop: white type with a soft shadow */
+html body.modern-aqua-mode .hero h1{color:#fff;text-shadow:0 2px 14px rgba(0,30,50,.35)}
+html body.modern-aqua-mode .hero p,
+html body.modern-aqua-mode .head p{color:#fff;text-shadow:0 1px 8px rgba(0,30,50,.35)}
+html body.modern-aqua-mode .head h2{color:#fff;text-shadow:0 2px 12px rgba(0,30,50,.35)}
+html body.modern-aqua-mode .eyebrow{color:#e8f7ff;text-shadow:0 1px 6px rgba(0,30,50,.35)}
+html body.modern-aqua-mode .tag,
+html body.modern-aqua-mode .badge{background:#fbfbfb;color:#222;border:1px solid #b5b5b5;border-radius:4px;box-shadow:none;font-weight:400}
+html body.modern-aqua-mode footer{color:#fff;background:transparent;border-top:1px solid rgba(255,255,255,.4);text-shadow:0 1px 6px rgba(0,30,50,.35)}
+
+/* windows: a white window body, a light grey title bar with a hairline, rounded top corners and a soft drop shadow */
+html body.modern-aqua-mode .panel,
+html body.modern-aqua-mode .monitor,
+html body.modern-aqua-mode #settingsOverlay .settings-panel{
+  background:#ffffff;border:1px solid var(--ma-win-line);border-radius:6px 6px 0 0;box-shadow:0 10px 26px rgba(0,0,0,.32);overflow:visible;position:relative;
+}
+html body.modern-aqua-mode .panel-head{
+  position:relative;height:22px;min-height:22px;box-sizing:border-box;padding:0 60px;margin:0;
+  background:linear-gradient(#ededed,#d7d7d7);border:0;border-bottom:1px solid #b4b4b4;border-radius:5px 5px 0 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7);color:#4d4d4d;text-align:center;
+  font:400 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:0;text-transform:none;
+}
+html body.modern-aqua-mode .panel-head::before{content:none !important;display:none !important}
+html body.modern-aqua-mode .panel-head > span:not(.wc):not(.lq-lights){color:#4d4d4d;font-weight:400;background:none;border:0;padding:0;display:inline}
+html body.modern-aqua-mode .panel-head[data-status]::after{display:none}
+html body.modern-aqua-mode .panel:has(> .panel-head[data-status]) > :not(.panel-head){margin-top:0}
+html body.modern-aqua-mode .panel::before,
+html body.modern-aqua-mode .panel::after{content:none !important;display:none !important}
+html body.modern-aqua-mode #settingsOverlay .settings-head{background:linear-gradient(#ededed,#d7d7d7);color:#4d4d4d;border-bottom:1px solid #b4b4b4;font:400 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;text-align:center}
+
+/* the window controls: the three glossy traffic lights at the left (close, minimise, zoom); no glyphs */
+html body.modern-aqua-mode .wc{left:9px;right:auto;top:50%;transform:translateY(-50%);gap:8px;display:flex}
+html body.modern-aqua-mode .panel-head .wc{left:9px}
+html body.modern-aqua-mode .wc-min{display:inline-block}
+html body.modern-aqua-mode .wc-close{order:-1}
+html body.modern-aqua-mode .wc-b{width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.22);color:transparent;box-shadow:inset 0 1px 0 rgba(255,255,255,.45)}
+html body.modern-aqua-mode .wc-b svg{display:none}
+html body.modern-aqua-mode .wc-max::after{content:none}
+html body.modern-aqua-mode .wc-close{background:radial-gradient(circle at 40% 35%,#ffb3ad,#fe5f57 55%,#e0463f)}
+html body.modern-aqua-mode .wc-min{background:radial-gradient(circle at 40% 35%,#ffe49a,#febc2e 55%,#e3a01b)}
+html body.modern-aqua-mode .wc-max{background:radial-gradient(circle at 40% 35%,#b6f2a3,#28c840 55%,#1fa632)}
+html body.modern-aqua-mode .panel-head .wc{display:flex !important}
+
+/* the body copy and cards inside the windows */
+html body.modern-aqua-mode .card,
+html body.modern-aqua-mode .fact{background:#ffffff;border:1px solid #d6d6d6;border-radius:5px;box-shadow:none;color:#1d1d1f}
+html body.modern-aqua-mode .card h3,
+html body.modern-aqua-mode .fact strong{color:#1d1d1f}
+html body.modern-aqua-mode .card p,
+html body.modern-aqua-mode .fact small{color:#4d4d4d}
+html body.modern-aqua-mode .note{background:#fff9d6;border:1px solid #e3d89a;border-radius:5px;color:#1d1d1f}
+html body.modern-aqua-mode .terminal{background:#ffffff;border:1px solid var(--ma-win-line);border-radius:6px 6px 0 0;box-shadow:0 10px 26px rgba(0,0,0,.32)}
+html body.modern-aqua-mode .terminal pre{color:#1d1d1f;background:transparent}
+html body.modern-aqua-mode .terminal pre .dim{color:#7a7a7a}
+html body.modern-aqua-mode .terminal pre .cyan{color:var(--ma-blue)}
+html body.modern-aqua-mode .terminal pre .green{color:#1f8a35}
+
+/* buttons: the Aqua push button, flat in Mavericks: a white to light grey face, a grey outline, and a blue default */
+html body.modern-aqua-mode .btn{background:linear-gradient(#ffffff,#f0f0f0);color:#1d1d1f;border:1px solid #a9a9a9;border-radius:5px;box-shadow:0 1px 0 rgba(0,0,0,.08);font:400 13px "Helvetica Neue",Helvetica,Arial,sans-serif;text-shadow:none}
+html body.modern-aqua-mode .btn:hover{background:linear-gradient(#ffffff,#e6e6e6)}
+html body.modern-aqua-mode .btn:active{background:linear-gradient(#dcdcdc,#e8e8e8);box-shadow:inset 0 1px 2px rgba(0,0,0,.2)}
+html body.modern-aqua-mode .btn.primary{background:linear-gradient(#6aa9f6,#3b7fe6 55%,#2f6fd3);color:#fff;border:1px solid #2a62c4;text-shadow:0 -1px 0 rgba(0,0,0,.2);font-weight:400}
+html body.modern-aqua-mode .btn.primary:hover{background:linear-gradient(#7db8f8,#4a8cec 55%,#3a7bdb)}
+
+/* switches inside the windows: the blue on-state of the Mavericks checkbox */
+html body.modern-aqua-mode #settingsOverlay #settingsKpToggle,
+html body.modern-aqua-mode #settingsOverlay #settingsMotionToggle{background:#e4e4e4 !important;border:1px solid #b5b5b5 !important;border-radius:9px !important;box-shadow:none !important}
+html body.modern-aqua-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+html body.modern-aqua-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:var(--ma-blue) !important;border-color:var(--ma-blue-d) !important}
+html body.modern-aqua-mode #settingsOverlay #settingsKpToggle span,
+html body.modern-aqua-mode #settingsOverlay #settingsMotionToggle span{background:linear-gradient(#ffffff,#f0f0f0) !important;border:1px solid #9a9a9a !important;border-radius:8px !important;box-shadow:0 1px 1px rgba(0,0,0,.2) !important}
+html body.modern-aqua-mode #settingsOverlay .settings-lang-select{background:#ffffff;border:1px solid #a9a9a9;border-radius:5px;color:#1d1d1f;box-shadow:none}
+
+/* the Layout dropdown: a white Mavericks menu with a hairline and a soft shadow */
+html body.modern-aqua-mode .sel-menu.sel-menu{background:rgba(255,255,255,.96) !important;color:#1d1d1f !important;border:1px solid rgba(0,0,0,.2) !important;border-radius:5px !important;box-shadow:0 10px 24px rgba(0,0,0,.28) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.modern-aqua-mode .sel-menu.sel-menu .sel-group{color:#777 !important}
+html body .sel-menu.sel-menu button.th-modern-aqua{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;margin:0 !important;padding:4px 26px 4px 10px !important;position:relative !important;color:#1d1d1f !important;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;font-weight:400 !important}
+html body .sel-menu.sel-menu button.th-modern-aqua:hover,
+html body .sel-menu.sel-menu button.th-modern-aqua:focus-visible{background:var(--ma-blue) !important;color:#ffffff !important;border-radius:4px !important}
+html body .sel-menu.sel-menu button.th-modern-aqua.active:not(:hover){color:#1d1d1f !important;font-weight:400 !important;background:transparent !important}
+html body .sel-menu.sel-menu button.th-modern-aqua .check{position:absolute !important;right:10px !important;left:auto !important;top:50% !important;transform:translateY(-50%) !important;float:none !important;display:block !important;margin:0 !important;color:#1d1d1f !important}
+html body .sel-menu.sel-menu button.th-modern-aqua:hover .check,
+html body .sel-menu.sel-menu button.th-modern-aqua:focus-visible .check{color:#ffffff !important}

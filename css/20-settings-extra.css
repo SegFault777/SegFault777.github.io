@@ -1,4 +1,4 @@
-/* Settings: "?" help popup (replaces the inline difference button) + 문화어 default toggle. */
+/* Settings: the "?" help popup (replaces the inline difference button) and the Munhwaeo default toggle. */
 .settings-label-wrap{display:flex;align-items:center;gap:8px;min-width:0}
 .settings-help-btn{flex:0 0 auto;width:18px;height:18px;padding:0;display:inline-flex;align-items:center;justify-content:center;font-size:11px;line-height:1;font-weight:700;color:#8fdcff;background:#12345f;border:1px solid #315b8d;border-radius:50%;cursor:pointer}
 .settings-help-btn:hover{background:#1a4a86}
@@ -26,6 +26,6 @@ body:not(.modern-mode):not(.oldretro-mode) .settings-help-close{width:18px;heigh
 
 /* Settings: the close X is an SVG glyph so it stays crisp in every theme. */
 .settings-close svg,.settings-help-close svg{display:block;width:12px;height:12px;pointer-events:none}
-/* 문화어 row: toggle + an explicit On/Off word beside it (the "More clear" reference). */
+/* Munhwaeo row: the toggle plus an explicit On/Off word beside it (the "More clear" reference). */
 .settings-kp-control{display:flex;align-items:center;gap:10px;flex:0 0 auto}
 .settings-kp-state{min-width:22px;font-size:12px;font-weight:600;white-space:nowrap;text-align:left}
