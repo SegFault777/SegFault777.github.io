@@ -1,0 +1,23 @@
+/* Section 06: the in-browser MiniWin demo (v86). The screen is a 4:3 box (MiniWin runs at 640x480); the emulator's
+   canvas fills it and is drawn with hard pixel edges. Colours are inherited from the layout, except the screen itself,
+   which is always black like a monitor. */
+.demo-body{padding:12px}
+.demo-screen{position:relative;width:100%;max-width:960px;margin:0 auto;aspect-ratio:4/3;background:#000;overflow:hidden;outline:0}
+.demo-screen:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.demo-screen canvas{display:block;width:100% !important;height:100% !important;image-rendering:pixelated;image-rendering:crisp-edges}
+.demo-screen .demo-text{position:absolute;inset:0;white-space:pre;overflow:hidden;font:14px/14px monospace;color:#aaa;background:#000}
+.demo-cover{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;padding:16px;background:#000;text-align:center}
+.demo-screen.is-on .demo-cover{display:none}
+.demo-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;max-width:960px;margin:10px auto 0}
+.demo-status > [data-s]{display:none}
+.demo-status[data-state="idle"] > [data-s="idle"],
+.demo-status[data-state="loading"] > [data-s="loading"],
+.demo-status[data-state="running"] > [data-s="running"],
+.demo-status[data-state="error"] > [data-s="error"]{display:inline}
+.demo-res{margin-left:8px;opacity:.75}
+.demo-res:empty{display:none}
+.demo-actions{display:flex;flex-wrap:wrap;gap:8px}
+.demo-touch{display:none}
+@media (pointer:coarse){.demo-touch{display:block}}
+.demo-screen:fullscreen{max-width:none;width:100vw;height:100vh;aspect-ratio:auto;display:flex;align-items:center;justify-content:center}
+.demo-screen:fullscreen canvas{width:auto !important;height:100% !important;aspect-ratio:4/3}

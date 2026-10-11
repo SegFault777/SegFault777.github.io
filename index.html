@@ -17,13 +17,14 @@
 <script defer src="js/settings-select.js?v=1.0"></script>
 <script defer src="js/modern-stagger.js?v=1.0"></script>
 <script defer src="js/glass.js?v=1.0"></script>
+<script defer src="js/demo.js?v=1.0"></script>
 </head>
 <body>
 <header class="top"><div class="wrap topbar">
   <a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0</span></a>
   <nav class="nav">
     <div class="style-switch" role="group" aria-label="Visual style"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div>
-    <a data-i18n="home" href="#home"></a><a data-i18n="about" href="#about"></a><a data-i18n="features" href="#features"></a><a data-i18n="build" href="#build"></a><a data-i18n="networking" href="#networking"></a><a data-i18n="download" href="#download"></a>
+    <a data-i18n="home" href="#home"></a><a data-i18n="about" href="#about"></a><a data-i18n="features" href="#features"></a><a data-i18n="build" href="#build"></a><a data-i18n="networking" href="#networking"></a><a data-i18n="download" href="#download"></a><a data-i18n="nav_demo" href="#demo"></a>
   </nav>
   <button class="settings-btn" id="settingsBtn" type="button" aria-haspopup="dialog" aria-label="Settings"><span class="settings-btn-icon" aria-hidden="true">⚙</span></button>
 </div></header>
@@ -114,6 +115,25 @@
     <a class="btn" data-i18n="readme" href="https://github.com/SegFault777/MiniWin/blob/main/README.md" rel="noopener" target="_blank"></a>
   </div>
 </div></section>
+
+ <section id="demo"><div class="wrap">
+   <div class="head"><div class="eyebrow" data-i18n="demo_eyebrow"></div><h2 data-i18n="demo_h2"></h2><p data-i18n="demo_p"></p></div>
+   <div class="panel demo-panel"><div class="panel-head" data-status="32 MB RAM"><span data-i18n="demo_window"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div>
+     <div class="demo-body">
+       <div class="demo-screen" id="demoScreen" tabindex="0" role="application" aria-label="MiniWin">
+         <div class="demo-text"></div><canvas></canvas>
+         <div class="demo-cover" id="demoCover"><button class="btn primary" id="demoStart" type="button" data-i18n="demo_start"></button></div>
+       </div>
+       <div class="demo-bar">
+         <div class="demo-status" id="demoStatus" data-state="idle" aria-live="polite"><span data-s="idle" data-i18n="demo_s_idle"></span><span data-s="loading" data-i18n="demo_s_loading"></span><span data-s="running" data-i18n="demo_s_running"></span><span data-s="error" data-i18n="demo_s_error"></span><span class="demo-res" id="demoRes"></span></div>
+         <div class="demo-actions"><button class="btn" id="demoReset" type="button" data-i18n="demo_reset" disabled></button><button class="btn" id="demoFull" type="button" data-i18n="demo_full" disabled></button></div>
+       </div>
+     </div>
+   </div>
+   <div class="note" data-i18n="demo_note"></div>
+   <div class="note demo-touch" data-i18n="demo_touch"></div>
+ </div></section>
+
 </main>
 
 <footer><div class="wrap foot">
