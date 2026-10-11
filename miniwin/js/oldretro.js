@@ -554,7 +554,7 @@
     if(!settingsBuilt)return;
     const t=settingsT();
     const isOldRetroNow=body.classList.contains('oldretro-mode');
-    settingsOverlay.querySelector('#biosTitlebarText').textContent='MiniWin Setup Utility \u2013 Copyright (C) 2026 MiniWin Systems Inc.';
+    settingsOverlay.querySelector('#biosTitlebarText').textContent='SegFault777 Setup Utility - Copylight (C) 2026 SegFault777 Systems Inc.';
     biosItemEl.innerHTML='';
     biosItemEl.appendChild(document.createTextNode(t.biosLabel+'\u00a0\u00a0\u00a0\u00a0'));
     const valueB=document.createElement('b');
@@ -1065,6 +1065,7 @@
 
   const settingsBtn=document.getElementById('settingsBtn');
   if(settingsBtn)settingsBtn.addEventListener('click',openSettings);
+  window.miniwinOpenSettings=openSettings;
 
   window.addEventListener('miniwin-language-change',()=>{
     if(body.classList.contains('oldretro-mode')&&built){

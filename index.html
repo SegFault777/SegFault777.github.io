@@ -1,146 +1,483 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MiniWin — a 32-bit x86 desktop OS built from scratch</title>
-<meta name="description" content="MiniWin is a dependency-free 32-bit x86 desktop OS by SegFault777: hand-written bootloader, 640×480 truecolor, windowing, Hangul IME, a TCP/IP + TLS 1.2 stack and an HTML5 browser. No libc.">
-<meta property="og:title" content="MiniWin — a 32-bit x86 OS built from scratch">
-<meta property="og:description" content="No libc, no dependencies: bootloader, kernel, GUI, TCP/IP, TLS 1.2 and an HTML5 browser.">
-<meta property="og:image" content="https://raw.githubusercontent.com/SegFault777/MiniWin/main/screenshots/20-html5-rendering.png">
-<link rel="stylesheet" href="css/main.css?v=1.0">
-<!-- Translation files (i18n/*.js) are loaded by js/i18n.js only when needed, for the chosen language. Order: i18n first, then the rest. -->
-<script defer src="js/i18n.js?v=1.0"></script>
-<script defer src="js/nav.js?v=1.0"></script>
-<script defer src="js/theme.js?v=1.0"></script>
-<script defer src="js/oldretro.js?v=1.0"></script>
-<script defer src="js/theme-help.js?v=1.0"></script>
-<script defer src="js/settings-select.js?v=1.0"></script>
-<script defer src="js/modern-stagger.js?v=1.0"></script>
-<script defer src="js/glass.js?v=1.0"></script>
-<script defer src="js/demo.js?v=1.0"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SegFault777</title>
+<link rel="stylesheet" href="miniwin/css/main.css?v=1.0">
+<style>
+  /* MiniWin view: sits under the header in normal flow, so the header is never covered */
+  body.miniwin-open { height:100vh; height:100dvh; display:flex; flex-direction:column; overflow:hidden; }
+  body.miniwin-open > header.top { position:static !important; flex:0 0 auto; }
+  #miniwinView { display:none; }
+  #miniwinView.open { display:flex; flex:1 1 auto; min-height:0; background:#000; }
+  #miniwinView.open iframe { flex:1 1 auto; width:100%; height:100%; border:0; display:block; }
+  body.miniwin-open main { display:none; }
+  /* Settings over the home page: a transparent layer that only the settings window draws in */
+  #miniwinView.settings-only { display:block; position:fixed; inset:0; z-index:500; background:transparent; }
+  #miniwinView.settings-only iframe { width:100%; height:100%; border:0; display:block; background:transparent; }
+  #miniwinView.hidden-frame iframe { }
+  .back-home { position:fixed; right:12px; bottom:12px; z-index:6; padding:6px 10px; cursor:pointer; font:inherit; }
+  #mainStyleSwitch { display:inline-flex; align-items:center; }
+  #devNotice { position:fixed; left:50%; top:90px; transform:translateX(-50%); z-index:700;
+    padding:10px 18px; border:1px solid currentColor; border-radius:6px; background:var(--bg-panel, #ffffff);
+    color:inherit; font:inherit; box-shadow:0 6px 18px rgba(0,0,0,.25); opacity:0; pointer-events:none; transition:opacity .25s; }
+  #devNotice.show { opacity:1; }
+</style>
 </head>
 <body>
 <header class="top"><div class="wrap topbar">
-  <a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0</span></a>
+  <a class="logo" href="./">Segfault<span>777</span></a>
   <nav class="nav">
-    <div class="style-switch" role="group" aria-label="Visual style"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div>
-    <a data-i18n="home" href="#home"></a><a data-i18n="about" href="#about"></a><a data-i18n="features" href="#features"></a><a data-i18n="build" href="#build"></a><a data-i18n="networking" href="#networking"></a><a data-i18n="download" href="#download"></a><a data-i18n="nav_demo" href="#demo"></a>
+    <a href="#home" data-view="home" class="active" aria-current="page">Home</a>
+    <a href="#miniwin" data-view="miniwin">MiniWin</a>
+    <a href="#live-editor" class="dev-soon" id="liveEditorLink">Live Editor</a>
+    <a class="gh-link" href="https://github.com/SegFault777" target="_blank" rel="noopener">GitHub</a>
   </nav>
-  <button class="settings-btn" id="settingsBtn" type="button" aria-haspopup="dialog" aria-label="Settings"><span class="settings-btn-icon" aria-hidden="true">⚙</span></button>
+  <div id="mainStyleSwitch"></div>
+  <button class="settings-btn" id="settingsGear" type="button" aria-haspopup="dialog" aria-label="Settings"><span class="settings-btn-icon" aria-hidden="true">⚙</span></button>
 </div></header>
 
-<main>
-<section class="hero" id="home"><div class="wrap hero-grid">
-  <div>
-    <span class="tag" data-i18n="hero_tag"></span>
-    <h1><span>MINI</span><span>WIN</span></h1>
-    <p data-i18n="hero_p"></p>
+<main id="home">
+  <section class="hero" id="top"><div class="wrap hero-grid"><div class="modern-reveal is-visible">
+    <span class="tag">SEGFAULT777 / MINIWIN / MAIN</span>
+    <h1><span>SEGFAULT777</span></h1>
+    <p id="heroIntro">저는 운영체제와 웹 기술을 직접 만들어 보는 것을 좋아합니다.
+       대표 작업은 <strong>MiniWin</strong>입니다. 외부 라이브러리 없이 처음부터 만든
+       32비트 x86 데스크톱 운영체제이며, 상단 메뉴의 MiniWin에서 바로 실행해 볼 수 있습니다.</p>
     <div class="actions">
-      <a class="btn primary" data-i18n="download_source" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip"></a>
-      <a class="btn" data-i18n="github" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank"></a>
+      <a class="btn primary" id="heroRun" href="#miniwin" data-view="miniwin">MiniWin 실행</a>
+      <a class="btn" href="https://github.com/SegFault777" target="_blank" rel="noopener">GitHub</a>
     </div>
-  </div>
-  <div class="monitor-stage"><div class="monitor">
-    <img alt="MiniWeb (WEB.MWP) rendering an HTML5 page with flex nav, grid cards, forms and lists" loading="eager" src="assets/miniweb-html5.png" width="640" height="480">
-    <div class="image-credit" data-i18n="hero_tag"></div>
-  </div></div>
-</div></section>
-
-<section id="about"><div class="wrap">
-  <div class="head"><div class="eyebrow" data-i18n="about_eyebrow"></div><h2 data-i18n="about_h2"></h2><p data-i18n="about_p"></p></div>
-  <div class="panel"><div class="panel-head" data-status="4 items"><span data-i18n="system_information"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div><div class="facts">
-    <div class="fact"><strong>i386</strong><small data-i18n="cpu"></small></div><div class="fact"><strong>640×480</strong><small data-i18n="display"></small></div><div class="fact"><strong>32-bit</strong><small data-i18n="colors"></small></div><div class="fact"><strong>1 MB</strong><small data-i18n="image_size"></small></div>
-  </div></div>
-</div></section>
-
-<section id="features"><div class="wrap">
-  <div class="head"><div class="eyebrow" data-i18n="features_eyebrow"></div><h2 data-i18n="features_h2"></h2><p data-i18n="features_p"></p></div>
-  <div class="grid">
-    <article class="panel card"><span class="badge">BOOT</span><h3 data-i18n="boot_title"></h3><p data-i18n="boot_p"></p></article>
-    <article class="panel card"><span class="badge">DISPLAY</span><h3 data-i18n="display_title"></h3><p data-i18n="display_p"></p></article>
-    <article class="panel card"><span class="badge">KERNEL</span><h3 data-i18n="kernel_title"></h3><p data-i18n="kernel_p"></p></article>
-    <article class="panel card"><span class="badge">DESKTOP</span><h3 data-i18n="desktop_title"></h3><p data-i18n="desktop_p"></p></article>
-    <article class="panel card"><span class="badge">APPS</span><h3 data-i18n="apps_title"></h3><p data-i18n="apps_p"></p></article>
-    <article class="panel card"><span class="badge">WEB</span><h3 data-i18n="web_title"></h3><p data-i18n="web_p"></p></article>
-    <article class="panel card"><span class="badge">HTML5</span><h3 data-i18n="html_title"></h3><p data-i18n="html_p"></p></article>
-    <article class="panel card"><span class="badge">MWP</span><h3 data-i18n="mwp_title"></h3><p data-i18n="mwp_p"></p></article>
-    <article class="panel card"><span class="badge">IME</span><h3 data-i18n="hangul_title"></h3><p data-i18n="hangul_p"></p></article>
-  </div>
-  <div class="note" data-i18n="roadmap_note"></div>
-</div></section>
-
-<section id="build"><div class="wrap">
-  <div class="head"><div class="eyebrow" data-i18n="build_eyebrow"></div><h2 data-i18n="build_h2"></h2><p data-i18n="build_p"></p></div>
-  <div class="panel terminal"><div class="panel-head" data-status="7 items"><span data-i18n="quick_start"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div><pre><span class="dim"># clone and build → build/os-image.img (1 MB)</span>
-<span class="cyan">$</span> git clone https://github.com/SegFault777/MiniWin.git
-<span class="cyan">$</span> cd MiniWin &amp;&amp; ./build.sh &amp;&amp; tools/install_all.sh
-
-<span class="dim"># boot it in QEMU</span>
-<span class="cyan">$</span> qemu-system-i386 -drive file=build/os-image.img,format=raw
-
-<span class="dim"># with a NIC and a serial log (DHCP, DNS, TCP, TLS show up in serial.log)</span>
-<span class="cyan">$</span> qemu-system-i386 -drive file=build/os-image.img,format=raw \
-    -netdev user,id=n0 -device rtl8139,netdev=n0 \
-    -serial file:serial.log
-
-<span class="dim"># hear the PC-speaker beep (swap pa for dsound, coreaudio, sdl…)</span>
-<span class="cyan">$</span> qemu-system-i386 -drive file=build/os-image.img,format=raw \
-    -audiodev pa,id=snd0 -machine pcspk-audiodev=snd0
-
-<span class="green">MiniWin is running.</span></pre></div>
-  <div class="rule"></div>
-  <div class="note" data-i18n="build_note"></div>
-  <div class="note" data-i18n="controls_note"></div>
-</div></section>
-
-<section id="networking"><div class="wrap">
-  <div class="head"><div class="eyebrow" data-i18n="network_eyebrow"></div><h2 data-i18n="network_h2"></h2><p data-i18n="network_p"></p></div>
-  <div class="grid">
-    <article class="panel card"><span class="badge">RTL8139</span><h3 data-i18n="rtl_title"></h3><p data-i18n="rtl_p"></p></article>
-    <article class="panel card"><span class="badge">e1000 / 82540EM</span><h3 data-i18n="e1000_title"></h3><p data-i18n="e1000_p"></p></article>
-    <article class="panel card"><span class="badge">L2–L4</span><h3 data-i18n="stack_title"></h3><p data-i18n="stack_p"></p></article>
-    <article class="panel card"><span class="badge">DHCP · DNS</span><h3 data-i18n="dhcpdns_title"></h3><p data-i18n="dhcpdns_p"></p></article>
-    <article class="panel card"><span class="badge">TCP · HTTP</span><h3 data-i18n="tcp_title"></h3><p data-i18n="tcp_p"></p></article>
-    <article class="panel card"><span class="badge">TLS 1.2</span><h3 data-i18n="tls_title"></h3><p data-i18n="tls_p"></p></article>
-  </div>
-  <div class="note" data-i18n="net_limits"></div>
-</div></section>
-
-<section id="download"><div class="wrap">
-  <div class="head"><div class="eyebrow" data-i18n="download_eyebrow"></div><h2 data-i18n="download_h2"></h2><p data-i18n="download_p"></p></div>
-  <div class="actions">
-    <a class="btn primary" data-i18n="releases" href="https://github.com/SegFault777/MiniWin/releases" rel="noopener" target="_blank"></a>
-    <a class="btn" data-i18n="mainzip" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip"></a>
-    <a class="btn" data-i18n="open_repo" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank"></a>
-    <a class="btn" data-i18n="readme" href="https://github.com/SegFault777/MiniWin/blob/main/README.md" rel="noopener" target="_blank"></a>
-  </div>
-</div></section>
-
- <section id="demo"><div class="wrap">
-   <div class="head"><div class="eyebrow" data-i18n="demo_eyebrow"></div><h2 data-i18n="demo_h2"></h2><p data-i18n="demo_p"></p></div>
-   <div class="panel demo-panel"><div class="panel-head" data-status="32 MB RAM"><span data-i18n="demo_window"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div>
-     <div class="demo-body">
-       <div class="demo-screen" id="demoScreen" tabindex="0" role="application" aria-label="MiniWin">
-         <div class="demo-text"></div><canvas></canvas>
-         <div class="demo-cover" id="demoCover"><button class="btn primary" id="demoStart" type="button" data-i18n="demo_start"></button></div>
-       </div>
-       <div class="demo-bar">
-         <div class="demo-status" id="demoStatus" data-state="idle" aria-live="polite"><span data-s="idle" data-i18n="demo_s_idle"></span><span data-s="loading" data-i18n="demo_s_loading"></span><span data-s="running" data-i18n="demo_s_running"></span><span data-s="error" data-i18n="demo_s_error"></span><span class="demo-res" id="demoRes"></span></div>
-         <div class="demo-actions"><button class="btn" id="demoReset" type="button" data-i18n="demo_reset" disabled></button><button class="btn" id="demoFull" type="button" data-i18n="demo_full" disabled></button></div>
-       </div>
-     </div>
-   </div>
-   <div class="note" data-i18n="demo_note"></div>
-   <div class="note demo-touch" data-i18n="demo_touch"></div>
- </div></section>
-
+  </div></div></section>
 </main>
 
-<div class="ns-dock" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<footer><div class="wrap foot">
-  <div><strong data-i18n="footer_name"></strong><br><span data-i18n="footer_desc"></span></div>
-  <div data-i18n="footer_source"></div>
-</div></footer>
+<div id="miniwinView">
+  <iframe id="miniwinFrame" title="MiniWin" src="miniwin/index.html"></iframe>
+</div>
+<button type="button" class="back-home" id="backHome" style="display:none;">Home</button>
+
+<script>
+(function () {
+  var frame = document.getElementById("miniwinFrame");
+  var view = document.getElementById("miniwinView");
+  var back = document.getElementById("backHome");
+  var gear = document.getElementById("settingsGear");
+  var slot = document.getElementById("mainStyleSwitch");
+  var links = document.querySelectorAll("[data-view]");
+  var navLinks = document.querySelectorAll("nav.nav a[data-view]");
+  var miniwinOpen = false;
+  var ready = false, queue = [];
+  var loadedSheets = {};
+
+  /* Every request to MiniWin goes through here: it waits until MiniWin has loaded. */
+  function send(msg) {
+    if (ready && frame.contentWindow) frame.contentWindow.postMessage(msg, "*");
+    else queue.push(msg);
+  }
+
+  function keepClasses(cls) {
+    return (cls || "").split(/\s+/).filter(function (c) { return c && c !== "ms-settings-only" && c !== "miniwin-open"; }).join(" ");
+  }
+
+  function applyBodyClasses(state) {
+    document.documentElement.className = keepClasses(state.html);
+    document.body.className = (keepClasses(state.body) + (miniwinOpen ? " miniwin-open" : "")).replace(/\s+/g, " ").trim();
+    syncOldRetroHome();
+  }
+
+  /* OldRetro on the home page: the same DOS-blue text screen MiniWin uses, showing the home content. */
+  var orScreen = null, orBody = null, orStatus = null, orBuf = "", orKeysBound = false;
+
+  function buildOldRetroHome() {
+    if (orScreen) return;
+    orScreen = document.createElement("div");
+    orScreen.id = "oldretroScreen";
+    orScreen.innerHTML =
+      '<div class="or-titlebar">SEGFAULT777.EXE \u2014 TEXT MODE HOME</div>' +
+      '<div class="or-menubar" id="orHomeMenu"></div>' +
+      '<div class="or-body" id="orHomeBody" tabindex="0"></div>' +
+      '<div class="or-statusbar" id="orHomeStatus"></div>' +
+      '<div class="or-pagectrl"><button type="button" id="orHomeUp">\u25b2 PAGE UP</button><button type="button" id="orHomeDown">\u25bc PAGE DOWN</button></div>';
+    document.body.appendChild(orScreen);
+    orBody = orScreen.querySelector("#orHomeBody");
+    orStatus = orScreen.querySelector("#orHomeStatus");
+    orScreen.querySelector("#orHomeUp").addEventListener("click", function () { orBody.scrollTop -= orBody.clientHeight * 0.8; });
+    orScreen.querySelector("#orHomeDown").addEventListener("click", function () { orBody.scrollTop += orBody.clientHeight * 0.8; });
+
+    var menu = orScreen.querySelector("#orHomeMenu");
+    [["HOME", "home"], ["MINIWIN", "miniwin"], ["GITHUB", "github"], ["GUI", "gui"]].forEach(function (it) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = it[0];
+      b.addEventListener("click", function () { orMenu(it[1]); });
+      menu.appendChild(b);
+    });
+
+    orBody.innerHTML = "";
+    var win = document.createElement("div");
+    win.className = "or-window";
+    var title = document.createElement("div");
+    title.className = "or-win-title";
+    title.textContent = "1. HOME";
+    win.appendChild(title);
+    var d = MAIN_I18N[mainLang()];
+    title.textContent = d.orHome;
+    var text = document.createElement("pre");
+    text.textContent =
+      "SEGFAULT777\n\n" + d.intro + "\n\n" +
+      "[ MINIWIN ]  " + d.orMiniwinDesc + "\n" +
+      "[ GITHUB  ]  https://github.com/SegFault777";
+    win.appendChild(text);
+    orBody.appendChild(win);
+
+    orStatus.textContent = d.orStatus;
+    /* typing RETRO returns to the GUI, as in MiniWin (bound once) */
+    if (!orKeysBound) document.addEventListener("keydown", function (e) {
+      if (!document.body.classList.contains("oldretro-mode") || miniwinOpen) return;
+      if (e.key && e.key.length === 1) orBuf = (orBuf + e.key.toLowerCase()).slice(-5);
+      if (orBuf === "retro") { orBuf = ""; orMenu("gui"); }
+    });
+    orKeysBound = true;
+  }
+
+  function orMenu(name) {
+    if (name === "home") show("home");
+    else if (name === "miniwin") show("miniwin");
+    else if (name === "github") window.open("https://github.com/SegFault777", "_blank", "noopener");
+    else if (name === "gui") send({ miniwin: "exitOldRetro" });
+  }
+
+  function syncOldRetroHome() {
+    var on = document.body.classList.contains("oldretro-mode");
+    if (on) buildOldRetroHome();
+    if (!orScreen) return;
+    var show_ = on && !miniwinOpen;
+    if (show_) {
+      var hb = document.querySelector("header.top");
+      orScreen.style.top = (hb ? Math.round(hb.getBoundingClientRect().bottom) : 52) + "px";
+    }
+    orScreen.style.display = show_ ? "" : "none";
+  }
+
+  /* The theme's stylesheets, loaded once from MiniWin's folder. */
+  function applySheets(list) {
+    (list || []).forEach(function (href) {
+      if (!href || loadedSheets[href]) return;
+      loadedSheets[href] = true;
+      var c = document.createElement("link");
+      c.rel = "stylesheet";
+      c.href = "miniwin/" + href;
+      document.head.appendChild(c);
+    });
+  }
+
+  /* The Retro / Modern switch shown in this header. Its state comes from MiniWin. */
+  function renderSwitch(state) {
+    if (!slot.firstElementChild) {
+      slot.innerHTML =
+        '<div class="style-switch" role="group" aria-label="Visual style">' +
+        '<span class="style-label"></span>' +
+        '<button class="style-toggle" type="button"><span></span></button>' +
+        '<span class="style-label"></span></div>';
+      slot.querySelector("button").addEventListener("click", function () {
+        send({ miniwin: "toggleStyle" });
+      });
+    }
+    var labels = slot.querySelectorAll(".style-label");
+    (state.switchLabels || []).forEach(function (t, i) { if (labels[i]) labels[i].textContent = t; });
+    var b = slot.querySelector("button");
+    b.setAttribute("aria-pressed", state.pressed || "false");
+    b.setAttribute("aria-label", "Switch between Retro and Modern");
+  }
+
+  window.addEventListener("message", function (e) {
+    if (e.source !== frame.contentWindow || !e.data || !e.data.miniwin) return;
+    var m = e.data;
+    if (m.miniwin === "ready") {
+      ready = true;
+      queue.splice(0).forEach(send);
+    } else if (m.miniwin === "state") {
+      applyBodyClasses(m);
+      applySheets(m.sheets);
+      renderSwitch(m);
+    } else if (m.miniwin === "settingsClosed") {
+      /* hide our layer first, then let MiniWin drop its settings-only mode: no frame of MiniWin shows */
+      view.classList.remove("settings-only");
+      send({ miniwin: "clearSettingsOnly" });
+    }
+  });
+
+  function show(name) {
+    miniwinOpen = name === "miniwin";
+    /* entering MiniWin: if the settings were drawn over Home, MiniWin's own page must show again behind them */
+    if (miniwinOpen) send({ miniwin: "clearSettingsOnly" });
+    view.classList.toggle("open", miniwinOpen);
+    view.classList.remove("settings-only");
+    back.style.display = miniwinOpen ? "block" : "none";
+    navLinks.forEach(function (a) { a.classList.toggle("active", a.getAttribute("data-view") === name); });
+    applyBodyClasses({ html: document.documentElement.className, body: document.body.className });
+  }
+
+  links.forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var name = a.getAttribute("data-view");
+      if (!name) return;
+      e.preventDefault();
+      show(name);
+    });
+  });
+  back.addEventListener("click", function () { show("home"); });
+
+  /* Settings: the same window MiniWin has, drawn over the home page. */
+  /* Home and the Live Editor notice follow the language chosen in MiniWin (same storage keys). */
+  var noticeEl = null;
+  var MAIN_I18N = {
+    "en": {
+      "home": "Home",
+      "notice": "Live Editor — under development.",
+      "intro": "I like building operating systems and web technology from scratch. My main project is MiniWin, a 32-bit x86 desktop OS written without external libraries. You can run it right away from MiniWin in the top menu.",
+      "run": "Run MiniWin",
+      "orHome": "1. HOME",
+      "orMiniwinDesc": "run MiniWin, the 32-bit x86 OS built from scratch",
+      "orStatus": "PAGE UP / PAGE DOWN TO SCROLL · TYPE \"RETRO\" TO RETURN TO GUI MODE"
+    },
+    "ko": {
+      "home": "홈",
+      "notice": "Live Editor — 개발 중입니다.",
+      "intro": "저는 운영체제와 웹 기술을 직접 만들어 보는 것을 좋아합니다. 대표 작업은 MiniWin입니다. 외부 라이브러리 없이 처음부터 만든 32비트 x86 데스크톱 운영체제이며, 상단 메뉴의 MiniWin에서 바로 실행해 볼 수 있습니다.",
+      "run": "MiniWin 실행",
+      "orHome": "1. 홈",
+      "orMiniwinDesc": "외부 라이브러리 없이 처음부터 만든 32비트 x86 운영체제 MiniWin 실행",
+      "orStatus": "PAGE UP / PAGE DOWN 으로 스크롤 · \"RETRO\" 입력 시 GUI 모드로 복귀"
+    },
+    "ko-kp": {
+      "home": "홈페지",
+      "notice": "Live Editor — 개발 중에 있습니다.",
+      "intro": "나는 조작체계와 웨브기술을 직접 만들어 보는것을 좋아합니다. 대표 작업은 MiniWin입니다. 외부 라이브러리 없이 처음부터 만든 32비트 x86 탁상용 조작체계이며, 상단 차림표의 MiniWin에서 바로 기동해 볼수 있습니다.",
+      "run": "MiniWin 기동",
+      "orHome": "1. 홈페지",
+      "orMiniwinDesc": "외부 라이브러리 없이 처음부터 만든 32비트 x86 조작체계 MiniWin 기동",
+      "orStatus": "PAGE UP / PAGE DOWN으로 화면흘리기 · \"RETRO\" 입력 시 그래픽 모드로 돌아감"
+    },
+    "es": {
+      "home": "Inicio",
+      "notice": "Live Editor — en desarrollo.",
+      "intro": "Me gusta construir sistemas operativos y tecnologías web desde cero. Mi proyecto principal es MiniWin, un sistema operativo de escritorio de 32 bits para x86 escrito sin bibliotecas externas. Puedes ejecutarlo al instante desde MiniWin en el menú superior.",
+      "run": "Ejecutar MiniWin",
+      "orHome": "1. INICIO",
+      "orMiniwinDesc": "ejecutar MiniWin, el SO de 32 bits para x86 hecho desde cero",
+      "orStatus": "AV PÁG / RE PÁG PARA DESPLAZAR · ESCRIBE \"RETRO\" PARA VOLVER AL MODO GUI"
+    },
+    "zh-CN": {
+      "home": "首页",
+      "notice": "Live Editor — 开发中。",
+      "intro": "我喜欢从零开始构建操作系统和 Web 技术。代表作是 MiniWin：一个不依赖外部库、从头编写的 32 位 x86 桌面操作系统，可以直接从顶部菜单的 MiniWin 运行。",
+      "run": "运行 MiniWin",
+      "orHome": "1. 首页",
+      "orMiniwinDesc": "运行 MiniWin，一个从零编写的 32 位 x86 操作系统",
+      "orStatus": "PAGE UP / PAGE DOWN 滚动 · 输入 \"RETRO\" 返回 GUI 模式"
+    },
+    "zh-TW": {
+      "home": "首頁",
+      "notice": "Live Editor — 開發中。",
+      "intro": "我喜歡從零開始打造作業系統與網頁技術。代表作是 MiniWin：一個不依賴外部函式庫、從頭撰寫的 32 位元 x86 桌面作業系統，可以直接從頂端選單的 MiniWin 執行。",
+      "run": "執行 MiniWin",
+      "orHome": "1. 首頁",
+      "orMiniwinDesc": "執行 MiniWin，一個從零撰寫的 32 位元 x86 作業系統",
+      "orStatus": "PAGE UP / PAGE DOWN 捲動 · 輸入 \"RETRO\" 返回 GUI 模式"
+    },
+    "ja": {
+      "home": "ホーム",
+      "notice": "Live Editor — 開発中です。",
+      "intro": "私はオペレーティングシステムとWeb技術を一から作ることが好きです。代表作はMiniWinです。外部ライブラリなしで一から作った32ビットx86デスクトップOSで、上のメニューのMiniWinからすぐに実行できます。",
+      "run": "MiniWinを実行",
+      "orHome": "1. ホーム",
+      "orMiniwinDesc": "外部ライブラリなしで一から作った32ビットx86 OS、MiniWinを実行",
+      "orStatus": "PAGE UP / PAGE DOWN でスクロール · \"RETRO\" と入力すると GUI モードに戻ります"
+    },
+    "fr": {
+      "home": "Accueil",
+      "notice": "Live Editor — en cours de développement.",
+      "intro": "J'aime construire des systèmes d'exploitation et des technologies web à partir de zéro. Mon projet principal est MiniWin, un système d'exploitation de bureau 32 bits pour x86 écrit sans bibliothèques externes. Vous pouvez le lancer directement depuis MiniWin dans le menu supérieur.",
+      "run": "Lancer MiniWin",
+      "orHome": "1. ACCUEIL",
+      "orMiniwinDesc": "lancer MiniWin, le SO 32 bits pour x86 développé de zéro",
+      "orStatus": "PAGE PRÉC. / PAGE SUIV. POUR DÉFILER · TAPEZ \"RETRO\" POUR REVENIR AU MODE GUI"
+    },
+    "de": {
+      "home": "Start",
+      "notice": "Live Editor — in Entwicklung.",
+      "intro": "Ich baue gern Betriebssysteme und Webtechnologien von Grund auf. Mein Hauptprojekt ist MiniWin, ein 32-Bit-x86-Desktop-Betriebssystem ohne externe Bibliotheken. Sie können es direkt über MiniWin im oberen Menü starten.",
+      "run": "MiniWin starten",
+      "orHome": "1. START",
+      "orMiniwinDesc": "MiniWin starten, das 32-Bit-x86-Betriebssystem von Grund auf",
+      "orStatus": "BILD AUF / BILD AB ZUM SCROLLEN · \"RETRO\" EINGEBEN FÜR DEN GUI-MODUS"
+    },
+    "pt-BR": {
+      "home": "Início",
+      "notice": "Live Editor — em desenvolvimento.",
+      "intro": "Gosto de construir sistemas operacionais e tecnologias web do zero. Meu projeto principal é o MiniWin, um sistema operacional de desktop de 32 bits para x86 escrito sem bibliotecas externas. Você pode executá-lo direto pelo MiniWin no menu superior.",
+      "run": "Executar MiniWin",
+      "orHome": "1. INÍCIO",
+      "orMiniwinDesc": "executar o MiniWin, o SO de 32 bits para x86 feito do zero",
+      "orStatus": "PAGE UP / PAGE DOWN PARA ROLAR · DIGITE \"RETRO\" PARA VOLTAR AO MODO GUI"
+    },
+    "it": {
+      "home": "Home",
+      "notice": "Live Editor — in sviluppo.",
+      "intro": "Mi piace costruire sistemi operativi e tecnologie web da zero. Il mio progetto principale è MiniWin, un sistema operativo desktop a 32 bit per x86 scritto senza librerie esterne. Puoi avviarlo subito da MiniWin nel menu in alto.",
+      "run": "Avvia MiniWin",
+      "orHome": "1. HOME",
+      "orMiniwinDesc": "avviare MiniWin, il SO a 32 bit per x86 costruito da zero",
+      "orStatus": "PAGE UP / PAGE DOWN PER SCORRERE · DIGITA \"RETRO\" PER TORNARE ALLA MODALITÀ GUI"
+    },
+    "ru": {
+      "home": "Главная",
+      "notice": "Live Editor — в разработке.",
+      "intro": "Мне нравится создавать операционные системы и веб-технологии с нуля. Мой главный проект — MiniWin, 32-битная настольная ОС для x86, написанная без внешних библиотек. Запустить её можно сразу из MiniWin в верхнем меню.",
+      "run": "Запустить MiniWin",
+      "orHome": "1. ГЛАВНАЯ",
+      "orMiniwinDesc": "запустить MiniWin — 32-битную ОС для x86, написанную с нуля",
+      "orStatus": "PAGE UP / PAGE DOWN — ПРОКРУТКА · НАПИШИТЕ \"RETRO\", ЧТОБЫ ВЕРНУТЬСЯ В GUI"
+    },
+    "vi": {
+      "home": "Trang chủ",
+      "notice": "Live Editor — đang phát triển.",
+      "intro": "Tôi thích xây dựng hệ điều hành và công nghệ web từ đầu. Dự án chính của tôi là MiniWin, một hệ điều hành máy tính 32-bit cho x86 viết mà không dùng thư viện bên ngoài. Bạn có thể chạy ngay từ MiniWin trong menu phía trên.",
+      "run": "Chạy MiniWin",
+      "orHome": "1. TRANG CHỦ",
+      "orMiniwinDesc": "chạy MiniWin, hệ điều hành 32-bit cho x86 được viết từ đầu",
+      "orStatus": "PAGE UP / PAGE DOWN ĐỂ CUỘN · GÕ \"RETRO\" ĐỂ QUAY LẠI CHẾ ĐỘ GUI"
+    },
+    "id": {
+      "home": "Beranda",
+      "notice": "Live Editor — sedang dikembangkan.",
+      "intro": "Saya senang membangun sistem operasi dan teknologi web dari nol. Proyek utama saya adalah MiniWin, sistem operasi desktop 32-bit untuk x86 yang ditulis tanpa pustaka eksternal. Anda bisa langsung menjalankannya dari MiniWin di menu atas.",
+      "run": "Jalankan MiniWin",
+      "orHome": "1. BERANDA",
+      "orMiniwinDesc": "jalankan MiniWin, sistem operasi 32-bit untuk x86 yang dibuat dari nol",
+      "orStatus": "PAGE UP / PAGE DOWN UNTUK GULIR · KETIK \"RETRO\" UNTUK KEMBALI KE MODE GUI"
+    },
+    "pl": {
+      "home": "Start",
+      "notice": "Live Editor — w trakcie prac.",
+      "intro": "Lubię budować systemy operacyjne i technologie webowe od podstaw. Moim głównym projektem jest MiniWin, 32-bitowy system operacyjny dla x86 napisany bez zewnętrznych bibliotek. Możesz go uruchomić od razu z MiniWin w górnym menu.",
+      "run": "Uruchom MiniWin",
+      "orHome": "1. START",
+      "orMiniwinDesc": "uruchomić MiniWin, 32-bitowy system dla x86 napisany od zera",
+      "orStatus": "PAGE UP / PAGE DOWN, ABY PRZEWIJAĆ · WPISZ \"RETRO\", ABY WRÓCIĆ DO TRYBU GUI"
+    },
+    "tr": {
+      "home": "Ana sayfa",
+      "notice": "Live Editor — geliştiriliyor.",
+      "intro": "Sıfırdan işletim sistemleri ve web teknolojileri geliştirmeyi seviyorum. Ana projem MiniWin; harici kütüphane kullanmadan yazılmış, 32 bit x86 masaüstü bir işletim sistemi. Üst menüdeki MiniWin'den hemen çalıştırabilirsiniz.",
+      "run": "MiniWin'i çalıştır",
+      "orHome": "1. ANA SAYFA",
+      "orMiniwinDesc": "sıfırdan yazılmış 32 bit x86 işletim sistemi MiniWin'i çalıştır",
+      "orStatus": "PAGE UP / PAGE DOWN İLE KAYDIR · GUI MODUNA DÖNMEK İÇİN \"RETRO\" YAZIN"
+    },
+    "nl": {
+      "home": "Home",
+      "notice": "Live Editor — in ontwikkeling.",
+      "intro": "Ik bouw graag besturingssystemen en webtechnologie vanaf nul. Mijn belangrijkste project is MiniWin, een 32-bit x86-desktopbesturingssysteem zonder externe bibliotheken. Je kunt het direct starten via MiniWin in het bovenste menu.",
+      "run": "MiniWin starten",
+      "orHome": "1. HOME",
+      "orMiniwinDesc": "MiniWin starten, het 32-bit x86-besturingssysteem vanaf nul",
+      "orStatus": "PAGE UP / PAGE DOWN OM TE SCROLLEN · TYP \"RETRO\" OM TERUG TE KEREN NAAR DE GUI"
+    },
+    "sv": {
+      "home": "Hem",
+      "notice": "Live Editor — under utveckling.",
+      "intro": "Jag gillar att bygga operativsystem och webbtekniker från grunden. Mitt huvudprojekt är MiniWin, ett 32-bitars x86-skrivbordsoperativsystem utan externa bibliotek. Du kan starta det direkt från MiniWin i menyn högst upp.",
+      "run": "Starta MiniWin",
+      "orHome": "1. HEM",
+      "orMiniwinDesc": "starta MiniWin, 32-bitars x86-operativsystemet byggt från grunden",
+      "orStatus": "PAGE UP / PAGE DOWN FÖR ATT RULLA · SKRIV \"RETRO\" FÖR ATT ÅTERGÅ TILL GUI-LÄGE"
+    },
+    "uk": {
+      "home": "Головна",
+      "notice": "Live Editor — у розробці.",
+      "intro": "Мені подобається створювати операційні системи та веб-технології з нуля. Мій головний проєкт — MiniWin, 32-бітна настільна ОС для x86, написана без зовнішніх бібліотек. Запустити її можна одразу з MiniWin у верхньому меню.",
+      "run": "Запустити MiniWin",
+      "orHome": "1. ГОЛОВНА",
+      "orMiniwinDesc": "запустити MiniWin — 32-бітну ОС для x86, написану з нуля",
+      "orStatus": "PAGE UP / PAGE DOWN — ПРОКРУТКА · НАПИШІТЬ \"RETRO\", ЩОБ ПОВЕРНУТИСЯ ДО GUI"
+    },
+    "ar": {
+      "home": "الرئيسية",
+      "notice": "Live Editor — قيد التطوير.",
+      "intro": "أحب بناء أنظمة التشغيل وتقنيات الويب من الصفر. مشروعي الرئيسي هو MiniWin، نظام تشغيل مكتبي بسعة 32 بت لمعالج x86 كُتب دون مكتبات خارجية. يمكنك تشغيله مباشرة من MiniWin في القائمة العلوية.",
+      "run": "تشغيل MiniWin",
+      "orHome": "1. الرئيسية",
+      "orMiniwinDesc": "تشغيل MiniWin، نظام التشغيل 32 بت لمعالج x86 المبني من الصفر",
+      "orStatus": "PAGE UP / PAGE DOWN للتمرير · اكتب \"RETRO\" للعودة إلى وضع GUI"
+    },
+    "hi": {
+      "home": "होम",
+      "notice": "Live Editor — विकास जारी है।",
+      "intro": "मुझे शून्य से ऑपरेटिंग सिस्टम और वेब तकनीक बनाना पसंद है। मेरी मुख्य परियोजना MiniWin है, एक 32-बिट x86 डेस्कटॉप ऑपरेटिंग सिस्टम जो बाहरी लाइब्रेरी के बिना लिखा गया है। आप इसे ऊपर के मेन्यू में MiniWin से सीधे चला सकते हैं।",
+      "run": "MiniWin चलाएँ",
+      "orHome": "1. होम",
+      "orMiniwinDesc": "MiniWin चलाएँ, शून्य से बना 32-बिट x86 ऑपरेटिंग सिस्टम",
+      "orStatus": "PAGE UP / PAGE DOWN से स्क्रॉल करें · GUI मोड में लौटने के लिए \"RETRO\" टाइप करें"
+    }
+  };
+  function mainLang() {
+    var lang = "en";
+    try {
+      lang = localStorage.getItem("miniwin-language") || "en";
+      if (lang === "ko" && localStorage.getItem("miniwin-kp-default") === "1") lang = "ko-kp";
+    } catch (e) {}
+    return MAIN_I18N[lang] ? lang : "en";
+  }
+  var homeLink = document.querySelector('header.top nav.nav a[data-view="home"]');
+  var liveLink = document.getElementById("liveEditorLink");
+  function applyMainLang() {
+    var d = MAIN_I18N[mainLang()];
+    if (homeLink) homeLink.textContent = d.home;
+    if (noticeEl) noticeEl.textContent = d.notice;
+    var intro = document.getElementById("heroIntro"), run = document.getElementById("heroRun");
+    if (intro) intro.textContent = d.intro;
+    if (run) run.textContent = d.run;
+    if (orScreen) { orScreen.remove(); orScreen = null; }   /* rebuilt in the new language */
+    syncOldRetroHome();
+    document.documentElement.lang = mainLang() === "ko-kp" ? "ko" : mainLang();
+  }
+  window.addEventListener("storage", function (e) {
+    if (e.key === "miniwin-language" || e.key === "miniwin-kp-default") applyMainLang();
+  });
+
+  /* Live Editor is not ready yet: show a short notice and keep the current view */
+  var notice = document.createElement("div");
+  noticeEl = notice;
+  notice.id = "devNotice";
+  notice.setAttribute("role", "status");
+  notice.textContent = "Live Editor \u2014 \uac1c\ubc1c \uc911\uc785\ub2c8\ub2e4.";
+  document.body.appendChild(notice);
+  var noticeTimer = null;
+  document.getElementById("liveEditorLink").addEventListener("click", function (e) {
+    e.preventDefault();
+    notice.classList.add("show");
+    clearTimeout(noticeTimer);
+    noticeTimer = setTimeout(function () { notice.classList.remove("show"); }, 2000);
+  });
+
+  applyMainLang();
+
+  gear.addEventListener("click", function () {
+    if (miniwinOpen) {
+      /* MiniWin is on screen: keep it, the settings window opens over it */
+      send({ miniwin: "openSettings", onlySettings: false });
+      return;
+    }
+    /* Home is on screen: the settings window floats over the home page */
+    view.classList.add("settings-only");
+    back.style.display = "none";
+    applyBodyClasses({ html: document.documentElement.className, body: document.body.className });
+    send({ miniwin: "openSettings", onlySettings: true });
+  });
+})();
+</script>
 </body>
 </html>

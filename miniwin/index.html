@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MiniWin — a 32-bit x86 desktop OS built from scratch</title>
+<meta name="description" content="MiniWin is a dependency-free 32-bit x86 desktop OS by SegFault777: hand-written bootloader, 640×480 truecolor, windowing, Hangul IME, a TCP/IP + TLS 1.2 stack and an HTML5 browser. No libc.">
+<meta property="og:title" content="MiniWin — a 32-bit x86 OS built from scratch">
+<meta property="og:description" content="No libc, no dependencies: bootloader, kernel, GUI, TCP/IP, TLS 1.2 and an HTML5 browser.">
+<meta property="og:image" content="https://raw.githubusercontent.com/SegFault777/MiniWin/main/screenshots/20-html5-rendering.png">
+<link rel="stylesheet" href="css/main.css?v=1.0">
+<!-- Translation files (i18n/*.js) are loaded by js/i18n.js only when needed, for the chosen language. Order: i18n first, then the rest. -->
+<script defer src="js/i18n.js?v=1.0"></script>
+<script defer src="js/nav.js?v=1.0"></script>
+<script defer src="js/theme.js?v=1.0"></script>
+<script defer src="js/oldretro.js?v=1.0"></script>
+<script defer src="js/theme-help.js?v=1.0"></script>
+<script defer src="js/settings-select.js?v=1.0"></script>
+<script defer src="js/modern-stagger.js?v=1.0"></script>
+<script defer src="js/glass.js?v=1.0"></script>
+<script defer src="js/demo.js?v=1.0"></script>
+<script defer src="js/bridge.js?v=1.0"></script>
+</head>
+<body>
+<header class="top"><div class="wrap topbar">
+  <a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0</span></a>
+  <nav class="nav">
+    <div class="style-switch" role="group" aria-label="Visual style" style="display:none"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div>
+    <a data-i18n="home" href="#home"></a><a data-i18n="about" href="#about"></a><a data-i18n="features" href="#features"></a><a data-i18n="build" href="#build"></a><a data-i18n="networking" href="#networking"></a><a data-i18n="download" href="#download"></a><a data-i18n="nav_demo" href="#demo"></a>
+  </nav>
+</div></header>
+
+<main>
+<section class="hero" id="home"><div class="wrap hero-grid">
+  <div>
+    <span class="tag" data-i18n="hero_tag"></span>
+    <h1><span>MINI</span><span>WIN</span></h1>
+    <p data-i18n="hero_p"></p>
+    <div class="actions">
+      <a class="btn primary" data-i18n="download_source" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip"></a>
+      <a class="btn" data-i18n="github" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank"></a>
+    </div>
+  </div>
+  <div class="monitor-stage"><div class="monitor">
+    <img alt="MiniWeb (WEB.MWP) rendering an HTML5 page with flex nav, grid cards, forms and lists" loading="eager" src="assets/miniweb-html5.png" width="640" height="480">
+    <div class="image-credit" data-i18n="hero_tag"></div>
+  </div></div>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <div class="head"><div class="eyebrow" data-i18n="about_eyebrow"></div><h2 data-i18n="about_h2"></h2><p data-i18n="about_p"></p></div>
+  <div class="panel"><div class="panel-head" data-status="4 items"><span data-i18n="system_information"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div><div class="facts">
+    <div class="fact"><strong>i386</strong><small data-i18n="cpu"></small></div><div class="fact"><strong>640×480</strong><small data-i18n="display"></small></div><div class="fact"><strong>32-bit</strong><small data-i18n="colors"></small></div><div class="fact"><strong>1 MB</strong><small data-i18n="image_size"></small></div>
+  </div></div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <div class="head"><div class="eyebrow" data-i18n="features_eyebrow"></div><h2 data-i18n="features_h2"></h2><p data-i18n="features_p"></p></div>
+  <div class="grid">
+    <article class="panel card"><span class="badge">BOOT</span><h3 data-i18n="boot_title"></h3><p data-i18n="boot_p"></p></article>
+    <article class="panel card"><span class="badge">DISPLAY</span><h3 data-i18n="display_title"></h3><p data-i18n="display_p"></p></article>
+    <article class="panel card"><span class="badge">KERNEL</span><h3 data-i18n="kernel_title"></h3><p data-i18n="kernel_p"></p></article>
+    <article class="panel card"><span class="badge">DESKTOP</span><h3 data-i18n="desktop_title"></h3><p data-i18n="desktop_p"></p></article>
+    <article class="panel card"><span class="badge">APPS</span><h3 data-i18n="apps_title"></h3><p data-i18n="apps_p"></p></article>
+    <article class="panel card"><span class="badge">WEB</span><h3 data-i18n="web_title"></h3><p data-i18n="web_p"></p></article>
+    <article class="panel card"><span class="badge">HTML5</span><h3 data-i18n="html_title"></h3><p data-i18n="html_p"></p></article>
+    <article class="panel card"><span class="badge">MWP</span><h3 data-i18n="mwp_title"></h3><p data-i18n="mwp_p"></p></article>
+    <article class="panel card"><span class="badge">IME</span><h3 data-i18n="hangul_title"></h3><p data-i18n="hangul_p"></p></article>
+  </div>
+  <div class="note" data-i18n="roadmap_note"></div>
+</div></section>
+
+<section id="build"><div class="wrap">
+  <div class="head"><div class="eyebrow" data-i18n="build_eyebrow"></div><h2 data-i18n="build_h2"></h2><p data-i18n="build_p"></p></div>
+  <div class="panel terminal"><div class="panel-head" data-status="7 items"><span data-i18n="quick_start"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div><pre><span class="dim"># clone and build → build/os-image.img (1 MB)</span>
+<span class="cyan">$</span> git clone https://github.com/SegFault777/MiniWin.git
+<span class="cyan">$</span> cd MiniWin &amp;&amp; ./build.sh &amp;&amp; tools/install_all.sh
+
+<span class="dim"># boot it in QEMU</span>
+<span class="cyan">$</span> qemu-system-i386 -drive file=build/os-image.img,format=raw
+
+<span class="dim"># with a NIC and a serial log (DHCP, DNS, TCP, TLS show up in serial.log)</span>
+<span class="cyan">$</span> qemu-system-i386 -drive file=build/os-image.img,format=raw \
+    -netdev user,id=n0 -device rtl8139,netdev=n0 \
+    -serial file:serial.log
+
+<span class="dim"># hear the PC-speaker beep (swap pa for dsound, coreaudio, sdl…)</span>
+<span class="cyan">$</span> qemu-system-i386 -drive file=build/os-image.img,format=raw \
+    -audiodev pa,id=snd0 -machine pcspk-audiodev=snd0
+
+<span class="green">MiniWin is running.</span></pre></div>
+  <div class="rule"></div>
+  <div class="note" data-i18n="build_note"></div>
+  <div class="note" data-i18n="controls_note"></div>
+</div></section>
+
+<section id="networking"><div class="wrap">
+  <div class="head"><div class="eyebrow" data-i18n="network_eyebrow"></div><h2 data-i18n="network_h2"></h2><p data-i18n="network_p"></p></div>
+  <div class="grid">
+    <article class="panel card"><span class="badge">RTL8139</span><h3 data-i18n="rtl_title"></h3><p data-i18n="rtl_p"></p></article>
+    <article class="panel card"><span class="badge">e1000 / 82540EM</span><h3 data-i18n="e1000_title"></h3><p data-i18n="e1000_p"></p></article>
+    <article class="panel card"><span class="badge">L2–L4</span><h3 data-i18n="stack_title"></h3><p data-i18n="stack_p"></p></article>
+    <article class="panel card"><span class="badge">DHCP · DNS</span><h3 data-i18n="dhcpdns_title"></h3><p data-i18n="dhcpdns_p"></p></article>
+    <article class="panel card"><span class="badge">TCP · HTTP</span><h3 data-i18n="tcp_title"></h3><p data-i18n="tcp_p"></p></article>
+    <article class="panel card"><span class="badge">TLS 1.2</span><h3 data-i18n="tls_title"></h3><p data-i18n="tls_p"></p></article>
+  </div>
+  <div class="note" data-i18n="net_limits"></div>
+</div></section>
+
+<section id="download"><div class="wrap">
+  <div class="head"><div class="eyebrow" data-i18n="download_eyebrow"></div><h2 data-i18n="download_h2"></h2><p data-i18n="download_p"></p></div>
+  <div class="actions">
+    <a class="btn primary" data-i18n="releases" href="https://github.com/SegFault777/MiniWin/releases" rel="noopener" target="_blank"></a>
+    <a class="btn" data-i18n="mainzip" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip"></a>
+    <a class="btn" data-i18n="open_repo" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank"></a>
+    <a class="btn" data-i18n="readme" href="https://github.com/SegFault777/MiniWin/blob/main/README.md" rel="noopener" target="_blank"></a>
+  </div>
+</div></section>
+
+ <section id="demo"><div class="wrap">
+   <div class="head"><div class="eyebrow" data-i18n="demo_eyebrow"></div><h2 data-i18n="demo_h2"></h2><p data-i18n="demo_p"></p></div>
+   <div class="panel demo-panel"><div class="panel-head" data-status="32 MB RAM"><span data-i18n="demo_window"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div>
+     <div class="demo-body">
+       <div class="demo-screen" id="demoScreen" tabindex="0" role="application" aria-label="MiniWin">
+         <div class="demo-text"></div><canvas></canvas>
+         <div class="demo-cover" id="demoCover"><button class="btn primary" id="demoStart" type="button" data-i18n="demo_start"></button></div>
+       </div>
+       <div class="demo-bar">
+         <div class="demo-status" id="demoStatus" data-state="idle" aria-live="polite"><span data-s="idle" data-i18n="demo_s_idle"></span><span data-s="loading" data-i18n="demo_s_loading"></span><span data-s="running" data-i18n="demo_s_running"></span><span data-s="error" data-i18n="demo_s_error"></span><span class="demo-res" id="demoRes"></span></div>
+         <div class="demo-actions"><button class="btn" id="demoReset" type="button" data-i18n="demo_reset" disabled></button><button class="btn" id="demoFull" type="button" data-i18n="demo_full" disabled></button></div>
+       </div>
+     </div>
+   </div>
+   <div class="note" data-i18n="demo_note"></div>
+   <div class="note demo-touch" data-i18n="demo_touch"></div>
+ </div></section>
+
+</main>
+
+<div class="ns-dock" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<footer><div class="wrap foot">
+  <div><strong data-i18n="footer_name"></strong><br><span data-i18n="footer_desc"></span></div>
+  <div data-i18n="footer_source"></div>
+</div></footer>
+</body>
+</html>
