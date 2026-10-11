@@ -1,0 +1,30 @@
+/* Theme guide window (the "?" next to the Layout setting). It uses the layout's own .panel and .btn classes, so it
+   takes the look of the current layout; this file only sets its size, position and the four-line description. */
+.theme-guide-overlay{position:fixed;inset:0;z-index:30000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.28)}
+.theme-guide-overlay[hidden]{display:none}
+.theme-guide{width:min(720px,100%);max-height:88vh;display:flex;flex-direction:column;margin:0 !important}
+.theme-guide-body{overflow:auto;padding:12px 14px;max-height:calc(88vh - 44px);box-sizing:border-box}
+.theme-guide-hint{margin:0 0 10px;font-size:13px}
+.theme-guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.theme-guide-pick{width:100%;height:auto;min-height:28px;padding:4px 10px;justify-content:flex-start;text-align:left;white-space:normal}
+.theme-guide-detail{margin-top:12px;padding:10px 12px}
+.theme-guide-detail[hidden]{display:none}
+.theme-guide-detail h3{margin:0 0 6px;font-size:16px}
+.theme-guide-detail p{margin:4px 0;font-size:14px;line-height:1.5}
+
+/* The guide's buttons: one rounded corner (6 px) and no bevel in every layout, so the Win9X square-and-bevel
+   corners of the Retro-type layouts do not show here. Each layout still sets their colours and their outline. */
+html body .theme-guide-overlay .theme-guide-pick,
+html body .theme-guide-overlay .theme-guide-pick:hover,
+html body .theme-guide-overlay .theme-guide-pick:active,
+html body .theme-guide-overlay .theme-guide-pick.primary{
+  border-radius:6px !important;
+  box-shadow:none !important;
+}
+/* the same even 1 px outline on every guide button (the layouts' bevelled border colours are not used here) */
+html body .theme-guide-overlay .theme-guide-pick,
+html body .theme-guide-overlay .theme-guide-pick:hover,
+html body .theme-guide-overlay .theme-guide-pick:active,
+html body .theme-guide-overlay .theme-guide-pick.primary{
+  border:1px solid rgba(0,0,0,.35) !important;
+}

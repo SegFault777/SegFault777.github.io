@@ -1,0 +1,118 @@
+/* NeXTSTEP (NeXT Computer, NeXTSTEP 3.x colour interface). Every colour is the exact RGB value sampled from the
+   reference screen (a 1024x768 NeXTSTEP capture): desktop #555577, window face #AAAAAA, bevels #FFFFFF and #555555,
+   outlines #000000, #00000B, #56576B, #555674, #AAA9AE, selected rows #FFFFFF, menu titles black with white text.
+   The NeXT logo and the application icons are not reproduced (they are Apple's). The type stays the Retro bitmap
+   face. Active only when body.nextstep-mode is set. */
+
+html body.nextstep-mode{
+  color:#000;
+  background-color:#555577 !important;
+  background-image:none !important;
+}
+
+/* menu titles: a black box with white text, as the NeXTSTEP menu bar */
+html body.nextstep-mode > header.top{background:transparent !important;border:0 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.nextstep-mode > header.top .topbar{height:20px !important;min-height:20px !important;padding:0 69px 0 0 !important;gap:0 !important;align-items:stretch}
+html body.nextstep-mode .logo{display:inline-flex;align-items:center;height:20px;padding:0 10px;background:#000;color:#fff;font-size:12px;text-shadow:none;letter-spacing:0}
+html body.nextstep-mode .logo .version{color:#fff;font-size:10px}
+html body.nextstep-mode .top .nav a,
+html body.nextstep-mode .top .lang-btn{display:inline-flex;align-items:center;height:20px;padding:0 9px;background:#000;color:#fff;border:0;border-radius:0;box-shadow:none;font-size:12px;text-shadow:none;line-height:20px}
+html body.nextstep-mode .top .nav a:hover,
+html body.nextstep-mode .top .nav a.active,
+html body.nextstep-mode .top .lang.open .lang-btn{background:#fff;color:#000}
+html body.nextstep-mode .top .style-switch{background:#AAAAAA;border:1px solid #000;border-radius:0;height:20px;padding:0 4px;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #555555}
+html body.nextstep-mode .top .style-label{color:#000;font-size:10px;text-shadow:none}
+html body.nextstep-mode .top .style-toggle{background:#AAAAAA !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:none !important}
+html body.nextstep-mode .top .style-toggle span{background:#FFFFFF !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:none !important}
+html body.nextstep-mode .top .settings-btn{background:#000;color:#fff;border:0;border-radius:0;box-shadow:none;height:20px;min-height:20px;width:20px;min-width:20px;padding:0}
+html body.nextstep-mode .top .settings-btn:hover{background:#fff;color:#000}
+
+/* windows: a #AAAAAA face, a 1 px #AAA9AE edge, then the three outer rings of the reference (#00000B, #56576B, #555674)
+   against the #555577 desktop; the title band has the white top line and the #555555 / #000000 double rule below */
+html body.nextstep-mode .panel,
+html body.nextstep-mode .monitor,
+html body.nextstep-mode .terminal,
+html body.nextstep-mode #settingsOverlay .settings-panel{
+  position:relative;background:#AAAAAA !important;border:1px solid #AAA9AE !important;border-radius:0 !important;
+  box-shadow:0 0 0 1px #00000B,0 0 0 2px #56576B,0 0 0 3px #555674 !important;overflow:visible !important;
+  margin:4px 4px 8px !important;padding:4px !important;
+}
+html body.nextstep-mode .panel-head{position:relative;box-sizing:border-box;height:21px;min-height:21px;margin:0;padding:0;display:flex;align-items:center;justify-content:center;background:#AAAAAA;border:0;border-top:1px solid #FFFFFF;box-shadow:inset 0 -1px 0 #555555,inset 0 -2px 0 #000000;color:#000;text-shadow:none}
+html body.nextstep-mode .panel-head::before{content:none !important;display:none !important}
+html body.nextstep-mode .panel-head > span:not(.wc):not(.lq-lights){font-size:11px;letter-spacing:0;color:#000;text-shadow:none}
+html body.nextstep-mode .panel-head[data-status]::after{display:none}
+html body.nextstep-mode .panel:has(> .panel-head[data-status]) > :not(.panel-head){margin-top:0}
+html body.nextstep-mode .panel::before,
+html body.nextstep-mode .panel::after{content:none !important;display:none !important}
+/* window controls: the NeXTSTEP miniaturise/close buttons are small square bevelled tabs at the left; the close is
+   the transparent button that sits over the tab */
+html body.nextstep-mode .wc{position:absolute;left:4px;top:3px;display:flex;gap:2px;transform:none;z-index:3}
+html body.nextstep-mode .wc-b{width:13px;height:13px;min-width:0;min-height:0;padding:0;margin:0;border:1px solid #000;border-radius:0;background:#AAAAAA;color:transparent;font-size:0;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #555555}
+html body.nextstep-mode .wc-b svg{display:none}
+html body.nextstep-mode .wc-max,
+html body.nextstep-mode .wc-min{display:none !important}
+html body.nextstep-mode #settingsOverlay .settings-head{position:relative;box-sizing:border-box;height:21px;margin:0;padding:0;display:flex;align-items:center;justify-content:center;background:#AAAAAA;border:0;border-top:1px solid #FFFFFF;box-shadow:inset 0 -1px 0 #555555,inset 0 -2px 0 #000000;color:#000}
+html body.nextstep-mode #settingsOverlay .settings-close{position:absolute;left:4px;top:3px;width:13px;height:13px;min-width:0;min-height:0;padding:0;margin:0;border:1px solid #000;border-radius:0;background:#AAAAAA;color:transparent;font-size:0;box-shadow:inset 1px 1px 0 #fff,inset -1px -1px 0 #555555;z-index:3}
+html body.nextstep-mode #settingsOverlay .settings-close svg{display:none}
+
+/* content: white text areas inset with #555555 / #FFFFFF bevels; cards are the same inset face */
+html body.nextstep-mode .card,
+html body.nextstep-mode .fact,
+html body.nextstep-mode .note{background:#AAAAAA;border:1px solid #555555;border-radius:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #000000;color:#000}
+html body.nextstep-mode .card h3,
+html body.nextstep-mode .fact strong{color:#000;text-shadow:none}
+html body.nextstep-mode .card p,
+html body.nextstep-mode .fact small{color:#000}
+html body.nextstep-mode .head{background:#AAAAAA;border:1px solid #555555;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #000000;padding:8px 12px}
+html body.nextstep-mode .head h2,
+html body.nextstep-mode .head p,
+html body.nextstep-mode .hero h1,
+html body.nextstep-mode .hero p{color:#000;text-shadow:none}
+html body.nextstep-mode .eyebrow{color:#000;text-shadow:none;background:#FFFFFF;border:1px solid #000;display:inline-block;padding:0 4px}
+html body.nextstep-mode .tag,
+html body.nextstep-mode .badge{background:#FFFFFF;color:#000;border:1px solid #000;border-radius:0;box-shadow:none;text-shadow:none}
+html body.nextstep-mode .terminal{background:#FFFFFF;box-shadow:inset 1px 1px 0 #555555,inset -1px -1px 0 #FFFFFF,0 0 0 1px #00000B,0 0 0 2px #56576B,0 0 0 3px #555674 !important}
+html body.nextstep-mode .terminal pre{color:#000;background:transparent}
+html body.nextstep-mode .terminal pre .dim,
+html body.nextstep-mode .terminal pre .cyan,
+html body.nextstep-mode .terminal pre .green{color:#000}
+html body.nextstep-mode footer{background:transparent;color:#fff;border:0;text-shadow:none}
+
+/* push buttons: a #AAAAAA face with a white top-left and a dark bottom-right bevel; pressed or hovered they invert
+   the bevel, like the NeXTSTEP push button */
+html body.nextstep-mode .btn{display:inline-flex;align-items:center;justify-content:center;height:24px;padding:0 12px;background:#AAAAAA;color:#000;border:1px solid #000;border-radius:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #555555,inset -2px -2px 0 #000000;font-size:12px;text-shadow:none;transform:none}
+html body.nextstep-mode .btn:hover{background:#AAAAAA}
+html body.nextstep-mode .btn:active{background:#AAAAAA;box-shadow:inset 1px 1px 0 #555555,inset -1px -1px 0 #FFFFFF}
+html body.nextstep-mode .btn.primary{box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #555555,inset -2px -2px 0 #000000,0 0 0 1px #000000}
+
+/* settings controls: the popup is a white field; the switch is a bevelled tab */
+html body.nextstep-mode #settingsOverlay .settings-lang-select{background:#FFFFFF;color:#000;border:1px solid #000;border-radius:0;height:24px;padding:0 6px;box-shadow:inset 1px 1px 0 #555555,inset -1px -1px 0 #FFFFFF;font-size:12px}
+html body.nextstep-mode #settingsOverlay .settings-row-label,
+html body.nextstep-mode #settingsOverlay .settings-kp-state{color:#000;text-shadow:none}
+html body.nextstep-mode #settingsOverlay #settingsKpToggle,
+html body.nextstep-mode #settingsOverlay #settingsMotionToggle{width:34px !important;height:16px !important;background:#AAAAAA !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #555555 !important}
+html body.nextstep-mode #settingsOverlay #settingsKpToggle span,
+html body.nextstep-mode #settingsOverlay #settingsMotionToggle span{top:2px !important;left:2px !important;width:10px !important;height:10px !important;background:#FFFFFF !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:none !important}
+html body.nextstep-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+html body.nextstep-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:#555555 !important}
+html body.nextstep-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"] span,
+html body.nextstep-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:20px !important}
+
+/* menus: a #AAAAAA panel with a black outline; the highlighted row is white with black text, as in the reference */
+html body.nextstep-mode .sel-menu.sel-menu{background:#AAAAAA !important;color:#000 !important;border:1px solid #000 !important;border-radius:0 !important;padding:2px 0 !important;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #555555 !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.nextstep-mode .sel-menu.sel-menu .sel-group{color:#000 !important;font-size:10px !important;font-weight:400 !important;border-bottom:1px solid #555555 !important;margin:0 !important;padding:6px 10px 2px !important}
+html body .sel-menu.sel-menu button.th-nextstep,
+html body.nextstep-mode .sel-menu.sel-menu button.th-nextstep{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;margin:0 !important;padding:3px 24px 3px 12px !important;position:relative !important;color:#000 !important;font-family:inherit !important;font-size:12px !important;font-weight:400 !important;width:100% !important;text-align:left !important}
+html body.nextstep-mode .sel-menu.sel-menu button.th-nextstep:hover,
+html body.nextstep-mode .sel-menu.sel-menu button.th-nextstep:focus-visible{background:#FFFFFF !important;color:#000 !important}
+html body.nextstep-mode .sel-menu.sel-menu button.th-nextstep.active:not(:hover){color:#000 !important;font-weight:400 !important;background:transparent !important}
+html body.nextstep-mode .sel-menu.sel-menu button.th-nextstep .check{position:absolute !important;right:8px !important;top:50% !important;transform:translateY(-50%) !important;float:none !important;display:block !important;margin:0 !important;color:#000 !important}
+
+/* dock: the right-hand column of #555577 with bevelled tiles (the reference's #FFFFFF highlight and #000004 top edge);
+   the application icons are left out */
+html body.nextstep-mode .ns-dock{display:flex !important;position:fixed;top:0;right:0;bottom:0;width:69px;background:#555577;z-index:1;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 0}
+html body.nextstep-mode .ns-dock i{display:block;width:60px;height:60px;background:#8B8B97;border:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset 2px 2px 0 #FFFDFF,inset -1px -1px 0 #555555,inset 0 -2px 0 #000000,0 0 0 1px #000004}
+@media (min-width:900px){html body.nextstep-mode main{padding-right:80px}}
+
+/* outside NeXTSTEP the dock column is not shown */
+html body:not(.nextstep-mode) .ns-dock{display:none !important}

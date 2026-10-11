@@ -63,41 +63,50 @@ x86 emulator, with **32 MB of RAM** and 8 MB of video memory.
 
 ## Layouts (themes)
 
-The site has **20 layouts** plus an **OldRetro** mode (a DOS-style text shell with a BIOS-style picker). Choose
+The site has **24 layouts** plus an **OldRetro** mode (a DOS-style text shell with a BIOS-style setup screen: Display Mode, Language, Munhwaeo and Reduce motion, with every layout listed). Choose
 one in **Settings → Layout**, or switch between Retro and Modern with the header toggle.
 
-**Retro family:** Retro, OldRetro, Luna (Windows XP), Aqua (Mac OS X 10.0–10.3), System 6, Platinum Lavender,
-Platinum Lime, Platinum Magenta (Mac OS 9).
+**Retro family:** Retro, OldRetro, Luna (Windows XP), Aqua (Mac OS X 10.0–10.3), System 6, NeXTSTEP, OS/2 (IBM OS/2 Warp 3 colours), BeOS (BeOS R5 colours), Platinum Lavender,
+Platinum Lime, Platinum Magenta (Mac OS 9). NeXTSTEP uses exact colours sampled from a NeXTSTEP 3.x screen,
+with the dock column on the right; its logo and application icons are not reproduced. OS/2 uses the exact colours
+of an OS/2 Warp 3 screen; the Warp wallpaper and logo are not reproduced.
 
-**Modern family:** Modern, Mid Aqua (Mac OS X 10.4–10.9), Modern Aqua (10.10–10.15), Material,
+**Modern family:** Modern, Mid Aqua (Mac OS X 10.4–10.9), Modern Aqua (10.10–10.15), Material, Plastik (KDE 3.5),
 Modern Glass, Aero, Breeze, Flat, Adwaita, Mica, Oxygen, Sequoia, Liquid Glass.
 
 Each visitor starts with a layout that matches their operating system:
 
-| Operating system | Default |
+| Device | Default layout |
 |---|---|
-| Windows 11 | Mica |
-| Windows 10, 8 | Flat |
-| Windows 7, Vista | Aero |
-| Windows XP | Luna |
-| Windows 2000, 9x | Retro |
-| macOS 26 and later | Liquid Glass |
-| macOS 11–15 | Sequoia |
-| macOS 10.10–10.15 | Modern Aqua |
-| macOS 10.4–10.9 | Mid Aqua |
-| macOS 10.0–10.3 | Aqua |
-| iOS | Sequoia |
-| Android | Material |
-| Linux and everything else | Modern |
+| Windows 9x, or Windows NT 5.0 and lower (Win 95 – Win ME / Windows 2000 / Windows 2000 Server) | Retro |
+| Windows NT 5.1 or 5.2 (Windows XP / Windows Server 2003) | Luna |
+| Windows NT 6.0 or 6.1 (Windows Vista / Windows 7 / Windows Server 2008 / 2008 R2) | Aero |
+| Windows NT 6.2 – 10.0 (Windows 8 – Windows 10 / Windows Server 2016 – 2022) | Flat |
+| Windows NT 10.0 with the Windows 11 Client Hints (Windows 11 / Windows Server 2025) | Mica |
+| Mac OS X 10.0 (Cheetah) – Mac OS X 10.3 (Panther) | Old Aqua |
+| Mac OS X 10.4 (Tiger) – OS X 10.9 (Mavericks) | Mid Aqua |
+| OS X 10.10 (Yosemite) – macOS 10.15 (Catalina) | Modern Aqua |
+| macOS 11 (Big Sur) – macOS 15 (Sequoia) | Sequoia |
+| macOS 26 (Tahoe), macOS 27 (Golden Gate) | Liquid Glass |
+| Classic Mac OS, 68K (System 1 – Mac OS 7) | System 6 |
+| Classic Mac OS 8 / 9 (PowerPC) | Platinum Lavender |
+| NeXTSTEP | NeXTSTEP |
+| OS/2 Warp 1 – Warp 4 | OS/2 |
+| BeOS DR1 – R5 | BeOS |
+| Android (all devices) | Material |
+| iOS, iPadOS | Sequoia |
+| Linux (GNOME) | Adwaita |
+| Anything else | Modern |
 
-**Detection.** Windows 11 and 10 both report `NT 10.0`, so Chromium's Client Hints tell them apart; Firefox and
-Safari treat Windows 11 as Windows 10. Safari and Chromium freeze the macOS version in the user agent at `10_15_7`,
-so that value is treated as Sequoia unless Client Hints give the real version. Linux always gets Modern, because a
-web page cannot tell KDE from GNOME.
+Not chosen automatically: OldRetro (only in special cases), Platinum Lime and Platinum Magenta, Modern Glass, Plastik,
+Breeze and Oxygen (a KDE version cannot be detected). Browsers cannot report the classic Mac, NeXTSTEP, OS/2 and BeOS
+systems reliably, so those are matched by the names their user agents contain. Safari and Chromium freeze the macOS
+version at 10_15_7 in the user agent; Chromium's Client Hints give the real version, and Safari cannot tell Catalina
+from Sequoia.
 
 ## Settings
 
-The gear button opens the settings window.
+The gear button opens the settings window. The **?** next to the Layout setting opens the layout guide: a window with a button for every layout (OldRetro included); a click shows its description as five labelled lines (motif, features, devices, pros and cons), in Korean or English.
 
 | Item | Saved as | Notes |
 |---|---|---|
@@ -117,6 +126,8 @@ Arabic and Hindi.
 
 The section 06 strings and the newest feature text are written in English and Korean; the other languages show
 English for those keys until they are translated.
+
+The interface text (navigation, section titles, buttons, the demo's labels and the settings window) is translated into every language listed above. The page's long explanatory paragraphs are translated into every language listed above. The detailed help texts (the munhwaeo note, the BIOS help) and the layout guide descriptions are still in Korean and English. The munhwaeo variant (ko-kp) is written in the North Korean standard orthography (for example 련결 and 로동 keep their initial ㄹ, and 화상, 기동, 페지 and 콤퓨터 are used).
 
 ## External resources
 

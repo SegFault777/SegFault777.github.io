@@ -1,0 +1,117 @@
+/* OS/2 (IBM OS/2 Warp 3, Presentation Manager). Every colour is the exact RGB value sampled from a 1024x768 OS/2
+   Warp reference screen: face #CACACA, highlight #FFFFFF, shadow #818181, outline #000000, active title #2800AA,
+   the navy and blue of the desktop #000055 / #0000AA, and the 50% #818181 / #FFFFFF dither of a selected icon.
+   The Warp wallpaper picture and logo are not reproduced (they are IBM's): the desktop is the two colours of its
+   dither, in a checker. The type stays the Retro bitmap face. Active only when body.os2-mode is set. */
+
+html body.os2-mode{
+  color:#000;
+  background-color:#0000AA !important;
+  background-image:conic-gradient(#000055 0 25%,#0000AA 25% 50%,#000055 50% 75%,#0000AA 75% 100%) !important;
+  background-size:2px 2px !important;
+  background-repeat:repeat !important;
+  background-attachment:scroll !important;
+}
+
+/* the Warp system bar at the top: a #CACACA bar, a white line above it and a black line under it */
+html body.os2-mode > header.top{background:linear-gradient(to bottom,#CACACA 0 1px,#FFFFFF 1px 2px,#CACACA 2px 100%) !important;border:0 !important;border-bottom:1px solid #000000 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.os2-mode > header.top .topbar{height:24px !important;min-height:24px !important;padding:0 !important;gap:0 !important;align-items:center}
+html body.os2-mode .logo{display:inline-flex;align-items:center;height:24px;padding:0 8px;color:#000;font-size:12px;text-shadow:none;letter-spacing:0}
+html body.os2-mode .logo .version{color:#000;font-size:10px}
+html body.os2-mode .top .nav a,
+html body.os2-mode .top .lang-btn{display:inline-flex;align-items:center;height:24px;padding:0 8px;background:transparent;color:#000;border:0;border-radius:0;box-shadow:none;font-size:12px;text-shadow:none;line-height:24px}
+html body.os2-mode .top .nav a:hover,
+html body.os2-mode .top .nav a.active,
+html body.os2-mode .top .lang.open .lang-btn{background:#2800AA;color:#FFFFFF}
+html body.os2-mode .top .style-switch{background:#CACACA;border:0;border-radius:0;height:20px;padding:0 4px;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #818181}
+html body.os2-mode .top .style-label{color:#000;font-size:10px;text-shadow:none}
+html body.os2-mode .top .style-toggle{background:#CACACA !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #818181 !important}
+html body.os2-mode .top .style-toggle span{background:#FFFFFF !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:none !important}
+html body.os2-mode .top .settings-btn{background:#CACACA;color:#000;border:0;border-radius:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #818181,1px 1px 0 #000000;height:20px;min-height:20px;width:22px;min-width:22px;padding:0}
+html body.os2-mode .top .settings-btn:hover{background:#2800AA;color:#FFFFFF}
+
+/* windows: the #CACACA face with a white top-left highlight, a #818181 edge and a black outline on the bottom and the
+   right; the active title bar is #2800AA, 20 rows high, with a white line under it */
+html body.os2-mode .panel,
+html body.os2-mode .monitor,
+html body.os2-mode .terminal,
+html body.os2-mode #settingsOverlay .settings-panel{
+  position:relative;background:#CACACA !important;border:1px solid #818181 !important;border-radius:0 !important;
+  box-shadow:inset 1px 1px 0 #FFFFFF,1px 1px 0 #000000 !important;overflow:visible !important;
+  margin:4px 6px 10px !important;padding:5px 4px 4px 4px !important;
+}
+html body.os2-mode .panel-head{position:relative;box-sizing:border-box;height:21px;min-height:21px;margin:0;padding:0;display:flex;align-items:center;justify-content:center;background:#2800AA;border:0;border-bottom:1px solid #FFFFFF;box-shadow:none;color:#FFFFFF;text-shadow:none}
+html body.os2-mode .panel-head::before{content:none !important;display:none !important}
+html body.os2-mode .panel-head > span:not(.wc):not(.lq-lights){font-size:11px;letter-spacing:0;color:#FFFFFF;text-shadow:none}
+html body.os2-mode .panel-head[data-status]::after{display:none}
+html body.os2-mode .panel:has(> .panel-head[data-status]) > :not(.panel-head){margin-top:0}
+html body.os2-mode .panel::before,
+html body.os2-mode .panel::after{content:none !important;display:none !important}
+/* window controls: the Warp title-bar buttons at the right of the title bar; the close button is the transparent
+   button over the rightmost button */
+html body.os2-mode .wc{position:absolute;right:4px;top:3px;display:flex;gap:2px;left:auto;transform:none;z-index:3}
+html body.os2-mode .wc-b{width:14px;height:14px;min-width:0;min-height:0;padding:0;margin:0;border:0;border-radius:0;background:#CACACA;color:transparent;font-size:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #818181,1px 1px 0 #000000}
+html body.os2-mode .wc-b svg{display:none}
+html body.os2-mode .wc-max,
+html body.os2-mode .wc-min{display:none !important}
+html body.os2-mode #settingsOverlay .settings-head{position:relative;box-sizing:border-box;height:21px;margin:0;padding:0;display:flex;align-items:center;justify-content:center;background:#2800AA;border:0;border-bottom:1px solid #FFFFFF;color:#FFFFFF}
+html body.os2-mode #settingsOverlay .settings-close{position:absolute;right:4px;top:3px;width:14px;height:14px;min-width:0;min-height:0;padding:0;margin:0;border:0;border-radius:0;background:#CACACA;color:transparent;font-size:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #818181,1px 1px 0 #000000;z-index:3}
+html body.os2-mode #settingsOverlay .settings-close svg{display:none}
+
+/* content: white list areas inset with the same bevel; cards are #CACACA with the frame above */
+html body.os2-mode .card,
+html body.os2-mode .fact,
+html body.os2-mode .note{background:#CACACA;border:1px solid #818181;border-radius:0;box-shadow:inset 1px 1px 0 #FFFFFF,1px 1px 0 #000000;color:#000}
+html body.os2-mode .card h3,
+html body.os2-mode .fact strong{color:#000;text-shadow:none}
+html body.os2-mode .card p,
+html body.os2-mode .fact small{color:#000}
+html body.os2-mode .head{background:#CACACA;border:1px solid #818181;box-shadow:inset 1px 1px 0 #FFFFFF,1px 1px 0 #000000;padding:8px 12px}
+html body.os2-mode .head h2,
+html body.os2-mode .head p,
+html body.os2-mode .hero h1,
+html body.os2-mode .hero p{color:#000;text-shadow:none}
+html body.os2-mode .eyebrow{color:#000;text-shadow:none;background:#FFFFFF;border:1px solid #818181;display:inline-block;padding:0 4px}
+html body.os2-mode .tag,
+html body.os2-mode .badge{background:#FFFFFF;color:#000;border:1px solid #818181;border-radius:0;box-shadow:none;text-shadow:none}
+html body.os2-mode .terminal{background:#FFFFFF}
+html body.os2-mode .terminal pre{color:#000;background:transparent}
+html body.os2-mode .terminal pre .dim,
+html body.os2-mode .terminal pre .cyan,
+html body.os2-mode .terminal pre .green{color:#000}
+html body.os2-mode footer{background:transparent;color:#FFFFFF;border:0;text-shadow:none}
+
+/* push buttons: the Warp face #CACACA with a white top-left and a #818181 / #000000 bottom-right bevel; pressed, the
+   bevel inverts */
+html body.os2-mode .btn{display:inline-flex;align-items:center;justify-content:center;height:26px;padding:0 14px;background:#CACACA;color:#000;border:0;border-radius:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #818181,1px 1px 0 #000000,1px 1px 0 1px #000000;font-size:12px;text-shadow:none;transform:none}
+html body.os2-mode .btn:hover{background:#CACACA}
+html body.os2-mode .btn:active{background:#CACACA;box-shadow:inset 1px 1px 0 #818181,inset -1px -1px 0 #FFFFFF}
+html body.os2-mode .btn.primary{box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #818181,0 0 0 1px #000000,1px 1px 0 #000000}
+
+/* settings controls: a white field with the bevel; the switch is a bevelled tab */
+html body.os2-mode #settingsOverlay .settings-lang-select{background:#FFFFFF;color:#000;border:1px solid #818181;border-radius:0;height:24px;padding:0 6px;box-shadow:inset 1px 1px 0 #818181,inset -1px -1px 0 #FFFFFF;font-size:12px}
+html body.os2-mode #settingsOverlay .settings-row-label,
+html body.os2-mode #settingsOverlay .settings-kp-state{color:#000;text-shadow:none}
+html body.os2-mode #settingsOverlay #settingsKpToggle,
+html body.os2-mode #settingsOverlay #settingsMotionToggle{width:34px !important;height:16px !important;background:#CACACA !important;border:1px solid #818181 !important;border-radius:0 !important;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #818181 !important}
+html body.os2-mode #settingsOverlay #settingsKpToggle span,
+html body.os2-mode #settingsOverlay #settingsMotionToggle span{top:2px !important;left:2px !important;width:10px !important;height:10px !important;background:#FFFFFF !important;border:1px solid #000 !important;border-radius:0 !important;box-shadow:none !important}
+html body.os2-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+html body.os2-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:#2800AA !important}
+html body.os2-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"] span,
+html body.os2-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:20px !important}
+
+/* menus: a #CACACA popup with a black outline; the highlighted row is the active title navy with white text */
+html body.os2-mode .sel-menu.sel-menu{background:#CACACA !important;color:#000 !important;border:1px solid #000 !important;border-radius:0 !important;padding:2px 0 !important;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #818181 !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.os2-mode .sel-menu.sel-menu .sel-group{color:#000 !important;font-size:10px !important;font-weight:400 !important;border-bottom:1px solid #818181 !important;margin:0 !important;padding:6px 10px 2px !important}
+html body .sel-menu.sel-menu button.th-os2,
+html body.os2-mode .sel-menu.sel-menu button.th-os2{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;margin:0 !important;padding:3px 24px 3px 12px !important;position:relative !important;color:#000 !important;font-family:inherit !important;font-size:12px !important;font-weight:400 !important;width:100% !important;text-align:left !important}
+html body.os2-mode .sel-menu.sel-menu button.th-os2:hover,
+html body.os2-mode .sel-menu.sel-menu button.th-os2:focus-visible{background:#2800AA !important;color:#FFFFFF !important}
+html body.os2-mode .sel-menu.sel-menu button.th-os2.active:not(:hover){color:#000 !important;font-weight:400 !important;background:transparent !important}
+html body.os2-mode .sel-menu.sel-menu button.th-os2 .check{position:absolute !important;right:8px !important;top:50% !important;transform:translateY(-50%) !important;float:none !important;display:block !important;margin:0 !important;color:#000 !important}
+html body.os2-mode .sel-menu.sel-menu button.th-os2:hover .check,
+html body.os2-mode .sel-menu.sel-menu button.th-os2:focus-visible .check{color:#FFFFFF !important}
+
+/* outside OS/2 the taskbar is not shown */
+html body:not(.os2-mode) .os2-only{display:none !important}

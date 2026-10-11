@@ -86,5 +86,16 @@
   "html_p": "A from-scratch engine: a spec-style HTML tokenizer and tree builder, CSS with selectors, @media, var() and calc(), block, inline, table, flexbox and grid layout, and form controls. Images, JavaScript and external stylesheets are not there yet.",
   "mwp_title": "Loadable .mwp programs",
   "mwp_p": "A flat, no-ELF program loader: a .mwp is built apart from the kernel, copied to a fixed address and started, and talks to the OS through one fixed-address syscall table. GREETER.MWP proves it end to end. There is no memory protection.",
-  "releases": "DOWNLOAD DISK IMAGE"
+  "releases": "DOWNLOAD DISK IMAGE",
+  "set_title": "Settings",
+  "set_language": "Language",
+  "set_close": "Close",
+  "set_on": "On",
+  "set_off": "Off",
+  "set_motion": "Reduce motion",
+  "set_displayMode": "Display mode",
+  "set_layout": "Layout",
+  "set_kpDefault": "Use Munhwaeo by default",
+  "set_diffBtn": "Difference between Retro and OldRetro",
+  "set_biosLabel": "Display Mode",
 };

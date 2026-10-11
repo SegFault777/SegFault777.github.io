@@ -1,0 +1,126 @@
+/* BeOS (Be Inc., BeOS R5). Every colour is the exact RGB value sampled from a 1024x768 BeOS R5 reference screen:
+   desktop #31659C, window face #DEDBDE, title band #EFEBEF, title text #525152, client white #FFFFFF, the
+   bevel #9C9A9C / #636163 / #EFEBEF, and the selection blue #0000B5 with white text. The Be logo, the application
+   icons and the NetPositive and GLTeapot content are not reproduced. The type stays the Retro bitmap face.
+   Active only when body.beos-mode is set. */
+
+html body.beos-mode{
+  color:#000;
+  background-color:#31659C !important;
+  background-image:none !important;
+}
+
+/* the deskbar at the top: a #DEDBDE bar with a white top line and a #9C9A9C bottom line */
+html body.beos-mode > header.top{background:linear-gradient(to bottom,#EFEFEF 0 1px,#FFFFFF 1px 2px,#DEDBDE 2px 100%) !important;border:0 !important;border-bottom:1px solid #9C9A9C !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.beos-mode > header.top .topbar{height:24px !important;min-height:24px !important;padding:0 !important;gap:0 !important;align-items:center}
+html body.beos-mode .logo{display:inline-flex;align-items:center;height:24px;padding:0 8px;color:#000;font-size:12px;text-shadow:none;letter-spacing:0}
+html body.beos-mode .logo .version{color:#525152;font-size:10px}
+html body.beos-mode .top .nav a,
+html body.beos-mode .top .lang-btn{display:inline-flex;align-items:center;height:24px;padding:0 8px;background:transparent;color:#000;border:0;border-radius:0;box-shadow:none;font-size:12px;text-shadow:none;line-height:24px}
+html body.beos-mode .top .nav a:hover,
+html body.beos-mode .top .nav a.active,
+html body.beos-mode .top .lang.open .lang-btn{background:#0000B5;color:#FFFFFF}
+html body.beos-mode .top .style-switch{background:#DEDBDE;border:1px solid #9C9A9C;border-radius:0;height:20px;padding:0 4px;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #636163}
+html body.beos-mode .top .style-label{color:#000;font-size:10px;text-shadow:none}
+html body.beos-mode .top .style-toggle{background:#DEDBDE !important;border:1px solid #636163 !important;border-radius:0 !important;box-shadow:inset 1px 1px 0 #FFFFFF !important}
+html body.beos-mode .top .style-toggle span{background:#FFFFFF !important;border:1px solid #636163 !important;border-radius:0 !important;box-shadow:none !important}
+html body.beos-mode .top .settings-btn{background:#DEDBDE;color:#000;border:1px solid #9C9A9C;border-radius:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #636163;height:20px;min-height:20px;width:22px;min-width:22px;padding:0}
+html body.beos-mode .top .settings-btn:hover{background:#0000B5;color:#FFFFFF}
+
+/* windows, measured on the BeOS R5 reference (corners included):
+   left and top (outer to inner): #9C9A9C, #FFFFFF, #EFEBEF, #9C9A9C, #9C9A9C
+   right and bottom (outer to inner): #636163, #9C9A9C, #EFEBEF, #FFFFFF, #9C9A9C
+   The top of a window with a title tab is 3 rows (#9C9A9C, #FFFFFF, #EFEBEF); the tab band itself is #EFEBEF with
+   two #9C9A9C rows under it. The client area inside the bevel is white. The corners are square: the right and bottom
+   shadows are listed first, so the dark outline wins at the top-right and bottom-left corners, as in the reference. */
+html body.beos-mode .panel,
+html body.beos-mode .monitor,
+html body.beos-mode .terminal,
+html body.beos-mode #settingsOverlay .settings-panel{
+  position:relative;background:#FFFFFF !important;border:0 !important;border-radius:0 !important;
+  box-shadow:
+    inset -1px 0 0 0 #636163,inset -2px 0 0 0 #9C9A9C,inset -3px 0 0 0 #EFEBEF,inset -4px 0 0 0 #FFFFFF,inset -5px 0 0 0 #9C9A9C,
+    inset 0 -1px 0 0 #636163,inset 0 -2px 0 0 #9C9A9C,inset 0 -3px 0 0 #EFEBEF,inset 0 -4px 0 0 #FFFFFF,inset 0 -5px 0 0 #9C9A9C,
+    inset 1px 0 0 0 #9C9A9C,inset 2px 0 0 0 #FFFFFF,inset 3px 0 0 0 #EFEBEF,inset 4px 0 0 0 #9C9A9C,inset 5px 0 0 0 #9C9A9C,
+    inset 0 1px 0 0 #9C9A9C,inset 0 2px 0 0 #FFFFFF,inset 0 3px 0 0 #EFEBEF !important;
+  overflow:visible !important;margin:24px 6px 10px !important;padding:6px 5px 5px 5px !important;
+}
+/* the title tab: #EFEBEF with a white top line, #525152 title text and a #9C9A9C rule under it */
+/* the title tab protrudes above the window at the top-left, as in the reference: 19 px above the window's top edge,
+   24 px tall (its top bevel is #9C9A9C, #FFFFFF, #EFEBEF; its right edge is #636163 with a #9C9A9C column beside it; its
+   bottom is two #9C9A9C rows, the same rule as the window's top). Its width follows the title. */
+html body.beos-mode .panel-head{position:absolute;left:0;top:-19px;height:24px;box-sizing:border-box;width:max-content;min-width:124px;margin:0;padding:0 26px 0 36px;display:flex;align-items:center;justify-content:center;background:#EFEBEF;border:0;color:#525152;text-shadow:none;z-index:4;
+  box-shadow:inset -1px 0 0 0 #636163,inset -2px 0 0 0 #9C9A9C,inset -3px 0 0 0 #EFEBEF,inset -4px 0 0 0 #FFFFFF,
+             inset 1px 0 0 0 #9C9A9C,inset 2px 0 0 0 #FFFFFF,inset 3px 0 0 0 #EFEBEF,
+             inset 0 -1px 0 0 #9C9A9C,inset 0 -2px 0 0 #9C9A9C,
+             inset 0 1px 0 0 #9C9A9C,inset 0 2px 0 0 #FFFFFF,inset 0 3px 0 0 #EFEBEF}
+html body.beos-mode .panel-head::before{content:none !important;display:none !important}
+html body.beos-mode .panel-head > span:not(.wc):not(.lq-lights){font-size:11px;letter-spacing:0;color:#525152;text-shadow:none}
+html body.beos-mode .panel-head[data-status]::after{display:none}
+html body.beos-mode .panel:has(> .panel-head[data-status]) > :not(.panel-head){margin-top:0}
+html body.beos-mode .panel::before,
+html body.beos-mode .panel::after{content:none !important;display:none !important}
+/* window controls: the BeOS tab buttons at the left of the title (close) and right (zoom) */
+html body.beos-mode .wc{position:absolute;left:4px;top:4px;display:flex;gap:2px;transform:none;z-index:3}
+html body.beos-mode .wc-b{width:11px;height:11px;min-width:0;min-height:0;padding:0;margin:0;border:1px solid #636163;border-radius:0;background:#DEDBDE;color:transparent;font-size:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #9C9A9C}
+html body.beos-mode .wc-b svg{display:none}
+html body.beos-mode .wc-max,
+html body.beos-mode .wc-min{display:none !important}
+html body.beos-mode #settingsOverlay .settings-head{position:absolute;left:0;top:-19px;height:24px;box-sizing:border-box;width:max-content;min-width:124px;margin:0;padding:0 26px 0 36px;display:flex;align-items:center;justify-content:center;background:#EFEBEF;border:0;color:#525152;z-index:4;
+  box-shadow:inset -1px 0 0 0 #636163,inset -2px 0 0 0 #9C9A9C,inset -3px 0 0 0 #EFEBEF,inset -4px 0 0 0 #FFFFFF,inset 1px 0 0 0 #9C9A9C,inset 2px 0 0 0 #FFFFFF,inset 3px 0 0 0 #EFEBEF,inset 0 -1px 0 0 #9C9A9C,inset 0 -2px 0 0 #9C9A9C,inset 0 1px 0 0 #9C9A9C,inset 0 2px 0 0 #FFFFFF,inset 0 3px 0 0 #EFEBEF}
+html body.beos-mode #settingsOverlay .settings-close{position:absolute;left:4px;top:4px;width:11px;height:11px;min-width:0;min-height:0;padding:0;margin:0;border:1px solid #636163;border-radius:0;background:#DEDBDE;color:transparent;font-size:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #9C9A9C;z-index:3}
+html body.beos-mode #settingsOverlay .settings-close svg{display:none}
+
+/* content: the white client area inside the bevel; cards are white with the same bevel */
+html body.beos-mode .card,
+html body.beos-mode .fact,
+html body.beos-mode .note{background:#FFFFFF;border:1px solid #9C9A9C;border-radius:0;box-shadow:inset 1px 1px 0 #636163,inset -1px -1px 0 #FFFFFF;color:#000}
+html body.beos-mode .card h3,
+html body.beos-mode .fact strong{color:#000;text-shadow:none}
+html body.beos-mode .card p,
+html body.beos-mode .fact small{color:#000}
+html body.beos-mode .head{background:#DEDBDE;border:1px solid #9C9A9C;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #636163;padding:8px 12px}
+html body.beos-mode .head h2,
+html body.beos-mode .head p,
+html body.beos-mode .hero h1,
+html body.beos-mode .hero p{color:#000;text-shadow:none}
+html body.beos-mode .eyebrow{color:#000;text-shadow:none;background:#FFFFFF;border:1px solid #9C9A9C;display:inline-block;padding:0 4px}
+html body.beos-mode .tag,
+html body.beos-mode .badge{background:#FFFFFF;color:#000;border:1px solid #9C9A9C;border-radius:0;box-shadow:none;text-shadow:none}
+html body.beos-mode .terminal{background:#FFFFFF}
+html body.beos-mode .terminal pre{color:#000;background:transparent}
+html body.beos-mode .terminal pre .dim,
+html body.beos-mode .terminal pre .cyan,
+html body.beos-mode .terminal pre .green{color:#000}
+html body.beos-mode footer{background:transparent;color:#FFFFFF;border:0;text-shadow:none}
+
+/* buttons: the #DEDBDE face with a white top-left and a #9C9A9C / #636163 bottom-right bevel; pressed, it inverts */
+html body.beos-mode .btn{display:inline-flex;align-items:center;justify-content:center;height:24px;padding:0 12px;background:#DEDBDE;color:#000;border:1px solid #636163;border-radius:0;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #9C9A9C;font-size:12px;text-shadow:none;transform:none}
+html body.beos-mode .btn:hover{background:#DEDBDE}
+html body.beos-mode .btn:active{background:#DEDBDE;box-shadow:inset 1px 1px 0 #9C9A9C,inset -1px -1px 0 #FFFFFF}
+html body.beos-mode .btn.primary{border:1px solid #000}
+
+/* settings controls: a white field with the bevel; the switch is a bevelled tab */
+html body.beos-mode #settingsOverlay .settings-lang-select{background:#FFFFFF;color:#000;border:1px solid #636163;border-radius:0;height:24px;padding:0 6px;box-shadow:inset 1px 1px 0 #9C9A9C,inset -1px -1px 0 #FFFFFF;font-size:12px}
+html body.beos-mode #settingsOverlay .settings-row-label,
+html body.beos-mode #settingsOverlay .settings-kp-state{color:#000;text-shadow:none}
+html body.beos-mode #settingsOverlay #settingsKpToggle,
+html body.beos-mode #settingsOverlay #settingsMotionToggle{width:34px !important;height:16px !important;background:#DEDBDE !important;border:1px solid #636163 !important;border-radius:0 !important;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #9C9A9C !important}
+html body.beos-mode #settingsOverlay #settingsKpToggle span,
+html body.beos-mode #settingsOverlay #settingsMotionToggle span{top:2px !important;left:2px !important;width:10px !important;height:10px !important;background:#FFFFFF !important;border:1px solid #636163 !important;border-radius:0 !important;box-shadow:none !important}
+html body.beos-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+html body.beos-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:#0000B5 !important}
+html body.beos-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"] span,
+html body.beos-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:20px !important}
+
+/* menus: a #DEDBDE popup with a #636163 outline; the highlighted row is #0000B5 with white text */
+html body.beos-mode .sel-menu.sel-menu{background:#DEDBDE !important;color:#000 !important;border:1px solid #636163 !important;border-radius:0 !important;padding:2px 0 !important;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #9C9A9C !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.beos-mode .sel-menu.sel-menu .sel-group{color:#525152 !important;font-size:10px !important;font-weight:400 !important;border-bottom:1px solid #9C9A9C !important;margin:0 !important;padding:6px 10px 2px !important}
+html body .sel-menu.sel-menu button.th-beos,
+html body.beos-mode .sel-menu.sel-menu button.th-beos{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;margin:0 !important;padding:3px 24px 3px 12px !important;position:relative !important;color:#000 !important;font-family:inherit !important;font-size:12px !important;font-weight:400 !important;width:100% !important;text-align:left !important}
+html body.beos-mode .sel-menu.sel-menu button.th-beos:hover,
+html body.beos-mode .sel-menu.sel-menu button.th-beos:focus-visible{background:#0000B5 !important;color:#FFFFFF !important}
+html body.beos-mode .sel-menu.sel-menu button.th-beos.active:not(:hover){color:#000 !important;font-weight:400 !important;background:transparent !important}
+html body.beos-mode .sel-menu.sel-menu button.th-beos .check{position:absolute !important;right:8px !important;top:50% !important;transform:translateY(-50%) !important;float:none !important;display:block !important;margin:0 !important;color:#000 !important}
+html body.beos-mode .sel-menu.sel-menu button.th-beos:hover .check,
+html body.beos-mode .sel-menu.sel-menu button.th-beos:focus-visible .check{color:#FFFFFF !important}

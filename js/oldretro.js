@@ -292,7 +292,7 @@
   let settingsMotionToggleEl=null,settingsMotionLabelEl=null,settingsMotionStateEl=null,biosMotionItemEl=null;
   const SETTINGS_I18N={
     ko:{
-      title:'설정',close:'닫기',on:'켬',off:'끔',motion:'애니메이션 제거',biosHelpMotion:'애니메이션 제거: 등장 효과, 화면 전환, 부드러운 스크롤과 부팅 재생을 끕니다. 모바일에서는 기본으로 켜집니다. 선택은 이 기기에 저장됩니다.',displayMode:'화면 모드',layout:'레이아웃',retro:'Retro',oldretro:'OldRetro',glass:'Modern Glass',glassHelp:'Modern Glass는 반투명·블러·둥근 레이어를 사용하는 Apple 스타일의 유리 질감입니다.',kpDefault:'문화어 기본 활성화',
+      title:'설정',language:'언어',close:'닫기',on:'켬',off:'끔',motion:'애니메이션 제거',biosHelpMotion:'애니메이션 제거: 등장 효과, 화면 전환, 부드러운 스크롤과 부팅 재생을 끕니다. 모바일에서는 기본으로 켜집니다. 선택은 이 기기에 저장됩니다.',displayMode:'화면 모드',layout:'레이아웃',retro:'Retro',oldretro:'OldRetro',glass:'Modern Glass',glassHelp:'Modern Glass는 반투명·블러·둥근 레이어를 사용하는 Apple 스타일의 유리 질감입니다.',kpDefault:'문화어 기본 활성화',
       kpHelp:'문화어는 조선민주주의인민공화국(북한)의 표준어입니다. 이 설정을 켜 두면 언어 메뉴에서 한국어를 고를 때 기본으로 문화어 표기가 적용되고, 끄면 일반 한국어(남한 표준어) 표기로 보입니다. 영어 등 다른 언어에는 영향이 없으며, 선택은 이 기기에 저장됩니다.',
       biosHowDesktop:'이 창을 닫으려면 ESC를 누른 뒤 [Save & Exit]에서 Enter를 누르세요. 창 바깥을 눌러도 닫히지 않습니다.',
       biosHowTouch:'이 창을 닫으려면 창 바깥을 터치해 Save & Exit 창을 띄운 뒤 [Save & Exit]를 터치하세요.',
@@ -317,7 +317,7 @@
       biosHelpLuna:'Luna: Windows XP 스타일의 파란 타이틀바와 베이지색 창 화면입니다. 선택하면 OldRetro를 나가 Luna로 전환하며, 위쪽 토글로 Modern을 거쳐 돌아오면 Luna가 다시 열립니다.',biosHelpFlat:'Flat: Windows 8/10 스타일의 평평한 단색 화면입니다. 선택하면 OldRetro를 나가 Flat으로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.',biosHelpAdwaita:'Adwaita: GNOME Adwaita 스타일의 둥근 모서리 밝은 화면입니다. 선택하면 OldRetro를 나가 Adwaita로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.',biosHelpLuna:'Luna: the Windows XP look, with blue title bars and beige windows. Selecting it leaves OldRetro for Luna; switching back to Retro with the top toggle brings OldRetro back.',biosHelpFlat:'Flat: the flat, solid-colour Windows 8/10 look. Selecting it leaves OldRetro for Flat; switching back to Retro with the top toggle brings OldRetro back.',biosHelpAdwaita:'Adwaita: the rounded, light GNOME Adwaita look. Selecting it leaves OldRetro for Adwaita; switching back to Retro with the top toggle brings OldRetro back.',biosHelpAqua:'Aqua: Mac OS X의 Aqua 스타일입니다. 광택 메뉴바, 신호등 창 버튼, 파란 캡슐 버튼을 씁니다. 선택하면 OldRetro를 나가 Aqua로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.',biosHelpMica:'Mica: Windows 11 스타일의 밝은 표면, 둥근 모서리, 파란 강조색, 알약 모양 토글입니다. 선택하면 OldRetro를 나가 Mica로 전환합니다.',biosHelpOxygen:'Oxygen: 이전 KDE Plasma 4의 Oxygen 스타일입니다. 어두운 패널, 광택 버튼, 파란 강조색을 씁니다. 선택하면 OldRetro를 나가 Oxygen으로 전환합니다.',biosHelpSequoia:'Sequoia: macOS Sequoia(15)의 화면 스타일입니다. 반투명 메뉴 막대, 둥근 창, 신호등 모양 창 버튼과 시스템 파란색 강조색을 씁니다. 선택하면 OldRetro를 나가 Sequoia로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.',biosHelpLiquid:'Liquid Glass: 빛을 굴절시키는 액체 유리 질감의 화면입니다. 파란색과 시안색 강조, 캡슐 모양 버튼을 씁니다. 선택하면 OldRetro를 나가 Liquid Glass로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.',biosHelpModern:'Modern: 깔끔한 Windows 11 스타일의 밝은 화면. 선택하면 OldRetro를 나가 Modern으로 전환하며, 위쪽 토글로 Retro로 돌아오면 OldRetro가 다시 열립니다.'
     },
     en:{
-      title:'Settings',close:'Close',on:'On',off:'Off',motion:'Reduce motion',biosHelpMotion:'Reduce motion: turns off entrance effects, transitions, smooth scrolling and the boot replay. On phones it is on by default. The choice is saved on this device.',displayMode:'Display mode',layout:'Layout',retro:'Retro',oldretro:'OldRetro',glass:'Modern Glass',glassHelp:'Modern Glass uses translucent, blurred and rounded layers inspired by Apple-style glass interfaces.',kpDefault:'Use \ubb38\ud654\uc5b4 by default',
+      title:'Settings',language:'Language',close:'Close',on:'On',off:'Off',motion:'Reduce motion',biosHelpMotion:'Reduce motion: turns off entrance effects, transitions, smooth scrolling and the boot replay. On phones it is on by default. The choice is saved on this device.',displayMode:'Display mode',layout:'Layout',retro:'Retro',oldretro:'OldRetro',glass:'Modern Glass',glassHelp:'Modern Glass uses translucent, blurred and rounded layers inspired by Apple-style glass interfaces.',kpDefault:'Use \ubb38\ud654\uc5b4 by default',
       kpHelp:'\ubb38\ud654\uc5b4 (Munhwaeo) is the standard form of Korean used in North Korea. When this is on, choosing Korean in the language menu shows the site in \ubb38\ud654\uc5b4 wording by default; when it is off, you get regular (South Korean standard) Korean. Other languages are not affected, and the choice is saved on this device.',
       biosHowDesktop:'To close this window, press ESC, then press Enter on [Save & Exit]. Clicking outside the window does not close it.',
       biosHowTouch:'To close this window, tap outside it to open the Save & Exit box, then tap [Save & Exit].',
@@ -342,6 +342,14 @@
       biosHelpAqua:'Aqua: the Mac OS X Aqua look, with a glossy menu bar, traffic-light window buttons and blue capsule buttons. Selecting it leaves OldRetro for Aqua; switching back to Retro with the top toggle brings OldRetro back.',biosHelpMica:'Mica: the Windows 11 look, with soft light surfaces, rounded corners, a blue accent and pill toggles. Selecting it leaves OldRetro for Mica.',biosHelpOxygen:'Oxygen: the KDE Plasma 4 Oxygen look, with a dark panel, glossy buttons and a blue highlight. Selecting it leaves OldRetro for Oxygen.',biosHelpSequoia:'Sequoia: the macOS Sequoia (15) look, with a translucent menu bar, rounded frosted windows, traffic-light buttons and a system-blue accent. Selecting it leaves OldRetro for Sequoia.',biosHelpLiquid:'Liquid Glass: a light-bending liquid glass look with blue and cyan accents and capsule buttons. Selecting it leaves OldRetro for Liquid Glass; switching back to Retro with the top toggle brings OldRetro back.',biosHelpModern:'Modern: the clean, light Windows 11-style look. Selecting it leaves OldRetro for Modern; switching back to Retro with the top toggle brings OldRetro back.'
     }
   };
+  function settingsT(){
+    const lang=window.miniwinLanguage||'en';
+    const base=SETTINGS_I18N[currentSettingsLang()];
+    const tr=(window.I18N&&window.I18N[lang])||{};
+    const out=Object.assign({},base);
+    Object.keys(base).forEach(k=>{const v=tr['set_'+k];if(typeof v==='string'&&v)out[k]=v;});
+    return out;
+  }
   function currentSettingsLang(){
     const l=window.miniwinLanguage||'en';
     return l.indexOf('ko')===0?'ko':'en';
@@ -363,7 +371,7 @@
   function prefOldRetro(){try{return localStorage.getItem('miniwin-oldretro')==='1'}catch(e){return body.classList.contains('oldretro-mode')}}
   function variantPref(){
     let v=null;try{v=localStorage.getItem('miniwin-modern-variant')}catch(e){}
-    if(!['modern','modern-aqua','modern-aqua-yosemite','material','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(v))v=typeof window.miniwinPlatformDefault==='function'?window.miniwinPlatformDefault():'modern';
+    if(!['modern','modern-aqua','modern-aqua-yosemite','material','plastik','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(v))v=typeof window.miniwinPlatformDefault==='function'?window.miniwinPlatformDefault():'modern';
     return v;
   }
   function prefGlass(){return variantPref()==='modern-glass'}
@@ -375,9 +383,12 @@
     if(body.classList.contains('luna-mode'))return 'luna';
     if(body.classList.contains('aqua-mode'))return 'aqua';
     if(body.classList.contains('system6-mode'))return 'system6';
+    if(body.classList.contains('nextstep-mode'))return 'nextstep';
+    if(body.classList.contains('os2-mode'))return 'os2';
+    if(body.classList.contains('beos-mode'))return 'beos';
     if(body.classList.contains('platinum-mode'))return body.classList.contains('platinum-lime')?'platinum-lime':body.classList.contains('platinum-magenta')?'platinum-magenta':'platinum-lavender';
     if(!body.classList.contains('modern-mode'))return 'retro';
-    return body.classList.contains('modern-aqua-yosemite-mode')?'modern-aqua-yosemite':body.classList.contains('material-mode')?'material':body.classList.contains('modern-aqua-mode')?'modern-aqua':body.classList.contains('modern-glass-mode')?'modern-glass':body.classList.contains('aero-mode')?'aero':body.classList.contains('breeze-mode')?'breeze':body.classList.contains('flat-mode')?'flat':body.classList.contains('adwaita-mode')?'adwaita':body.classList.contains('mica-mode')?'mica':body.classList.contains('oxygen-mode')?'oxygen':body.classList.contains('sequoia-mode')?'sequoia':body.classList.contains('liquid-mode')?'liquid':'modern';
+    return body.classList.contains('modern-aqua-yosemite-mode')?'modern-aqua-yosemite':body.classList.contains('plastik-mode')?'plastik':body.classList.contains('material-mode')?'material':body.classList.contains('modern-aqua-mode')?'modern-aqua':body.classList.contains('modern-glass-mode')?'modern-glass':body.classList.contains('aero-mode')?'aero':body.classList.contains('breeze-mode')?'breeze':body.classList.contains('flat-mode')?'flat':body.classList.contains('adwaita-mode')?'adwaita':body.classList.contains('mica-mode')?'mica':body.classList.contains('oxygen-mode')?'oxygen':body.classList.contains('sequoia-mode')?'sequoia':body.classList.contains('liquid-mode')?'liquid':'modern';
   }
   function syncSettingsToggle(){
     syncMotionUI();
@@ -386,12 +397,12 @@
       let on=false;try{on=localStorage.getItem('miniwin-kp-default')==='1'}catch(e){}
       settingsKpToggle.setAttribute('aria-pressed',on?'true':'false');
       const kpStateEl=settingsOverlay.querySelector('#settingsKpState');
-      if(kpStateEl)kpStateEl.textContent=SETTINGS_I18N[currentSettingsLang()][on?'on':'off'];
+      if(kpStateEl)kpStateEl.textContent=settingsT()[on?'on':'off'];
     }
   }
 
   function syncMotionUI(){
-    const on=reduceMotionNow(),t=SETTINGS_I18N[currentSettingsLang()];
+    const on=reduceMotionNow(),t=settingsT();
     if(settingsMotionToggleEl)settingsMotionToggleEl.setAttribute('aria-pressed',on?'true':'false');
     if(settingsMotionStateEl)settingsMotionStateEl.textContent=t[on?'on':'off'];
     if(settingsMotionLabelEl)settingsMotionLabelEl.textContent=t.motion;
@@ -411,7 +422,7 @@
 
   function renderHelpPop(){
     if(!settingsHelpPop)return;
-    const t=SETTINGS_I18N[currentSettingsLang()];
+    const t=settingsT();
     const kp=helpKind==='kp',glass=helpKind==='glass';
     settingsHelpTitleEl.textContent=glass?t.glass:kp?t.kpDefault:t.diffBtn;
     settingsDiffPanel.hidden=kp||glass;
@@ -476,7 +487,7 @@
 
   function renderSettingsText(){
     if(!settingsBuilt)return;
-    const t=SETTINGS_I18N[currentSettingsLang()];
+    const t=settingsT();
     settingsTitleEl.textContent=t.title;
     settingsModeLabelEl.textContent=t.layout||t.displayMode;
     settingsKpHelpBody.textContent=t.kpHelp;
@@ -509,7 +520,7 @@
   function renderBiosKeys(){
     if(!biosKeysEl)return;
     biosKeysEl.innerHTML='';
-    const kt=SETTINGS_I18N[currentSettingsLang()];
+    const kt=settingsT();
     (touchLike()?kt.biosKeysTouch:kt.biosKeysDesktop).forEach(line=>{
       const d=document.createElement('div');d.textContent=line;biosKeysEl.appendChild(d);
     });
@@ -517,7 +528,7 @@
 
   function updateBiosHelp(which){
     if(!biosHelpEl)return;
-    const t=SETTINGS_I18N[currentSettingsLang()];
+    const t=settingsT();
     if(which==='retro')biosHelpEl.textContent=t.biosHelpRetro;
     else if(which==='oldretro')biosHelpEl.textContent=t.biosHelpOldRetro;
     else if(which==='glass')biosHelpEl.textContent=t.biosHelpGlass;
@@ -541,7 +552,7 @@
 
   function renderBiosText(){
     if(!settingsBuilt)return;
-    const t=SETTINGS_I18N[currentSettingsLang()];
+    const t=settingsT();
     const isOldRetroNow=body.classList.contains('oldretro-mode');
     settingsOverlay.querySelector('#biosTitlebarText').textContent='MiniWin Setup Utility \u2013 Copyright (C) 2026 MiniWin Systems Inc.';
     biosItemEl.innerHTML='';
@@ -570,6 +581,7 @@
     biosKpItemEl.innerHTML='';
     biosKpItemEl.appendChild(document.createTextNode(t.kpDefault+'\u00a0\u00a0\u00a0\u00a0'));
     const kpB=document.createElement('b');kpB.textContent=kpOn?'[Enabled]':'[Disabled]';biosKpItemEl.appendChild(kpB);
+    renderBiosLangItem();
     if(biosMotionItemEl){biosMotionItemEl.innerHTML='';biosMotionItemEl.appendChild(document.createTextNode(t.motion+'\u00a0\u00a0\u00a0\u00a0'));const mB=document.createElement('b');mB.textContent=reduceMotionNow()?'[Enabled]':'[Disabled]';biosMotionItemEl.appendChild(mB);}
     settingsOverlay.querySelector('#biosPopupTitle').textContent=t.biosLabel;
     settingsOverlay.querySelector('#biosFooterVersion').textContent='Version 1.0.';
@@ -596,10 +608,11 @@
     if(top<pop.scrollTop)pop.scrollTop=top;
     else if(bottom>pop.scrollTop+pop.clientHeight)pop.scrollTop=bottom-pop.clientHeight;
   }
-  function biosOptEl(v){return v==='modern-aqua-yosemite'?biosOptModernAquaYosemiteEl:v==='liquid'?biosOptLiquidEl:v==='sequoia'?biosOptSequoiaEl:v==='aqua'?biosOptAquaEl:v==='mica'?biosOptMicaEl:v==='oxygen'?biosOptOxygenEl:v==='luna'?biosOptLunaEl:v==='flat'?biosOptFlatEl:v==='adwaita'?biosOptAdwaitaEl:v==='retro'?biosOptRetroEl:v==='glass'?biosOptGlassEl:v==='aero'?biosOptAeroEl:v==='breeze'?biosOptBreezeEl:v==='modern'?biosOptModernEl:v==='modern-aqua'?biosOptModernAquaEl:v==='material'?biosOptMaterialEl:biosOptOldRetroEl}
+  function biosOptEl(v){const g=settingsOverlay&&settingsOverlay.querySelector('.bios-popup-opt[data-val="'+v+'"]');if(g)return g;return v==='modern-aqua-yosemite'?biosOptModernAquaYosemiteEl:v==='liquid'?biosOptLiquidEl:v==='sequoia'?biosOptSequoiaEl:v==='aqua'?biosOptAquaEl:v==='mica'?biosOptMicaEl:v==='oxygen'?biosOptOxygenEl:v==='luna'?biosOptLunaEl:v==='flat'?biosOptFlatEl:v==='adwaita'?biosOptAdwaitaEl:v==='retro'?biosOptRetroEl:v==='glass'?biosOptGlassEl:v==='aero'?biosOptAeroEl:v==='breeze'?biosOptBreezeEl:v==='modern'?biosOptModernEl:v==='modern-aqua'?biosOptModernAquaEl:v==='material'?biosOptMaterialEl:biosOptOldRetroEl}
 
   function setBiosHighlight(val){
     biosHighlight=val;
+    if(settingsOverlay)settingsOverlay.querySelectorAll('.bios-popup-opt[data-val]').forEach(b=>b.classList.toggle('highlight',b.dataset.val===val));
     biosOptRetroEl.classList.toggle('highlight',val==='retro');
     biosOptOldRetroEl.classList.toggle('highlight',val==='oldretro');
     biosOptGlassEl.classList.toggle('highlight',val==='glass');
@@ -627,7 +640,7 @@
     biosPopupKeyHandler=(e)=>{
       if(e.key==='ArrowUp'||e.key==='ArrowDown'){
         e.preventDefault();
-        const order=['retro','oldretro','modern','modern-aqua','modern-aqua-yosemite','material','glass','aero','breeze','luna','flat','adwaita','aqua','mica','oxygen','sequoia','liquid'];
+        const order=['retro','oldretro','modern','modern-aqua','modern-aqua-yosemite','material','glass','aero','breeze','luna','flat','adwaita','aqua','mica','oxygen','sequoia','liquid','platinum-lavender','platinum-lime','platinum-magenta','system6','nextstep','os2','beos','plastik'];
         let i=order.indexOf(biosHighlight)+(e.key==='ArrowDown'?1:-1);
         i=(i+order.length)%order.length;
         setBiosHighlight(order[i]);
@@ -648,6 +661,75 @@
   function closeBiosPopup(){
     if(biosPopupEl)biosPopupEl.hidden=true;
     if(biosPopupKeyHandler){document.removeEventListener('keydown',biosPopupKeyHandler,true);biosPopupKeyHandler=null;}
+  }
+
+  /* OldRetro's BIOS screen was missing the Platinum, System 6, NeXTSTEP, OS/2, BeOS and Plastik layouts, and the
+     Language setting. These are added to the same popup and menu at set-up time. */
+  const BIOS_EXTRA_LAYOUTS=[['platinum-lavender','Platinum Lavender'],['platinum-lime','Platinum Lime'],['platinum-magenta','Platinum Magenta'],['system6','System 6'],['nextstep','NeXTSTEP'],['os2','OS/2'],['beos','BeOS'],['plastik','Plastik']];
+  let biosLangItemEl=null,biosLangPopupEl=null,biosLangKeyHandler=null;
+  function renderBiosLangItem(){
+    if(!biosLangItemEl)return;
+    const t=settingsT();
+    const cur=(window.miniwinLanguages||[]).find(l=>l[0]===window.miniwinLanguage);
+    biosLangItemEl.innerHTML='';
+    biosLangItemEl.appendChild(document.createTextNode((t.language||'Language')+'\u00a0\u00a0\u00a0\u00a0'));
+    const b=document.createElement('b');b.textContent='['+(cur?cur[1]:(window.miniwinLanguage||'en'))+']';biosLangItemEl.appendChild(b);
+  }
+  function closeBiosLangPopup(){
+    if(biosLangPopupEl)biosLangPopupEl.hidden=true;
+    if(biosLangKeyHandler){document.removeEventListener('keydown',biosLangKeyHandler,true);biosLangKeyHandler=null;}
+  }
+  function openBiosLangPopup(){
+    closeBiosPopup();
+    if(!biosLangPopupEl)return;
+    const t=settingsT();
+    biosLangPopupEl.querySelector('#biosLangTitle').textContent=t.language||'Language';
+    const list=biosLangPopupEl.querySelector('#biosLangList');
+    list.innerHTML='';
+    (window.miniwinLanguages||[]).forEach(l=>{
+      const code=l[0], name=l[1];
+      const b=document.createElement('button');b.type='button';b.className='bios-popup-opt';b.dataset.val=code;b.textContent=name;
+      if(code===window.miniwinLanguage)b.classList.add('highlight');
+      b.addEventListener('click',()=>{
+        if(typeof window.setLanguage==='function')window.setLanguage(code);
+        closeBiosLangPopup();
+        renderBiosText();
+        if(biosLangItemEl)biosLangItemEl.focus({preventScroll:true});
+      });
+      list.appendChild(b);
+    });
+    biosLangPopupEl.hidden=false;
+    biosLangKeyHandler=(e)=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();closeBiosLangPopup();if(biosLangItemEl)biosLangItemEl.focus({preventScroll:true});}};
+    document.addEventListener('keydown',biosLangKeyHandler,true);
+  }
+  function setupBiosExtras(){
+    /* the layouts: one button per missing layout, after the last existing option */
+    let ref=biosOptLiquidEl;
+    BIOS_EXTRA_LAYOUTS.forEach(([v,label])=>{
+      const b=document.createElement('button');
+      b.type='button';b.className='bios-popup-opt';b.dataset.val=v;
+      b.id='biosOpt'+v.split('-').map(x=>x[0].toUpperCase()+x.slice(1)).join('');
+      b.textContent=label;
+      b.addEventListener('click',()=>applyBiosSelection(v));
+      b.addEventListener('mouseenter',()=>setBiosHighlight(v));
+      b.addEventListener('focus',()=>setBiosHighlight(v));
+      ref.insertAdjacentElement('afterend',b);ref=b;
+    });
+    /* the language item, after the Layout item */
+    const li=document.createElement('button');
+    li.type='button';li.className='bios-item';li.id='biosLangItem';
+    biosItemEl.insertAdjacentElement('afterend',li);
+    biosLangItemEl=li;
+    li.addEventListener('click',openBiosLangPopup);
+    li.addEventListener('focus',()=>{if(typeof updateBiosHelp==='function')updateBiosHelp('lang')});
+    /* the language popup: a sibling of the layout popup, with a scrolling list of every language */
+    const pop=document.createElement('div');
+    pop.className='bios-popup';pop.id='biosLangPopup';pop.hidden=true;
+    pop.innerHTML='<div class="bios-popup-title" id="biosLangTitle"></div><div class="bios-lang-list" id="biosLangList"></div>';
+    const list=pop.querySelector('#biosLangList');list.style.maxHeight='60vh';list.style.overflow='auto';
+    biosPopupEl.parentNode.appendChild(pop);
+    biosLangPopupEl=pop;
+    renderBiosLangItem();
   }
 
   function applyBiosSelection(val){
@@ -680,6 +762,10 @@
     }else if(val==='oldretro'&&!isOldRetroNow){
       if(body.classList.contains('modern-mode')&&typeof window.miniwinApplyStyle==='function')window.miniwinApplyStyle('retro');
       enterOldRetro();
+      closeSettings();
+    }else if(BIOS_EXTRA_LAYOUTS.some(x=>x[0]===val)){
+      if(isOldRetroNow)exitOldRetro();
+      if(typeof window.miniwinApplyStyle==='function')window.miniwinApplyStyle(val);
       closeSettings();
     }else{
       renderBiosText();
@@ -749,6 +835,7 @@
             '<button type="button" class="settings-close" id="settingsClose"><svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div>'+
           '<div class="settings-body">'+
             '<div class="settings-row" id="settingsLayoutRow"><span class="settings-label-wrap"><label class="settings-row-label" id="settingsModeLabel" for="settingsLayoutSelect"></label>'+
+              '<button type="button" class="settings-help-btn" id="themeGuideBtn" aria-label="Layout guide" title="Layout guide">?</button>'+
               '</span>'+
               '<select class="settings-lang-select" id="settingsLayoutSelect"></select>'+
             '</div>'+
@@ -825,9 +912,11 @@
     settingsTitleEl=settingsOverlay.querySelector('#settingsTitle');
     settingsModeLabelEl=settingsOverlay.querySelector('#settingsModeLabel');
     settingsLayoutSel=settingsOverlay.querySelector('#settingsLayoutSelect');
+    const themeGuideBtn=settingsOverlay.querySelector('#themeGuideBtn');
+    if(themeGuideBtn)themeGuideBtn.addEventListener('click',()=>{if(window.miniwinOpenThemeGuide)window.miniwinOpenThemeGuide(themeGuideBtn);});
     settingsLayoutSel.innerHTML=
-      '<optgroup label="Retro Layout"><option value="retro">Retro</option><option value="oldretro">OldRetro</option><option value="luna">Luna</option><option value="aqua">Old Aqua</option><option value="platinum-lavender">Platinum Lavender</option><option value="platinum-lime">Platinum Lime</option><option value="platinum-magenta">Platinum Magenta</option><option value="system6">System 6</option></optgroup>'+
-      '<optgroup label="Modern Layout"><option value="modern">Modern</option><option value="modern-aqua">Mid Aqua</option><option value="modern-aqua-yosemite">Modern Aqua</option><option value="material">Material</option><option value="modern-glass">Modern Glass</option><option value="aero">Aero</option><option value="breeze">Breeze</option><option value="flat">Flat</option><option value="adwaita">Adwaita</option><option value="mica">Mica</option><option value="oxygen">Oxygen</option><option value="sequoia">Sequoia</option><option value="liquid">Liquid Glass</option></optgroup>';
+      '<optgroup label="Retro Layout"><option value="retro">Retro</option><option value="oldretro">OldRetro</option><option value="luna">Luna</option><option value="aqua">Old Aqua</option><option value="platinum-lavender">Platinum Lavender</option><option value="platinum-lime">Platinum Lime</option><option value="platinum-magenta">Platinum Magenta</option><option value="system6">System 6</option><option value="nextstep">NeXTSTEP</option><option value="os2">OS/2</option><option value="beos">BeOS</option></optgroup>'+
+      '<optgroup label="Modern Layout"><option value="modern">Modern</option><option value="modern-aqua">Mid Aqua</option><option value="modern-aqua-yosemite">Modern Aqua</option><option value="material">Material</option><option value="plastik">Plastik</option><option value="modern-glass">Modern Glass</option><option value="aero">Aero</option><option value="breeze">Breeze</option><option value="flat">Flat</option><option value="adwaita">Adwaita</option><option value="mica">Mica</option><option value="oxygen">Oxygen</option><option value="sequoia">Sequoia</option><option value="liquid">Liquid Glass</option></optgroup>';
     const langSel=settingsOverlay.querySelector('#settingsLangSelect');
     langSel.innerHTML=(window.miniwinLanguages||[]).map(l=>'<option value="'+l[0]+'">'+l[1]+'</option>').join('');
     langSel.addEventListener('change',()=>{if(typeof window.setLanguage==='function')window.setLanguage(langSel.value)});
@@ -891,6 +980,7 @@
     settingsOverlay.querySelector('#settingsHelpBack').addEventListener('click',closeHelpPop);
     settingsKpToggle.addEventListener('click',()=>{setKpDefault(settingsKpToggle.getAttribute('aria-pressed')!=='true');});
     biosItemEl.addEventListener('click',openBiosPopup);
+    setupBiosExtras();
     biosOptRetroEl.addEventListener('click',()=>applyBiosSelection('retro'));
     biosOptOldRetroEl.addEventListener('click',()=>applyBiosSelection('oldretro'));
     biosOptGlassEl.addEventListener('click',()=>applyBiosSelection('glass'));
@@ -929,7 +1019,7 @@
     biosOptAeroEl.addEventListener('focus',()=>setBiosHighlight('aero'));
     biosOptGlassEl.addEventListener('mouseenter',()=>setBiosHighlight('glass'));
     biosOptGlassEl.addEventListener('focus',()=>setBiosHighlight('glass'));
-    const biosItems=[biosItemEl,biosKpItemEl,biosMotionItemEl];
+    const biosItems=[biosItemEl,biosLangItemEl,biosKpItemEl,biosMotionItemEl];
     const kpToggleBios=()=>{let on=false;try{on=localStorage.getItem('miniwin-kp-default')==='1'}catch(e){}setKpDefault(!on);renderBiosText();updateBiosHelp('kp');};
     biosKpItemEl.addEventListener('click',kpToggleBios);
     biosKpItemEl.addEventListener('focus',()=>updateBiosHelp('kp'));

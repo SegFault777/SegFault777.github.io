@@ -1,0 +1,117 @@
+/* Plastik (KDE 3.5). Colours taken from KDE 3.5 Plastik reference screens (1024x768): the window title band (26 rows,
+   sampled row by row), the taskbar (48 rows, sampled row by row), the menu and toolbar face #E6E7E6, the window body
+   white, and the window frame bevel (#3C3C3C, #A5A5A5, #C9C9C9, #929394, #848684). The blue desktop is a colour field
+   sampled on an 8x6 grid of the reference desktop; the wallpaper photograph itself is not reproduced. The type stays
+   the system face. Active only when body.plastik-mode is set. */
+
+html body.modern-mode.plastik-mode{
+  color:#000;
+  background-color:#3272DE !important;
+  background-image:url("assets/plastik/desk-grid.png") !important;
+  background-size:100% 100% !important;
+  background-repeat:no-repeat !important;
+  background-attachment:fixed !important;
+}
+
+/* the taskbar at the bottom: 48 sampled rows */
+html body.modern-mode.plastik-mode::after{
+  content:"";position:fixed;left:0;right:0;bottom:0;height:48px;z-index:0;pointer-events:none;background:linear-gradient(to bottom,#FFFFFF 0px 1px,#FFFFFF 1px 2px,#FFFFFF 2px 3px,#FCFCFC 3px 4px,#FAFAFB 4px 5px,#F8F8F9 5px 6px,#F5F5F7 6px 7px,#F4F4F6 7px 8px,#F1F1F3 8px 9px,#EFEFF2 9px 10px,#EDEDF0 10px 11px,#EAEBEE 11px 12px,#E8E8EC 12px 13px,#E6E7EB 13px 14px,#E4E4E9 14px 15px,#E1E2E7 15px 16px,#E0E0E5 16px 17px,#DDDEE3 17px 18px,#DBDBE1 18px 19px,#D9DAE0 19px 20px,#D7D7DE 20px 21px,#D4D4DC 21px 22px,#D3D3DA 22px 23px,#C5C6D0 23px 24px,#C7C8D2 24px 25px,#C8C9D3 25px 26px,#CACBD4 26px 27px,#CCCDD6 27px 28px,#CDCED7 28px 29px,#CFD0D8 29px 30px,#D1D1DA 30px 31px,#D2D3DB 31px 32px,#D4D4DC 32px 33px,#D6D6DE 33px 34px,#D7D8DF 34px 35px,#D9DAE1 35px 36px,#DBDBE2 36px 37px,#DDDDE3 37px 38px,#DEDEE5 38px 39px,#E0E0E6 39px 40px,#E1E1E7 40px 41px,#E3E3E9 41px 42px,#E5E5EB 42px 43px,#E6E7EC 43px 44px,#E8E8ED 44px 45px,#EAEAEF 45px 46px,#EBEBF0 46px 47px,#EDEDF1 47px 48px);
+}
+
+/* the Plastik menu bar (the KDE menu and the top bar): the #E6E7E6 face with a dark bottom edge */
+html body.modern-mode.plastik-mode > header.top{background:#E6E7E6 !important;border:0 !important;border-bottom:1px solid #848684 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.modern-mode.plastik-mode > header.top .topbar{height:30px !important;min-height:30px !important;padding:0 !important;gap:0 !important;align-items:center}
+html body.modern-mode.plastik-mode .logo{display:inline-flex;align-items:center;height:30px;padding:0 10px;color:#000;font-size:13px;font-weight:600;text-shadow:none;letter-spacing:0}
+html body.modern-mode.plastik-mode .logo .version{color:#3C3C3C;font-size:10px}
+html body.modern-mode.plastik-mode .top .nav a,
+html body.modern-mode.plastik-mode .top .lang-btn{display:inline-flex;align-items:center;height:30px;padding:0 9px;background:transparent;color:#000;border:0;border-radius:0;box-shadow:none;font-size:13px;text-shadow:none;line-height:30px}
+html body.modern-mode.plastik-mode .top .nav a:hover,
+html body.modern-mode.plastik-mode .top .nav a.active,
+html body.modern-mode.plastik-mode .top .lang.open .lang-btn{background:#3272DE;color:#FFFFFF}
+html body.modern-mode.plastik-mode .top .style-switch{background:#E6E7E6;border:1px solid #848684;border-radius:2px;height:22px;padding:0 6px;box-shadow:inset 1px 1px 0 #FFFFFF}
+html body.modern-mode.plastik-mode .top .style-label{color:#000;font-size:11px;text-shadow:none}
+html body.modern-mode.plastik-mode .top .style-toggle{background:#E6E7E6 !important;border:1px solid #848684 !important;border-radius:9px !important;box-shadow:none !important}
+html body.modern-mode.plastik-mode .top .style-toggle span{background:#FFFFFF !important;border:1px solid #848684 !important;border-radius:50% !important;box-shadow:none !important}
+html body.modern-mode.plastik-mode .top .settings-btn{background:#E6E7E6;color:#000;border:1px solid #848684;border-radius:2px;box-shadow:inset 1px 1px 0 #FFFFFF;height:22px;min-height:22px;width:26px;min-width:26px;padding:0}
+html body.modern-mode.plastik-mode .top .settings-btn:hover{background:#3272DE;color:#FFFFFF}
+
+/* windows: the Plastik frame (outer #3C3C3C, then #A5A5A5, #C9C9C9, #929394, #848684) and a white body */
+html body.modern-mode.plastik-mode .panel,
+html body.modern-mode.plastik-mode .monitor,
+html body.modern-mode.plastik-mode .terminal,
+html body.modern-mode.plastik-mode #settingsOverlay .settings-panel{
+  position:relative;background:#FFFFFF !important;border:1px solid #3C3C3C !important;border-radius:0 !important;
+  box-shadow:inset 1px 1px 0 #A5A5A5,inset 2px 2px 0 #C9C9C9,inset -1px -1px 0 #848684,inset -2px -2px 0 #929394 !important;
+  overflow:visible !important;margin:6px 8px 12px !important;padding:0 !important;
+}
+/* the title band: the reference's 26 sampled rows, dark text on the light top, white text is not used */
+html body.modern-mode.plastik-mode .panel-head{position:relative;box-sizing:border-box;height:26px;min-height:26px;margin:0;padding:0 10px;display:flex;align-items:center;justify-content:flex-start;background:linear-gradient(to bottom,#3C3C3C 0px 1px,#DFDFDF 1px 2px,#EAEAE9 2px 3px,#E5E5E5 3px 4px,#DFDEDF 4px 5px,#D9D9D9 5px 6px,#D5D5D4 6px 7px,#D2D2D2 7px 8px,#CECECE 8px 9px,#CACACA 9px 10px,#C6C6C6 10px 11px,#C2C2C2 11px 12px,#BFBFC0 12px 13px,#BCBBBC 13px 14px,#B9B9B9 14px 15px,#B6B6B6 15px 16px,#B3B3B3 16px 17px,#AEAFAF 17px 18px,#ABABAB 18px 19px,#A7A7A8 19px 20px,#A4A3A3 20px 21px,#A1A1A1 21px 22px,#9D9D9D 22px 23px,#9A9B9A 23px 24px,#989898 24px 25px,#848684 25px 26px);border:0;color:#000;text-shadow:none}
+html body.modern-mode.plastik-mode .panel-head::before{content:none !important;display:none !important}
+html body.modern-mode.plastik-mode .panel-head > span:not(.wc):not(.lq-lights){font-size:12px;letter-spacing:0;color:#000;text-shadow:none;font-weight:600}
+html body.modern-mode.plastik-mode .panel-head[data-status]::after{display:none}
+html body.modern-mode.plastik-mode .panel:has(> .panel-head[data-status]) > :not(.panel-head){margin-top:0}
+html body.modern-mode.plastik-mode .panel::before,
+html body.modern-mode.plastik-mode .panel::after{content:none !important;display:none !important}
+html body.modern-mode.plastik-mode .wc{position:absolute;right:6px;top:4px;display:flex;gap:3px;left:auto;transform:none;z-index:3}
+html body.modern-mode.plastik-mode .wc-b{width:18px;height:18px;min-width:0;min-height:0;padding:0;margin:0;border:1px solid #3C3C3C;border-radius:2px;background:#E6E7E6;color:transparent;font-size:0;box-shadow:inset 1px 1px 0 #FFFFFF}
+html body.modern-mode.plastik-mode .wc-close{background:#E6E7E6}
+html body.modern-mode.plastik-mode .wc-close:hover{background:#C42B1C}
+html body.modern-mode.plastik-mode .wc-b svg{display:none}
+html body.modern-mode.plastik-mode .wc-max,
+html body.modern-mode.plastik-mode .wc-min{display:none !important}
+html body.modern-mode.plastik-mode #settingsOverlay .settings-head{position:relative;box-sizing:border-box;height:26px;margin:0;padding:0 10px;display:flex;align-items:center;justify-content:flex-start;background:linear-gradient(to bottom,#3C3C3C 0px 1px,#DFDFDF 1px 2px,#EAEAE9 2px 3px,#E5E5E5 3px 4px,#DFDEDF 4px 5px,#D9D9D9 5px 6px,#D5D5D4 6px 7px,#D2D2D2 7px 8px,#CECECE 8px 9px,#CACACA 9px 10px,#C6C6C6 10px 11px,#C2C2C2 11px 12px,#BFBFC0 12px 13px,#BCBBBC 13px 14px,#B9B9B9 14px 15px,#B6B6B6 15px 16px,#B3B3B3 16px 17px,#AEAFAF 17px 18px,#ABABAB 18px 19px,#A7A7A8 19px 20px,#A4A3A3 20px 21px,#A1A1A1 21px 22px,#9D9D9D 22px 23px,#9A9B9A 23px 24px,#989898 24px 25px,#848684 25px 26px);border:0;color:#000}
+html body.modern-mode.plastik-mode #settingsOverlay .settings-close{position:absolute;right:6px;top:4px;width:18px;height:18px;min-width:0;min-height:0;padding:0;margin:0;border:1px solid #3C3C3C;border-radius:2px;background:#E6E7E6;color:transparent;font-size:0;box-shadow:inset 1px 1px 0 #FFFFFF;z-index:3}
+html body.modern-mode.plastik-mode #settingsOverlay .settings-close:hover{background:#C42B1C}
+html body.modern-mode.plastik-mode #settingsOverlay .settings-close svg{display:none}
+
+/* content: the #E6E7E6 face for cards and headings; white for the text areas */
+html body.modern-mode.plastik-mode .card,
+html body.modern-mode.plastik-mode .fact,
+html body.modern-mode.plastik-mode .note{background:#E6E7E6;border:1px solid #848684;border-radius:2px;box-shadow:none;color:#000}
+html body.modern-mode.plastik-mode .card h3,
+html body.modern-mode.plastik-mode .fact strong{color:#000;text-shadow:none;font-weight:600}
+html body.modern-mode.plastik-mode .card p,
+html body.modern-mode.plastik-mode .fact small{color:#3C3C3C}
+html body.modern-mode.plastik-mode .head{background:#E6E7E6;border:1px solid #848684;border-radius:2px;padding:8px 12px}
+html body.modern-mode.plastik-mode .head h2,
+html body.modern-mode.plastik-mode .head p,
+html body.modern-mode.plastik-mode .hero h1,
+html body.modern-mode.plastik-mode .hero p{color:#000;text-shadow:none}
+html body.modern-mode.plastik-mode .eyebrow{color:#3272DE;text-shadow:none;background:#FFFFFF;border:1px solid #3272DE;border-radius:2px;display:inline-block;padding:0 6px}
+html body.modern-mode.plastik-mode .tag,
+html body.modern-mode.plastik-mode .badge{background:#FFFFFF;color:#3272DE;border:1px solid #3272DE;border-radius:2px;box-shadow:none;text-shadow:none}
+html body.modern-mode.plastik-mode .terminal{background:#FFFFFF}
+html body.modern-mode.plastik-mode .terminal pre{color:#000;background:transparent}
+html body.modern-mode.plastik-mode footer{background:transparent;color:#FFFFFF;border:0;text-shadow:0 1px 1px rgba(0,0,0,.4)}
+
+/* buttons: the Plastik face (#E6E7E6) with a dark outline and a white top-left bevel; the hover is the desktop blue */
+html body.modern-mode.plastik-mode .btn{display:inline-flex;align-items:center;justify-content:center;height:26px;padding:0 14px;background:#E6E7E6;color:#000;border:1px solid #3C3C3C;border-radius:3px;box-shadow:inset 1px 1px 0 #FFFFFF,inset -1px -1px 0 #A5A5A5;font-size:12px;text-shadow:none;transform:none}
+html body.modern-mode.plastik-mode .btn:hover{background:#F4F4F4;border-color:#3272DE}
+html body.modern-mode.plastik-mode .btn:active{background:#C9C9C9;box-shadow:inset 1px 1px 0 #848684}
+html body.modern-mode.plastik-mode .btn.primary{background:#3272DE;color:#FFFFFF;border-color:#24509E}
+html body.modern-mode.plastik-mode .btn.primary:hover{background:#4480E8;color:#FFFFFF}
+
+/* settings controls */
+html body.modern-mode.plastik-mode #settingsOverlay .settings-lang-select{background:#FFFFFF;color:#000;border:1px solid #848684;border-radius:2px;height:26px;padding:0 6px;box-shadow:none;font-size:12px}
+html body.modern-mode.plastik-mode #settingsOverlay .settings-row-label,
+html body.modern-mode.plastik-mode #settingsOverlay .settings-kp-state{color:#000;text-shadow:none}
+html body.modern-mode.plastik-mode #settingsOverlay #settingsKpToggle,
+html body.modern-mode.plastik-mode #settingsOverlay #settingsMotionToggle{width:40px !important;height:20px !important;background:#E6E7E6 !important;border:1px solid #848684 !important;border-radius:3px !important;box-shadow:none !important}
+html body.modern-mode.plastik-mode #settingsOverlay #settingsKpToggle span,
+html body.modern-mode.plastik-mode #settingsOverlay #settingsMotionToggle span{top:3px !important;left:3px !important;width:12px !important;height:12px !important;background:#FFFFFF !important;border:1px solid #848684 !important;border-radius:2px !important;box-shadow:none !important}
+html body.modern-mode.plastik-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"],
+html body.modern-mode.plastik-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"]{background:#3272DE !important;border-color:#24509E !important}
+html body.modern-mode.plastik-mode #settingsOverlay #settingsKpToggle[aria-pressed="true"] span,
+html body.modern-mode.plastik-mode #settingsOverlay #settingsMotionToggle[aria-pressed="true"] span{left:23px !important}
+
+/* menus: a white popup with the Plastik frame; the highlighted row is the desktop blue with white text */
+html body.modern-mode.plastik-mode .sel-menu.sel-menu{background:#FFFFFF !important;color:#000 !important;border:1px solid #3C3C3C !important;border-radius:0 !important;padding:2px 0 !important;box-shadow:inset 1px 1px 0 #A5A5A5,inset -1px -1px 0 #848684 !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+html body.modern-mode.plastik-mode .sel-menu.sel-menu .sel-group{color:#3C3C3C !important;font-size:11px !important;font-weight:600 !important;border-bottom:1px solid #C9C9C9 !important;margin:0 !important;padding:6px 10px 2px !important}
+html body .sel-menu.sel-menu button.th-plastik,
+html body.modern-mode.plastik-mode .sel-menu.sel-menu button.th-plastik{background:transparent !important;border:0 !important;border-radius:0 !important;box-shadow:none !important;margin:0 !important;padding:4px 26px 4px 12px !important;position:relative !important;color:#000 !important;font-family:inherit !important;font-size:12px !important;font-weight:400 !important;width:100% !important;text-align:left !important}
+html body.modern-mode.plastik-mode .sel-menu.sel-menu button.th-plastik:hover,
+html body.modern-mode.plastik-mode .sel-menu.sel-menu button.th-plastik:focus-visible{background:#3272DE !important;color:#FFFFFF !important}
+html body.modern-mode.plastik-mode .sel-menu.sel-menu button.th-plastik.active:not(:hover){color:#3272DE !important;font-weight:600 !important;background:transparent !important}
+html body.modern-mode.plastik-mode .sel-menu.sel-menu button.th-plastik .check{position:absolute !important;right:8px !important;top:50% !important;transform:translateY(-50%) !important;float:none !important;display:block !important;margin:0 !important;color:#3272DE !important}
+html body.modern-mode.plastik-mode .sel-menu.sel-menu button.th-plastik:hover .check,
+html body.modern-mode.plastik-mode .sel-menu.sel-menu button.th-plastik:focus-visible .check{color:#FFFFFF !important}
