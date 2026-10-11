@@ -4,11 +4,7 @@ This repository is the website for **MiniWin**, a 32-bit x86 operating system wr
 explains the project, shows the source, and lets visitors boot the real MiniWin disk image in their browser.
 It is a static site: plain HTML, CSS and JavaScript with no build step.
 
-<<<<<<< HEAD
-![Desktop](https://github.com/SegFault777/MiniWin/blob/main/screenshots/01-boot-desktop.png)
-=======
 ## About MiniWin
->>>>>>> 1be50fa (Add demo)
 
 MiniWin boots from a single 1 MB MBR disk image into a Windows-95-flavoured GUI. Its bootloader sets a 640×480
 32-bit VBE mode, the kernel is freestanding C with no libc, and it includes a window manager, a Hangul input
