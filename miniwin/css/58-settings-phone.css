@@ -1,0 +1,20 @@
+/* Settings window on tall or near-square screens (wider than 1.25:1 is left alone):
+   the panel takes the screen below the bar, so the Layout list and the other rows have room, and the panel scrolls. */
+@media (max-aspect-ratio: 5/4), (max-width:700px) and (max-aspect-ratio: 9/16){
+  /* not for the OldRetro setup screen (its own window keeps its size) */
+  body:not(.oldretro-mode) #settingsOverlay{
+    align-items:stretch !important;
+    justify-content:stretch !important;
+    padding:64px 8px 12px !important;
+    box-sizing:border-box;
+  }
+  body:not(.oldretro-mode) #settingsOverlay .settings-panel{
+    width:100% !important;
+    max-width:none !important;
+    height:100% !important;
+    max-height:none !important;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior:contain;
+  }
+}

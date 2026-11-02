@@ -19,22 +19,77 @@
   #miniwinView.hidden-frame iframe { }
   .back-home { position:fixed; right:12px; bottom:12px; z-index:6; padding:6px 10px; cursor:pointer; font:inherit; }
   #mainStyleSwitch { display:inline-flex; align-items:center; }
-  #devNotice { position:fixed; left:50%; top:90px; transform:translateX(-50%); z-index:700;
-    padding:10px 18px; border:1px solid currentColor; border-radius:6px; background:var(--bg-panel, #ffffff);
-    color:inherit; font:inherit; box-shadow:0 6px 18px rgba(0,0,0,.25); opacity:0; pointer-events:none; transition:opacity .25s; }
-  #devNotice.show { opacity:1; }
+  #themeTest { display:none; max-width:900px; margin:0 auto; padding:64px 24px 48px; }
+  body.themetest-open #themeTest { display:block; }
+  #minidaw { display:none; max-width:900px; margin:0 auto; padding:64px 24px 48px; }
+  body.minidaw-open #minidaw { display:block; }
+  #minidaw { padding-top:0; padding-bottom:75vh; }  /* room at the end so every section heading can reach the bar line */
+  #minidaw section { padding:90px 0; }
+  #minidaw .md-bar { position:relative; z-index:40; width:100vw; margin-left:calc(50% - 50vw); color:inherit; }
+  #minidaw .md-bar.is-fixed { position:fixed; }
+  #minidaw .hero { padding:8px 0 16px; }
+  #minidaw h2 { margin:26px 0 10px; font-size:1.25rem; }
+  #minidaw ul { margin:8px 0 0; padding-left:20px; line-height:1.6; }
+  #minidaw li { margin:6px 0; }
+  #minidaw p { line-height:1.6; }
+  body.themetest-open #home { display:none; }
+  body.minidaw-open #home { display:none; }
+  #themeTest section { min-height:0; padding:0; }
+  #themeTest .hero { padding:8px 0 16px; }
+  #themeTest .tt-section { margin:22px 0; }
+  #themeTest h2 { margin:0 0 12px; font-size:1.25rem; }
+  #themeTest .tt-row { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  #themeTest .tt-windows { align-items:stretch; }
+  #themeTest .tt-windows .panel { flex:1 1 240px; min-width:0; position:relative; }
+  #themeTest .tt-body { padding:12px; }
+  #themeTest .tt-font p { margin:6px 0; }
+  #themeTest code { font-family:ui-monospace,Menlo,Consolas,monospace; }
+  .nav-toggle { display:none; }
+  @media (max-width:700px){
+    header.top, header.top .topbar { max-width:100%; }
+    header.top .wrap.topbar { flex-wrap:nowrap !important; gap:6px; padding-left:12px !important; padding-right:12px !important; }
+    /* the theme sets the nav's own position and display on phones: these rules must win */
+    header.top nav.nav:not(.open) { display:none !important; }
+    header.top nav.nav.open { display:flex !important; position:absolute !important; top:100% !important; left:0 !important; right:0 !important;
+      flex-direction:column !important; align-items:stretch !important; gap:0; padding:6px 12px 10px !important; z-index:10; box-shadow:0 10px 18px rgba(0,0,0,.2); }
+    header.top nav.nav a { display:flex; align-items:center; justify-content:flex-start; text-align:left; min-height:44px; padding:0 12px; border-radius:6px; }
+    .nav-toggle { display:inline-flex; align-items:center; justify-content:center; min-width:44px; min-height:44px;
+      background:none; border:0; font-size:22px; line-height:1; cursor:pointer; border-radius:8px; }
+    header.top .nav-toggle { opacity:1 !important; }
+    .settings-btn { min-width:44px; min-height:44px; }
+    section.hero .wrap { padding-left:16px; padding-right:16px; }
+    section.hero .actions .btn { min-height:44px; }
+  }
+  @media (max-width:420px){ header.top .style-switch .style-label { display:none; } }
+  /* tall narrow screens (about 1:2 and taller): the menu fills the screen below the bar, with roomy items */
+  @media (max-width:700px) and (max-aspect-ratio: 9/16){
+    header.top nav.nav.open { top:100% !important; bottom:auto !important; max-height:calc(100vh - 56px); max-height:calc(100dvh - 56px) !important;
+      min-height:calc(100dvh - 56px); overflow-y:auto; padding:8px 16px 32px !important; justify-content:flex-start; }
+    header.top nav.nav.open a { min-height:64px; font-size:1.15rem; border-bottom:1px solid rgba(128,128,128,.28); border-radius:0; padding:0 16px; }
+    header.top nav.nav.open a:last-child { border-bottom:0; }
+    header.top nav.nav.open a.active { border-radius:8px; border-bottom:0; }
+  }
+  @media (min-width:701px){ header.top nav.nav.open { display:none !important; } }
+  /* Home logo: the uploaded SegFault777 mark as plain <img> files (works from file:// too). A black and a white copy are kept; the
+     script below shows the white one on dark headers and the black one on light headers. */
+  header a.logo.logo-mark{display:inline-flex;align-items:center;padding:0;margin:0;background:none;border:0;box-shadow:none;text-shadow:none;letter-spacing:0;font-size:inherit}
+  header a.logo.logo-mark .logo-img{display:none;height:var(--logo-h,26px);width:auto;max-width:none}
+  header a.logo.logo-mark[data-ink="black"] .logo-img-black,header a.logo.logo-mark[data-ink="white"] .logo-img-white{display:block}
+  header a.logo.logo-mark:hover .logo-img,header a.logo.logo-mark:focus-visible .logo-img{opacity:.8}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap topbar">
-  <a class="logo" href="./">Segfault<span>777</span></a>
-  <nav class="nav">
+  <a class="logo logo-mark" href="./" aria-label="Segfault777"><img class="logo-img logo-img-black" src="assets/segfault777-ink-dark.png" alt="" width="86" height="26"><img class="logo-img logo-img-white" src="assets/segfault777-ink-light.png" alt="" width="86" height="26"></a>
+  <nav class="nav" id="mainNav">
     <a href="#home" data-view="home" class="active" aria-current="page">Home</a>
     <a href="#miniwin" data-view="miniwin">MiniWin</a>
-    <a href="#live-editor" class="dev-soon" id="liveEditorLink">Live Editor</a>
+    <a href="#minidaw" data-view="minidaw" id="miniDawLink">MiniDAW</a>
+    <a href="#themetest" data-view="themetest" id="themeTestLink" data-tt="navTheme">Theme Test</a>
     <a class="gh-link" href="https://github.com/SegFault777" target="_blank" rel="noopener">GitHub</a>
   </nav>
   <div id="mainStyleSwitch"></div>
+  <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Menu"><span aria-hidden="true">☰</span></button>
   <button class="settings-btn" id="settingsGear" type="button" aria-haspopup="dialog" aria-label="Settings"><span class="settings-btn-icon" aria-hidden="true">⚙</span></button>
 </div></header>
 
@@ -52,6 +107,166 @@
   </div></div></section>
 </main>
 
+<main id="minidaw">
+  <header class="top md-bar"><div class="wrap topbar">
+    <a class="logo" href="#minidaw">MINI<span>DAW</span></a>
+    <nav class="nav" aria-label="MiniDAW sections">
+      <a href="#md-project" data-md-jump="md-project" data-tt="mdNavProject">Project</a>
+      <a href="#md-inside" data-md-jump="md-inside" data-tt="mdNavFeatures">Features</a>
+      <a href="#md-build" data-md-jump="md-build" data-tt="mdNavBuild">Build</a>
+      <a href="#md-status" data-md-jump="md-status" data-tt="mdNavStatus">Status</a>
+      <a href="#md-get" data-md-jump="md-get" data-tt="mdNavGet">Get it</a>
+    </nav>
+  </div></header>
+
+  <section class="hero" id="md-home"><div class="wrap hero-grid">
+    <div class="modern-reveal is-visible">
+      <span class="tag">SEGFAULT777 / MINIDAW / MAIN</span>
+      <h1><span>MINI</span><span>DAW</span></h1>
+      <p class="slogan" data-tt="mdSlogan">A DAW for all of us.</p>
+      <p data-tt="mdIntro">MiniDAW is a lightweight, fast digital audio workstation for Windows, built with Qt 6 and inspired by the workflow of Logic Pro. It stays approachable for beginners and still offers what a producer expects.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/SegFault777/MiniDAW/releases" rel="noopener" target="_blank" data-tt="mdDownload">Download</a>
+        <a class="btn" href="https://github.com/SegFault777/MiniDAW" rel="noopener" target="_blank" data-tt="mdGithub">GitHub</a>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="md-project"><div class="wrap">
+    <div class="head"><div class="eyebrow" data-tt="mdEye1">01 / THE PROJECT</div><h2 data-tt="mdH1">A DAW for all of us.</h2>
+      <p data-tt="mdProject">One Windows program for arranging, recording, editing and mixing: a multitrack arrangement, MIDI editing, built-in instruments, VST3 plug-ins, tempo and time-signature tracks, time stretching, automation and bouncing.</p></div>
+    <div class="panel">
+      <div class="panel-head" data-status="at a glance">MINIDAW</div>
+      <div class="facts">
+        <div class="fact"><strong>Qt 6</strong><small data-tt="mdFactQt">UI toolkit</small></div>
+        <div class="fact"><strong>Windows</strong><small>10 / 11</small></div>
+        <div class="fact"><strong>0.10_1</strong><small data-tt="mdFactVer">version</small></div>
+        <div class="fact"><strong>GPL-3.0</strong><small data-tt="mdFactLic">or later</small></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="md-inside"><div class="wrap">
+    <div class="head"><div class="eyebrow" data-tt="mdEye2">02 / WHAT'S INSIDE</div><h2 data-tt="mdH2">Arrangement, instruments and mixing.</h2></div>
+    <div class="grid">
+      <article class="panel card"><span class="badge">ARR</span><h3 data-tt="mdC1T">Arrangement</h3><p data-tt="mdC1B">A multitrack Tracks area with a time-signature ruler, a smart snap grid, cut / copy / paste of regions, cycle range, metronome and undo / redo.</p></article>
+      <article class="panel card"><span class="badge">MIDI</span><h3 data-tt="mdC2T">MIDI editing</h3><p data-tt="mdC2B">Piano roll, a 16-step sequencer, Standard MIDI File import and export, MIDI keyboards and Musical Typing, plus Logic-style functions such as quantize, arpeggiator and humanize.</p></article>
+      <article class="panel card"><span class="badge">SYN</span><h3 data-tt="mdC3T">Instruments</h3><p data-tt="mdC3B">A 16-voice subtractive synthesizer, a synthesized drum kit and Drummer with styles, variations and fills.</p></article>
+      <article class="panel card"><span class="badge">MIX</span><h3 data-tt="mdC4T">Mixer and effects</h3><p data-tt="mdC4B">Channel strips with EQ, compressor, echo, reverb, overdrive, chorus and filter, two aux sends, a master limiter and volume, pan and send automation.</p></article>
+      <article class="panel card"><span class="badge">VST3</span><h3 data-tt="mdC5T">Plug-ins</h3><p data-tt="mdC5B">VST3 instruments and effects with their own editor windows, saved state, and a small plug-in SDK for writing your own effects.</p></article>
+      <article class="panel card"><span class="badge">FILE</span><h3 data-tt="mdC6T">Projects and bounce</h3><p data-tt="mdC6B">.mdaw projects with autosave and crash recovery, Loop Browser, bounce to 16 / 24-bit or 32-bit float WAV, and five interface languages.</p></article>
+    </div>
+  </div></section>
+
+  <section id="md-build"><div class="wrap">
+    <div class="head"><div class="eyebrow" data-tt="mdEye3">03 / BUILD & RUN</div><h2 data-tt="mdH3">Build it from source.</h2></div>
+    <div class="panel terminal">
+      <div class="panel-head" data-status="from source">build.sh</div>
+      <pre><span class="dim"># clone and build the Qt version</span>
+<span class="cyan">$</span> git clone https://github.com/SegFault777/MiniDAW.git
+<span class="cyan">$</span> cd MiniDAW
+<span class="cyan">$</span> export QT_DIR=C:/Qt/6.8.3/msvc2022_64
+<span class="cyan">$</span> ./build.sh            <span class="dim"># build/MiniDAW.exe</span>
+<span class="cyan">$</span> ./build.sh installer  <span class="dim"># installer-out/MiniDAW-&lt;version&gt;-setup.exe</span>
+
+<span class="dim"># run the DSP unit tests (no Qt needed)</span>
+<span class="cyan">$</span> bash tests/run.sh</pre>
+    </div>
+    <div class="note" data-tt="mdBuildNote">Requirements: Windows 10/11, Visual Studio 2022 or newer, Git Bash, Qt 6.5 or newer (6.8 recommended). Inno Setup 6 is optional, for the installer. Set VST3_SDK_DIR to include VST3 hosting.</div>
+  </div></section>
+
+  <section id="md-status"><div class="wrap">
+    <div class="head"><div class="eyebrow" data-tt="mdEye4">04 / STATUS</div><h2 data-tt="mdH4">Version 0.10_1.</h2>
+      <p data-tt="mdStatus">A native version without Qt (MiniDAWNative.exe) is in progress. The Qt version remains the main program. VST3 parameters are edited in the plug-in's own window for now.</p></div>
+    <div class="req-grid">
+      <div class="req-card">
+        <h3 data-tt="mdLimits">Known limitations</h3>
+        <table>
+          <tr><th>Audio</th><td>WASAPI shared mode, about 50 ms; ASIO planned</td></tr>
+          <tr><th>VST3</th><td>No automation lanes yet</td></tr>
+          <tr><th>Drummer</th><td>Built-in kit only</td></tr>
+        </table>
+      </div>
+      <div class="req-card">
+        <h3 data-tt="mdRoadmap">Roadmap</h3>
+        <table>
+          <tr><th>Next</th><td>Native UI without Qt</td></tr>
+          <tr><th>Planned</th><td>ASIO / exclusive mode, Smart Tempo</td></tr>
+          <tr><th>Later</th><td>Loop tempo detection, more automation</td></tr>
+        </table>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="md-get"><div class="wrap">
+    <div class="head"><div class="eyebrow" data-tt="mdEye5">05 / GET IT</div><h2 data-tt="mdH5">Install, or read the source.</h2>
+      <p data-tt="mdGet">Download the installer from Releases, or read the source on GitHub. MiniDAW is an independent open-source project, not affiliated with Apple Inc. or Steinberg.</p></div>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/SegFault777/MiniDAW/releases" rel="noopener" target="_blank" data-tt="mdReleases">Releases</a>
+      <a class="btn" href="https://github.com/SegFault777/MiniDAW" rel="noopener" target="_blank" data-tt="mdSourceGH">Source on GitHub</a>
+      <a class="btn" href="https://github.com/SegFault777/MiniDAW/blob/main/README.md" rel="noopener" target="_blank" data-tt="mdReadme">README</a>
+    </div>
+    <div class="note" data-tt="mdGetNote">Released under GPL-3.0-or-later. Sample loops in loops/ are released under the same license.</div>
+  </div></section>
+
+  <footer><div class="wrap foot">
+    <div><strong>MiniDAW</strong><br><span data-tt="mdFooter">A DAW for all of us. GPL-3.0-or-later.</span></div>
+    <div>github.com/SegFault777/MiniDAW</div>
+  </div></footer>
+</main>
+
+<main id="themeTest">
+  <section class="hero"><div class="wrap">
+    <span class="tag" data-tt="ttTag">THEME TEST</span>
+    <h1 data-tt="ttTitle">Theme Test</h1>
+    <p data-tt="ttIntro">Check how the current theme draws buttons, window corners, window controls and fonts. Change the theme in Settings (gear, top right) and this page follows it.</p>
+  </div></section>
+
+  <section class="tt-section"><div class="wrap">
+    <h2 data-tt="ttH1">1. Buttons</h2>
+    <div class="tt-row">
+      <button type="button" data-tt="ttButton">Button</button>
+      <button type="button" class="primary" data-tt="ttPrimary">Primary</button>
+      <button type="button" disabled data-tt="ttDisabled">Disabled</button>
+      <a class="btn" href="#themetest" data-tt="ttLinkBtn">Link button</a>
+      <a class="btn primary" href="#themetest" data-tt="ttPrimaryLink">Primary link</a>
+    </div>
+  </div></section>
+
+  <section class="tt-section"><div class="wrap">
+    <h2 data-tt="ttH2">2. Window corners</h2>
+    <div class="tt-row tt-windows">
+      <div class="panel"><div class="panel-head" data-status="small"><span data-tt="ttSmallTitle">Small window</span></div>
+        <div class="tt-body"><span data-tt="ttSmallBody">Corner test: small.</span></div></div>
+      <div class="panel"><div class="panel-head" data-status="medium"><span data-tt="ttMedTitle">Medium window</span></div>
+        <div class="tt-body"><span data-tt="ttMedBody">Corner test: a window with a longer body and more text inside it, so the corners and edges are easy to see.</span></div></div>
+    </div>
+  </div></section>
+
+  <section class="tt-section"><div class="wrap">
+    <h2 data-tt="ttH3">3. Window controls (_ &#9633; X)</h2>
+    <div class="panel"><div class="panel-head" data-status="controls"><span data-tt="ttCtrlTitle">Window controls</span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div>
+      <div class="tt-body"><span data-tt="ttCtrlBody">Hover and press each control: minimize, maximize, close.</span></div></div>
+  </div></section>
+
+  <section class="tt-section tt-font"><div class="wrap">
+    <h2 data-tt="ttH4">4. Fonts</h2>
+    <p style="font-size:12px">12px: The quick brown fox jumps over the lazy dog.</p>
+    <p style="font-size:14px">14px: The quick brown fox jumps over the lazy dog.</p>
+    <p style="font-size:16px">16px: The quick brown fox jumps over the lazy dog.</p>
+    <p style="font-size:20px">20px: The quick brown fox jumps over the lazy dog.</p>
+    <p style="font-size:28px;font-weight:700">28px bold: Aa Bb Cc 0123456789</p>
+    <p><em>Italic:</em> <strong>Bold:</strong> <code>code 0123 {}[]</code></p>
+    <p>English: Hello, MiniWin.</p>
+    <p>한국어: 안녕하세요, 미니윈입니다.</p>
+    <p>日本語: こんにちは、MiniWin です。</p>
+    <p>中文: 你好，MiniWin。</p>
+    <p>Русский: Привет, MiniWin.</p>
+    <p>العربية: مرحبًا بك في MiniWin.</p>
+    <p>हिन्दी: नमस्ते, MiniWin।</p>
+  </div></section>
+</main>
+
 <div id="miniwinView">
   <iframe id="miniwinFrame" title="MiniWin" src="miniwin/index.html"></iframe>
 </div>
@@ -67,23 +282,43 @@
   var links = document.querySelectorAll("[data-view]");
   var navLinks = document.querySelectorAll("nav.nav a[data-view]");
   var miniwinOpen = false;
+  var themeTestOpen = false;
+  var minidawOpen = false;
   var ready = false, queue = [];
   var loadedSheets = {};
 
   /* Every request to MiniWin goes through here: it waits until MiniWin has loaded. */
+  /* The frame can finish loading before this script runs, so the frame's "ready" message may already be gone.
+     Ask until it answers (any message from the frame counts as ready), and flush whatever was queued. */
+  function markReady() {
+    if (ready) return;
+    ready = true;
+    queue.splice(0).forEach(send);
+  }
+  var readyPing = setInterval(function () {
+    if (ready) { clearInterval(readyPing); return; }
+    if (frame.contentWindow) frame.contentWindow.postMessage({ miniwin: "state" }, "*");
+  }, 150);
   function send(msg) {
     if (ready && frame.contentWindow) frame.contentWindow.postMessage(msg, "*");
     else queue.push(msg);
   }
 
   function keepClasses(cls) {
-    return (cls || "").split(/\s+/).filter(function (c) { return c && c !== "ms-settings-only" && c !== "miniwin-open"; }).join(" ");
+    return (cls || "").split(/\s+/).filter(function (c) { return c && c !== "ms-settings-only" && c !== "miniwin-open" && c !== "themetest-open" && c !== "minidaw-open"; }).join(" ");
   }
 
   function applyBodyClasses(state) {
     document.documentElement.className = keepClasses(state.html);
-    document.body.className = (keepClasses(state.body) + (miniwinOpen ? " miniwin-open" : "")).replace(/\s+/g, " ").trim();
+    document.body.className = (keepClasses(state.body) + (miniwinOpen ? " miniwin-open" : "") + (themeTestOpen ? " themetest-open" : "") + (minidawOpen ? " minidaw-open" : "")).replace(/\s+/g, " ").trim();
     syncOldRetroHome();
+    syncToggleColor();
+  }
+
+  /* the menu icon uses the same colour as the menu links of the current theme */
+  function syncToggleColor() {
+    var a = document.querySelector("#mainNav a");
+    if (a && navToggle) navToggle.style.color = getComputedStyle(a).color;
   }
 
   /* OldRetro on the home page: the same DOS-blue text screen MiniWin uses, showing the home content. */
@@ -124,17 +359,30 @@
     var d = MAIN_I18N[mainLang()];
     title.textContent = d.orHome;
     var text = document.createElement("pre");
+    text.style.whiteSpace = "pre-wrap";
+    text.style.wordBreak = "break-word";
     text.textContent =
       "SEGFAULT777\n\n" + d.intro + "\n\n" +
       "[ MINIWIN ]  " + d.orMiniwinDesc + "\n" +
       "[ GITHUB  ]  https://github.com/SegFault777";
     win.appendChild(text);
     orBody.appendChild(win);
+    var prompt = document.createElement("pre");
+    prompt.className = "or-prompt";
+    prompt.style.whiteSpace = "pre-wrap";
+    prompt.style.marginTop = "18px";
+    prompt.textContent =
+      "F1 HOME    F2 MINIWIN    F3 GITHUB    F4 GUI\n\n" +
+      "C:\\SEGFAULT777> HOME\n" +
+      "C:\\SEGFAULT777> _";
+    orBody.appendChild(prompt);
 
     orStatus.textContent = d.orStatus;
     /* typing RETRO returns to the GUI, as in MiniWin (bound once) */
     if (!orKeysBound) document.addEventListener("keydown", function (e) {
       if (!document.body.classList.contains("oldretro-mode") || miniwinOpen) return;
+      var fkeys = { F1: "home", F2: "miniwin", F3: "github", F4: "gui" };
+      if (fkeys[e.key]) { e.preventDefault(); orMenu(fkeys[e.key]); return; }
       if (e.key && e.key.length === 1) orBuf = (orBuf + e.key.toLowerCase()).slice(-5);
       if (orBuf === "retro") { orBuf = ""; orMenu("gui"); }
     });
@@ -152,7 +400,7 @@
     var on = document.body.classList.contains("oldretro-mode");
     if (on) buildOldRetroHome();
     if (!orScreen) return;
-    var show_ = on && !miniwinOpen;
+    var show_ = on && !miniwinOpen && !themeTestOpen && !minidawOpen;
     if (show_) {
       var hb = document.querySelector("header.top");
       orScreen.style.top = (hb ? Math.round(hb.getBoundingClientRect().bottom) : 52) + "px";
@@ -194,9 +442,9 @@
   window.addEventListener("message", function (e) {
     if (e.source !== frame.contentWindow || !e.data || !e.data.miniwin) return;
     var m = e.data;
+    markReady();
     if (m.miniwin === "ready") {
-      ready = true;
-      queue.splice(0).forEach(send);
+      /* nothing more: markReady() has run */
     } else if (m.miniwin === "state") {
       applyBodyClasses(m);
       applySheets(m.sheets);
@@ -208,15 +456,30 @@
     }
   });
 
-  function show(name) {
+  /* URL tags: #miniwin, #themetest; Home is the bare address. fromRoute = the URL already says it, so nothing is pushed. */
+  var VIEW_HASHES = ["miniwin", "themetest", "minidaw"];
+  function routeName() {
+    var h = location.hash.replace(/^#/, "");
+    return VIEW_HASHES.indexOf(h) >= 0 ? h : "home";
+  }
+  function setRoute(name) {
+    var target = location.pathname + location.search + (name === "home" ? "" : "#" + name);
+    if (target !== location.pathname + location.search + location.hash) history.pushState({ view: name }, "", target);
+  }
+
+  function show(name, fromRoute) {
     miniwinOpen = name === "miniwin";
+    themeTestOpen = name === "themetest";
+    minidawOpen = name === "minidaw";
+    if (minidawOpen && window.miniwinMdSync) requestAnimationFrame(window.miniwinMdSync);
     /* entering MiniWin: if the settings were drawn over Home, MiniWin's own page must show again behind them */
     if (miniwinOpen) send({ miniwin: "clearSettingsOnly" });
     view.classList.toggle("open", miniwinOpen);
     view.classList.remove("settings-only");
-    back.style.display = miniwinOpen ? "block" : "none";
+    back.style.display = (miniwinOpen || themeTestOpen || minidawOpen) ? "block" : "none";
     navLinks.forEach(function (a) { a.classList.toggle("active", a.getAttribute("data-view") === name); });
     applyBodyClasses({ html: document.documentElement.className, body: document.body.className });
+    if (!fromRoute) setRoute(name);
   }
 
   links.forEach(function (a) {
@@ -229,198 +492,878 @@
   });
   back.addEventListener("click", function () { show("home"); });
 
+  /* Back / forward move between views; a typed or shared #miniwin link opens MiniWin directly. */
+  window.addEventListener("popstate", function () { show(routeName(), true); });
+  window.addEventListener("load", function () { show(routeName(), true); });
+
   /* Settings: the same window MiniWin has, drawn over the home page. */
-  /* Home and the Live Editor notice follow the language chosen in MiniWin (same storage keys). */
-  var noticeEl = null;
+  /* Home follows the language chosen in MiniWin (same storage keys). */
   var MAIN_I18N = {
     "en": {
       "home": "Home",
-      "notice": "Live Editor — under development.",
       "intro": "I like building operating systems and web technology from scratch. My main project is MiniWin, a 32-bit x86 desktop OS written without external libraries. You can run it right away from MiniWin in the top menu.",
       "run": "Run MiniWin",
       "orHome": "1. HOME",
       "orMiniwinDesc": "run MiniWin, the 32-bit x86 OS built from scratch",
-      "orStatus": "PAGE UP / PAGE DOWN TO SCROLL · TYPE \"RETRO\" TO RETURN TO GUI MODE"
+      "orStatus": "PAGE UP / PAGE DOWN TO SCROLL · TYPE \"RETRO\" TO RETURN TO GUI MODE",
+      "menu": "Menu",
+      "navTheme": "Theme Test",
+      "ttTag": "THEME TEST",
+      "ttTitle": "Theme Test",
+      "ttIntro": "Check how the current theme draws buttons, window corners, window controls and fonts. Change the theme in Settings (gear, top right) and this page follows it.",
+      "ttH1": "1. Buttons",
+      "ttH2": "2. Window corners",
+      "ttH3": "3. Window controls (_ ☐ X)",
+      "ttH4": "4. Fonts",
+      "ttButton": "Button",
+      "ttPrimary": "Primary",
+      "ttDisabled": "Disabled",
+      "ttLinkBtn": "Link button",
+      "ttPrimaryLink": "Primary link",
+      "ttSmallTitle": "Small window",
+      "ttSmallBody": "Corner test: small.",
+      "ttMedTitle": "Medium window",
+      "ttMedBody": "Corner test: a window with a longer body and more text inside it, so the corners and edges are easy to see.",
+      "ttCtrlTitle": "Window controls",
+      "ttCtrlBody": "Hover and press each control: minimize, maximize, close."
     },
     "ko": {
       "home": "홈",
-      "notice": "Live Editor — 개발 중입니다.",
       "intro": "저는 운영체제와 웹 기술을 직접 만들어 보는 것을 좋아합니다. 대표 작업은 MiniWin입니다. 외부 라이브러리 없이 처음부터 만든 32비트 x86 데스크톱 운영체제이며, 상단 메뉴의 MiniWin에서 바로 실행해 볼 수 있습니다.",
       "run": "MiniWin 실행",
       "orHome": "1. 홈",
       "orMiniwinDesc": "외부 라이브러리 없이 처음부터 만든 32비트 x86 운영체제 MiniWin 실행",
-      "orStatus": "PAGE UP / PAGE DOWN 으로 스크롤 · \"RETRO\" 입력 시 GUI 모드로 복귀"
+      "orStatus": "PAGE UP / PAGE DOWN 으로 스크롤 · \"RETRO\" 입력 시 GUI 모드로 복귀",
+      "menu": "메뉴",
+      "navTheme": "테마 테스트",
+      "ttTag": "테마 테스트",
+      "ttTitle": "테마 테스트",
+      "ttIntro": "현재 테마가 단추, 창 모서리, 창 조작 단추, 글꼴을 어떻게 그리는지 확인합니다. 설정(오른쪽 위 톱니바퀴)에서 테마를 바꾸면 이 페이지도 따라 바뀝니다.",
+      "ttH1": "1. 단추",
+      "ttH2": "2. 창 모서리",
+      "ttH3": "3. 창 조작 단추 (_ ☐ X)",
+      "ttH4": "4. 글꼴",
+      "ttButton": "단추",
+      "ttPrimary": "강조",
+      "ttDisabled": "사용 안 함",
+      "ttLinkBtn": "링크 단추",
+      "ttPrimaryLink": "강조 링크",
+      "ttSmallTitle": "작은 창",
+      "ttSmallBody": "모서리 테스트: 작은 창.",
+      "ttMedTitle": "중간 창",
+      "ttMedBody": "모서리 테스트: 본문이 더 길고 글이 많아서 모서리와 가장자리를 쉽게 볼 수 있는 창입니다.",
+      "ttCtrlTitle": "창 조작 단추",
+      "ttCtrlBody": "각 단추 위에 마우스를 올리고 눌러 보세요: 최소화, 최대화, 닫기."
     },
     "ko-kp": {
       "home": "홈페지",
-      "notice": "Live Editor — 개발 중에 있습니다.",
       "intro": "나는 조작체계와 웨브기술을 직접 만들어 보는것을 좋아합니다. 대표 작업은 MiniWin입니다. 외부 라이브러리 없이 처음부터 만든 32비트 x86 탁상용 조작체계이며, 상단 차림표의 MiniWin에서 바로 기동해 볼수 있습니다.",
       "run": "MiniWin 기동",
       "orHome": "1. 홈페지",
       "orMiniwinDesc": "외부 라이브러리 없이 처음부터 만든 32비트 x86 조작체계 MiniWin 기동",
-      "orStatus": "PAGE UP / PAGE DOWN으로 화면흘리기 · \"RETRO\" 입력 시 그래픽 모드로 돌아감"
+      "orStatus": "PAGE UP / PAGE DOWN으로 화면흘리기 · \"RETRO\" 입력 시 그래픽 모드로 돌아감",
+      "menu": "차림표",
+      "navTheme": "테마 시험",
+      "ttTag": "테마 시험",
+      "ttTitle": "테마 시험",
+      "ttIntro": "현재 테마가 단추, 창 모서리, 창 조종단추, 글꼴을 어떻게 그리는지 봅니다. 설정(오른쪽 우의 톱니바퀴)에서 테마를 바꾸면 이 페지도 따라 바뀝니다.",
+      "ttH1": "1. 단추",
+      "ttH2": "2. 창 모서리",
+      "ttH3": "3. 창 조종단추 (_ ☐ X)",
+      "ttH4": "4. 글꼴",
+      "ttButton": "단추",
+      "ttPrimary": "강조",
+      "ttDisabled": "사용못함",
+      "ttLinkBtn": "련결 단추",
+      "ttPrimaryLink": "강조 련결",
+      "ttSmallTitle": "작은 창문",
+      "ttSmallBody": "모서리 시험: 작은 창문.",
+      "ttMedTitle": "가운데 창문",
+      "ttMedBody": "모서리 시험: 본문이 더 길고 글이 많은 창문으로 모서리와 가장자리를 쉽게 볼수 있습니다.",
+      "ttCtrlTitle": "창 조종단추",
+      "ttCtrlBody": "단추마다 쥐를 올려놓고 눌러 보십시오: 줄이기, 키우기, 닫기."
     },
     "es": {
       "home": "Inicio",
-      "notice": "Live Editor — en desarrollo.",
       "intro": "Me gusta construir sistemas operativos y tecnologías web desde cero. Mi proyecto principal es MiniWin, un sistema operativo de escritorio de 32 bits para x86 escrito sin bibliotecas externas. Puedes ejecutarlo al instante desde MiniWin en el menú superior.",
       "run": "Ejecutar MiniWin",
       "orHome": "1. INICIO",
       "orMiniwinDesc": "ejecutar MiniWin, el SO de 32 bits para x86 hecho desde cero",
-      "orStatus": "AV PÁG / RE PÁG PARA DESPLAZAR · ESCRIBE \"RETRO\" PARA VOLVER AL MODO GUI"
+      "orStatus": "AV PÁG / RE PÁG PARA DESPLAZAR · ESCRIBE \"RETRO\" PARA VOLVER AL MODO GUI",
+      "menu": "Menú",
+      "navTheme": "Prueba de tema",
+      "ttTag": "PRUEBA DE TEMA",
+      "ttTitle": "Prueba de tema",
+      "ttIntro": "Comprueba cómo el tema actual dibuja botones, esquinas de ventana, botones de ventana y fuentes. Cambia el tema en Ajustes (engranaje, arriba a la derecha) y esta página lo seguirá.",
+      "ttH1": "1. Botones",
+      "ttH2": "2. Esquinas de ventana",
+      "ttH3": "3. Botones de ventana (_ ☐ X)",
+      "ttH4": "4. Fuentes",
+      "ttButton": "Botón",
+      "ttPrimary": "Principal",
+      "ttDisabled": "Deshabilitado",
+      "ttLinkBtn": "Botón de enlace",
+      "ttPrimaryLink": "Enlace principal",
+      "ttSmallTitle": "Ventana pequeña",
+      "ttSmallBody": "Prueba de esquinas: pequeña.",
+      "ttMedTitle": "Ventana mediana",
+      "ttMedBody": "Prueba de esquinas: una ventana con más texto, para ver bien las esquinas y los bordes.",
+      "ttCtrlTitle": "Botones de ventana",
+      "ttCtrlBody": "Pasa el cursor sobre cada botón y púlsalo: minimizar, maximizar, cerrar."
     },
     "zh-CN": {
       "home": "首页",
-      "notice": "Live Editor — 开发中。",
       "intro": "我喜欢从零开始构建操作系统和 Web 技术。代表作是 MiniWin：一个不依赖外部库、从头编写的 32 位 x86 桌面操作系统，可以直接从顶部菜单的 MiniWin 运行。",
       "run": "运行 MiniWin",
       "orHome": "1. 首页",
       "orMiniwinDesc": "运行 MiniWin，一个从零编写的 32 位 x86 操作系统",
-      "orStatus": "PAGE UP / PAGE DOWN 滚动 · 输入 \"RETRO\" 返回 GUI 模式"
+      "orStatus": "PAGE UP / PAGE DOWN 滚动 · 输入 \"RETRO\" 返回 GUI 模式",
+      "menu": "菜单",
+      "navTheme": "主题测试",
+      "ttTag": "主题测试",
+      "ttTitle": "主题测试",
+      "ttIntro": "查看当前主题如何绘制按钮、窗口圆角、窗口控制按钮和字体。在设置（右上角齿轮）中更改主题，此页面也会随之变化。",
+      "ttH1": "1. 按钮",
+      "ttH2": "2. 窗口圆角",
+      "ttH3": "3. 窗口控制按钮 (_ ☐ X)",
+      "ttH4": "4. 字体",
+      "ttButton": "按钮",
+      "ttPrimary": "主要",
+      "ttDisabled": "禁用",
+      "ttLinkBtn": "链接按钮",
+      "ttPrimaryLink": "主要链接",
+      "ttSmallTitle": "小窗口",
+      "ttSmallBody": "圆角测试：小窗口。",
+      "ttMedTitle": "中窗口",
+      "ttMedBody": "圆角测试：窗口的内容更长、文字更多，便于看清圆角和边缘。",
+      "ttCtrlTitle": "窗口控制按钮",
+      "ttCtrlBody": "将鼠标悬停并按下每个按钮：最小化、最大化、关闭。"
     },
     "zh-TW": {
       "home": "首頁",
-      "notice": "Live Editor — 開發中。",
       "intro": "我喜歡從零開始打造作業系統與網頁技術。代表作是 MiniWin：一個不依賴外部函式庫、從頭撰寫的 32 位元 x86 桌面作業系統，可以直接從頂端選單的 MiniWin 執行。",
       "run": "執行 MiniWin",
       "orHome": "1. 首頁",
       "orMiniwinDesc": "執行 MiniWin，一個從零撰寫的 32 位元 x86 作業系統",
-      "orStatus": "PAGE UP / PAGE DOWN 捲動 · 輸入 \"RETRO\" 返回 GUI 模式"
+      "orStatus": "PAGE UP / PAGE DOWN 捲動 · 輸入 \"RETRO\" 返回 GUI 模式",
+      "menu": "選單",
+      "navTheme": "主題測試",
+      "ttTag": "主題測試",
+      "ttTitle": "主題測試",
+      "ttIntro": "查看目前主題如何繪製按鈕、視窗圓角、視窗控制按鈕與字型。在設定（右上角齒輪）中更改主題，此頁面也會跟著變化。",
+      "ttH1": "1. 按鈕",
+      "ttH2": "2. 視窗圓角",
+      "ttH3": "3. 視窗控制按鈕 (_ ☐ X)",
+      "ttH4": "4. 字型",
+      "ttButton": "按鈕",
+      "ttPrimary": "主要",
+      "ttDisabled": "停用",
+      "ttLinkBtn": "連結按鈕",
+      "ttPrimaryLink": "主要連結",
+      "ttSmallTitle": "小視窗",
+      "ttSmallBody": "圓角測試：小視窗。",
+      "ttMedTitle": "中視窗",
+      "ttMedBody": "圓角測試：視窗內容較長、文字較多，方便看清圓角與邊緣。",
+      "ttCtrlTitle": "視窗控制按鈕",
+      "ttCtrlBody": "將滑鼠移到每個按鈕上並按下：最小化、最大化、關閉。"
     },
     "ja": {
       "home": "ホーム",
-      "notice": "Live Editor — 開発中です。",
       "intro": "私はオペレーティングシステムとWeb技術を一から作ることが好きです。代表作はMiniWinです。外部ライブラリなしで一から作った32ビットx86デスクトップOSで、上のメニューのMiniWinからすぐに実行できます。",
       "run": "MiniWinを実行",
       "orHome": "1. ホーム",
       "orMiniwinDesc": "外部ライブラリなしで一から作った32ビットx86 OS、MiniWinを実行",
-      "orStatus": "PAGE UP / PAGE DOWN でスクロール · \"RETRO\" と入力すると GUI モードに戻ります"
+      "orStatus": "PAGE UP / PAGE DOWN でスクロール · \"RETRO\" と入力すると GUI モードに戻ります",
+      "menu": "メニュー",
+      "navTheme": "テーマテスト",
+      "ttTag": "テーマテスト",
+      "ttTitle": "テーマテスト",
+      "ttIntro": "現在のテーマがボタン、ウィンドウの角、ウィンドウ操作ボタン、フォントをどう描くかを確認します。設定（右上の歯車）でテーマを変えると、このページも変わります。",
+      "ttH1": "1. ボタン",
+      "ttH2": "2. ウィンドウの角",
+      "ttH3": "3. ウィンドウ操作ボタン (_ ☐ X)",
+      "ttH4": "4. フォント",
+      "ttButton": "ボタン",
+      "ttPrimary": "強調",
+      "ttDisabled": "無効",
+      "ttLinkBtn": "リンクボタン",
+      "ttPrimaryLink": "強調リンク",
+      "ttSmallTitle": "小さいウィンドウ",
+      "ttSmallBody": "角のテスト：小さいウィンドウ。",
+      "ttMedTitle": "中くらいのウィンドウ",
+      "ttMedBody": "角のテスト：本文が長く文字が多いので、角と縁が見やすいウィンドウです。",
+      "ttCtrlTitle": "ウィンドウ操作ボタン",
+      "ttCtrlBody": "各ボタンにカーソルを合わせて押してください：最小化、最大化、閉じる。"
     },
     "fr": {
       "home": "Accueil",
-      "notice": "Live Editor — en cours de développement.",
       "intro": "J'aime construire des systèmes d'exploitation et des technologies web à partir de zéro. Mon projet principal est MiniWin, un système d'exploitation de bureau 32 bits pour x86 écrit sans bibliothèques externes. Vous pouvez le lancer directement depuis MiniWin dans le menu supérieur.",
       "run": "Lancer MiniWin",
       "orHome": "1. ACCUEIL",
       "orMiniwinDesc": "lancer MiniWin, le SO 32 bits pour x86 développé de zéro",
-      "orStatus": "PAGE PRÉC. / PAGE SUIV. POUR DÉFILER · TAPEZ \"RETRO\" POUR REVENIR AU MODE GUI"
+      "orStatus": "PAGE PRÉC. / PAGE SUIV. POUR DÉFILER · TAPEZ \"RETRO\" POUR REVENIR AU MODE GUI",
+      "menu": "Menu",
+      "navTheme": "Test de thème",
+      "ttTag": "TEST DE THÈME",
+      "ttTitle": "Test de thème",
+      "ttIntro": "Vérifiez comment le thème actuel dessine les boutons, les coins de fenêtre, les boutons de fenêtre et les polices. Changez le thème dans Paramètres (engrenage, en haut à droite) et cette page suivra.",
+      "ttH1": "1. Boutons",
+      "ttH2": "2. Coins de fenêtre",
+      "ttH3": "3. Boutons de fenêtre (_ ☐ X)",
+      "ttH4": "4. Polices",
+      "ttButton": "Bouton",
+      "ttPrimary": "Principal",
+      "ttDisabled": "Désactivé",
+      "ttLinkBtn": "Bouton lien",
+      "ttPrimaryLink": "Lien principal",
+      "ttSmallTitle": "Petite fenêtre",
+      "ttSmallBody": "Test des coins : petite fenêtre.",
+      "ttMedTitle": "Fenêtre moyenne",
+      "ttMedBody": "Test des coins : une fenêtre avec un texte plus long, pour bien voir les coins et les bords.",
+      "ttCtrlTitle": "Boutons de fenêtre",
+      "ttCtrlBody": "Survolez et appuyez sur chaque bouton : réduire, agrandir, fermer."
     },
     "de": {
       "home": "Start",
-      "notice": "Live Editor — in Entwicklung.",
       "intro": "Ich baue gern Betriebssysteme und Webtechnologien von Grund auf. Mein Hauptprojekt ist MiniWin, ein 32-Bit-x86-Desktop-Betriebssystem ohne externe Bibliotheken. Sie können es direkt über MiniWin im oberen Menü starten.",
       "run": "MiniWin starten",
       "orHome": "1. START",
       "orMiniwinDesc": "MiniWin starten, das 32-Bit-x86-Betriebssystem von Grund auf",
-      "orStatus": "BILD AUF / BILD AB ZUM SCROLLEN · \"RETRO\" EINGEBEN FÜR DEN GUI-MODUS"
+      "orStatus": "BILD AUF / BILD AB ZUM SCROLLEN · \"RETRO\" EINGEBEN FÜR DEN GUI-MODUS",
+      "menu": "Menü",
+      "navTheme": "Theme-Test",
+      "ttTag": "THEME-TEST",
+      "ttTitle": "Theme-Test",
+      "ttIntro": "Prüfen Sie, wie das aktuelle Theme Schaltflächen, Fensterecken, Fenstersteuerung und Schriften darstellt. Ändern Sie das Theme in den Einstellungen (Zahnrad oben rechts), dann folgt diese Seite.",
+      "ttH1": "1. Schaltflächen",
+      "ttH2": "2. Fensterecken",
+      "ttH3": "3. Fenstersteuerung (_ ☐ X)",
+      "ttH4": "4. Schriften",
+      "ttButton": "Schaltfläche",
+      "ttPrimary": "Primär",
+      "ttDisabled": "Deaktiviert",
+      "ttLinkBtn": "Link-Schaltfläche",
+      "ttPrimaryLink": "Primärer Link",
+      "ttSmallTitle": "Kleines Fenster",
+      "ttSmallBody": "Ecken-Test: klein.",
+      "ttMedTitle": "Mittleres Fenster",
+      "ttMedBody": "Ecken-Test: ein Fenster mit längerem Text, damit Ecken und Kanten gut zu sehen sind.",
+      "ttCtrlTitle": "Fenstersteuerung",
+      "ttCtrlBody": "Fahren Sie über jede Schaltfläche und drücken Sie: minimieren, maximieren, schließen."
     },
     "pt-BR": {
       "home": "Início",
-      "notice": "Live Editor — em desenvolvimento.",
       "intro": "Gosto de construir sistemas operacionais e tecnologias web do zero. Meu projeto principal é o MiniWin, um sistema operacional de desktop de 32 bits para x86 escrito sem bibliotecas externas. Você pode executá-lo direto pelo MiniWin no menu superior.",
       "run": "Executar MiniWin",
       "orHome": "1. INÍCIO",
       "orMiniwinDesc": "executar o MiniWin, o SO de 32 bits para x86 feito do zero",
-      "orStatus": "PAGE UP / PAGE DOWN PARA ROLAR · DIGITE \"RETRO\" PARA VOLTAR AO MODO GUI"
+      "orStatus": "PAGE UP / PAGE DOWN PARA ROLAR · DIGITE \"RETRO\" PARA VOLTAR AO MODO GUI",
+      "menu": "Menu",
+      "navTheme": "Teste de tema",
+      "ttTag": "TESTE DE TEMA",
+      "ttTitle": "Teste de tema",
+      "ttIntro": "Veja como o tema atual desenha botões, cantos de janela, botões de janela e fontes. Mude o tema em Configurações (engrenagem, no canto superior direito) e esta página acompanha.",
+      "ttH1": "1. Botões",
+      "ttH2": "2. Cantos de janela",
+      "ttH3": "3. Botões de janela (_ ☐ X)",
+      "ttH4": "4. Fontes",
+      "ttButton": "Botão",
+      "ttPrimary": "Principal",
+      "ttDisabled": "Desativado",
+      "ttLinkBtn": "Botão de link",
+      "ttPrimaryLink": "Link principal",
+      "ttSmallTitle": "Janela pequena",
+      "ttSmallBody": "Teste de cantos: pequena.",
+      "ttMedTitle": "Janela média",
+      "ttMedBody": "Teste de cantos: uma janela com mais texto, para ver bem os cantos e as bordas.",
+      "ttCtrlTitle": "Botões de janela",
+      "ttCtrlBody": "Passe o mouse sobre cada botão e clique: minimizar, maximizar, fechar."
     },
     "it": {
       "home": "Home",
-      "notice": "Live Editor — in sviluppo.",
       "intro": "Mi piace costruire sistemi operativi e tecnologie web da zero. Il mio progetto principale è MiniWin, un sistema operativo desktop a 32 bit per x86 scritto senza librerie esterne. Puoi avviarlo subito da MiniWin nel menu in alto.",
       "run": "Avvia MiniWin",
       "orHome": "1. HOME",
       "orMiniwinDesc": "avviare MiniWin, il SO a 32 bit per x86 costruito da zero",
-      "orStatus": "PAGE UP / PAGE DOWN PER SCORRERE · DIGITA \"RETRO\" PER TORNARE ALLA MODALITÀ GUI"
+      "orStatus": "PAGE UP / PAGE DOWN PER SCORRERE · DIGITA \"RETRO\" PER TORNARE ALLA MODALITÀ GUI",
+      "menu": "Menu",
+      "navTheme": "Test tema",
+      "ttTag": "TEST TEMA",
+      "ttTitle": "Test tema",
+      "ttIntro": "Controlla come il tema attuale disegna pulsanti, angoli delle finestre, controlli di finestra e font. Cambia il tema in Impostazioni (ingranaggio in alto a destra) e questa pagina lo seguirà.",
+      "ttH1": "1. Pulsanti",
+      "ttH2": "2. Angoli delle finestre",
+      "ttH3": "3. Controlli di finestra (_ ☐ X)",
+      "ttH4": "4. Font",
+      "ttButton": "Pulsante",
+      "ttPrimary": "Principale",
+      "ttDisabled": "Disattivato",
+      "ttLinkBtn": "Pulsante link",
+      "ttPrimaryLink": "Link principale",
+      "ttSmallTitle": "Finestra piccola",
+      "ttSmallBody": "Test angoli: piccola.",
+      "ttMedTitle": "Finestra media",
+      "ttMedBody": "Test angoli: una finestra con più testo, per vedere bene angoli e bordi.",
+      "ttCtrlTitle": "Controlli di finestra",
+      "ttCtrlBody": "Passa sopra ogni pulsante e premi: riduci, ingrandisci, chiudi."
     },
     "ru": {
       "home": "Главная",
-      "notice": "Live Editor — в разработке.",
       "intro": "Мне нравится создавать операционные системы и веб-технологии с нуля. Мой главный проект — MiniWin, 32-битная настольная ОС для x86, написанная без внешних библиотек. Запустить её можно сразу из MiniWin в верхнем меню.",
       "run": "Запустить MiniWin",
       "orHome": "1. ГЛАВНАЯ",
       "orMiniwinDesc": "запустить MiniWin — 32-битную ОС для x86, написанную с нуля",
-      "orStatus": "PAGE UP / PAGE DOWN — ПРОКРУТКА · НАПИШИТЕ \"RETRO\", ЧТОБЫ ВЕРНУТЬСЯ В GUI"
+      "orStatus": "PAGE UP / PAGE DOWN — ПРОКРУТКА · НАПИШИТЕ \"RETRO\", ЧТОБЫ ВЕРНУТЬСЯ В GUI",
+      "menu": "Меню",
+      "navTheme": "Тест темы",
+      "ttTag": "ТЕСТ ТЕМЫ",
+      "ttTitle": "Тест темы",
+      "ttIntro": "Проверьте, как текущая тема рисует кнопки, углы окон, кнопки окон и шрифты. Смените тему в настройках (шестерёнка справа вверху), и эта страница тоже изменится.",
+      "ttH1": "1. Кнопки",
+      "ttH2": "2. Углы окон",
+      "ttH3": "3. Кнопки окна (_ ☐ X)",
+      "ttH4": "4. Шрифты",
+      "ttButton": "Кнопка",
+      "ttPrimary": "Основная",
+      "ttDisabled": "Недоступна",
+      "ttLinkBtn": "Кнопка-ссылка",
+      "ttPrimaryLink": "Основная ссылка",
+      "ttSmallTitle": "Маленькое окно",
+      "ttSmallBody": "Тест углов: маленькое.",
+      "ttMedTitle": "Среднее окно",
+      "ttMedBody": "Тест углов: окно с большим текстом, чтобы углы и края было хорошо видно.",
+      "ttCtrlTitle": "Кнопки окна",
+      "ttCtrlBody": "Наведите курсор на каждую кнопку и нажмите: свернуть, развернуть, закрыть."
     },
     "vi": {
       "home": "Trang chủ",
-      "notice": "Live Editor — đang phát triển.",
       "intro": "Tôi thích xây dựng hệ điều hành và công nghệ web từ đầu. Dự án chính của tôi là MiniWin, một hệ điều hành máy tính 32-bit cho x86 viết mà không dùng thư viện bên ngoài. Bạn có thể chạy ngay từ MiniWin trong menu phía trên.",
       "run": "Chạy MiniWin",
       "orHome": "1. TRANG CHỦ",
       "orMiniwinDesc": "chạy MiniWin, hệ điều hành 32-bit cho x86 được viết từ đầu",
-      "orStatus": "PAGE UP / PAGE DOWN ĐỂ CUỘN · GÕ \"RETRO\" ĐỂ QUAY LẠI CHẾ ĐỘ GUI"
+      "orStatus": "PAGE UP / PAGE DOWN ĐỂ CUỘN · GÕ \"RETRO\" ĐỂ QUAY LẠI CHẾ ĐỘ GUI",
+      "menu": "Menu",
+      "navTheme": "Kiểm tra giao diện",
+      "ttTag": "KIỂM TRA GIAO DIỆN",
+      "ttTitle": "Kiểm tra giao diện",
+      "ttIntro": "Xem giao diện hiện tại vẽ nút, góc cửa sổ, nút điều khiển cửa sổ và phông chữ như thế nào. Đổi giao diện trong Cài đặt (bánh răng, góc trên bên phải) và trang này sẽ theo.",
+      "ttH1": "1. Nút",
+      "ttH2": "2. Góc cửa sổ",
+      "ttH3": "3. Nút điều khiển cửa sổ (_ ☐ X)",
+      "ttH4": "4. Phông chữ",
+      "ttButton": "Nút",
+      "ttPrimary": "Chính",
+      "ttDisabled": "Vô hiệu",
+      "ttLinkBtn": "Nút liên kết",
+      "ttPrimaryLink": "Liên kết chính",
+      "ttSmallTitle": "Cửa sổ nhỏ",
+      "ttSmallBody": "Kiểm tra góc: nhỏ.",
+      "ttMedTitle": "Cửa sổ vừa",
+      "ttMedBody": "Kiểm tra góc: cửa sổ có nhiều chữ hơn, để nhìn rõ góc và mép.",
+      "ttCtrlTitle": "Nút điều khiển cửa sổ",
+      "ttCtrlBody": "Di chuột vào và nhấn từng nút: thu nhỏ, phóng to, đóng."
     },
     "id": {
       "home": "Beranda",
-      "notice": "Live Editor — sedang dikembangkan.",
       "intro": "Saya senang membangun sistem operasi dan teknologi web dari nol. Proyek utama saya adalah MiniWin, sistem operasi desktop 32-bit untuk x86 yang ditulis tanpa pustaka eksternal. Anda bisa langsung menjalankannya dari MiniWin di menu atas.",
       "run": "Jalankan MiniWin",
       "orHome": "1. BERANDA",
       "orMiniwinDesc": "jalankan MiniWin, sistem operasi 32-bit untuk x86 yang dibuat dari nol",
-      "orStatus": "PAGE UP / PAGE DOWN UNTUK GULIR · KETIK \"RETRO\" UNTUK KEMBALI KE MODE GUI"
+      "orStatus": "PAGE UP / PAGE DOWN UNTUK GULIR · KETIK \"RETRO\" UNTUK KEMBALI KE MODE GUI",
+      "menu": "Menu",
+      "navTheme": "Tes Tema",
+      "ttTag": "TES TEMA",
+      "ttTitle": "Tes Tema",
+      "ttIntro": "Lihat bagaimana tema saat ini menggambar tombol, sudut jendela, tombol jendela, dan font. Ubah tema di Pengaturan (roda gigi, kanan atas) dan halaman ini akan mengikuti.",
+      "ttH1": "1. Tombol",
+      "ttH2": "2. Sudut jendela",
+      "ttH3": "3. Tombol jendela (_ ☐ X)",
+      "ttH4": "4. Font",
+      "ttButton": "Tombol",
+      "ttPrimary": "Utama",
+      "ttDisabled": "Nonaktif",
+      "ttLinkBtn": "Tombol tautan",
+      "ttPrimaryLink": "Tautan utama",
+      "ttSmallTitle": "Jendela kecil",
+      "ttSmallBody": "Tes sudut: kecil.",
+      "ttMedTitle": "Jendela sedang",
+      "ttMedBody": "Tes sudut: jendela dengan teks lebih panjang agar sudut dan tepinya mudah dilihat.",
+      "ttCtrlTitle": "Tombol jendela",
+      "ttCtrlBody": "Arahkan kursor ke setiap tombol lalu klik: minimalkan, maksimalkan, tutup."
     },
     "pl": {
       "home": "Start",
-      "notice": "Live Editor — w trakcie prac.",
       "intro": "Lubię budować systemy operacyjne i technologie webowe od podstaw. Moim głównym projektem jest MiniWin, 32-bitowy system operacyjny dla x86 napisany bez zewnętrznych bibliotek. Możesz go uruchomić od razu z MiniWin w górnym menu.",
       "run": "Uruchom MiniWin",
       "orHome": "1. START",
       "orMiniwinDesc": "uruchomić MiniWin, 32-bitowy system dla x86 napisany od zera",
-      "orStatus": "PAGE UP / PAGE DOWN, ABY PRZEWIJAĆ · WPISZ \"RETRO\", ABY WRÓCIĆ DO TRYBU GUI"
+      "orStatus": "PAGE UP / PAGE DOWN, ABY PRZEWIJAĆ · WPISZ \"RETRO\", ABY WRÓCIĆ DO TRYBU GUI",
+      "menu": "Menu",
+      "navTheme": "Test motywu",
+      "ttTag": "TEST MOTYWU",
+      "ttTitle": "Test motywu",
+      "ttIntro": "Sprawdź, jak bieżący motyw rysuje przyciski, rogi okien, przyciski okien i czcionki. Zmień motyw w Ustawieniach (koło zębate w prawym górnym rogu), a ta strona się zaktualizuje.",
+      "ttH1": "1. Przyciski",
+      "ttH2": "2. Rogi okien",
+      "ttH3": "3. Przyciski okna (_ ☐ X)",
+      "ttH4": "4. Czcionki",
+      "ttButton": "Przycisk",
+      "ttPrimary": "Główny",
+      "ttDisabled": "Wyłączony",
+      "ttLinkBtn": "Przycisk linku",
+      "ttPrimaryLink": "Główny link",
+      "ttSmallTitle": "Małe okno",
+      "ttSmallBody": "Test rogów: małe.",
+      "ttMedTitle": "Średnie okno",
+      "ttMedBody": "Test rogów: okno z dłuższym tekstem, żeby dobrze widać było rogi i krawędzie.",
+      "ttCtrlTitle": "Przyciski okna",
+      "ttCtrlBody": "Najedź na każdy przycisk i naciśnij: minimalizuj, maksymalizuj, zamknij."
     },
     "tr": {
       "home": "Ana sayfa",
-      "notice": "Live Editor — geliştiriliyor.",
       "intro": "Sıfırdan işletim sistemleri ve web teknolojileri geliştirmeyi seviyorum. Ana projem MiniWin; harici kütüphane kullanmadan yazılmış, 32 bit x86 masaüstü bir işletim sistemi. Üst menüdeki MiniWin'den hemen çalıştırabilirsiniz.",
       "run": "MiniWin'i çalıştır",
       "orHome": "1. ANA SAYFA",
       "orMiniwinDesc": "sıfırdan yazılmış 32 bit x86 işletim sistemi MiniWin'i çalıştır",
-      "orStatus": "PAGE UP / PAGE DOWN İLE KAYDIR · GUI MODUNA DÖNMEK İÇİN \"RETRO\" YAZIN"
+      "orStatus": "PAGE UP / PAGE DOWN İLE KAYDIR · GUI MODUNA DÖNMEK İÇİN \"RETRO\" YAZIN",
+      "menu": "Menü",
+      "navTheme": "Tema Testi",
+      "ttTag": "TEMA TESTİ",
+      "ttTitle": "Tema Testi",
+      "ttIntro": "Mevcut temanın düğmeleri, pencere köşelerini, pencere denetimlerini ve yazı tiplerini nasıl çizdiğini kontrol edin. Ayarlar'da (sağ üstteki dişli) temayı değiştirin; bu sayfa da onu izleyecek.",
+      "ttH1": "1. Düğmeler",
+      "ttH2": "2. Pencere köşeleri",
+      "ttH3": "3. Pencere denetimleri (_ ☐ X)",
+      "ttH4": "4. Yazı tipleri",
+      "ttButton": "Düğme",
+      "ttPrimary": "Birincil",
+      "ttDisabled": "Devre dışı",
+      "ttLinkBtn": "Bağlantı düğmesi",
+      "ttPrimaryLink": "Birincil bağlantı",
+      "ttSmallTitle": "Küçük pencere",
+      "ttSmallBody": "Köşe testi: küçük.",
+      "ttMedTitle": "Orta pencere",
+      "ttMedBody": "Köşe testi: köşelerin ve kenarların kolay görülmesi için daha uzun metinli bir pencere.",
+      "ttCtrlTitle": "Pencere denetimleri",
+      "ttCtrlBody": "Her düğmenin üzerine gelip basın: küçült, büyüt, kapat."
     },
     "nl": {
       "home": "Home",
-      "notice": "Live Editor — in ontwikkeling.",
       "intro": "Ik bouw graag besturingssystemen en webtechnologie vanaf nul. Mijn belangrijkste project is MiniWin, een 32-bit x86-desktopbesturingssysteem zonder externe bibliotheken. Je kunt het direct starten via MiniWin in het bovenste menu.",
       "run": "MiniWin starten",
       "orHome": "1. HOME",
       "orMiniwinDesc": "MiniWin starten, het 32-bit x86-besturingssysteem vanaf nul",
-      "orStatus": "PAGE UP / PAGE DOWN OM TE SCROLLEN · TYP \"RETRO\" OM TERUG TE KEREN NAAR DE GUI"
+      "orStatus": "PAGE UP / PAGE DOWN OM TE SCROLLEN · TYP \"RETRO\" OM TERUG TE KEREN NAAR DE GUI",
+      "menu": "Menu",
+      "navTheme": "Thematest",
+      "ttTag": "THEMATEST",
+      "ttTitle": "Thematest",
+      "ttIntro": "Bekijk hoe het huidige thema knoppen, vensterhoeken, vensterknoppen en lettertypen tekent. Wijzig het thema in Instellingen (tandwiel, rechtsboven) en deze pagina volgt.",
+      "ttH1": "1. Knoppen",
+      "ttH2": "2. Vensterhoeken",
+      "ttH3": "3. Vensterknoppen (_ ☐ X)",
+      "ttH4": "4. Lettertypen",
+      "ttButton": "Knop",
+      "ttPrimary": "Primair",
+      "ttDisabled": "Uitgeschakeld",
+      "ttLinkBtn": "Linkknop",
+      "ttPrimaryLink": "Primaire link",
+      "ttSmallTitle": "Klein venster",
+      "ttSmallBody": "Hoektest: klein.",
+      "ttMedTitle": "Middelgroot venster",
+      "ttMedBody": "Hoektest: een venster met meer tekst, zodat de hoeken en randen goed zichtbaar zijn.",
+      "ttCtrlTitle": "Vensterknoppen",
+      "ttCtrlBody": "Beweeg over elke knop en klik: minimaliseren, maximaliseren, sluiten."
     },
     "sv": {
       "home": "Hem",
-      "notice": "Live Editor — under utveckling.",
       "intro": "Jag gillar att bygga operativsystem och webbtekniker från grunden. Mitt huvudprojekt är MiniWin, ett 32-bitars x86-skrivbordsoperativsystem utan externa bibliotek. Du kan starta det direkt från MiniWin i menyn högst upp.",
       "run": "Starta MiniWin",
       "orHome": "1. HEM",
       "orMiniwinDesc": "starta MiniWin, 32-bitars x86-operativsystemet byggt från grunden",
-      "orStatus": "PAGE UP / PAGE DOWN FÖR ATT RULLA · SKRIV \"RETRO\" FÖR ATT ÅTERGÅ TILL GUI-LÄGE"
+      "orStatus": "PAGE UP / PAGE DOWN FÖR ATT RULLA · SKRIV \"RETRO\" FÖR ATT ÅTERGÅ TILL GUI-LÄGE",
+      "menu": "Meny",
+      "navTheme": "Temat test",
+      "ttTag": "TEMATEST",
+      "ttTitle": "Temat test",
+      "ttIntro": "Se hur det aktuella temat ritar knappar, fönsterhörn, fönsterknappar och typsnitt. Byt tema i Inställningar (kugghjulet uppe till höger) så följer den här sidan med.",
+      "ttH1": "1. Knappar",
+      "ttH2": "2. Fönsterhörn",
+      "ttH3": "3. Fönsterknappar (_ ☐ X)",
+      "ttH4": "4. Typsnitt",
+      "ttButton": "Knapp",
+      "ttPrimary": "Primär",
+      "ttDisabled": "Inaktiverad",
+      "ttLinkBtn": "Länkknapp",
+      "ttPrimaryLink": "Primär länk",
+      "ttSmallTitle": "Litet fönster",
+      "ttSmallBody": "Hörntest: litet.",
+      "ttMedTitle": "Medelstort fönster",
+      "ttMedBody": "Hörntest: ett fönster med mer text, så att hörn och kanter syns tydligt.",
+      "ttCtrlTitle": "Fönsterknappar",
+      "ttCtrlBody": "För musen över varje knapp och klicka: minimera, maximera, stäng."
     },
     "uk": {
       "home": "Головна",
-      "notice": "Live Editor — у розробці.",
       "intro": "Мені подобається створювати операційні системи та веб-технології з нуля. Мій головний проєкт — MiniWin, 32-бітна настільна ОС для x86, написана без зовнішніх бібліотек. Запустити її можна одразу з MiniWin у верхньому меню.",
       "run": "Запустити MiniWin",
       "orHome": "1. ГОЛОВНА",
       "orMiniwinDesc": "запустити MiniWin — 32-бітну ОС для x86, написану з нуля",
-      "orStatus": "PAGE UP / PAGE DOWN — ПРОКРУТКА · НАПИШІТЬ \"RETRO\", ЩОБ ПОВЕРНУТИСЯ ДО GUI"
+      "orStatus": "PAGE UP / PAGE DOWN — ПРОКРУТКА · НАПИШІТЬ \"RETRO\", ЩОБ ПОВЕРНУТИСЯ ДО GUI",
+      "menu": "Меню",
+      "navTheme": "Тест теми",
+      "ttTag": "ТЕСТ ТЕМИ",
+      "ttTitle": "Тест теми",
+      "ttIntro": "Перевірте, як поточна тема малює кнопки, кути вікон, кнопки вікна та шрифти. Змініть тему в налаштуваннях (шестерня праворуч угорі), і ця сторінка також зміниться.",
+      "ttH1": "1. Кнопки",
+      "ttH2": "2. Кути вікон",
+      "ttH3": "3. Кнопки вікна (_ ☐ X)",
+      "ttH4": "4. Шрифти",
+      "ttButton": "Кнопка",
+      "ttPrimary": "Основна",
+      "ttDisabled": "Недоступна",
+      "ttLinkBtn": "Кнопка-посилання",
+      "ttPrimaryLink": "Основне посилання",
+      "ttSmallTitle": "Мале вікно",
+      "ttSmallBody": "Тест кутів: мале.",
+      "ttMedTitle": "Середнє вікно",
+      "ttMedBody": "Тест кутів: вікно з довшим текстом, щоб кути й краї було добре видно.",
+      "ttCtrlTitle": "Кнопки вікна",
+      "ttCtrlBody": "Наведіть курсор на кожну кнопку і натисніть: згорнути, розгорнути, закрити."
     },
     "ar": {
       "home": "الرئيسية",
-      "notice": "Live Editor — قيد التطوير.",
       "intro": "أحب بناء أنظمة التشغيل وتقنيات الويب من الصفر. مشروعي الرئيسي هو MiniWin، نظام تشغيل مكتبي بسعة 32 بت لمعالج x86 كُتب دون مكتبات خارجية. يمكنك تشغيله مباشرة من MiniWin في القائمة العلوية.",
       "run": "تشغيل MiniWin",
       "orHome": "1. الرئيسية",
       "orMiniwinDesc": "تشغيل MiniWin، نظام التشغيل 32 بت لمعالج x86 المبني من الصفر",
-      "orStatus": "PAGE UP / PAGE DOWN للتمرير · اكتب \"RETRO\" للعودة إلى وضع GUI"
+      "orStatus": "PAGE UP / PAGE DOWN للتمرير · اكتب \"RETRO\" للعودة إلى وضع GUI",
+      "menu": "القائمة",
+      "navTheme": "اختبار السمة",
+      "ttTag": "اختبار السمة",
+      "ttTitle": "اختبار السمة",
+      "ttIntro": "تحقق من طريقة رسم السمة الحالية للأزرار وزوايا النوافذ وأزرار النافذة والخطوط. غيّر السمة من الإعدادات (الترس أعلى اليمين) وستتبعها هذه الصفحة.",
+      "ttH1": "1. الأزرار",
+      "ttH2": "2. زوايا النوافذ",
+      "ttH3": "3. أزرار النافذة (_ ☐ X)",
+      "ttH4": "4. الخطوط",
+      "ttButton": "زر",
+      "ttPrimary": "أساسي",
+      "ttDisabled": "معطّل",
+      "ttLinkBtn": "زر رابط",
+      "ttPrimaryLink": "رابط أساسي",
+      "ttSmallTitle": "نافذة صغيرة",
+      "ttSmallBody": "اختبار الزوايا: صغيرة.",
+      "ttMedTitle": "نافذة متوسطة",
+      "ttMedBody": "اختبار الزوايا: نافذة بنص أطول لرؤية الزوايا والحواف بوضوح.",
+      "ttCtrlTitle": "أزرار النافذة",
+      "ttCtrlBody": "مرر المؤشر على كل زر واضغط: تصغير، تكبير، إغلاق."
     },
     "hi": {
       "home": "होम",
-      "notice": "Live Editor — विकास जारी है।",
       "intro": "मुझे शून्य से ऑपरेटिंग सिस्टम और वेब तकनीक बनाना पसंद है। मेरी मुख्य परियोजना MiniWin है, एक 32-बिट x86 डेस्कटॉप ऑपरेटिंग सिस्टम जो बाहरी लाइब्रेरी के बिना लिखा गया है। आप इसे ऊपर के मेन्यू में MiniWin से सीधे चला सकते हैं।",
       "run": "MiniWin चलाएँ",
       "orHome": "1. होम",
       "orMiniwinDesc": "MiniWin चलाएँ, शून्य से बना 32-बिट x86 ऑपरेटिंग सिस्टम",
-      "orStatus": "PAGE UP / PAGE DOWN से स्क्रॉल करें · GUI मोड में लौटने के लिए \"RETRO\" टाइप करें"
+      "orStatus": "PAGE UP / PAGE DOWN से स्क्रॉल करें · GUI मोड में लौटने के लिए \"RETRO\" टाइप करें",
+      "menu": "मेनू",
+      "navTheme": "थीम टेस्ट",
+      "ttTag": "थीम टेस्ट",
+      "ttTitle": "थीम टेस्ट",
+      "ttIntro": "देखें कि वर्तमान थीम बटन, विंडो के कोने, विंडो नियंत्रण और फ़ॉन्ट कैसे बनाती है। सेटिंग्स (ऊपर दाईं ओर गियर) में थीम बदलें, यह पेज भी उसी के अनुसार बदल जाएगा।",
+      "ttH1": "1. बटन",
+      "ttH2": "2. विंडो के कोने",
+      "ttH3": "3. विंडो नियंत्रण (_ ☐ X)",
+      "ttH4": "4. फ़ॉन्ट",
+      "ttButton": "बटन",
+      "ttPrimary": "मुख्य",
+      "ttDisabled": "अक्षम",
+      "ttLinkBtn": "लिंक बटन",
+      "ttPrimaryLink": "मुख्य लिंक",
+      "ttSmallTitle": "छोटी विंडो",
+      "ttSmallBody": "कोने का परीक्षण: छोटी।",
+      "ttMedTitle": "मध्यम विंडो",
+      "ttMedBody": "कोने का परीक्षण: लंबे पाठ वाली विंडो, ताकि कोने और किनारे साफ़ दिखें।",
+      "ttCtrlTitle": "विंडो नियंत्रण",
+      "ttCtrlBody": "हर बटन पर कर्सर ले जाकर दबाएँ: छोटा करें, बड़ा करें, बंद करें।"
+    }
+  };
+  var MD_I18N = {
+    "en": {
+      "mdNavProject": "Project",
+      "mdNavFeatures": "Features",
+      "mdNavBuild": "Build",
+      "mdNavStatus": "Status",
+      "mdNavGet": "Get it",
+      "mdSlogan": "A DAW for all of us.",
+      "mdIntro": "MiniDAW is a lightweight, fast digital audio workstation for Windows, built with Qt 6 and inspired by the workflow of Logic Pro. It stays approachable for beginners and still offers what a producer expects.",
+      "mdDownload": "Download",
+      "mdGithub": "GitHub",
+      "mdEye1": "01 / THE PROJECT",
+      "mdH1": "A DAW for all of us.",
+      "mdProject": "One Windows program for arranging, recording, editing and mixing: a multitrack arrangement, MIDI editing, built-in instruments, VST3 plug-ins, tempo and time-signature tracks, time stretching, automation and bouncing.",
+      "mdFactQt": "UI toolkit",
+      "mdFactVer": "version",
+      "mdFactLic": "or later",
+      "mdEye2": "02 / WHAT'S INSIDE",
+      "mdH2": "Arrangement, instruments and mixing.",
+      "mdC1T": "Arrangement",
+      "mdC1B": "A multitrack Tracks area with a time-signature ruler, a smart snap grid, cut / copy / paste of regions, cycle range, metronome and undo / redo.",
+      "mdC2T": "MIDI editing",
+      "mdC2B": "Piano roll, a 16-step sequencer, Standard MIDI File import and export, MIDI keyboards and Musical Typing, plus Logic-style functions such as quantize, arpeggiator and humanize.",
+      "mdC3T": "Instruments",
+      "mdC3B": "A 16-voice subtractive synthesizer, a synthesized drum kit and Drummer with styles, variations and fills.",
+      "mdC4T": "Mixer and effects",
+      "mdC4B": "Channel strips with EQ, compressor, echo, reverb, overdrive, chorus and filter, two aux sends, a master limiter and volume, pan and send automation.",
+      "mdC5T": "Plug-ins",
+      "mdC5B": "VST3 instruments and effects with their own editor windows, saved state, and a small plug-in SDK for writing your own effects.",
+      "mdC6T": "Projects and bounce",
+      "mdC6B": ".mdaw projects with autosave and crash recovery, Loop Browser, bounce to 16 / 24-bit or 32-bit float WAV, and five interface languages.",
+      "mdEye3": "03 / BUILD & RUN",
+      "mdH3": "Build it from source.",
+      "mdBuildNote": "Requirements: Windows 10/11, Visual Studio 2022 or newer, Git Bash, Qt 6.5 or newer (6.8 recommended). Inno Setup 6 is optional, for the installer. Set VST3_SDK_DIR to include VST3 hosting.",
+      "mdEye4": "04 / STATUS",
+      "mdH4": "Version 0.10_1.",
+      "mdStatus": "A native version without Qt (MiniDAWNative.exe) is in progress. The Qt version remains the main program. VST3 parameters are edited in the plug-in's own window for now.",
+      "mdLimits": "Known limitations",
+      "mdRoadmap": "Roadmap",
+      "mdEye5": "05 / GET IT",
+      "mdH5": "Install, or read the source.",
+      "mdGet": "Download the installer from Releases, or read the source on GitHub. MiniDAW is an independent open-source project, not affiliated with Apple Inc. or Steinberg.",
+      "mdReleases": "Releases",
+      "mdSourceGH": "Source on GitHub",
+      "mdReadme": "README",
+      "mdGetNote": "Released under GPL-3.0-or-later. Sample loops in loops/ are released under the same license."
+    },
+    "ko": {
+      "mdNavProject": "프로젝트",
+      "mdNavFeatures": "기능",
+      "mdNavBuild": "빌드",
+      "mdNavStatus": "상태",
+      "mdNavGet": "받기",
+      "mdSlogan": "모두를 위한 DAW.",
+      "mdIntro": "MiniDAW는 Qt 6로 만든 가볍고 빠른 Windows용 디지털 오디오 워크스테이션입니다. Logic Pro의 작업 방식을 참고했고, 초보자도 쉽게 쓰면서 프로듀서에게 필요한 기능을 갖췄습니다.",
+      "mdDownload": "다운로드",
+      "mdGithub": "GitHub",
+      "mdEye1": "01 / 프로젝트 소개",
+      "mdH1": "모두를 위한 DAW.",
+      "mdProject": "편곡, 녹음, 편집, 믹싱을 하나의 Windows 프로그램에서 할 수 있습니다. 멀티트랙 편곡, MIDI 편집, 내장 악기, VST3 플러그인, 템포와 박자표 트랙, 타임 스트레치, 오토메이션, 바운스를 지원합니다.",
+      "mdFactQt": "UI 툴킷",
+      "mdFactVer": "버전",
+      "mdFactLic": "이상",
+      "mdEye2": "02 / 구성 요소",
+      "mdH2": "편곡, 악기, 믹싱.",
+      "mdC1T": "편곡",
+      "mdC1B": "멀티트랙 트랙 영역, 박자표 눈금자, 스마트 스냅 격자, 리전 잘라내기·복사·붙여넣기, 사이클 구간, 메트로놈, 실행 취소와 다시 실행을 제공합니다.",
+      "mdC2T": "MIDI 편집",
+      "mdC2B": "피아노 롤, 16단계 시퀀서, 표준 MIDI 파일 가져오기와 내보내기, MIDI 키보드와 Musical Typing, 퀀타이즈·아르페지오·휴머나이즈 같은 기능을 제공합니다.",
+      "mdC3T": "악기",
+      "mdC3B": "16음 감산 합성 신디사이저, 합성 드럼 키트, 스타일·변주·필인이 있는 Drummer를 제공합니다.",
+      "mdC4T": "믹서와 이펙트",
+      "mdC4B": "EQ, 컴프레서, 에코, 리버브, 오버드라이브, 코러스, 필터를 포함한 채널 스트립, 보조 센드 2개, 마스터 리미터, 볼륨·팬·센드 오토메이션을 제공합니다.",
+      "mdC5T": "플러그인",
+      "mdC5B": "자체 편집 창이 있는 VST3 악기와 이펙트, 상태 저장, 직접 이펙트를 만드는 작은 플러그인 SDK를 제공합니다.",
+      "mdC6T": "프로젝트와 바운스",
+      "mdC6B": ".mdaw 프로젝트, 자동 저장과 충돌 복구, 루프 브라우저, 16/24비트 또는 32비트 float WAV 내보내기, 5개 언어 인터페이스를 제공합니다.",
+      "mdEye3": "03 / 빌드와 실행",
+      "mdH3": "소스에서 직접 빌드하세요.",
+      "mdBuildNote": "요구 사항: Windows 10/11, Visual Studio 2022 이상, Git Bash, Qt 6.5 이상(6.8 권장). 설치 프로그램에는 Inno Setup 6이 선택 사항입니다. VST3 호스팅은 VST3_SDK_DIR을 지정하세요.",
+      "mdEye4": "04 / 상태",
+      "mdH4": "버전 0.10_1.",
+      "mdStatus": "Qt 없이 동작하는 네이티브 버전(MiniDAWNative.exe)을 개발 중입니다. 주 프로그램은 여전히 Qt 버전입니다. 지금은 VST3 파라미터를 플러그인의 자체 창에서 편집합니다.",
+      "mdLimits": "알려진 한계",
+      "mdRoadmap": "로드맵",
+      "mdEye5": "05 / 받기",
+      "mdH5": "설치하거나 소스를 읽어 보세요.",
+      "mdGet": "Releases에서 설치 프로그램을 받거나 GitHub에서 소스를 볼 수 있습니다. MiniDAW는 Apple Inc.나 Steinberg와 관련이 없는 독립 오픈소스 프로젝트입니다.",
+      "mdReleases": "릴리스",
+      "mdSourceGH": "GitHub에서 소스 보기",
+      "mdReadme": "README",
+      "mdGetNote": "GPL-3.0-or-later 라이선스로 배포됩니다. loops/ 폴더의 샘플 루프도 같은 라이선스입니다."
+    },
+    "ja": {
+      "mdNavProject": "プロジェクト",
+      "mdNavFeatures": "機能",
+      "mdNavBuild": "ビルド",
+      "mdNavStatus": "状況",
+      "mdNavGet": "入手",
+      "mdSlogan": "みんなのためのDAW。",
+      "mdIntro": "MiniDAWは、Qt 6で作られた軽量で高速なWindows用デジタルオーディオワークステーションです。Logic Proのワークフローを参考にし、初心者にも使いやすく、プロデューサーに必要な機能を備えています。",
+      "mdDownload": "ダウンロード",
+      "mdGithub": "GitHub",
+      "mdEye1": "01 / プロジェクト概要",
+      "mdH1": "みんなのためのDAW。",
+      "mdProject": "マルチトラックのアレンジ、MIDI編集、内蔵音源、VST3プラグイン、テンポと拍子のトラック、タイムストレッチ、オートメーション、録音とバウンスを、1つのWindowsプログラムで扱えます。",
+      "mdFactQt": "UIツールキット",
+      "mdFactVer": "バージョン",
+      "mdFactLic": "以降",
+      "mdEye2": "02 / 機能一覧",
+      "mdH2": "アレンジ、音源、ミキシング。",
+      "mdC1T": "アレンジ",
+      "mdC1B": "拍子記号のルーラー、スマートなスナップグリッド、リージョンの切り取り・コピー・貼り付け、サイクル範囲、メトロノーム、元に戻す/やり直しを備えたマルチトラック領域。",
+      "mdC2T": "MIDI編集",
+      "mdC2B": "ピアノロール、16ステップシーケンサー、標準MIDIファイルの読み込みと書き出し、MIDIキーボードとMusical Typing、クオンタイズ、アルペジオ、ヒューマナイズなどのLogic風の機能。",
+      "mdC3T": "音源",
+      "mdC3B": "16ボイスのサブトラクティブシンセ、合成ドラムキット、スタイル・バリエーション・フィル付きのDrummer。",
+      "mdC4T": "ミキサーとエフェクト",
+      "mdC4B": "EQ、コンプレッサー、エコー、リバーブ、オーバードライブ、コーラス、フィルターを備えたチャンネルストリップ、2つのAuxセンド、マスターリミッター、ボリューム・パン・センドのオートメーション。",
+      "mdC5T": "プラグイン",
+      "mdC5B": "専用の編集ウィンドウを持つVST3の音源とエフェクト、状態の保存、独自のエフェクトを作るための小さなプラグインSDK。",
+      "mdC6T": "プロジェクトとバウンス",
+      "mdC6B": ".mdawプロジェクト、自動保存とクラッシュ回復、ループブラウザー、16/24ビットまたは32ビット浮動小数点WAVへのバウンス、5か国語のインターフェース。",
+      "mdEye3": "03 / ビルドと実行",
+      "mdH3": "ソースからビルドしましょう。",
+      "mdBuildNote": "必要環境: Windows 10/11、Visual Studio 2022以降、Git Bash、Qt 6.5以降（6.8推奨）。インストーラーにはInno Setup 6（任意）が必要です。VST3ホスティングにはVST3_SDK_DIRを設定してください。",
+      "mdEye4": "04 / 状況",
+      "mdH4": "バージョン 0.10_1。",
+      "mdStatus": "Qtを使わないネイティブ版（MiniDAWNative.exe）を開発中です。メインのプログラムは引き続きQt版です。VST3のパラメーターは、今のところプラグイン自身のウィンドウで編集します。",
+      "mdLimits": "既知の制限",
+      "mdRoadmap": "ロードマップ",
+      "mdEye5": "05 / 入手",
+      "mdH5": "インストールするか、ソースを読みましょう。",
+      "mdGet": "Releasesからインストーラーを入手するか、GitHubでソースを読めます。MiniDAWはApple Inc.やSteinbergとは提携していない独立したオープンソースプロジェクトです。",
+      "mdReleases": "リリース",
+      "mdSourceGH": "GitHubでソースを見る",
+      "mdReadme": "README",
+      "mdGetNote": "GPL-3.0-or-laterのもとで公開されています。loops/フォルダーのサンプルループも同じライセンスです。"
+    },
+    "zh-CN": {
+      "mdNavProject": "项目",
+      "mdNavFeatures": "功能",
+      "mdNavBuild": "构建",
+      "mdNavStatus": "状态",
+      "mdNavGet": "获取",
+      "mdSlogan": "人人都能用的 DAW。",
+      "mdIntro": "MiniDAW 是一款轻量、快速的 Windows 数字音频工作站，使用 Qt 6 开发，参考了 Logic Pro 的工作流程。它对新手友好，同时提供制作人所需的功能。",
+      "mdDownload": "下载",
+      "mdGithub": "GitHub",
+      "mdEye1": "01 / 项目介绍",
+      "mdH1": "人人都能用的 DAW。",
+      "mdProject": "在一个 Windows 程序中完成编曲、录音、编辑和混音：多轨编排、MIDI 编辑、内置乐器、VST3 插件、速度与拍号轨道、时间拉伸、自动化和合并导出。",
+      "mdFactQt": "UI 工具包",
+      "mdFactVer": "版本",
+      "mdFactLic": "或更高",
+      "mdEye2": "02 / 功能",
+      "mdH2": "编曲、乐器与混音。",
+      "mdC1T": "编曲",
+      "mdC1B": "带拍号标尺的多轨区域、智能吸附网格、片段剪切/复制/粘贴、循环范围、节拍器以及撤销/重做。",
+      "mdC2T": "MIDI 编辑",
+      "mdC2B": "钢琴卷帘、16 步序列器、标准 MIDI 文件导入导出、MIDI 键盘与 Musical Typing，以及量化、琶音、humanize 等 Logic 风格功能。",
+      "mdC3T": "乐器",
+      "mdC3B": "16 声部减法合成器、合成鼓组，以及带风格、变化和过门的 Drummer。",
+      "mdC4T": "混音器与效果",
+      "mdC4B": "带 EQ、压缩、回声、混响、过载、合唱和滤波器的通道条，两路辅助发送，总线限制器，以及音量、声像和发送的自动化。",
+      "mdC5T": "插件",
+      "mdC5B": "带独立编辑窗口的 VST3 乐器和效果器，支持保存状态，并提供用于开发自定义效果的小型插件 SDK。",
+      "mdC6T": "项目与合并导出",
+      "mdC6B": ".mdaw 工程、自动保存与崩溃恢复、循环浏览器、导出 16/24 位或 32 位浮点 WAV，以及五种界面语言。",
+      "mdEye3": "03 / 构建与运行",
+      "mdH3": "从源代码构建。",
+      "mdBuildNote": "环境要求：Windows 10/11、Visual Studio 2022 或更新版本、Git Bash、Qt 6.5 或更新版本（推荐 6.8）。安装程序可选 Inno Setup 6。启用 VST3 托管请设置 VST3_SDK_DIR。",
+      "mdEye4": "04 / 状态",
+      "mdH4": "版本 0.10_1。",
+      "mdStatus": "不依赖 Qt 的原生版本（MiniDAWNative.exe）正在开发中。Qt 版本仍是主程序。目前 VST3 参数在插件自己的窗口中编辑。",
+      "mdLimits": "已知限制",
+      "mdRoadmap": "路线图",
+      "mdEye5": "05 / 获取",
+      "mdH5": "安装或阅读源码。",
+      "mdGet": "可以从 Releases 下载安装程序，或在 GitHub 上阅读源码。MiniDAW 是独立的开源项目，与 Apple Inc. 和 Steinberg 没有关联。",
+      "mdReleases": "发布版本",
+      "mdSourceGH": "在 GitHub 上查看源码",
+      "mdReadme": "README",
+      "mdGetNote": "以 GPL-3.0-or-later 发布。loops/ 中的示例循环采用相同许可证。"
+    },
+    "es": {
+      "mdNavProject": "Proyecto",
+      "mdNavFeatures": "Funciones",
+      "mdNavBuild": "Compilar",
+      "mdNavStatus": "Estado",
+      "mdNavGet": "Descargar",
+      "mdSlogan": "Una DAW para todos.",
+      "mdIntro": "MiniDAW es una estación de trabajo de audio digital ligera y rápida para Windows, hecha con Qt 6 e inspirada en el flujo de trabajo de Logic Pro. Es accesible para principiantes y ofrece lo que espera un productor.",
+      "mdDownload": "Descargar",
+      "mdGithub": "GitHub",
+      "mdEye1": "01 / EL PROYECTO",
+      "mdH1": "Una DAW para todos.",
+      "mdProject": "Un solo programa para Windows para arreglar, grabar, editar y mezclar: arreglo multipista, edición MIDI, instrumentos integrados, plug-ins VST3, pistas de tempo y compás, estiramiento temporal, automatización y exportación.",
+      "mdFactQt": "Kit de interfaz",
+      "mdFactVer": "versión",
+      "mdFactLic": "o posterior",
+      "mdEye2": "02 / CONTENIDO",
+      "mdH2": "Arreglo, instrumentos y mezcla.",
+      "mdC1T": "Arreglo",
+      "mdC1B": "Área de pistas con regla de compás, rejilla de ajuste inteligente, cortar, copiar y pegar regiones, rango de ciclo, metrónomo y deshacer o rehacer.",
+      "mdC2T": "Edición MIDI",
+      "mdC2B": "Piano roll, secuenciador de 16 pasos, importación y exportación de archivos MIDI estándar, teclados MIDI y Musical Typing, además de cuantización, arpegiador y humanize al estilo Logic.",
+      "mdC3T": "Instrumentos",
+      "mdC3B": "Sintetizador sustractivo de 16 voces, batería sintetizada y Drummer con estilos, variaciones y rellenos.",
+      "mdC4T": "Mezclador y efectos",
+      "mdC4B": "Canales con EQ, compresor, eco, reverb, overdrive, coro y filtro, dos envíos auxiliares, limitador maestro y automatización de volumen, paneo y envíos.",
+      "mdC5T": "Plug-ins",
+      "mdC5B": "Instrumentos y efectos VST3 con su propia ventana de edición, guardado de estado y un pequeño SDK para escribir tus propios efectos.",
+      "mdC6T": "Proyectos y exportación",
+      "mdC6B": "Proyectos .mdaw con autoguardado y recuperación tras fallos, navegador de loops, exportación a WAV de 16/24 bits o 32 bits float, e interfaz en cinco idiomas.",
+      "mdEye3": "03 / COMPILAR Y EJECUTAR",
+      "mdH3": "Compílalo desde el código fuente.",
+      "mdBuildNote": "Requisitos: Windows 10/11, Visual Studio 2022 o más reciente, Git Bash, Qt 6.5 o más reciente (recomendado 6.8). Inno Setup 6 es opcional, para el instalador. Define VST3_SDK_DIR para el alojamiento VST3.",
+      "mdEye4": "04 / ESTADO",
+      "mdH4": "Versión 0.10_1.",
+      "mdStatus": "Hay una versión nativa sin Qt (MiniDAWNative.exe) en desarrollo. El programa principal sigue siendo la versión con Qt. Por ahora, los parámetros VST3 se editan en la ventana del propio plug-in.",
+      "mdLimits": "Limitaciones conocidas",
+      "mdRoadmap": "Hoja de ruta",
+      "mdEye5": "05 / DESCARGA",
+      "mdH5": "Instálalo o lee el código fuente.",
+      "mdGet": "Descarga el instalador desde Releases o lee el código en GitHub. MiniDAW es un proyecto de código abierto independiente, sin relación con Apple Inc. ni con Steinberg.",
+      "mdReleases": "Versiones",
+      "mdSourceGH": "Código fuente en GitHub",
+      "mdReadme": "README",
+      "mdGetNote": "Publicado bajo GPL-3.0-or-later. Los loops de muestra de loops/ tienen la misma licencia."
+    },
+    "ko-kp": {
+      "mdNavProject": "프로젝트",
+      "mdNavFeatures": "기능",
+      "mdNavBuild": "빌드",
+      "mdNavStatus": "상태",
+      "mdNavGet": "받기",
+      "mdSlogan": "모두를 위한 DAW.",
+      "mdIntro": "MiniDAW는 Qt 6로 만든 가볍고 빠른 Windows용 디지털 오디오 워크스테이션입니다. Logic Pro의 작업 방식을 참고했고, 초보자도 쉽게 쓰면서 프로듀서에게 필요한 기능을 갖췄습니다.",
+      "mdDownload": "다운로드",
+      "mdGithub": "GitHub",
+      "mdEye1": "01 / 프로젝트 소개",
+      "mdH1": "모두를 위한 DAW.",
+      "mdProject": "편곡, 녹음, 편집, 믹싱을 하나의 Windows 프로그램에서 할 수 있습니다. 멀티트랙 편곡, MIDI 편집, 내장 악기, VST3 플러그인, 템포와 박자표 트랙, 타임 스트레치, 오토메이션, 바운스를 지원합니다.",
+      "mdFactQt": "UI 툴킷",
+      "mdFactVer": "버전",
+      "mdFactLic": "이상",
+      "mdEye2": "02 / 구성 요소",
+      "mdH2": "편곡, 악기, 믹싱.",
+      "mdC1T": "편곡",
+      "mdC1B": "멀티트랙 트랙 영역, 박자표 눈금자, 스마트 스냅 격자, 리전 잘라내기·복사·붙여넣기, 사이클 구간, 메트로놈, 실행 취소와 다시 실행을 제공합니다.",
+      "mdC2T": "MIDI 편집",
+      "mdC2B": "피아노 롤, 16단계 시퀀서, 표준 MIDI 파일 가져오기와 내보내기, MIDI 키보드와 Musical Typing, 퀀타이즈·아르페지오·휴머나이즈 같은 기능을 제공합니다.",
+      "mdC3T": "악기",
+      "mdC3B": "16음 감산 합성 신디사이저, 합성 드럼 키트, 스타일·변주·필인이 있는 Drummer를 제공합니다.",
+      "mdC4T": "믹서와 이펙트",
+      "mdC4B": "EQ, 컴프레서, 에코, 리버브, 오버드라이브, 코러스, 필터를 포함한 채널 스트립, 보조 센드 2개, 마스터 리미터, 볼륨·팬·센드 오토메이션을 제공합니다.",
+      "mdC5T": "플러그인",
+      "mdC5B": "자체 편집 창이 있는 VST3 악기와 이펙트, 상태 저장, 직접 이펙트를 만드는 작은 플러그인 SDK를 제공합니다.",
+      "mdC6T": "프로젝트와 바운스",
+      "mdC6B": ".mdaw 프로젝트, 자동 저장과 충돌 복구, 루프 브라우저, 16/24비트 또는 32비트 float WAV 내보내기, 5개 언어 인터페이스를 제공합니다.",
+      "mdEye3": "03 / 빌드와 실행",
+      "mdH3": "소스에서 직접 빌드하세요.",
+      "mdBuildNote": "요구 사항: Windows 10/11, Visual Studio 2022 이상, Git Bash, Qt 6.5 이상(6.8 권장). 설치 프로그램에는 Inno Setup 6이 선택 사항입니다. VST3 호스팅은 VST3_SDK_DIR을 지정하세요.",
+      "mdEye4": "04 / 상태",
+      "mdH4": "버전 0.10_1.",
+      "mdStatus": "Qt 없이 동작하는 네이티브 버전(MiniDAWNative.exe)을 개발 중입니다. 주 프로그램은 여전히 Qt 버전입니다. 지금은 VST3 파라미터를 플러그인의 자체 창에서 편집합니다.",
+      "mdLimits": "알려진 한계",
+      "mdRoadmap": "로드맵",
+      "mdEye5": "05 / 받기",
+      "mdH5": "설치하거나 소스를 읽어 보세요.",
+      "mdGet": "Releases에서 설치 프로그램을 받거나 GitHub에서 소스를 볼 수 있습니다. MiniDAW는 Apple Inc.나 Steinberg와 관련이 없는 독립 오픈소스 프로젝트입니다.",
+      "mdReleases": "릴리스",
+      "mdSourceGH": "GitHub에서 소스 보기",
+      "mdReadme": "README",
+      "mdGetNote": "GPL-3.0-or-later 라이선스로 배포됩니다. loops/ 폴더의 샘플 루프도 같은 라이선스입니다."
     }
   };
   function mainLang() {
@@ -432,13 +1375,18 @@
     return MAIN_I18N[lang] ? lang : "en";
   }
   var homeLink = document.querySelector('header.top nav.nav a[data-view="home"]');
-  var liveLink = document.getElementById("liveEditorLink");
   function applyMainLang() {
     var d = MAIN_I18N[mainLang()];
     if (homeLink) homeLink.textContent = d.home;
-    if (noticeEl) noticeEl.textContent = d.notice;
     var intro = document.getElementById("heroIntro"), run = document.getElementById("heroRun");
     if (intro) intro.textContent = d.intro;
+    if (navToggle) navToggle.setAttribute("aria-label", d.menu);
+    var md = MD_I18N[mainLang()] || MD_I18N.en;   /* MiniDAW view strings; languages without them keep English */
+    document.querySelectorAll("[data-tt]").forEach(function (el) {
+      var key = el.getAttribute("data-tt");
+      var v = d[key] != null ? d[key] : md[key];
+      if (v != null) el.textContent = v;
+    });
     if (run) run.textContent = d.run;
     if (orScreen) { orScreen.remove(); orScreen = null; }   /* rebuilt in the new language */
     syncOldRetroHome();
@@ -448,20 +1396,26 @@
     if (e.key === "miniwin-language" || e.key === "miniwin-kp-default") applyMainLang();
   });
 
-  /* Live Editor is not ready yet: show a short notice and keep the current view */
-  var notice = document.createElement("div");
-  noticeEl = notice;
-  notice.id = "devNotice";
-  notice.setAttribute("role", "status");
-  notice.textContent = "Live Editor \u2014 \uac1c\ubc1c \uc911\uc785\ub2c8\ub2e4.";
-  document.body.appendChild(notice);
-  var noticeTimer = null;
-  document.getElementById("liveEditorLink").addEventListener("click", function (e) {
-    e.preventDefault();
-    notice.classList.add("show");
-    clearTimeout(noticeTimer);
-    noticeTimer = setTimeout(function () { notice.classList.remove("show"); }, 2000);
-  });
+  /* Phone: the menu drops down from the bar. It closes after a choice, on an outside tap, or with Escape. */
+  var navToggle = document.getElementById("navToggle");
+  var mainNav = document.getElementById("mainNav");
+  function setNav(open) {
+    syncToggleColor();
+    mainNav.classList.toggle("open", open);
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) {
+      var bg = getComputedStyle(document.querySelector("header.top")).backgroundColor;
+      if (!bg || /rgba\(0, 0, 0, 0\)|transparent/.test(bg)) bg = getComputedStyle(document.body).backgroundColor || "#ffffff";
+      mainNav.style.background = bg;
+    } else {
+      mainNav.style.background = "";
+    }
+  }
+  navToggle.addEventListener("click", function (e) { e.stopPropagation(); setNav(!mainNav.classList.contains("open")); });
+  mainNav.addEventListener("click", function (e) { if (e.target.closest("a")) setNav(false); });
+  document.addEventListener("click", function (e) { if (!mainNav.contains(e.target) && e.target !== navToggle) setNav(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setNav(false); });
+  window.matchMedia("(min-width:701px)").addEventListener("change", function () { setNav(false); });
 
   applyMainLang();
 
@@ -476,6 +1430,99 @@
     back.style.display = "none";
     applyBodyClasses({ html: document.documentElement.className, body: document.body.className });
     send({ miniwin: "openSettings", onlySettings: true });
+  });
+})();
+</script>
+<script>
+/* Pick the black or white copy of the home logo so it stands out on the header's real background. */
+(function () {
+  var logo = document.querySelector("header a.logo.logo-mark");
+  if (!logo) return;
+  function lum(rgb) {
+    var m = rgb.match(/[\d.]+/g); if (!m) return null;
+    var a = m.length > 3 ? parseFloat(m[3]) : 1; if (a === 0) return null;
+    return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255;
+  }
+  /* Keep the mark inside the bar: 26 px, or less when the look's bar is shorter (NeXTSTEP is 20 px). */
+  function fit() {
+    var bar = logo.closest("header") || logo.parentElement;
+    var cs = getComputedStyle(bar);
+    var avail = bar.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 4;
+    logo.style.setProperty("--logo-h", Math.max(8, Math.min(26, Math.floor(avail))) + "px");
+  }
+  function pick() {
+    fit();
+    var el = logo.parentElement, L = null;
+    while (el && L === null) { L = lum(getComputedStyle(el).backgroundColor); el = el.parentElement; }
+    logo.setAttribute("data-ink", L !== null && L < 0.5 ? "white" : "black");
+  }
+  pick();
+  window.addEventListener("load", pick);
+  window.addEventListener("resize", pick);
+  new MutationObserver(pick).observe(document.documentElement, { attributes: true, attributeFilter: ["class", "style"] });
+  if (document.body) new MutationObserver(pick).observe(document.body, { attributes: true, attributeFilter: ["class", "style"] });
+})();
+</script>
+<script>
+/* The MiniDAW bar follows the page like MiniWin's header: once its place scrolls under the home bar it is pinned right below the home bar
+   (position:fixed), and an empty spacer keeps the page from jumping. Sticky does not work here because the page body scrolls
+   inside a box that never overflows, so the scroll-based pinning is done in script. */
+  var view = document.getElementById("minidaw");
+  var homeBar = document.querySelector("header.top");
+  var mdBar = document.querySelector("#minidaw .md-bar");
+  var spacer = document.createElement("div");
+  if (mdBar) mdBar.parentNode.insertBefore(spacer, mdBar);
+  function syncBar() {
+    if (!view || !mdBar || !homeBar || view.offsetParent === null) return;
+    var top = homeBar.getBoundingClientRect().height;
+    view.style.paddingTop = top + "px";  /* the view starts under the home bar, so its first row is never hidden */
+    var flow = spacer.getBoundingClientRect();
+    var vr = view.getBoundingClientRect();
+    var h = mdBar.offsetHeight;
+    var pinned = flow.top < top && vr.bottom > top + h;
+    if (pinned) {
+      spacer.style.height = h + "px";
+      mdBar.classList.add("is-fixed");
+      mdBar.style.top = top + "px";
+      mdBar.style.left = "0px";
+      mdBar.style.width = "100%";
+    } else {
+      spacer.style.height = "0px";
+      mdBar.classList.remove("is-fixed");
+      mdBar.style.top = mdBar.style.left = mdBar.style.width = "";
+    }
+  }
+  var mdSections = ["md-project", "md-inside", "md-build", "md-status", "md-get"].map(function (id) { return document.getElementById(id); });
+  /* The current section is the last one whose heading has reached the line under the two bars. At the very bottom of the page,
+     the last section that has its heading on screen is taken, because the page cannot scroll any further. */
+  function markActive() {
+    var topLine = (homeBar ? homeBar.getBoundingClientRect().height : 0) + (mdBar ? mdBar.offsetHeight : 0) + 24;
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    var best = mdSections[0] ? mdSections[0].id : "";
+    mdSections.forEach(function (sec) {
+      if (!sec) return;
+      var top = sec.getBoundingClientRect().top;
+      if (top <= topLine || (atBottom && top < window.innerHeight)) best = sec.id;
+    });
+    document.querySelectorAll("[data-md-jump]").forEach(function (a) { a.classList.toggle("active", a.getAttribute("data-md-jump") === best); });
+  }
+  window.miniwinMdSync = function () { syncBar(); markActive(); };  /* show() calls this when MiniDAW opens */
+  window.addEventListener("scroll", function () { syncBar(); markActive(); }, { passive: true });
+  window.addEventListener("resize", syncBar);
+  window.addEventListener("load", function () { syncBar(); markActive(); });
+  if (homeBar && "ResizeObserver" in window) new ResizeObserver(syncBar).observe(homeBar);
+  syncBar();
+
+  /* MiniDAW bar: jump to a section and mark it active. Uses scrolling only, so the URL hash is not changed and the router stays on MiniDAW. */
+(function () {
+  var links = document.querySelectorAll("[data-md-jump]");
+  links.forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var target = document.getElementById(a.getAttribute("data-md-jump"));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   });
 })();
 </script>

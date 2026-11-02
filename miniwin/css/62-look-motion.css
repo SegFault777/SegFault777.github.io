@@ -1,0 +1,47 @@
+/* 62-look-motion.css -- small motion for some Modern looks (Aero, Breeze, Sequoia, Material, Modern Aqua).
+   Every rule is scoped to one look class, so the bundles only carry the rules of the look that needs them.
+   Motion uses the individual "translate" property, so it never fights the transforms set by the look or the reveal code.
+   Everything stops when Reduce motion is on (html.reduce-motion) or the system asks for it. */
+
+/* Aero: the monitor floats slowly; panels lift a little on hover */
+@keyframes mw-aero-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+body.aero-mode .hero-grid > .monitor-stage .monitor { animation: mw-aero-float 6s ease-in-out infinite; }
+body.aero-mode .panel { transition: translate .35s ease, box-shadow .35s ease; }
+body.aero-mode .panel:hover { translate: 0 -3px; }
+
+/* Breeze: cards rise in one after another */
+@keyframes mw-breeze-rise { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+body.breeze-mode .grid > .card { animation: mw-breeze-rise .55s cubic-bezier(.2, .7, .2, 1) both; }
+body.breeze-mode .grid > .card:nth-child(2) { animation-delay: .06s; }
+body.breeze-mode .grid > .card:nth-child(3) { animation-delay: .12s; }
+body.breeze-mode .grid > .card:nth-child(4) { animation-delay: .18s; }
+body.breeze-mode .grid > .card:nth-child(5) { animation-delay: .24s; }
+body.breeze-mode .grid > .card:nth-child(6) { animation-delay: .30s; }
+
+/* Sequoia: the small tag above the title breathes */
+@keyframes mw-seq-breathe { 0%, 100% { opacity: .78; } 50% { opacity: 1; } }
+body.sequoia-mode .tag { animation: mw-seq-breathe 3.6s ease-in-out infinite; }
+
+/* Material: cards lift on hover with a soft shadow */
+body.material-mode .card { transition: translate .25s ease, box-shadow .25s ease; }
+body.material-mode .card:hover { translate: 0 -4px; box-shadow: 0 10px 24px rgba(0, 0, 0, .18); }
+
+/* Modern Aqua: the primary button pulses like an Aqua button */
+@keyframes mw-aqua-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(40, 140, 255, .45); } 60% { box-shadow: 0 0 0 9px rgba(40, 140, 255, 0); } }
+body.modern-aqua-mode .btn.primary,
+body.modern-aqua-yosemite-mode .btn.primary { animation: mw-aqua-pulse 2.6s ease-out infinite; }
+
+/* Reduce motion: stop every look animation and hover lift */
+html.reduce-motion .hero-grid > .monitor-stage .monitor,
+html.reduce-motion .panel,
+html.reduce-motion .card,
+html.reduce-motion .tag,
+html.reduce-motion .btn.primary {
+  animation: none !important;
+  transition: none !important;
+  translate: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid > .monitor-stage .monitor,
+  .panel, .card, .tag, .btn.primary { animation: none !important; transition: none !important; translate: none !important; }
+}

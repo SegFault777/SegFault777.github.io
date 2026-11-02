@@ -39,30 +39,39 @@
     });
   }
 
-  /* placed under the select, or above it when there is no room below; the width follows the select */
+  /* Both dropdowns get the same height on a given screen, and the list always stays inside the screen:
+     the select is brought to the middle first, so there is room above and below it. */
   function place(sel){
-    const m=ensureMenu(), r=sel.getBoundingClientRect();
-    const w=Math.max(r.width,180), left=Math.max(8,Math.min(r.left,window.innerWidth-w-8));
-    const maxH=Math.min(window.innerHeight*0.7,520);
+    const m=ensureMenu(), r=sel.getBoundingClientRect(), vh=window.innerHeight;
+    const panel=sel.closest('.settings-panel')||document.querySelector('#settingsOverlay .settings-panel');
+    const pr=panel?panel.getBoundingClientRect():{top:0,bottom:vh,left:0,right:window.innerWidth};
+    const w=Math.max(r.width,180), left=Math.max(pr.left+8,Math.min(r.left,pr.right-w-8));
+    const H0=Math.round(Math.min(520, vh*0.7, Math.max(160, vh/2-24)));
+    /* the list stays inside the settings window: pick the side with more room, and shrink to fit it */
+    const roomBelow=pr.bottom-(r.bottom+4)-6;
+    const roomAbove=(r.top-4)-pr.top-6;
+    const useBelow=roomBelow>=roomAbove;
+    const room=useBelow?roomBelow:roomAbove;
+    const H=Math.round(Math.max(80,Math.min(H0,room)));
     m.style.cssText='';
     m.style.setProperty('position','fixed','important');
     m.style.setProperty('display','block','important');
     m.style.setProperty('right','auto','important');
     m.style.setProperty('z-index','20010','important');
-    m.style.setProperty('max-height',maxH+'px','important');
+    m.style.setProperty('max-height',H+'px','important');
     m.style.setProperty('width',w+'px','important');
     m.style.setProperty('min-width','0','important');
     m.style.setProperty('left',left+'px','important');
     m.style.visibility='visible';m.style.opacity='1';m.style.pointerEvents='auto';m.style.transform='none';
-    const h=Math.min(m.scrollHeight,maxH);
-    const below=r.bottom+6;
-    const top=(below+h>window.innerHeight-8&&r.top-6-h>8)?r.top-6-h:below;
-    m.style.setProperty('top',top+'px','important');
+    const top=useBelow?(r.bottom+4):(r.top-4-H);
+    m.style.setProperty('top',Math.round(top)+'px','important');
   }
 
   function open(sel){
     if(!sel.isConnected) return;
-    owner=sel;build(sel);place(sel);
+    owner=sel;
+    try{sel.scrollIntoView({block:'center',inline:'nearest'});}catch(e){}
+    build(sel);place(sel);
     sel.setAttribute('aria-expanded','true');
   }
   function close(){

@@ -1,0 +1,19 @@
+/* Settings window: the Layout and Language rows line up.
+   The label takes the same width in both rows, and the select fills the rest, so both selects start and end at the same x. */
+#settingsLayoutRow,
+#settingsLangRow{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+#settingsLayoutRow > .settings-label-wrap,
+#settingsLangRow > .settings-row-label{
+  flex:0 0 130px;
+  min-width:0;
+}
+#settingsLayoutRow > .settings-lang-select,
+#settingsLangRow > .settings-lang-select{
+  flex:1 1 0;
+  min-width:0;
+  width:auto;
+}

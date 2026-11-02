@@ -1,0 +1,11 @@
+/* System requirements table (in the Download section): follows the current theme's colours */
+.req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:28px;}
+.req-card{border:1px solid currentColor;border-radius:8px;padding:16px 18px;background:transparent;}
+.req-card h3{margin:0 0 10px;font-size:1.05rem;}
+.req-card table{width:100%;border-collapse:collapse;}
+.req-card th,.req-card td{text-align:left;padding:6px 4px;border-bottom:1px solid rgba(127,127,127,.3);vertical-align:top;}
+.req-card th{width:38%;font-weight:600;opacity:.85;}
+.req-card tr:last-child th,.req-card tr:last-child td{border-bottom:0;}
+
+/* Demo version label under the Demo section title */
+.demo-version{margin:4px 0 8px;font-weight:700;letter-spacing:.02em;opacity:.9;}

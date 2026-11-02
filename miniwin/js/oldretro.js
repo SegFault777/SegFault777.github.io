@@ -162,7 +162,7 @@
     'Detecting Primary Slave  ... None',
     'Detecting Floppy Drive A: ... 1.44M',
     '',
-    'MINIWIN Bootstrap Loader v1.0',
+    'MINIWIN Bootstrap Loader v1.1',
     'Loading MINIWIN.SYS ......... OK',
     'Loading DISPLAY.CLI ......... OK',
     'Loading MOUSE.DRV ........... skipped (keyboard only)',

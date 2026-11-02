@@ -88,7 +88,25 @@
   const PLATINUM=['platinum-lavender','platinum-lime','platinum-magenta'];
   const normalise=m=>['retro','luna','aqua','system6','nextstep','os2','beos','platinum-lavender','platinum-lime','platinum-magenta','modern','modern-aqua','modern-aqua-yosemite','material','plastik','modern-glass','aero','breeze','flat','adwaita','mica','oxygen','sequoia','liquid'].includes(m)?m:platformDefault();
   const sync=m=>{const modern=m!=='retro'&&m!=='luna'&&m!=='aqua'&&m!=='system6'&&m!=='nextstep'&&m!=='os2'&&m!=='beos'&&!PLATINUM.includes(m);t.setAttribute('aria-pressed',String(modern));t.setAttribute('data-theme',m);t.setAttribute('aria-label',modern?'Switch to Retro style':'Switch to Modern style');};
-  const apply=(m,save=true)=>{m=normalise(m);if(save&&PLATINUM.includes(get('miniwin-style'))){try{localStorage.setItem('miniwin-retro-flavour',get('miniwin-style'))}catch(e){}} /* leaving a Platinum variant remembers it for the Retro toggle */const liq=m==='liquid',seq=m==='sequoia',aqua=m==='aqua',maqua=m==='modern-aqua',ayos=m==='modern-aqua-yosemite',mat=m==='material',plk=m==='plastik',mica=m==='mica',oxy=m==='oxygen',luna=m==='luna',plat=PLATINUM.includes(m),s6=m==='system6',ns=m==='nextstep',os2=m==='os2',be=m==='beos',modern=m!=='retro'&&!luna&&!aqua&&!plat&&!s6&&!ns&&!os2&&!be,glass=m==='modern-glass',aero=m==='aero',breeze=m==='breeze',flat=m==='flat',adw=m==='adwaita';[['modern-mode',modern],['modern-glass-mode',glass],['aero-mode',aero],['breeze-mode',breeze],['luna-mode',luna],['flat-mode',flat],['adwaita-mode',adw],['aqua-mode',aqua],['mica-mode',mica],['oxygen-mode',oxy],['sequoia-mode',seq],['liquid-mode',liq],['platinum-mode',plat],['modern-aqua-mode',maqua],['modern-aqua-yosemite-mode',ayos],['material-mode',mat],['plastik-mode',plk],['system6-mode',s6],['nextstep-mode',ns],['os2-mode',os2],['beos-mode',be]].forEach(([c,on])=>{root.classList.toggle(c,on);body.classList.toggle(c,on)});
+  /* One stylesheet per look: css/bundles/<look>.css (built by tools/build_css_bundles.py from the css/ files). Only the chosen
+     look is downloaded; switching loads that look's bundle once and turns the other bundles off. The bundle goes in front of
+     the 58/60/61 sheets so the cascade order stays the same as with the old main.css. The page is hidden (html.look-pending,
+     see index.html) until the first bundle has loaded, so nothing is ever drawn unstyled. */
+  const bundleLinks={};
+  const useBundle=name=>{
+    if(!bundleLinks[name]){
+      const l=document.createElement('link');
+      l.rel='stylesheet';l.href='css/bundles/'+name+'.css?v=1.0';
+      l.onload=l.onerror=()=>root.classList.remove('look-pending');
+      const before=document.querySelector('link[href^="css/58-"]');
+      document.head.insertBefore(l,before);
+      bundleLinks[name]=l;
+    }
+    for(const k in bundleLinks)bundleLinks[k].disabled=k!==name;
+    if(window.miniwinFitLogo)window.miniwinFitLogo();
+  };
+  setTimeout(()=>root.classList.remove('look-pending'),4000); /* never leave the page hidden if a bundle is blocked */
+  const apply=(m,save=true)=>{m=normalise(m);useBundle(m);if(save&&PLATINUM.includes(get('miniwin-style'))){try{localStorage.setItem('miniwin-retro-flavour',get('miniwin-style'))}catch(e){}} /* leaving a Platinum variant remembers it for the Retro toggle */const liq=m==='liquid',seq=m==='sequoia',aqua=m==='aqua',maqua=m==='modern-aqua',ayos=m==='modern-aqua-yosemite',mat=m==='material',plk=m==='plastik',mica=m==='mica',oxy=m==='oxygen',luna=m==='luna',plat=PLATINUM.includes(m),s6=m==='system6',ns=m==='nextstep',os2=m==='os2',be=m==='beos',modern=m!=='retro'&&!luna&&!aqua&&!plat&&!s6&&!ns&&!os2&&!be,glass=m==='modern-glass',aero=m==='aero',breeze=m==='breeze',flat=m==='flat',adw=m==='adwaita';[['modern-mode',modern],['modern-glass-mode',glass],['aero-mode',aero],['breeze-mode',breeze],['luna-mode',luna],['flat-mode',flat],['adwaita-mode',adw],['aqua-mode',aqua],['mica-mode',mica],['oxygen-mode',oxy],['sequoia-mode',seq],['liquid-mode',liq],['platinum-mode',plat],['modern-aqua-mode',maqua],['modern-aqua-yosemite-mode',ayos],['material-mode',mat],['plastik-mode',plk],['system6-mode',s6],['nextstep-mode',ns],['os2-mode',os2],['beos-mode',be]].forEach(([c,on])=>{root.classList.toggle(c,on);body.classList.toggle(c,on)});
     /* the accent of the Platinum variant: lime and magenta add a class to the body (lavender is the base) */
     ['platinum-lime','platinum-magenta'].forEach(c=>{body.classList.toggle(c,m===c)});
     /* the Modern Aqua terrain wallpaper for this macOS release (body.wp-*) */

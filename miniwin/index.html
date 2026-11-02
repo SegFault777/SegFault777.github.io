@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="look-pending">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,22 @@
 <meta property="og:title" content="MiniWin — a 32-bit x86 OS built from scratch">
 <meta property="og:description" content="No libc, no dependencies: bootloader, kernel, GUI, TCP/IP, TLS 1.2 and an HTML5 browser.">
 <meta property="og:image" content="https://raw.githubusercontent.com/SegFault777/MiniWin/main/screenshots/20-html5-rendering.png">
-<link rel="stylesheet" href="css/main.css?v=1.0">
+<link rel="icon" type="image/png" href="assets/MiniWin.png">
+<noscript><style>html.look-pending{visibility:visible}  .hero .slogan{margin:0 0 14px;font-size:1.15rem;font-weight:700;letter-spacing:.02em}
+</style></noscript>
+<style>
+  /* MiniWin header logo: the 128x32 pixel logo drawn at exactly 2x (256x64) with nearest-neighbour scaling, so the pixels stay sharp with no anti-aliasing */
+  header.top a.logo.logo-brand{display:inline-flex !important;align-items:center;height:auto !important;min-height:0 !important;padding:0 !important;margin:0 !important;background:none !important;border:0 !important;box-shadow:none !important;text-shadow:none !important;letter-spacing:0 !important;font-size:inherit !important;color:inherit !important}
+  header.top a.logo.logo-brand img{display:block;width:auto;height:auto;max-width:none;max-height:none;image-rendering:pixelated;image-rendering:crisp-edges;flex:0 0 auto}
+  /* "What changed" list: one collapsible panel per release */
+  .changes-ver{margin:12px 0;padding:12px 18px}
+  .changes-ver summary{cursor:pointer;font-weight:700;padding:4px 0}
+  .changes-ver ul{margin:10px 0 4px;padding-left:20px}
+  .changes-ver li{margin:8px 0;line-height:1.6}
+</style>
+<link rel="stylesheet" href="css/58-settings-phone.css?v=1.0">
+<link rel="stylesheet" href="css/60-settings-align.css?v=1.0">
+<link rel="stylesheet" href="css/61-requirements.css?v=1.0">
 <!-- Translation files (i18n/*.js) are loaded by js/i18n.js only when needed, for the chosen language. Order: i18n first, then the rest. -->
 <script defer src="js/i18n.js?v=1.0"></script>
 <script defer src="js/nav.js?v=1.0"></script>
@@ -23,10 +38,10 @@
 </head>
 <body>
 <header class="top"><div class="wrap topbar">
-  <a class="logo" href="#home">Mini<span>Win</span><span class="version">1.0</span></a>
+  <a class="logo logo-brand" href="#home"><img src="assets/MiniWin_LOGO.png" width="256" height="64" alt="MiniWin"></a>
   <nav class="nav">
     <div class="style-switch" role="group" aria-label="Visual style" style="display:none"><span class="style-label">Retro</span><button class="style-toggle" id="styleToggle" type="button" aria-label="Switch between Retro and Modern" aria-pressed="false"><span></span></button><span class="style-label">Modern</span></div>
-    <a data-i18n="home" href="#home"></a><a data-i18n="about" href="#about"></a><a data-i18n="features" href="#features"></a><a data-i18n="build" href="#build"></a><a data-i18n="networking" href="#networking"></a><a data-i18n="download" href="#download"></a><a data-i18n="nav_demo" href="#demo"></a>
+    <a data-i18n="home" href="#home"></a><a data-i18n="about" href="#about"></a><a data-i18n="features" href="#features"></a><a data-i18n="build" href="#build"></a><a data-i18n="networking" href="#networking"></a><a data-i18n="download" href="#download"></a><a data-i18n="nav_changes" href="#changes"></a><a data-i18n="nav_demo" href="#demo"></a>
   </nav>
 </div></header>
 
@@ -35,6 +50,7 @@
   <div>
     <span class="tag" data-i18n="hero_tag"></span>
     <h1><span>MINI</span><span>WIN</span></h1>
+    <p class="slogan">Mini OS, Many Things.</p>
     <p data-i18n="hero_p"></p>
     <div class="actions">
       <a class="btn primary" data-i18n="download_source" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip"></a>
@@ -42,7 +58,7 @@
     </div>
   </div>
   <div class="monitor-stage"><div class="monitor">
-    <img alt="MiniWeb (WEB.MWP) rendering an HTML5 page with flex nav, grid cards, forms and lists" loading="eager" src="assets/miniweb-html5.png" width="640" height="480">
+    <img alt="MiniWin desktop with the Start menu open, Notepad showing Hello MiniWin, and the Settings window" loading="eager" src="assets/miniwin-startmenu.png" width="640" height="480">
     <div class="image-credit" data-i18n="hero_tag"></div>
   </div></div>
 </div></section>
@@ -66,8 +82,20 @@
     <article class="panel card"><span class="badge">HTML5</span><h3 data-i18n="html_title"></h3><p data-i18n="html_p"></p></article>
     <article class="panel card"><span class="badge">MWP</span><h3 data-i18n="mwp_title"></h3><p data-i18n="mwp_p"></p></article>
     <article class="panel card"><span class="badge">IME</span><h3 data-i18n="hangul_title"></h3><p data-i18n="hangul_p"></p></article>
+    <article class="panel card"><span class="badge">MWFS</span><h3 data-i18n="storage_title"></h3><p data-i18n="storage_p"></p></article>
+    <article class="panel card"><span class="badge">SHELL</span><h3 data-i18n="shell_title"></h3><p data-i18n="shell_p"></p></article>
+    <article class="panel card"><span class="badge">ICONS</span><h3 data-i18n="icons_title"></h3><p data-i18n="icons_p"></p></article>
   </div>
   <div class="note" data-i18n="roadmap_note"></div>
+</div></section>
+
+<section id="changes"><div class="wrap">
+  <div class="head"><div class="eyebrow" data-i18n="changes_eyebrow"></div><h2 data-i18n="changes_h2"></h2><p data-i18n="changes_p"></p></div>
+  <details class="panel changes-ver"><summary data-i18n="cv13_t"></summary><ul><li data-i18n="cv13_1"></li><li data-i18n="cv13_2"></li><li data-i18n="cv13_3"></li><li data-i18n="cv13_4"></li><li data-i18n="cv13_5"></li><li data-i18n="cv13_6"></li><li data-i18n="cv13_7"></li><li data-i18n="cv13_8"></li></ul></details>
+  <details class="panel changes-ver"><summary data-i18n="cv12_t"></summary><ul><li data-i18n="cv12_1"></li><li data-i18n="cv12_2"></li><li data-i18n="cv12_3"></li><li data-i18n="cv12_4"></li><li data-i18n="cv12_5"></li><li data-i18n="cv12_6"></li></ul></details>
+  <details class="panel changes-ver"><summary data-i18n="cv11_t"></summary><ul><li data-i18n="cv11_1"></li><li data-i18n="cv11_2"></li><li data-i18n="cv11_3"></li><li data-i18n="cv11_4"></li><li data-i18n="cv11_5"></li><li data-i18n="cv11_6"></li><li data-i18n="cv11_7"></li><li data-i18n="cv11_8"></li></ul></details>
+  <details class="panel changes-ver"><summary data-i18n="cv10_t"></summary><ul><li data-i18n="cv10_1"></li><li data-i18n="cv10_2"></li><li data-i18n="cv10_3"></li><li data-i18n="cv10_4"></li><li data-i18n="cv10_5"></li><li data-i18n="cv10_6"></li><li data-i18n="cv10_7"></li></ul></details>
+  <details class="panel changes-ver"><summary data-i18n="cv9_t"></summary><ul><li data-i18n="cv9_1"></li><li data-i18n="cv9_2"></li><li data-i18n="cv9_3"></li><li data-i18n="cv9_4"></li><li data-i18n="cv9_5"></li><li data-i18n="cv9_6"></li><li data-i18n="cv9_7"></li></ul></details>
 </div></section>
 
 <section id="build"><div class="wrap">
@@ -91,6 +119,7 @@
 <span class="green">MiniWin is running.</span></pre></div>
   <div class="rule"></div>
   <div class="note" data-i18n="build_note"></div>
+  <div class="note" data-i18n="build_more"></div>
   <div class="note" data-i18n="controls_note"></div>
 </div></section>
 
@@ -114,12 +143,39 @@
     <a class="btn" data-i18n="mainzip" href="https://github.com/SegFault777/MiniWin/archive/refs/heads/main.zip"></a>
     <a class="btn" data-i18n="open_repo" href="https://github.com/SegFault777/MiniWin" rel="noopener" target="_blank"></a>
     <a class="btn" data-i18n="readme" href="https://github.com/SegFault777/MiniWin/blob/main/README.md" rel="noopener" target="_blank"></a>
+    <a class="btn" data-i18n="docs_btn" href="https://github.com/SegFault777/MiniWin/blob/main/docs/README.md" rel="noopener" target="_blank"></a>
+  </div>
+
+  <div class="note" data-i18n="docs_note"></div>
+  <div class="note" data-i18n="license_note"></div>
+
+  <div class="req-grid">
+    <div class="req-card">
+      <h3>Minimum requirements</h3>
+      <table>
+        <tr><th>CPU</th><td>Pentium II</td></tr>
+        <tr><th>Disk</th><td>IDE, 1.1 MB</td></tr>
+        <tr><th>Memory</th><td>9.3 MB</td></tr>
+        <tr><th>Display</th><td>640x480</td></tr>
+        <tr><th>ODD</th><td>Floppy</td></tr>
+      </table>
+    </div>
+    <div class="req-card">
+      <h3>Recommended requirements</h3>
+      <table>
+        <tr><th>CPU</th><td>Pentium II</td></tr>
+        <tr><th>Disk</th><td>IDE, 2 MB</td></tr>
+        <tr><th>Memory</th><td>16 MB</td></tr>
+        <tr><th>Display</th><td>640x480</td></tr>
+        <tr><th>ODD</th><td>Floppy</td></tr>
+      </table>
+    </div>
   </div>
 </div></section>
 
  <section id="demo"><div class="wrap">
-   <div class="head"><div class="eyebrow" data-i18n="demo_eyebrow"></div><h2 data-i18n="demo_h2"></h2><p data-i18n="demo_p"></p></div>
-   <div class="panel demo-panel"><div class="panel-head" data-status="32 MB RAM"><span data-i18n="demo_window"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div>
+   <div class="head"><div class="eyebrow" data-i18n="demo_eyebrow"></div><h2 data-i18n="demo_h2"></h2><p class="demo-version">Demo: MiniWin 1.0-rc (latest: MiniWin 1.1)</p><p data-i18n="demo_p"></p></div>
+   <div class="panel demo-panel"><div class="panel-head" data-status="MiniWin 1.0-rc (latest: 1.1) · 32 MB RAM"><span data-i18n="demo_window"></span><span class="wc" aria-hidden="true"><span class="wc-b wc-min"><svg class="g-std" viewBox="0 0 10 10"><path d="M2 6.5h6"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 3.8L5 6.3l2.5-2.5"/></svg></span><span class="wc-b wc-max"><svg class="g-std" viewBox="0 0 10 10"><rect x="2.5" y="2.5" width="5" height="5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.5 6.2L5 3.7l2.5 2.5"/></svg></span><span class="wc-b wc-close"><svg class="g-std" viewBox="0 0 10 10"><path d="M2.5 2.5l5 5M7.5 2.5l-5 5"/></svg><svg class="g-breeze" viewBox="0 0 10 10"><path d="M2.8 2.8l4.4 4.4M7.2 2.8L2.8 7.2"/></svg></span></span></div>
      <div class="demo-body">
        <div class="demo-screen" id="demoScreen" tabindex="0" role="application" aria-label="MiniWin">
          <div class="demo-text"></div><canvas></canvas>
@@ -142,5 +198,29 @@
   <div><strong data-i18n="footer_name"></strong><br><span data-i18n="footer_desc"></span></div>
   <div data-i18n="footer_source"></div>
 </div></footer>
+<script>
+/* Fit the header logo to the bar of the current look (the bar height changes per look: System 6 is 21 px, Plastik 31 px, Aqua 53 px...).
+   The bar is measured with the logo hidden, so the logo cannot push the bar taller and feed back into the measurement.
+   Size: 2x (64 px) if the bar has room, else 1x (32 px), else the largest height that fits. Always 4:1 and never smoothed. */
+(function () {
+  var bar = document.querySelector("header.top");
+  var img = document.querySelector(".logo-brand img");
+  if (!bar || !img) return;
+  function fit() {
+    img.style.setProperty("display", "none", "important");
+    var cs = getComputedStyle(bar);
+    var avail = bar.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 4;
+    img.style.removeProperty("display");
+    var h = avail >= 64 ? 64 : avail >= 32 ? 32 : Math.max(8, Math.floor(avail));
+    img.style.setProperty("height", h + "px", "important");
+    img.style.setProperty("width", (h * 4) + "px", "important");
+  }
+  fit();
+  window.addEventListener("load", fit);
+  if ("ResizeObserver" in window) new ResizeObserver(fit).observe(bar);
+  window.addEventListener("resize", fit);
+  window.miniwinFitLogo = fit; /* theme.js calls this after a look change */
+})();
+</script>
 </body>
 </html>
